@@ -6,22 +6,22 @@ ZMP app created with following options:
 
 ```
 {
-  "cwd": "C:\\Users\\MININT-R66V0K6-local\\Documents\\miniapp\\banlai",
+  "cwd": "C:\\Users\\MININT-R66V0K6-local\\Music\\temp",
   "newProject": true,
   "name": "BanLai",
-  "framework": "react-typescript",
-  "template": "blank",
-  "cssPreProcessor": "less",
+  "framework": "react",
+  "template": "single-view",
+  "cssPreProcessor": "stylus",
+  "includeTailwind": true,
   "theming": {
     "customColor": false,
     "color": "#007aff",
     "darkTheme": false,
     "iconFonts": true,
     "fillBars": false,
-    "useUiKits": false
+    "useUiKits": true
   },
-  "customBuild": false,
-  "includeTailwind": false
+  "customBuild": false
 }
 ```
 

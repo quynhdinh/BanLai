@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   zmp,
   zmpready,
@@ -8,6 +8,7 @@ import {
 import store from '../store';
 
 const MyApp = () => {
+
   // ZMP Parameters
   const zmpparams = {
     name: 'BanLai', // App name
@@ -16,10 +17,16 @@ const MyApp = () => {
       store: store,
   };
 
+  zmpready(() => {
+    // Call ZMP APIs here
+  });
+
   return (
     <App { ...zmpparams } >
-      {/* Your main view, should have "view-main" class */}
+
+        {/* Your main view, should have "view-main" class */}
         <View main className="safe-areas" url="/" />
+
     </App>
   );
 }
