@@ -10,11 +10,12 @@ import {
 } from 'zmp-framework/react';
 import AppItems from '../components/app-items';
 import UserCard from '../components/user-card';
-
+import NavigationBar from '../components/NavigationBar';
 const HomePage = () => {
   const user = useStore('user');
   return (
     <Page name="home" navbarLarge>
+        <NavigationBar/>
       {/* Top Navbar */}
       <Navbar >
         <NavTitleLarge>BanLai</NavTitleLarge>

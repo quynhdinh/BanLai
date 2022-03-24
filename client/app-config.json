@@ -15,6 +15,11 @@
     "/form",
     "/dynamic-route",
     "/about",
-    "/404"
+    "/404",
+    "/home",
+    "/manage-post",
+    "/create",
+    "/messages",
+    "/account"
   ]
 }
