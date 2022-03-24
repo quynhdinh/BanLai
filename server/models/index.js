@@ -18,5 +18,6 @@ db.Products = require('./product.js');
 db.Users = require('./user.js');
 db.City = require('./location/city.js');
 db.District = require('./location/district.js');
-
+db.Category = require('./category/category');
+db.SubCategory = require('./category/subcategory');
 module.exports = db;
