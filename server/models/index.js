@@ -16,5 +16,7 @@ const db = {};
 db.Orders = require('./order.js');
 db.Products = require('./product.js');
 db.Users = require('./user.js');
+db.City = require('./location/city.js');
+db.District = require('./location/district.js');
 
 module.exports = db;
