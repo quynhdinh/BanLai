@@ -19,14 +19,14 @@ const ERROR_CODE = {
 auth.genJSONWebToken = (uid, exp) => {
   return jwt.sign({
     id: uid
-  }, process.env.TOKEN_SECRET, { expiresIn: exp });
+  }, process.env.TOKEN_SECRET, {expiresIn: exp});
 }
 
 auth.verify = async (req, res, next) => {
   try {
     let header = req.headers['authorization'];
     if (!header || !header.startsWith('Bearer ')) {
-      return res.send({ error: ERROR_CODE.INVALID_SESSION, message: 'User session invalid.' });
+      return res.send({error: ERROR_CODE.INVALID_SESSION, message: 'User session invalid.'});
     }
 
     let authToken = header.substring(7);
@@ -37,13 +37,12 @@ auth.verify = async (req, res, next) => {
     });
 
     if (!user) {
-      return res.send({ error: ERROR_CODE.NOT_EXIST, message: 'Account is not exits' });
+      return res.send({error: ERROR_CODE.NOT_EXIST, message: 'Account is not exits'});
     }
-    
     req.user = user;
     return next();
   } catch (exception) {
-    res.send({ error: ERROR_CODE.INVALID_SESSION, message: 'User session invalid.' });
+    res.send({error: ERROR_CODE.INVALID_SESSION, message: 'User session invalid.'});
     console.error('API-Exception:', exception);
   }
 }
