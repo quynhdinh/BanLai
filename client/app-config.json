@@ -14,7 +14,13 @@
     "/user",
     "/form",
     "/dynamic-route",
+    "/saved-posts",
     "/about",
-    "/404"
+    "/404",
+    "/home",
+    "/manage-post",
+    "/create",
+    "/messages",
+    "/account"
   ]
 }

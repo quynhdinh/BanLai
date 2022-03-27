@@ -3,11 +3,11 @@ import { createStore } from 'zmp-core/lite';
 const store = createStore({
   state: {
     user: {
-      displayName: 'Zalo',
-      email: 'zte@zalo.me',
-      avatar: 'ZA',
-      online: true,
-      story: true
+      displayName: 'Trần Anh Kiệt',
+      email: 'takiet@apcs.vn',
+      avatar: 'TAK',
+      // online: true,
+      // story: true
     },
     products: [
       {
