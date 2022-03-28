@@ -1,5 +1,5 @@
 import React from "react"
-import {Page, Card, Text, useStore, List, ListItem, Box, Title,} from "zmp-framework/react"
+import {Page, Card, useStore, List, ListItem, Box, Title, Icon, Link,} from "zmp-framework/react"
 import NavigationBar from "../components/NavigationBar"
 import UserCard from '../components/user-card';
 import * as PropTypes from "prop-types";
@@ -10,22 +10,33 @@ const AccountPage = ({zmproute}) => {
     return (
         <Page className='page-box page-with-navbar'>
             <NavigationBar active={zmproute.path}/>
-            <NavigationBar/>
             <List>
-                <ListItem link="/user/">
+                <ListItem link='/user/'>
                     <UserCard user={user}/>
                 </ListItem>
-                <ListItem link="/saved-posts/">
-                    <Text>Tin đăng đã lưu</Text>
+                <ListItem link='/saved-posts/' title='Tin đăng đã lưu'>
+                    <Icon className='list-icon' slot='media' zmp='zi-heart-solid' color={'#ff3b30'} size={16}/>
                 </ListItem>
             </List>
-            <Card inset title='Bán Lại'>
-                <Box key="normal">
-                    <Title size="normal">
+            <Card inset>
+                <Title size='normal'>Bán Lại</Title>
+                <Box key="normal" mb='4'>
+                    <Title size="xsmall">
                         Email: banlai@gmail.com
                     </Title>
-                    <Title size="normal">
+                    <Title size="xsmall">
                         Hotline: 1987654321
+                    </Title>
+                </Box>
+            </Card>
+            <Card inset>
+                <Title size='normal'>Hướng dẫn đăng tin</Title>
+                <Box key="normal" mb='4'>
+                    <Title size="xsmall">
+                        Quy định đăng tin
+                    </Title>
+                    <Title size="xsmall">
+                        Hướng dẫn đăng tin
                     </Title>
                 </Box>
             </Card>

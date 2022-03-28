@@ -19,13 +19,8 @@ const HomePage = () => {
             <NavigationBar/>
             {/* Top Navbar */}
             <Navbar>
-                <NavTitleLarge>BanLai</NavTitleLarge>
+                <NavTitleLarge>Bán Lại</NavTitleLarge>
             </Navbar>
-            {/* Page content */}
-            {/*<Card inset>*/}
-            {/*  <p>Here is your blank ZMP app. Let's see what we have here.</p>*/}
-            {/*</Card>*/}
-            {/* User info */}
             <List>
                 <ListItem link="/user/">
                     <UserCard user={user}/>
