@@ -1,0 +1,51 @@
+/* src/css/swiper.css*/
+.swiper-container {
+    width: 100%;
+    height: 200px;
+    margin-top: 0px;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: rgb(54, 77, 121);
+    color: white;
+display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-name {
+    margin-left: 10px;
+    margin-top:10px
+}
+.item-price {
+    margin-left: 10px;
+    color: red;
+    size: 20px
+}
+
+.block-icon {
+    position: relative;
+    display: inline-flex;
+}
+
+.text {
+    margin-left: 10px;
+}
