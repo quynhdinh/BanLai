@@ -35,5 +35,4 @@ router.get('/:cityId', async function (req, res, next) {
 // 623be6ced8cc84201538e032: HCM
 // 623bec21d8cc84201538e051: Thu Duc
 
-router.post
 module.exports = router;
