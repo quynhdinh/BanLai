@@ -1,9 +1,9 @@
 import React from 'react';
 import {Avatar, Title} from 'zmp-framework/react';
 
-const MessageItem = ({user, product}) => {
+const MessageItem = ({user, product, marginTop}) => {
     return (
-        <div style={{display: 'flex', width: '100%'}}>
+        <div style={{display: 'flex', width: '100%', marginTop: marginTop}}>
             <Avatar story={user.story} online={user.online}>{user.avatar}</Avatar>
             <div style={{marginLeft: 16}}>
                 <Title style={{marginBottom: 0}}>{user.displayName}</Title>

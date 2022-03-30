@@ -19,6 +19,7 @@ const articlePage = ({zmproute}) => {
     // useScrollPosition('/article')
     const user = useStore('user');
     const product = useStore('products')
+    const spacing = '20px'
     return (
         <Page pageContent={false}>
             <NavigationBar active={zmproute.path}/>
@@ -30,14 +31,14 @@ const articlePage = ({zmproute}) => {
             </Tabbar>
             <Tabs>
                 <Tab id="tab-1" className="page-content" tabActive>
-
                     <Card inset>
-                        <MessageItem user={user[0]} product={product[0]}/>
+                        <MessageItem user={user[0]} product={product[0]} marginTop = {'0px'}/>
+                        <MessageItem user={user[1]} product={product[1]} marginTop = {spacing}/>
                     </Card>
                 </Tab>
                 <Tab id="tab-2" className="page-content">
                     <Card inset>
-                        <MessageItem user={user[1]} product={product[2]}/>
+                        <MessageItem user={user[1]} product={product[2]} marginTop = {'0px'}/>
                     </Card>
                 </Tab>
             </Tabs>
