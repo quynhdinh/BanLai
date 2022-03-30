@@ -2,6 +2,8 @@
 import { createStore } from 'zmp-core/lite';
 const store = createStore({
   state: {
+    loadingCategories: false,
+    categories: [[1, 'Technology'],[2, 'Technology'],[3, 'Technology'],[4, 'Technology'],[5, 'Technology']],
     user: {
       displayName: 'Trần Anh Kiệt',
       email: 'takiet@apcs.vn',
@@ -28,6 +30,12 @@ const store = createStore({
     ]
   },
   getters: {
+    categories({ state }) {
+      return state.categories
+    },
+    loadingCategories({ state }) {
+      return state.loadingCategories
+    },
     user({ state }) {
       return state.user
     },

@@ -32,13 +32,19 @@ display: -webkit-box;
 }
 
 .item-name {
-    margin-left: 10px;
     margin-top:10px
 }
 .item-price {
-    margin-left: 10px;
+    display: inline-block;
     color: red;
-    size: 20px
+    size: 20px;
+}
+
+.liked {
+    display: inline-block;
+    color: black;
+    float: right;
+    margin-right: 5px;
 }
 
 .block-icon {
