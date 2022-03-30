@@ -12,7 +12,7 @@ const AccountPage = ({zmproute}) => {
             <NavigationBar active={zmproute.path}/>
             <List>
                 <ListItem link='/user/'>
-                    <UserCard user={user}/>
+                    <UserCard user={user[0]}/>
                 </ListItem>
                 <ListItem link='/saved-posts/' title='Tin đăng đã lưu'>
                     <Icon className='list-icon' slot='media' zmp='zi-heart-solid' color={'#ff3b30'} size={16}/>
