@@ -12,8 +12,8 @@ import {
 import NavigationBar from "../components/NavigationBar"
 import ComingSoon from "../components/ComingSoon"
 import useScrollPosition from "../hooks/useScrollPosition"
-import UserCard from "../components/message-card";
-import MessageCard from "../components/message-card";
+import UserCard from "../components/MessageItem/message-item";
+import MessageItem from "../components/MessageItem/message-item";
 
 const articlePage = ({zmproute}) => {
     // useScrollPosition('/article')
@@ -32,12 +32,12 @@ const articlePage = ({zmproute}) => {
                 <Tab id="tab-1" className="page-content" tabActive>
 
                     <Card inset>
-                        <MessageCard user={user[0]} product={product[0]}/>
+                        <MessageItem user={user[0]} product={product[0]}/>
                     </Card>
                 </Tab>
                 <Tab id="tab-2" className="page-content">
                     <Card inset>
-                        <MessageCard user={user[1]} product={product[2]}/>
+                        <MessageItem user={user[1]} product={product[2]}/>
                     </Card>
                 </Tab>
             </Tabs>
