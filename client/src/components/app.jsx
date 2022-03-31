@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  zmp,
   zmpready,
   App,
   View,
@@ -19,6 +18,7 @@ const MyApp = () => {
 
   zmpready(() => {
     // Call ZMP APIs here
+    store.dispatch('login')
   });
 
   return (

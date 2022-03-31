@@ -1,7 +1,11 @@
 import {createStore} from 'zmp-core/lite';
+import {getAccessToken} from "./services/zalo";
+import {loadUserFromCache} from "./services/storage";
+import {getCurrentUser, login} from "./services/auth";
 
 const store = createStore({
     state: {
+        jwt: null,
         loadingCategories: false,
         categories: [[1, 'Technology'], [2, 'Technology'], [3, 'Technology'], [4, 'Technology'], [5, 'Technology']],
         user: [
@@ -61,27 +65,30 @@ const store = createStore({
         setUser({state}, data) {
             state.user = {...state.user, ...data}
         },
+        setJwt({ state }, jwt) {
+            state.jwt = jwt
+        },
         addProduct({state}, product) {
             state.products = [...state.products, product];
         },
+        async login({dispatch}) {
+            const cachedUser = await loadUserFromCache()
+            if (cachedUser) {
+                dispatch('setUser', cachedUser)
+            }
+            const token = await getAccessToken()
+            const success = await login(token)
+            if (success) {
+                const user = await getCurrentUser()
+                if (user) {
+                    dispatch('setUser', user)
+                }
+            }
+        }
     },
     addProduct({state}, product) {
         state.products = [...state.products, product];
     },
-    async login({dispatch}) {
-        const cachedUser = await loadUserFromCache()
-        if (cachedUser) {
-            dispatch('setUser', cachedUser)
-        }
-        const token = await getAccessToken()
-        const success = await login(token)
-        if (success) {
-            const user = await getCurrentUser()
-            if (user) {
-                dispatch('setUser', user)
-            }
-        }
-    }
 })
 
 export default store;
