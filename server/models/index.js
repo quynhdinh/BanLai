@@ -20,4 +20,5 @@ db.City = require('./location/city.js');
 db.District = require('./location/district.js');
 db.Category = require('./category/category');
 db.SubCategory = require('./category/subcategory');
+db.Post = require('./post/post')
 module.exports = db;
