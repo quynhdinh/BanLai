@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Title } from 'zmp-framework/react';
+import {Avatar, Text, Title} from 'zmp-framework/react';
 
 const UserCard = ({ user }) => {
   return (
@@ -7,7 +7,7 @@ const UserCard = ({ user }) => {
       <Avatar story={user.story} online={user.online} src={user.avatar}/>
       <div style={{ marginLeft: 16 }}>
         <Title style={{ marginBottom: 0 }}>{user.displayName}</Title>
-        <div>{user.email}</div>
+          <Text className='mt-1' size='xxsmall'>Thành viên bán lại</Text>
       </div>
     </div>
   )

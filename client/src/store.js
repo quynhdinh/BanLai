@@ -70,7 +70,12 @@ const store = createStore({
             state.user = {...state.user, ...data}
         },
         setU({ state }, u) {
-            state.u = u
+            state.u = {
+                displayName: u.name,
+                avatar: u.picture,
+                createdAt: u.createdAt,
+                online: true
+            }
         },
         setJwt({ state }, jwt) {
             state.jwt = jwt

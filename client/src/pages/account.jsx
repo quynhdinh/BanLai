@@ -5,14 +5,16 @@ import UserCard from '../components/user-card';
 import * as PropTypes from "prop-types";
 
 const AccountPage = ({zmproute}) => {
-    // useScrollPosition('/article')
     const user = useStore('user');
+    const _u = useStore('u')
+    const u = _u ? _u : user[0];
+
     return (
         <Page className='page-box page-with-navbar'>
             <NavigationBar active={zmproute.path}/>
             <List>
                 <ListItem link='/user/'>
-                    <UserCard user={user[0]}/>
+                    <UserCard user={u}/>
                 </ListItem>
                 <ListItem link='/saved-posts/' title='Tin đăng đã lưu'>
                     <Icon className='list-icon' slot='media' zmp='zi-heart-solid' color={'#ff3b30'} size={16}/>
