@@ -37,6 +37,7 @@ export const login = async (accessToken) => {
 export const getCurrentUser = async () => {
   try {
     const response = await (await request('GET', 'users/logged-in')).json()
+    store.dispatch('setU', response.data)
     return response.data
   } catch (error) {
     console.log('Error get current user info. Details: ', error)

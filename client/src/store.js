@@ -8,6 +8,7 @@ const store = createStore({
         jwt: null,
         loadingCategories: false,
         categories: [[1, 'Technology'], [2, 'Technology'], [3, 'Technology'], [4, 'Technology'], [5, 'Technology']],
+        u: null,
         user: [
             {
                 displayName: 'Trần Anh Kiệt',
@@ -54,6 +55,9 @@ const store = createStore({
         loadingCategories({state}) {
             return state.loadingCategories
         },
+        u({state}) {
+            return state.u
+        },
         user({state}) {
             return state.user
         },
@@ -64,6 +68,9 @@ const store = createStore({
     actions: {
         setUser({state}, data) {
             state.user = {...state.user, ...data}
+        },
+        setU({ state }, u) {
+            state.u = u
         },
         setJwt({ state }, jwt) {
             state.jwt = jwt
