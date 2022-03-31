@@ -36,7 +36,7 @@ router.post('/login', async (req, res) => {
             return res.send({
                 error: 0,
                 message: 'Success',
-                data: {id: id}
+                data: {...user, jwt}
             });
         }
     } catch (ex) {
