@@ -1,9 +1,23 @@
 var express = require('express');
 const db = require('../models');
-// const AuthService = require("../services/auth-service");
+const AuthService = require("../services/auth-service");
 var router = express.Router();
 
-router.post('/', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
+    try {
+        result = await db.Post.find({})
+        res.send({
+            error: 0,
+            message: 'Success',
+            data: result,
+        })
+    } catch (error) {
+        res.send({ error: -1, message: 'Unknown exception' });
+        console.log('API-Exception', error);
+    }
+});
+
+router.post('/', AuthService.verify, async (req, res, next) => {
     try {
         // const userId = req.user._id
         const {
