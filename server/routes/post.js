@@ -17,6 +17,21 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/:postId', async function (req, res, next) {
+    try {
+        const param = req.params["postId"].toString()
+        const result = await db.Post.find({_id: param})
+        res.send({
+            error: 0,
+            message: 'Success',
+            data: result,
+        })
+    } catch (error) {
+        res.send({error: -1, message: 'Unknown exception'});
+        console.log('API-Exception', error);
+    }
+});
+
 router.post('/', AuthService.verify, async (req, res, next) => {
     try {
         // const userId = req.user._id
