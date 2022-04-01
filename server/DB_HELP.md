@@ -9,8 +9,14 @@
 
 #### Tạo một collection(tên collection trong MongoDB bắt buộc là lowercase và là số nhiều)
 [link](https://www.mongodb.com/docs/manual/reference/method/db.createCollection/)
+
 #### Xem collection `cities`
 `db.cities.find()`
+
+### Update một collection theo _id
+`db.cities.updateOne(
+    {_id : ObjectId('623be6ced8cc84201538e032')},
+    {$set: { name : "Hồ Chí Minh"}});`
 
 #### Thêm 1 document vào cities
 `db.cities.insertOne({
