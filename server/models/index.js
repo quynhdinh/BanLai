@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 const config = require('../config');
 
-mongoose.connect(config.MONGODB_URL);
+mongoose.connect(config.MONGODB_URL, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	useCreateIndex: true
+});
 
 //Listen status connect database
 mongoose.connection.on('error', function() {
