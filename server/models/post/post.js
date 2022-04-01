@@ -11,8 +11,8 @@ var schema = new mongoose.Schema({
     title: {type: String, required: true},
     price: {type: Number, required: true},
     description: String,
-    ViewCount: {type: Number, default: 0},
-    productDeTails: Object
+    viewCount: {type: Number, default: 0},
+    productDetails: Object
 }, {timestamps: true});
 
 module.exports = mongoose.model('Post', schema);
