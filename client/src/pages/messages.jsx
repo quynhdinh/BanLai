@@ -4,6 +4,8 @@ import {
 } from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar"
 import MessageItem from "../components/MessageItem/message-item";
+import PostItem from "../components/PostItem";
+import log from "tailwindcss/lib/util/log";
 
 const messagePage = ({zmproute}) => {
     const user = useStore('user');
@@ -22,14 +24,21 @@ const messagePage = ({zmproute}) => {
                 <Tab id="tab-1" className="page-content" tabActive>
                     <Box>
                         <Card inset>
-                            {
-                                user.map((u, i) => (
-                                    <MessageItem key={i}
-                                                 product={products[i % products.length]}
-                                                 user={u}
-                                                 marginTop={i === 0 ? '0px' : spacing}/>
-                                ))
-                            }
+                            <MessageItem product={products[0]}
+                                         user={user[0]}
+                                         marginTop={spacing}/>
+                            <MessageItem product={products[0]}
+                                         user={user[1]}
+                                         marginTop={spacing}/>
+                            <MessageItem product={products[0]}
+                                         user={user[2]}
+                                         marginTop={spacing}/>
+                            <MessageItem product={products[0]}
+                                         user={user[3]}
+                                         marginTop={spacing}/>
+                            <MessageItem product={products[0]}
+                                         user={user[4]}
+                                         marginTop={spacing}/>
                         </Card>
                     </Box>
                 </Tab>
