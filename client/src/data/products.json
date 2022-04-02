@@ -1,0 +1,45 @@
+[
+  {
+    "id": 1,
+    "title": "Đàn Piano Điện Yamaha CLP-150",
+    "price": "20000000",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi tempora similique reiciendis, error nesciunt vero, blanditiis pariatur dolor, minima sed sapiente rerum, dolorem corrupti hic modi praesentium unde saepe perspiciatis.",
+    "image_url": "https://i.imgur.com/b7u010X.jpeg"
+  },
+  {
+    "id": 2,
+    "title": "Máy lọc không khí BlueAir BluePure 411 Pac",
+    "price": "1500000",
+    "description": "Velit odit autem modi saepe ratione totam minus, aperiam, labore quia provident temporibus quasi est ut aliquid blanditiis beatae suscipit odio vel! Nostrum porro sunt sint eveniet maiores, dolorem itaque!",
+    "image_url": "https://i.imgur.com/LySd5z2.jpeg"
+
+  },
+  {
+    "id": 3,
+    "title": "Xe đạp địa hình MTB XDS Hero 380 27.5 inch Size M",
+    "price": "2000000",
+    "description": "Expedita sequi perferendis quod illum pariatur aliquam, alias laboriosam! Vero blanditiis placeat, mollitia necessitatibus reprehenderit. Labore dolores amet quos, accusamus earum asperiores officiis assumenda optio architecto quia neque, quae eum.",
+    "image_url": "https://i.imgur.com/YUvSN1b.jpeg"
+  },
+  {
+    "id": 4,
+    "title": "Bàn chải điện Oral B cho người lớn và trẻ em",
+    "price": "500000",
+    "description": "Expedita sequi perferendis quod illum pariatur aliquam, alias laboriosam! Vero blanditiis placeat, mollitia necessitatibus reprehenderit. Labore dolores amet quos, accusamus earum asperiores officiis assumenda optio architecto quia neque, quae eum.",
+    "image_url": "https://i.imgur.com/bxttoIM.jpeg"
+  },
+  {
+    "id": 5,
+    "title": "MacBook Pro 13 inch M1 2020 chính hãng xài lướt",
+    "price": "20000000",
+    "description": "Expedita sequi perferendis quod illum pariatur aliquam, alias laboriosam! Vero blanditiis placeat, mollitia necessitatibus reprehenderit. Labore dolores amet quos, accusamus earum asperiores officiis assumenda optio architecto quia neque, quae eum.",
+    "image_url": "https://i.imgur.com/lw8s1t3.jpeg"
+  },
+  {
+    "id": 5,
+    "title": "Iphone 13 Pro 128G còn bảo hành 6 tháng CellphoneS",
+    "price": "20000000",
+    "description": "Expedita sequi perferendis quod illum pariatur aliquam, alias laboriosam! Vero blanditiis placeat, mollitia necessitatibus reprehenderit. Labore dolores amet quos, accusamus earum asperiores officiis assumenda optio architecto quia neque, quae eum.",
+    "image_url": "https://i.imgur.com/TyPdN9n.jpeg"
+  }
+]
