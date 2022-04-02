@@ -1,16 +1,51 @@
-import React from "react"
-import { Page, Card, Text, Box } from "zmp-framework/react"
-import NavigationBar from "../components/NavigationBar"
-import ComingSoon from "../components/ComingSoon"
-import useScrollPosition from "../hooks/useScrollPosition"
+import React from 'react';
+import {
+    Page, Card, Searchbar, Box, Tabbar, Link, Tabs, Tab, useStore
+} from 'zmp-framework/react';
+import NavigationBar from "../components/NavigationBar";
+import PostItem from "../components/PostItem";
 
-const articlePage = ({ zmproute }) => {
-    // useScrollPosition('/article')
+const managePostPage = ({zmproute}) => {
+    const product = useStore('products')
+    const spacing = '20px'
     return (
-        <Page>
-            <NavigationBar active={zmproute.path} />
-            <ComingSoon pageName="Quản lý bài đăng" />
+        <Page pageContent={false}>
+            <NavigationBar active={zmproute.path}/>
+            <Box mt='1'>
+                <Searchbar
+                    searchContainer='.virtual-list'
+                    searchItem='li'
+                    searchIn='.item-title'
+                />
+            </Box>
+            <div>
+                <Tabbar top>
+                    <Link tabLink="#tab-1" tabLinkActive>
+                        Đang rao
+                    </Link>
+                    <Link tabLink="#tab-2">Đã bán</Link>
+                </Tabbar>
+            </div>
+            <Tabs>
+                <Tab id="tab-1" className="page-content" tabActive>
+                    <Box>
+                        <Card inset>
+                            {product.map((item, index) => (
+                                <PostItem key={index} product={item} marginTop={index === 0 ? '0px' : spacing}/>
+                            ))}
+                        </Card>
+                    </Box>
+                </Tab>
+                <Tab id="tab-2" className="page-content">
+                    <Box>
+                        <Card inset>
+                            <PostItem product={product[2]} marginTop={'0px'}/>
+                            <PostItem product={product[0]} marginTop={spacing}/>
+                        </Card>
+                    </Box>
+                </Tab>
+            </Tabs>
         </Page>
     )
 }
-export default articlePage
+export default managePostPage
