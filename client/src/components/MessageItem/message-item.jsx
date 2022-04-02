@@ -6,8 +6,8 @@ const MessageItem = ({user, product, marginTop}) => {
         <div style={{display: 'flex', width: '100%', marginTop: marginTop}}>
             <Avatar story={user.story} online={user.online} src={user.avatar}/>
             <div style={{marginLeft: 16}}>
-                <Title style={{marginBottom: 0}} >{user.displayName}</Title>
-                <Text size='small'>{product.title}</Text>
+                <Title size='small' style={{marginBottom: 0}} >{user.displayName}</Title>
+                <Text size='xxsmall'>{product.title}</Text>
             </div>
             <Text style={{position: "absolute", right: "5%"}} size='xxxsmall' marginRight={10}>10 giờ trước</Text>
         </div>
