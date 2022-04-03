@@ -7,7 +7,7 @@ const UserCard = ({ user }) => {
       <Avatar story={user.story} online={user.online} src={user.avatar}/>
       <div style={{ marginLeft: 16 }}>
         <Title style={{ marginBottom: 0 }}>{user.displayName}</Title>
-          <Text className='mt-1' size='xxsmall'>Thành viên bán lại</Text>
+          <Text className='mt-1' size='xxsmall'>Thành viên Bán Lại</Text>
       </div>
     </div>
   )

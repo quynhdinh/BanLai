@@ -22,11 +22,11 @@ const messagePage = ({zmproute}) => {
             </Tabbar>
             <Tabs>
                 <Tab id="tab-1" className="page-content" tabActive>
-                    <Box>
+                    <Box style={{marginBottom: "50px"}}>
                         <Card inset>
                             <MessageItem product={products[0]}
                                          user={user[0]}
-                                         marginTop={spacing}/>
+                                         marginTop={'0px'}/>
                             <MessageItem product={products[0]}
                                          user={user[1]}
                                          marginTop={spacing}/>

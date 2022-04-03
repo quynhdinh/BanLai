@@ -12,13 +12,13 @@ const HomePage = () => {
     return (
         <Page name="home" navbarLarge>
             <NavigationBar/>
-            <Box className="inquiry" px="2">
+            <Box className="inquiry" mt ={1}>
                 <div className="flex-1 ">
                     <Searchbar  className="discount-searchbar" value={keyword}
                                 onChange={e => setKeyword(e.target.value)} type="text" placeholder="Tìm sản phẩm"
                                 clearButton onSearchbarClear={() => setKeyword('')}/>
-                    <PostFilter>{"Thiết bị điện tử"}</PostFilter>
-                    <PostFilter>{"Đã qua sử dụng"}</PostFilter>
+                    {/*<PostFilter>{"Thiết bị điện tử"}</PostFilter>*/}
+                    {/*<PostFilter>{"Đã qua sử dụng"}</PostFilter>*/}
                 </div>
             </Box>
         </Page>

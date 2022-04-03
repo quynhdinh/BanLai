@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Page, Card, Searchbar, Box, Tabbar, Link, Tabs, Tab, useStore
+    Page, Card, Searchbar, Box, Tabbar, Link, Tabs, Tab, useStore, SkeletonText
 } from 'zmp-framework/react';
 import NavigationBar from "../components/NavigationBar";
 import PostItem from "../components/PostItem";
@@ -13,6 +13,7 @@ const managePostPage = ({zmproute}) => {
             <NavigationBar active={zmproute.path}/>
             <Box mt='1'>
                 <Searchbar
+                    placeholder = 'Tìm sản phẩm'
                     searchContainer='.virtual-list'
                     searchItem='li'
                     searchIn='.item-title'
@@ -28,7 +29,7 @@ const managePostPage = ({zmproute}) => {
             </div>
             <Tabs>
                 <Tab id="tab-1" className="page-content" tabActive>
-                    <Box>
+                    <Box style={{marginBottom: "150px"}}>
                         <Card inset>
                             {product.map((item, index) => (
                                 <PostItem key={index} product={item} marginTop={index === 0 ? '0px' : spacing}/>
@@ -37,10 +38,11 @@ const managePostPage = ({zmproute}) => {
                     </Box>
                 </Tab>
                 <Tab id="tab-2" className="page-content">
-                    <Box>
+                    <Box style={{marginBottom: "150px"}}>
                         <Card inset>
-                            <PostItem product={product[2]} marginTop={'0px'}/>
-                            <PostItem product={product[0]} marginTop={spacing}/>
+                            {product.map((item, index) => (
+                                <PostItem key={index} product={item} marginTop={index === 0 ? '0px' : spacing}/>
+                            ))}
                         </Card>
                     </Box>
                 </Tab>
