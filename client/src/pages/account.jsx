@@ -1,8 +1,7 @@
 import React from "react"
-import {Page, Card, useStore, List, ListItem, Box, Title, Icon, Link,} from "zmp-framework/react"
+import {Page, Card, useStore, List, ListItem, Box, Title, Icon, Link, Avatar,} from "zmp-framework/react"
 import NavigationBar from "../components/NavigationBar"
 import UserCard from '../components/user-card';
-import * as PropTypes from "prop-types";
 
 const AccountPage = ({zmproute}) => {
     const user = useStore('user');
@@ -20,8 +19,9 @@ const AccountPage = ({zmproute}) => {
                     <Icon className='list-icon' slot='media' zmp='zi-heart-solid' color={'#ff3b30'} size={16}/>
                 </ListItem>
             </List>
-            <Card inset>
-                <Title size='normal'>Bán Lại</Title>
+
+            <Box mt={20} ml={10}>
+                <Title size='normal'>Liên hệ Bán Lại</Title>
                 <Box key="normal" mb='4'>
                     <Title size="xsmall">
                         Email: banlai@gmail.com
@@ -30,8 +30,8 @@ const AccountPage = ({zmproute}) => {
                         Hotline: 1987654321
                     </Title>
                 </Box>
-            </Card>
-            <Card inset>
+            </Box>
+            <Box ml={10} mt={10}>
                 <Title size='normal'>Hướng dẫn đăng tin</Title>
                 <Box key="normal" mb='4'>
                     <Title size="xsmall">
@@ -41,7 +41,7 @@ const AccountPage = ({zmproute}) => {
                         Hướng dẫn đăng tin
                     </Title>
                 </Box>
-            </Card>
+            </Box>
         </Page>
     )
 }
