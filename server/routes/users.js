@@ -14,7 +14,7 @@ router.post('/login', async (req, res) => {
         if (!accessToken) {
             return res.send({error: -1, message: 'Invalid access token'});
         }
-        const {id, birthday, name, gender, picture} = await ZaloService.getZaloProfile(accessToken);
+        const {id, name, birthday, picture} = await ZaloService.getZaloProfile(accessToken);
         let pictureUrl = picture
         if (picture.data) {
             pictureUrl = picture.data.url
@@ -26,8 +26,7 @@ router.post('/login', async (req, res) => {
         }
         let user = await db.Users.updateOne({zaloId: id}, {
             birthday: birthDate,
-            name,
-            gender,
+            name: name,
             picture: pictureUrl
         }, {upsert: true}); // inserts a new document if no document matches the filter
 

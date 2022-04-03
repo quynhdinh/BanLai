@@ -11,7 +11,7 @@ service.getZaloProfile = (accessToken) => {
             method: 'GET',
             qs: {
                 access_token: accessToken,
-                fields: 'id,name,birthday,email,picture'
+                fields: 'id,name,birthday,picture'
             },
             json: true
         }, (error, response, body) => {
