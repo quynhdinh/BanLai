@@ -1,6 +1,8 @@
 var express = require('express');
 const db = require('../models');
+var {validationResult} = require('express-validator');
 const AuthService = require("../services/auth-service");
+const {postValidate} = require("../helpers/post-validator");
 const ObjectId = require('mongoose').Types.ObjectId;
 var router = express.Router();
 
@@ -33,13 +35,16 @@ router.get('/:postId', async function (req, res, next) {
     }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
     try {
-        // const userId = req.user._id
         const {
             category, subCategory, userId, city, district, status, condition,
             title, price, description, viewCount, productDetails
         } = req.body
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({errors: errors.array()});
+        }
         const doc = await db.Post.create({
             userId,
             category,
@@ -55,7 +60,7 @@ router.post('/', async (req, res, next) => {
             data: doc,
         })
     } catch (error) {
-        res.send({error: -1, message: 'Unknown exception'});
+        res.send({error: -1, message: error});
         console.log('API-Exception', error);
     }
 
