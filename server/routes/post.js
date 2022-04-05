@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
     try {
-        const result = await db.Post.find({})
+        const result = await db.Posts.find({})
         res.send({
             error: 0,
             message: 'Lấy danh sách bài đăng thành công',
@@ -22,7 +22,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:postId', async function (req, res, next) {
     try {
         const param = req.params["postId"].toString()
-        const result = await db.Post.find({_id: param})
+        const result = await db.Posts.find({_id: param})
         res.send({
             error: 0,
             message: 'Lấy thông tin bài đăng thành công',
@@ -48,7 +48,7 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
                 data: errors.array()
             })
         }
-        const doc = await db.Post.create({
+        const doc = await db.Posts.create({
             userId,
             category,
             subCategory,

@@ -4,7 +4,7 @@ const {Schema} = mongoose;
 const schema = new mongoose.Schema({
     category: {type: String, required: true},
     subCategory: {type: String, required: true},
-    userId: {type: Schema.Types.ObjectId, ref: 'User', required: true},
+    zaloId: {type: String, required: true},
     city: {type: String, required: true},
     district: {type: String, required: true},
     status: {type: String, required: true},
