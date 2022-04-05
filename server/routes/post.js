@@ -1,17 +1,16 @@
-var express = require('express');
+const express = require('express');
 const db = require('../models');
-var {validationResult} = require('express-validator');
+const {validationResult} = require('express-validator');
 const AuthService = require("../services/auth-service");
 const {postValidate} = require("../helpers/post-validator");
-const ObjectId = require('mongoose').Types.ObjectId;
-var router = express.Router();
+const router = express.Router();
 
 router.get('/', async (req, res, next) => {
     try {
-        result = await db.Post.find({})
+        const result = await db.Post.find({})
         res.send({
             error: 0,
-            message: 'Success',
+            message: 'Lấy danh sách bài đăng thành công',
             data: result,
         })
     } catch (error) {
@@ -26,7 +25,7 @@ router.get('/:postId', async function (req, res, next) {
         const result = await db.Post.find({_id: param})
         res.send({
             error: 0,
-            message: 'Success',
+            message: 'Lấy thông tin bài đăng thành công',
             data: result,
         })
     } catch (error) {
@@ -39,15 +38,15 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
     try {
         const {
             category, subCategory, userId, city, district, status, condition,
-            title, price, description, viewCount, isSaved, productDetails
+            title, price, description, productDetails
         } = req.body
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            //res.append('error', '1');
-            res.send({ error: 1,
-                            massage: 'thông tin không hợp lệ',
-                            data: errors.array()})
-            return
+            return res.send({
+                error: 1,
+                massage: 'Thông tin không hợp lệ',
+                data: errors.array()
+            })
         }
         const doc = await db.Post.create({
             userId,

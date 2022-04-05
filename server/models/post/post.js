@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
-var schema = new mongoose.Schema({
+const schema = new mongoose.Schema({
     category: {type: String, required: true},
     subCategory: {type: String, required: true},
     userId: {type: Schema.Types.ObjectId, ref: 'User', required: true},
