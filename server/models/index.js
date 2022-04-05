@@ -20,4 +20,5 @@ const db = {};
 db.Orders = require('./order.js');
 db.Products = require('./product.js');
 db.Users = require('./user.js');
+db.Post = require('./post/post');
 module.exports = db;
