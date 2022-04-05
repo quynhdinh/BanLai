@@ -56,7 +56,6 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
             city, district,
             status, condition,
             title, price, description,
-            viewCount, isSaved,
             productDetails
         })
         res.send({
