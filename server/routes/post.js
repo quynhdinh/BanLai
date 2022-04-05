@@ -45,7 +45,7 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
         if (!errors.isEmpty()) {
             //res.append('error', '1');
             res.send({ error: 1,
-                            massage: 'invalid params',
+                            massage: 'thông tin không hợp lệ',
                             data: errors.array()})
             return
         }

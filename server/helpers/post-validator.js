@@ -2,8 +2,8 @@ const {check} = require('express-validator');
 
 let validateCreatePost = () => {
     return [
-        check('category', 'Category is not empty').not().isEmpty(),
-        check('subCategory', 'Sub category is not empty').not().isEmpty(),
+        check('category', 'Cần có danh mục').not().isEmpty(),
+        check('subCategory', 'Cần có danh mục chi tiết').not().isEmpty(),
         check('userId', 'userId is not empty').not().isEmpty(),
         check('city', 'Thành phố không được trống').not().isEmpty(),
         check('district', 'quận,huyện không được trống').not().isEmpty(),
