@@ -43,7 +43,11 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
         } = req.body
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({errors: errors.array()});
+            //res.append('error', '1');
+            res.send({ error: 1,
+                            massage: 'invalid params',
+                            data: errors.array()})
+            return
         }
         const doc = await db.Post.create({
             userId,
@@ -61,7 +65,7 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
             data: doc,
         })
     } catch (error) {
-        res.send({error: -1, message: error});
+        res.send({error: -1, message: 'Unknown exception'});
         console.log('API-Exception', error);
     }
 
