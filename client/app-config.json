@@ -21,6 +21,9 @@
     "/manage-post",
     "/create",
     "/messages",
-    "/account"
+    "/account",
+    "/create-post",
+    "/choose-category",
+    "/choose-subcategory"
   ]
 }
