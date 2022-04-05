@@ -39,7 +39,7 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
     try {
         const {
             category, subCategory, userId, city, district, status, condition,
-            title, price, description, viewCount, productDetails
+            title, price, description, viewCount, isSaved, productDetails
         } = req.body
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -52,7 +52,8 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
             city, district,
             status, condition,
             title, price, description,
-            viewCount, productDetails
+            viewCount, isSaved,
+            productDetails
         })
         res.send({
             error: 0,

@@ -13,6 +13,7 @@ var schema = new mongoose.Schema({
     price: {type: Number, required: true},
     description: String,
     viewCount: {type: Number, default: 0},
+    isSaved: {type: Boolean, default: false},
     productDetails: Object
 }, {timestamps: true});
 
