@@ -1,25 +1,34 @@
-import React, { forwardRef, useRef, useImperativeHandle } from "react"
-import { Box, SkeletonBlock } from "zmp-framework/react"
+import React from 'react';
+import {
+    Page,
+    Card,
+    SkeletonImage,
+    SkeletonText,
+    Box
+} from 'zmp-framework/react';
 
-const Category = forwardRef(({ loading, categoryName, thumbnail, active }, ref) => {
-  const elRef = useRef(null)
+const Category = ({product, category}) => {
 
-  useImperativeHandle(ref, () => elRef.current)
-  if (loading) {
     return (
-      <Box my={0} mr={0} ml={10} ref={elRef} className="category-wrapper">
-        <SkeletonBlock className="category"></SkeletonBlock>
-      </Box>
+        <Card inset title={category}>
+            <Box flex flexDirection='row'>
+                <Box>
+                    <SkeletonImage
+                        tag='div'
+                        src={product.image_url}
+                        showIcon
+                        width={100}
+                        height={100}
+                    />
+                </Box>
+                <Box style={{flex: 1, marginLeft: '8px'}}>
+                    <SkeletonText>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                        eiusmod tempor
+                    </SkeletonText>
+                </Box>
+            </Box>
+        </Card>
     )
-  }
-  return (
-    <Box ref={elRef} m={0} className="category-wrapper">
-      <div className="category">
-        <div className="category-shadow shadow-3"></div>
-        <span className="category-name">{categoryName}</span>
-      </div>
-    </Box>
-  )
-})
-
+}
 export default Category
