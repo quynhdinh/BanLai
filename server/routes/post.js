@@ -37,7 +37,7 @@ router.get('/:postId', async function (req, res, next) {
 router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
     try {
         const {
-            category, subCategory, userId, city, district, status, condition,
+            category, subCategory, zaloId, city, district, status, condition,
             title, price, description, productDetails
         } = req.body
         const errors = validationResult(req);
@@ -49,7 +49,7 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
             })
         }
         const doc = await db.Posts.create({
-            userId,
+            zaloId,
             category,
             subCategory,
             city, district,

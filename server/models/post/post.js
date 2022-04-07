@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const {Schema} = mongoose;
 
-const schema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
     category: {type: String, required: true},
     subCategory: {type: String, required: true},
     zaloId: {type: String, required: true},
@@ -16,4 +15,4 @@ const schema = new mongoose.Schema({
     productDetails: Object
 }, {timestamps: true});
 
-module.exports = mongoose.model('Post', schema);
+module.exports = mongoose.model('Post', postSchema);
