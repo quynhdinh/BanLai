@@ -11,7 +11,7 @@ import NavbarBack from "../components/navbar-back";
 const createPostPage = ({ zmproute }) => {
   return (
     <Page pageContent={false} name="choose-category">
-      <NavbarBack title="Tạo tin đăng" />
+      <NavbarBack title="Tạo tin đăng" linkLeft={'/'}/>
       <Box pt={10} mt={10} px={4}>
         <Title size="large" bold>
           Chọn danh mục

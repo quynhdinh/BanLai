@@ -12,6 +12,7 @@ const UserPage = () => {
         title="User info"
         linkRight="/form"
         labelRight="Edit"
+        linkLeft={'/account/'}
       />
       <div style={{ textAlign: 'center', marginTop: 32 }}>
         <Avatar story online size={96}>{user.avatar}</Avatar>

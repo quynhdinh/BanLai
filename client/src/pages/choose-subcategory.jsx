@@ -13,7 +13,7 @@ const createPostPage = ({ zmproute }) => {
   const category = useStore("householdCategories");
   return (
     <Page name="choose-subcategory">
-      <NavbarBack title="Tạo tin đăng" />
+      <NavbarBack title="Tạo tin đăng" linkLeft={'/choose-category/'} />
       <Box px={4}>
         <Title size="large" bold>
           Chọn danh mục

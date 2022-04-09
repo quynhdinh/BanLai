@@ -33,7 +33,7 @@ const createPostPage = ({ zmproute }) => {
   };
   return (
     <Page name="create-post">
-      <NavbarBack title="Tạo tin đăng" />
+      <NavbarBack title="Tạo tin đăng" linkLeft={'/choose-subcategory/'}/>
       <Box px={4}>
         <List
           style={{ listStyle: "none" }}

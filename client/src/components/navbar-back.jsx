@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, Navbar, NavLeft, Icon, NavTitle, NavRight } from 'zmp-framework/react';
 
-const NavbarBack = ({ title, linkRight, labelRight }) => {
+const NavbarBack = ({ title, linkLeft, linkRight, labelRight }) => {
   return (
     <Navbar>
       <NavLeft displayName="zmp-navleft">
-        <Link className="no-ripple" noLinkClass back>
+        <Link className="no-ripple" noLinkClass animate={false} href={linkLeft}>
           <Icon zmp="zi-arrow-left" />
         </Link>
       </NavLeft>

@@ -29,7 +29,7 @@ const FormPage = () => {
 
   return (
     <Page name="user-form">
-      <NavbarBack title="Update user info" />
+      <NavbarBack title="Update user info" linkLeft={'/account/'}/>
       <Box>
         <Card inset>
           <Input
