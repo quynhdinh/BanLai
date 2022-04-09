@@ -10,11 +10,11 @@ router.get('/', async (req, res, next) => {
         const result = await db.Posts.find({})
         res.send({
             error: 0,
-            message: 'Lấy danh sách bài đăng thành công',
+            msg: 'Lấy danh sách bài đăng thành công',
             data: result,
         })
     } catch (error) {
-        res.send({error: -1, message: 'Unknown exception'});
+        res.send({error: -1, msg: 'Unknown exception'});
         console.log('API-Exception', error);
     }
 });
@@ -25,11 +25,11 @@ router.get('/:postId', async function (req, res, next) {
         const result = await db.Posts.find({_id: param})
         res.send({
             error: 0,
-            message: 'Lấy thông tin bài đăng thành công',
+            msg: 'Lấy thông tin bài đăng thành công',
             data: result,
         })
     } catch (error) {
-        res.send({error: -1, message: 'Unknown exception'});
+        res.send({error: -1, msg: 'Unknown exception'});
         console.log('API-Exception', error);
     }
 });
@@ -59,11 +59,11 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
         })
         res.send({
             error: 0,
-            message: 'Tạo bài thành công!',
+            msg: 'Tạo bài thành công!',
             data: doc,
         })
     } catch (error) {
-        res.send({error: -1, message: 'Unknown exception'});
+        res.send({error: -1, msg: 'Unknown exception'});
         console.log('API-Exception', error);
     }
 

@@ -6,7 +6,7 @@ mongoose.connect(config.MONGODB_URL, {
 	useUnifiedTopology: true,
 	useCreateIndex: true
 });
-
+mongoose.set('useFindAndModify', false);
 //Listen status connect database
 mongoose.connection.on('error', function() {
 	console.log('Connect to database error!');

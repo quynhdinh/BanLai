@@ -8,11 +8,11 @@ router.get('/', async (req, res, next) => {
         const result = await db.CarePostMapping.find({})
         res.send({
             error: 0,
-            message: 'Lấy thông tin quan tâm bài đăng thành công',
+            msg: 'Lấy thông tin quan tâm bài đăng thành công',
             data: result,
         })
     } catch (error) {
-        res.send({error: -1, message: 'Unknown exception'});
+        res.send({error: -1, msg: 'Unknown exception'});
         console.log('API-Exception', error);
     }
 });
@@ -27,10 +27,10 @@ router.post('/', AuthService.verify, async (req, res) => {
     })
     res.send({
         error: 0,
-        message: 'Thêm bài đăng vào danh sách quan tâm thành công!',
+        msg: 'Thêm bài đăng vào danh sách quan tâm thành công!',
         data: mapping,
     })
-    return res.send({error: 0, message: 'Success', data: req.user});
+    return res.send({error: 0, msg: 'Success', data: req.user});
 });
 
 router.get('/:zaloId', async function (req, res, next) {
@@ -39,11 +39,11 @@ router.get('/:zaloId', async function (req, res, next) {
         const result = await db.CarePostMapping.find({zaloId: param})
         res.send({
             error: 0,
-            message: 'Lấy danh sách quan tâm của user thành công',
+            msg: 'Lấy danh sách quan tâm của user thành công',
             data: result,
         })
     } catch (error) {
-        res.send({error: -1, message: 'Unknown exception'});
+        res.send({error: -1, msg: 'Unknown exception'});
         console.log('API-Exception', error);
     }
 });
@@ -56,7 +56,7 @@ router.delete('/:postId', AuthService.verify, async (req, res, next) => {
         if (!post) {
             return res.send({
                 error: 1,
-                message: 'Không tìm thấy bài đăng này'
+                msg: 'Không tìm thấy bài đăng này'
             })
         } else {
             return res.send({
@@ -65,7 +65,7 @@ router.delete('/:postId', AuthService.verify, async (req, res, next) => {
             })
         }
     } catch (error) {
-        res.send({error: -1, message: 'Unknown exception'});
+        res.send({error: -1, msg: 'Unknown exception'});
         console.log('API-Exception', error);
     }
 });

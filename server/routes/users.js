@@ -5,7 +5,7 @@ const ZaloService = require('./../services/zalo-service.js');
 const router = express.Router();
 
 router.get('/logged-in', AuthService.verify, (req, res) => {
-    return res.send({error: 0, message: 'Success', data: req.user});
+    return res.send({error: 0, msg: 'Success', data: req.user});
 });
 router.get('/', async (req, res) => {
     try {
@@ -13,11 +13,11 @@ router.get('/', async (req, res) => {
         res.send({
             error: 0,
             count: result.length,
-            message: 'Lấy danh sách người dùng thành công',
+            msg: 'Lấy danh sách người dùng thành công',
             data: result,
         })
     } catch (error) {
-        res.send({error: -1, message: 'Unknown exception'});
+        res.send({error: -1, msg: 'Unknown exception'});
         console.log('API-Exception', error);
     }
 });
@@ -25,7 +25,7 @@ router.post('/login', async (req, res) => {
     try {
         const accessToken = req.body.accessToken;
         if (!accessToken) {
-            return res.send({error: -1, message: 'Invalid access token'});
+            return res.send({error: -1, msg: 'Invalid access token'});
         }
         const {id, name, birthday, picture} = await ZaloService.getZaloProfile(accessToken);
         let pictureUrl = picture
@@ -47,12 +47,12 @@ router.post('/login', async (req, res) => {
             const jwt = AuthService.genJSONWebToken(id, 3600);
             return res.send({
                 error: 0,
-                message: 'Success',
+                msg: 'Đăng nhập thành công',
                 data: {...user, jwt}
             });
         }
     } catch (ex) {
-        res.send({error: -1, message: 'Unknown exception'});
+        res.send({error: -1, msg: 'Unknown exception'});
         console.log('API-Exception', ex);
     }
 });
@@ -64,11 +64,11 @@ router.post('/update-follow-status', AuthService.verify, async (req, res, next) 
         const user = await db.Users.updateOne({zaloId}, {isFollowing})
         return res.send({
             error: 0,
-            message: 'Success',
+            msg: 'Cập nhật thông tin theo dõi thành công',
             data: user
         });
     } catch (ex) {
-        res.send({error: -1, message: 'Unknown exception'});
+        res.send({error: -1, msg: 'Unknown exception'});
         console.log('API-Exception', ex);
     }
 });
