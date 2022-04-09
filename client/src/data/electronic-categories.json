@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "title": "Điện thoại"
+  },
+  {
+    "id": 2,
+    "title": "Máy tính bảng"
+  },
+  {
+    "id": 3,
+    "title": "Laptop"
+  },
+  {
+    "id": 4,
+    "title": "PC"
+  },
+  {
+    "id": 5,
+    "title": "Camera"
+  },
+  {
+    "id": 6,
+    "title": "Karaoke"
+  },
+  {
+    "id": 7,
+    "title": "Tivi"
+  },
+  {
+    "id": 8,
+    "title": "Khác"
+  }
+]
