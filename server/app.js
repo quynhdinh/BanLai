@@ -27,6 +27,7 @@ app.use('/orders', require('./routes/orders'));
 app.use('/webhook', require('./routes/webhook'));
 app.use('/api/posts', require('./routes/post'));
 app.use('/api/carelist', require('./routes/care-list'));
+app.use('/api/messages', require('./routes/message'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

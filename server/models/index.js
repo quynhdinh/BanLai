@@ -22,4 +22,5 @@ db.Products = require('./product.js');
 db.Users = require('./user.js');
 db.Posts = require('./post/post');
 db.CarePostMapping = require('./post/care-post-mapping');
+db.Messages = require('./message');
 module.exports = db;
