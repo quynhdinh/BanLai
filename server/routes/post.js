@@ -66,7 +66,105 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
         res.send({error: -1, msg: 'Unknown exception'});
         console.log('API-Exception', error);
     }
+});
 
+//update the post
+router.put('/:postId', async(req, res) => {
+    try {
+        const param = req.params["postId"].toString()
+        const {
+            category, subCategory, zaloId, city, district, status, condition,
+            title, price, description, productDetails
+        } = req.body
+        const p = await db.Posts.findByIdAndUpdate({_id: param}, {
+            zaloId: zaloId,
+            category: category,
+            subCategory: subCategory,
+            city: city,
+            district: district,
+            status: status,
+            condition: condition,
+            title: title,
+            price: price,
+            description: description,
+            productDetails: productDetails
+            }, {new: true}
+        )
+        res.send({
+            error: 0,
+            msg: 'Cập nhật bài đăng thành công',
+            data: p,
+        })
+    } catch (error) {
+        res.send({error: -1, msg: 'Unknown exception'});
+        console.log('API-Exception', error);
+    }
+})
+
+router.put('/viewCount/:postId', async (req, res, next) => {
+    try {
+        const param = req.params["postId"].toString()
+        const p = await db.Posts.findOneAndUpdate({_id: param}, {$inc: {'viewCount': 1}}, {new: true})
+        if (p) {
+            res.send({
+                error: 0,
+                msg: 'Cập nhận lượt xem bài đăng thành công',
+                data: p
+            })
+        } else {
+            res.send({
+                error: -1,
+                msg: 'Không tìm thấy bài đăng',
+            })
+        }
+    } catch (error) {
+        res.send({error: -1, msg: 'Unknown exception'});
+        console.log('API-Exception', error);
+    }
+});
+
+router.put('/repost/:postId', async (req, res, next) => {
+    try {
+        const param = req.params["postId"].toString()
+        const p = await db.Posts.findOneAndUpdate({_id: param}, {'status': 'Active'}, {new: true})
+        if (p) {
+            res.send({
+                error: 0,
+                msg: 'Active bài đăng thành công',
+                data: p
+            })
+        } else {
+            res.send({
+                error: -1,
+                msg: 'Không tìm thấy bài đăng',
+            })
+        }
+    } catch (error) {
+        res.send({error: -1, msg: 'Unknown exception'});
+        console.log('API-Exception', error);
+    }
+});
+
+router.put('/close-post/:postId', async (req, res, next) => {
+    try {
+        const param = req.params["postId"].toString()
+        const p = await db.Posts.findOneAndUpdate({_id: param}, {'status': 'Closed'}, {new: true})
+        if (p) {
+            res.send({
+                error: 0,
+                msg: 'Ẩn bài đăng thành công',
+                data: p
+            })
+        } else {
+            res.send({
+                error: -1,
+                msg: 'Không tìm thấy bài đăng',
+            })
+        }
+    } catch (error) {
+        res.send({error: -1, msg: 'Unknown exception'});
+        console.log('API-Exception', error);
+    }
 });
 
 module.exports = router;

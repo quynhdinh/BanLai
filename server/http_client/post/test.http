@@ -48,3 +48,37 @@ Content-Type: application/json
     "color": "xanh"
   }
 }
+
+###
+PUT http://localhost:5000/api/posts/viewCount/624ea0f71e88fd8a60835eff
+Content-Type: application/json
+
+###
+
+
+PUT http://localhost:5000/api/posts/repost/624ea0f71e88fd8a60835eff
+Content-Type: application/json
+###
+
+PUT http://localhost:5000/api/posts/close-post/624ea0f71e88fd8a60835eff
+Content-Type: application/json
+###
+
+PUT http://localhost:5000/api/posts/624ea0f71e88fd8a60835eff
+Content-Type: application/json
+
+{
+  "category": "Đồ điện tử",
+  "subCategory": "Điện thoại",
+  "zaloId": "3024770787876860996",
+  "city": "Thủ Đức",
+  "district": "Quận 9",
+  "status": "Active",
+  "condition": "Đồ cũ",
+  "title": "Bán Iphone 13 Pro Max xài lướt",
+  "price": 30000000,
+  "description": "Bán gấp Iphone 13 Pro Max, chỉ 20 triệu liên hệ ngay để ép giá!",
+  "productDetails": {
+    "color": "đen"
+  }
+}
