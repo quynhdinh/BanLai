@@ -4,7 +4,7 @@ import {
     useStore,
     SkeletonImage,
     SkeletonText,
-    Searchbar, Box, Icon, Text, Card,
+    Searchbar, Box, Icon, Text, Card, Link,
 } from 'zmp-framework/react';
 import NavigationBar from '../components/NavigationBar';
 import Categories from "../components/Categories";
@@ -27,29 +27,23 @@ const HomePage = () => {
             {/*</Box>*/}
             <Box flex flexDirection="row" style={{justifyContent: "center"}}>
                 <Box style={{position: "flex", right: "10%"}}>
-                    <SkeletonImage
-                        tag="div"
-                        showIcon
-                        iconColor="gray"
+                    <img
+                        src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
                         width={120}
-                        height={90}
+                        height={100}
                     />
                 </Box>
 
                 <Box style={{position: "flex", left: "10%"}}>
-                    <SkeletonImage
-                        tag="div"
-                        showIcon
-                        iconColor="gray"
+                    <img
+                        src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
                         width={120}
-                        height={90}
+                        height={100}
                     />
                 </Box>
             </Box>
 
-            <Box>
-                <Categories/>
-            </Box>
+            <Categories/>
         </Page>
     );
 }
