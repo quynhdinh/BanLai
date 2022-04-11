@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {
-    Box,
+    Avatar,
+    Box, Card,
     List, ListItem,
     Page, Searchbar,
     useStore,
@@ -22,7 +23,7 @@ const electronicListPage = () => {
                     <Searchbar className="discount-searchbar" value={keyword}
                                onChange={e => setKeyword(e.target.value)} type="text" placeholder="Tìm sản phẩm"
                                clearButton onSearchbarClear={() => setKeyword('')}/>
-                    {/*<PostFilter>{"Thiết bị điện tử"}</PostFilter>*/}
+                    <PostFilter>{"Thiết bị điện tử"}</PostFilter>
                     {/*<PostFilter>{"Đã qua sử dụng"}</PostFilter>*/}
                 </div>
             </Box>
