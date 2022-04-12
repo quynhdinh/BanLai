@@ -4,6 +4,7 @@ const {validationResult} = require('express-validator');
 const AuthService = require("../services/auth-service");
 const {postValidate} = require("../helpers/post-validator");
 const router = express.Router();
+// router.use(AuthService.verify);
 
 router.get('/', async (req, res, next) => {
     try {

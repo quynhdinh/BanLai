@@ -3,7 +3,7 @@ const db = require('../models');
 const AuthService = require('../services/auth-service');
 const router = express.Router();
 
-router.use(AuthService.verify);
+// router.use(AuthService.verify);
 
 router.get('/:type', async (req, res, next) => {
     try {
@@ -11,14 +11,14 @@ router.get('/:type', async (req, res, next) => {
         if (type !== 0 && type !== 1) {
             return res.send({
                 error: -1,
-                message: 'Param không hợp lệ',
+                msg: 'Param không hợp lệ',
             });
         }
         const zaloId = req.body
         const messages = await db.Messages.find({zaloId: zaloId, type: type})
         res.send({
             error: 0,
-            message: 'Lấy danh sách tin nhắn thành công',
+            msg: 'Lấy danh sách tin nhắn thành công',
             data: messages,
         });
     } catch (error) {

@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    h1= title
+    h2= 'User Apis'
+    p /users: Lấy danh sách users
+    h2= 'Post Apis'
+    p GET /api/posts: Lấy danh sách post
+    p GET /api/posts/:id: Lấy danh sách post
+    p GET /api/users/posts/:id: Lấy danh sách post của 1 user
+    p POST /api/posts: Tạo bài đăng mới
+    p PUT /api/posts/:postId: Cập nhật 1 bài đăng
+    p PUT /api/posts/close-post/:postId: Đóng một bài đăng
+    p PUT /api/posts/repost/:postId: Đăng lại một bài đăng
+    p PUT /api/posts/viewCount/:postId: Tăng lượt xem của 1 bài đăng lên 1
+    h2= 'Care list Apis'
+    p GET /api/care-list/. Lấy dánh sách quan tâm của 1 user
+    p POST /api/carelist/:id Thêm vào danh sách của 1 user
+    p DELETE /api/carelist/:id Bỏ 1 post khỏi danh sách quan tâm
+    h2= 'Message Apis'
+    p GET /api/messages/:type Lấy danh sách tin nhắn theo type(0: tôi mua, 1: tôi bán)
+    p POST /api/messages: Tạo 1 tracking
