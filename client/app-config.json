@@ -26,6 +26,8 @@
     "/choose-category",
     "/choose-subcategory",
     "/electronic-list",
-    "/house-item-list"
+    "/house-item-list",
+    "/seller-profile",
+    "/care-list"
   ]
 }
