@@ -24,6 +24,8 @@
     "/account",
     "/create-post",
     "/choose-category",
-    "/choose-subcategory"
+    "/choose-subcategory",
+    "/electronic-list",
+    "/house-item-list"
   ]
 }
