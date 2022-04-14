@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Page,
-  useStore,
-  Icon,
   List,
-  ListItem,
   Button,
   Box,
   zmp,
   ListInput,
-  Picker,
+  Title,
 } from "zmp-framework/react";
 import NavbarBack from "../components/navbar-back";
 
-const createPostPage = ({ zmproute }) => {
-  const [price, setprice] = useState("");
-  useEffect(() => {
-    const zmproute = zmp.views.main.router.currentRoute;
-    console.log(zmproute);
-  }, []);
-
+const createPostPage = () => {
+  const zmproute = zmp.views.main.router.currentRoute;
   const handleOnSubmitForm = (e) => {
     e.preventDefault();
     console.log(zmp.form.convertToData("#my-form"));
@@ -31,10 +23,21 @@ const createPostPage = ({ zmproute }) => {
       city: 2,
     });
   };
+
   return (
     <Page name="create-post">
-      <NavbarBack title="Tạo tin đăng" linkLeft={'/choose-subcategory/'}/>
+      <NavbarBack title="Tạo tin đăng" linkLeft={"/choose-subcategory/"} />
       <Box px={4}>
+        <Box
+          flex
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Title>
+            {zmproute.query?.category}/{zmproute.query?.subcategory}
+          </Title>
+        </Box>
         <List
           style={{ listStyle: "none" }}
           form
@@ -48,8 +51,6 @@ const createPostPage = ({ zmproute }) => {
             placeholder="Nhập tiêu đề rao bán"
             name="photo"
             required
-            // multiple
-            // errorMessage="Invalid"
             validate
           ></ListInput>
           <ListInput
@@ -59,7 +60,6 @@ const createPostPage = ({ zmproute }) => {
             clearButton
             name="title"
             required
-            // errorMessage="Invalid"
             validate
           ></ListInput>
           <ListInput
@@ -81,7 +81,6 @@ const createPostPage = ({ zmproute }) => {
             <option value="1">Đã qua sử dụng</option>
             <option value="2">Hà Nội</option>
           </ListInput>
-
           <ListInput
             label="Mô tả"
             type="textarea"
@@ -89,6 +88,58 @@ const createPostPage = ({ zmproute }) => {
             clearButton
             name="description"
           ></ListInput>
+
+          {zmproute.query?.subcategory === "Điện thoại" ? (
+            <>
+              <ListInput
+                label="Màu sắc"
+                type="select"
+                // placeholder="Chọn tình trạng sản phẩm"
+                name="condition"
+                validate
+              >
+                <option value="1">Đỏ</option>
+              </ListInput>
+              <ListInput
+                label="Dung lượng"
+                type="select"
+                // placeholder="Chọn tình trạng sản phẩm"
+                name="condition"
+                validate
+              >
+                <option value="1"> 128GB</option>
+              </ListInput>
+              <ListInput
+                label="Bảo hành"
+                type="select"
+                // placeholder="Chọn tình trạng sản phẩm"
+                name="condition"
+                validate
+              >
+                <option value="1">Hết bảo hành</option>
+              </ListInput>
+            </>
+          ) : (
+            <></>
+          )}
+
+          {zmproute.query?.subcategory === "Karaoke" ? (
+            <>
+              <ListInput label="Hãng" type="select" name="condition" validate>
+                <option value="1">Yamaha</option>
+              </ListInput>
+              <ListInput
+                label="Xuất sứ"
+                type="select"
+                name="condition"
+                validate
+              >
+                <option value="1"> Trung quốc</option>
+              </ListInput>
+            </>
+          ) : (
+            <></>
+          )}
           <ListInput
             label="Tỉnh/Thành phố *"
             type="select"

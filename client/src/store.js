@@ -5,8 +5,8 @@ import { getCurrentUser, login } from "./services/auth";
 import {
   getFakeUsers,
   getFakeProducts,
-  getFakeElectronicCategories,
-  getFakeHouseholeCategories,
+  getElectronicCategories,
+  getHouseholeCategories,
 } from "./services/fake_data";
 
 const store = createStore({
@@ -23,8 +23,8 @@ const store = createStore({
     u: null,
     user: getFakeUsers(),
     products: getFakeProducts(),
-    electronicCategories: getFakeElectronicCategories(),
-    householdCategories: getFakeHouseholeCategories(),
+    electronicCategories: getElectronicCategories(),
+    householdCategories: getHouseholeCategories(),
   },
   getters: {
     categories({ state }) {
