@@ -11,10 +11,10 @@ export const getFakeUsers = () => {
   return users;
 };
 
-export const getFakeElectronicCategories = () => {
+export const getElectronicCategories = () => {
   return electronicCategories;
 };
 
-export const getFakeHouseholeCategories = () => {
+export const getHouseholeCategories = () => {
   return householdCategories;
 };

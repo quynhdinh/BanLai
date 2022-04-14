@@ -1,34 +1,34 @@
 [
   {
-    "id": 1,
+    "id": 21,
     "title": "Tủ lạnh"
   },
   {
-    "id": 2,
+    "id": 22,
     "title": "Điều hòa"
   },
   {
-    "id": 3,
+    "id": 23,
     "title": "Máy giặt"
   },
   {
-    "id": 4,
+    "id": 24,
     "title": "Đồ dùng bếp"
   },
   {
-    "id": 5,
+    "id": 25,
     "title": "Đồ vệ sinh nhà"
   },
   {
-    "id": 6,
+    "id": 26,
     "title": "Bàn, tủ, kệ"
   },
   {
-    "id": 7,
+    "id": 27,
     "title": "Giường, chăn, ga, gối nệm"
   },
   {
-    "id": 8,
+    "id": 28,
     "title": "Khác"
   }
 ]
