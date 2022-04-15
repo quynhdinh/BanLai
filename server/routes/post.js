@@ -4,7 +4,7 @@ const {validationResult} = require('express-validator');
 const AuthService = require("../services/auth-service");
 const {postValidate} = require("../helpers/post-validator");
 const router = express.Router();
-// router.use(AuthService.verify);
+router.use(AuthService.verify);
 
 router.get('/', async (req, res, next) => {
     try {
@@ -34,6 +34,21 @@ router.get('/:postId', async function (req, res, next) {
         console.log('API-Exception', error);
     }
 });
+
+router.get('/by-user/:zaloId', async function(req, res, next) {
+    try {
+        const _zaloId = req.params["zaloId"].toString()
+        const result = await db.Posts.find({zaloId: _zaloId})
+        res.send({
+            error: 0,
+            msg: 'Lấy thông tin bài đăng thành công',
+            data: result,
+        })
+    } catch (error) {
+        res.send({error: -1, msg: 'Unknown exception'});
+        console.log('API-Exception', error);
+    }
+})
 
 router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
     try {
@@ -167,5 +182,27 @@ router.put('/close-post/:postId', async (req, res, next) => {
         console.log('API-Exception', error);
     }
 });
+
+router.get('/by-category/:categoryId', async (req, res, next) => {
+    try {
+        const param = req.params["categoryId"].toInt()
+        var category = ""
+        if (param === 0) {
+            category = "Đồ điện tử"
+        } else if (param === 1) {
+            category = "Đồ nội thất và gia dụng"
+        } else {
+            return res.send({
+                error: -1,
+                msg: 'Param không hợp lệ'
+            })
+        }
+        db.Posts.find({categoryId: category})
+    } catch (error) {
+        res.send({error: -1, msg: 'Unknown exception'});
+        console.log('API-Exception', error);
+    }
+});
+
 
 module.exports = router;
