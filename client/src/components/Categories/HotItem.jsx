@@ -21,10 +21,7 @@ const HotItem = ({category, index, paddingBot}) => {
                 console.log("on click");
                 zmproute.navigate('/electronic-list');
                 break;
-            case 'Đồ gia dụng':
-                zmproute.navigate('/house-item-list');
-                break;
-            case 'Đồ nội thất':
+            case 'Đồ gia dụng và nội thất':
                 zmproute.navigate('/house-item-list');
                 break;
         }
