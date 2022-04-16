@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Icon, Text, Box } from "zmp-framework/react";
+import {moneyFormat} from "../../util/number";
 
 const Category = ({ product, category, border }) => {
   return (
@@ -29,7 +30,7 @@ const Category = ({ product, category, border }) => {
           style={{ position: "relative" }}
         >
           <img
-            src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+            src={product.images[0]}
             style={{
               objectFit: "cover",
               width: 102,
@@ -73,12 +74,12 @@ const Category = ({ product, category, border }) => {
                 WebkitBoxOrient: "vertical",
               }}
             >
-              Laptop Apple MacBook Pro M1 2020 8GB/512GB (MYD92SA/A)
+                {product.title}
             </Text>
           </Box>
 
           <Text style={{ color: "rgba(239, 78, 73, 1)", fontWeight: 700 }}>
-            20.000.000đ
+              {moneyFormat(product.price)}
           </Text>
           <Box
             p={1}
@@ -90,7 +91,7 @@ const Category = ({ product, category, border }) => {
             }}
           >
             <Text size="xxxsmall" style={{ marginBottom: 0 }}>
-              Tan Binh, Ho Chi Minh
+                {product.district} {product.city}
             </Text>
           </Box>
         </Box>
