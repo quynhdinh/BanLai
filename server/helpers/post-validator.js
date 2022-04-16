@@ -8,6 +8,7 @@ let validateCreatePost = () => {
         check('city', 'Thành phố không được trống').notEmpty(),
         check('district', 'Quận,huyện không được trống').notEmpty(),
         check('status', 'Trạng thái bài đăng không được để trống').notEmpty(),
+        check('images', 'Hình ảnh không được để trống').notEmpty(),
         check('condition', 'Trạng thái sản phẩm không được để trống').notEmpty(),
         check('price', 'Giá sản phẩm không được để trống').notEmpty(),
         check('title', 'Tiêu đề không được để trống').notEmpty(),

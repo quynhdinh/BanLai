@@ -53,7 +53,7 @@ router.get('/by-user/:zaloId', async function(req, res, next) {
 router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
     try {
         const {
-            category, subCategory, zaloId, city, district, status, condition,
+            category, subCategory, zaloId, city, district, status, images, condition,
             title, price, description, productDetails
         } = req.body
         const errors = validationResult(req);
@@ -69,7 +69,7 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
             category,
             subCategory,
             city, district,
-            status, condition,
+            status, images, condition,
             title, price, description,
             productDetails
         })
