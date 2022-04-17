@@ -12,7 +12,11 @@ const postSchema = new mongoose.Schema({
     price: {type: Number, required: true},
     description: String,
     viewCount: {type: Number, default: 0},
-    productDetails: Object
+    productDetails: Object,
+    images: [{
+        type: Object,
+        required: true
+    }]
 }, {timestamps: true});
 
 module.exports = mongoose.model('Post', postSchema);
