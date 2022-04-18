@@ -1,27 +1,25 @@
-import React from "react";
-import {
-  Page,
-  List,
-  Button,
-  Box,
-  zmp,
-  ListInput,
-  Title,
-} from "zmp-framework/react";
+import React, { useState } from "react";
+import { Page, Button, Box, zmp, Title } from "zmp-framework/react";
 import NavbarBack from "../components/navbar-back";
+import { useForm } from "react-hook-form";
+import CustomInput, { Select } from "../components/Input";
+import TextArea from "../components/Input/text-area";
+import { city, HaNoi, HoChiMinh } from "../data/city-district";
+import { titleHints, priceHints } from "../data/input-hint";
 
 const createPostPage = () => {
   const zmproute = zmp.views.main.router.currentRoute;
-  const handleOnSubmitForm = (e) => {
-    e.preventDefault();
-    console.log(zmp.form.convertToData("#my-form"));
-  };
+  const [districtOptions, setDistrictOptions] = useState(HoChiMinh);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
 
-  const handleFillForm = (e) => {
-    e.preventDefault();
-    zmp.form.fillFromData("#my-form", {
-      city: 2,
-    });
+  const handleChangeDistrictList = (e) => {
+    if (e.target.value === "Hà Nội") setDistrictOptions(HaNoi);
+    else setDistrictOptions(HoChiMinh);
   };
 
   return (
@@ -29,149 +27,77 @@ const createPostPage = () => {
       <NavbarBack title="Tạo tin đăng" linkLeft={"/choose-subcategory/"} />
       <Box px={4}>
         <Box
+          p={2}
+          mx={0}
+          my={4}
           flex
           flexDirection="row"
-          alignItems="center"
+          textAlign="center"
           justifyContent="center"
+          style={{
+            border: "1px solid rgba(102, 118, 133, 1)",
+            borderRadius: "4px",
+          }}
         >
-          <Title>
+          <Title size="small" style={{ marginBottom: 0 }}>
             {zmproute.query?.category}/{zmproute.query?.subcategory}
           </Title>
         </Box>
-        <List
-          style={{ listStyle: "none" }}
-          form
-          id="my-form"
-          onSubmit={handleOnSubmitForm}
-          noHairlines
-        >
-          <ListInput
-            label="Thêm ảnh rao bán (tối đa 10 ảnh) *"
-            type="file"
+
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Title bold>Hình ảnh và mô tả</Title>
+          <input {...register("photo")} type="file" multiple></input>
+          <Title size="small" style={{}}>
+            Thêm ảnh rao bán (tối đa 10 ảnh) *
+          </Title>
+
+          <CustomInput
+            {...register("title", {
+              required: "Vui lòng điền tiêu đề rao bán",
+            })}
             placeholder="Nhập tiêu đề rao bán"
-            name="photo"
-            required
-            validate
-          ></ListInput>
-          <ListInput
-            label="Tiêu đề rao bán *"
-            type="text"
-            placeholder="Nhập tiêu đề rao bán"
-            clearButton
-            name="title"
-            required
-            validate
-          ></ListInput>
-          <ListInput
-            label="Giá rao bán *"
-            type="number"
+            label="Tiêu đề rao bán"
+            compulsory
+            hintMessage={titleHints}
+            errorMessage={errors?.title && errors?.title.message}
+          />
+          <CustomInput
+            {...register("price", { required: "Vui lòng nhập giá rao bán" })}
             placeholder="Nhập giá rao bán"
-            clearButton
-            name="price"
-            required
-            validate
-          ></ListInput>
-          <ListInput
+            label="Giá rao bán"
+            compulsory
+            hintMessage={priceHints}
+            errorMessage={errors?.price && errors?.price.message}
+          />
+          <Select
+            {...register("condition")}
             label="Tình trạng sản phẩm"
-            type="select"
-            placeholder="Chọn tình trạng sản phẩm"
-            name="condition"
-            validate
-          >
-            <option value="1">Đã qua sử dụng</option>
-            <option value="2">Hà Nội</option>
-          </ListInput>
-          <ListInput
-            label="Mô tả"
-            type="textarea"
-            placeholder="Mô tả sản phẩm"
-            clearButton
-            name="description"
-          ></ListInput>
-
-          {zmproute.query?.subcategory === "Điện thoại" ? (
-            <>
-              <ListInput
-                label="Màu sắc"
-                type="select"
-                // placeholder="Chọn tình trạng sản phẩm"
-                name="condition"
-                validate
-              >
-                <option value="1">Đỏ</option>
-              </ListInput>
-              <ListInput
-                label="Dung lượng"
-                type="select"
-                // placeholder="Chọn tình trạng sản phẩm"
-                name="condition"
-                validate
-              >
-                <option value="1"> 128GB</option>
-              </ListInput>
-              <ListInput
-                label="Bảo hành"
-                type="select"
-                // placeholder="Chọn tình trạng sản phẩm"
-                name="condition"
-                validate
-              >
-                <option value="1">Hết bảo hành</option>
-              </ListInput>
-            </>
-          ) : (
-            <></>
-          )}
-
-          {zmproute.query?.subcategory === "Karaoke" ? (
-            <>
-              <ListInput label="Hãng" type="select" name="condition" validate>
-                <option value="1">Yamaha</option>
-              </ListInput>
-              <ListInput
-                label="Xuất sứ"
-                type="select"
-                name="condition"
-                validate
-              >
-                <option value="1"> Trung quốc</option>
-              </ListInput>
-            </>
-          ) : (
-            <></>
-          )}
-          <ListInput
-            label="Tỉnh/Thành phố *"
-            type="select"
-            placeholder="Chọn tỉnh/thành phố"
-            name="city"
-            validate
-          >
-            <option value="1">Hồ Chí Minh</option>
-            <option value="2">Hà Nội</option>
-          </ListInput>
-          <ListInput
-            label="Quận/Huyện *"
-            type="select"
-            placeholder="Chọn quận/huyện"
-            name="district"
-            validate
-          >
-            <option value="1">Hồ Chí Minh</option>
-            <option value="2">Hà Nội</option>
-          </ListInput>
-
-          <Box>
-            <Button type="submit" typeName="secondary" responsive>
-              Get Form Data
-            </Button>
-          </Box>
-          <Box>
-            <Button typeName="secondary" responsive onClick={handleFillForm}>
-              Fill Form
-            </Button>
-          </Box>
-        </List>
+            compulsory
+            option={["Đã qua sử dụng", "Còn mới"]}
+          />
+          <TextArea
+            {...register("description")}
+            placeholder="Mô tả"
+            label="Mô tả sản phẩm"
+          />
+          <Title bold>Thông tin liên lạc</Title>
+          <Select
+            {...register("city")}
+            label="Tỉnh/Thành phố"
+            compulsory
+            onChange={handleChangeDistrictList}
+            option={city}
+          />
+          <Select
+            {...register("district")}
+            label="Quận/Huyện"
+            compulsory
+            option={districtOptions}
+          />
+          <Button type="submit" typeName="primary" large responsive>
+            Đăng tin rao bán
+          </Button>
+        </form>
       </Box>
     </Page>
   );
