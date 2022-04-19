@@ -1,10 +1,14 @@
 const express = require('express');
 const db = require('../models');
+const bodyParser = require('body-parser');
 const {validationResult} = require('express-validator');
-const AuthService = require("../services/auth-service");
+// const AuthService = require("../services/auth-service");
 const {postValidate} = require("../helpers/post-validator");
 const router = express.Router();
-router.use(AuthService.verify);
+// router.use(AuthService.verify);
+const upload = require('../services/multer')
+const cloudinary = require('../services/cloudinary')
+const fs = require('fs');
 
 router.get('/', async (req, res, next) => {
     try {
@@ -35,7 +39,7 @@ router.get('/:postId', async function (req, res, next) {
     }
 });
 
-router.get('/by-user/:zaloId', async function(req, res, next) {
+router.get('/by-user/:zaloId', async function (req, res, next) {
     try {
         const _zaloId = req.params["zaloId"].toString()
         const result = await db.Posts.find({zaloId: _zaloId})
@@ -50,13 +54,20 @@ router.get('/by-user/:zaloId', async function(req, res, next) {
     }
 })
 
-router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
+router.post('/', upload.array("images", 4), postValidate.validateCreatePost(), async (req, res, next) => {
     try {
         const {
             category, subCategory, zaloId, city, district, status, images, condition,
             title, price, description, productDetails
         } = req.body
+
         const errors = validationResult(req);
+        if (Object.keys(req.files).length === 0) {
+            return res.send({
+                error: 1,
+                massage: 'Hình ảnh không được để trống',
+            })
+        }
         if (!errors.isEmpty()) {
             return res.send({
                 error: 1,
@@ -64,7 +75,8 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
                 data: errors.array()
             })
         }
-        const doc = await db.Posts.create({
+
+        let post = new db.Posts({
             zaloId,
             category,
             subCategory,
@@ -72,12 +84,27 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
             status, images, condition,
             title, price, description,
             productDetails
-        })
+        });
+
+        const uploader = async (path) => await cloudinary.uploads(path, 'Images');
+
+        const urls = []
+        const files = req.files;
+        for (const file of files) {
+            const {path} = file;
+            const newPath = await uploader(path)
+            urls.push(newPath)
+            fs.unlinkSync(path)
+        }
+        post['images'] = urls; // add the urls to object
+
+        await post.save();
         res.send({
             error: 0,
             msg: 'Tạo bài thành công!',
-            data: doc,
+            data: post,
         })
+
     } catch (error) {
         res.send({error: -1, msg: 'Unknown exception'});
         console.log('API-Exception', error);
@@ -85,7 +112,7 @@ router.post('/', postValidate.validateCreatePost(), async (req, res, next) => {
 });
 
 //update the post
-router.put('/:postId', async(req, res) => {
+router.put('/:postId', async (req, res) => {
     try {
         const param = req.params["postId"].toString()
         const {
@@ -93,17 +120,17 @@ router.put('/:postId', async(req, res) => {
             title, price, description, productDetails
         } = req.body
         const p = await db.Posts.findByIdAndUpdate({_id: param}, {
-            zaloId: zaloId,
-            category: category,
-            subCategory: subCategory,
-            city: city,
-            district: district,
-            status: status,
-            condition: condition,
-            title: title,
-            price: price,
-            description: description,
-            productDetails: productDetails
+                zaloId: zaloId,
+                category: category,
+                subCategory: subCategory,
+                city: city,
+                district: district,
+                status: status,
+                condition: condition,
+                title: title,
+                price: price,
+                description: description,
+                productDetails: productDetails
             }, {new: true}
         )
         res.send({
