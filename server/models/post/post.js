@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema({
     zaloId: {type: String, required: true},
     city: {type: String, required: true},
     district: {type: String, required: true},
-    status: {type: String, required: true},
+    status: {type: String, default:'active', required: true},
     images: {type: Array, required: true},
     condition: {type: String, required: true},
     title: {type: String, required: true},
