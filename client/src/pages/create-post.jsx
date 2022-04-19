@@ -119,38 +119,7 @@ const createPostPage = () => {
               />
             </>
           )}
-          {zmproute.query?.subcategory === "Điện thoại" && (
-            <>
-              <Title bold>Thông tin chi tiết</Title>
-              <Select
-                {...register("productDetails.manufacturer", {
-                  required: "Vui lòng chọn hãng sản xuất",
-                })}
-                label="Hãng sản xuất"
-                compulsory
-                option={tabletManufacturer}
-                errorMessage={
-                  errors?.productDetails?.manufacturer &&
-                  errors?.productDetails?.manufacturer.message
-                }
-              />
-              <Select
-                {...register("productDetails.SIM")}
-                label="Hỗ trợ thẻ sim"
-                option={tabletSIM}
-              />
-              <Select
-                {...register("productDetails.storage")}
-                label="Dung lượng"
-                option={tabletStorage}
-              />
-              <Select
-                {...register("productDetails.screen")}
-                label="Kích thước màn hình"
-                option={tabletScreen}
-              />
-            </>
-          )}
+
           {zmproute.query?.subcategory === "Máy tính bảng" && (
             <>
               <Title bold>Thông tin chi tiết</Title>
@@ -242,28 +211,7 @@ const createPostPage = () => {
               />
             </>
           )}
-          {zmproute.query?.subcategory === "Tủ lạnh" && (
-            <>
-              <Title bold>Thông tin chi tiết</Title>
-              <Select
-                {...register("productDetails.manufacturer", {
-                  required: "Vui lòng chọn hãng sản xuất",
-                })}
-                label="Hãng sản xuất"
-                compulsory
-                option={fridgeManufacturer}
-                errorMessage={
-                  errors?.productDetails?.manufacturer &&
-                  errors?.productDetails?.manufacturer.message
-                }
-              />
-              <Select
-                {...register("productDetails.volume")}
-                label="Dung tích"
-                option={fridgeVolume}
-              />
-            </>
-          )}
+
           {zmproute.query?.subcategory === "Tủ lạnh" && (
             <>
               <Title bold>Thông tin chi tiết</Title>
