@@ -14,8 +14,8 @@ const Category = ({ product, category, border }) => {
           position: "relative",
           height: "120px",
           border: border ? "" : "0.5px solid black",
-          borderTop: border ? "0.5px solid #E4E8EC" : "",
-          borderBottom: border ? "0.5px solid #E4E8EC" : "",
+          borderTop: border ? "0.5px solid #E4E8EC" : "0.5px solid black",
+          borderBottom: border ? "0.5px solid #E4E8EC" : "0.5px solid black",
           borderRadius: border ? "" : "8px",
         }}
       >

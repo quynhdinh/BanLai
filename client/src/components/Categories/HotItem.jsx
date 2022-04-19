@@ -40,8 +40,8 @@ const HotItem = ({category, index, paddingBot}) => {
                         {category}
                     </Title>
                 </Box>
-                <Box className="product-row">
-                    <Row style={{ width: `calc(${products.length * 50}vw - ${products.length * 20}px + ${(products.length - 1) * 8}px)` }}>
+                <Box className="product-row" >
+                    <Row style={{ width: `calc(${products.length * 80}vw - ${products.length * 20}px + ${(products.length - 1) * 8}px)` }}>
                         {products.map(product => <Col key={product._id} className="product-column">
                             <Category product={product} />
                         </Col>)}
