@@ -5,7 +5,7 @@ import {
     Swiper,
     SwiperSlide,
     Title,
-    Text, zmp, Button
+    Text, zmp, Button, Row, Col
 } from "zmp-framework/react"
 
 import Category from "./Category"
@@ -14,14 +14,12 @@ const HotItem = ({category, index, paddingBot}) => {
     const products = useStore('products')
     const zmproute = zmp.views.main.router
 
-    function electronicSelect() {
-        console.log("on click");
-        switch (category) {
-            case 'Đồ điện tử':
-                console.log("on click");
+    function viewAll() {
+        switch (index) {
+            case 0:
                 zmproute.navigate('/electronic-list');
                 break;
-            case 'Đồ gia dụng và nội thất':
+            case 1:
                 zmproute.navigate('/house-item-list');
                 break;
         }
@@ -42,16 +40,12 @@ const HotItem = ({category, index, paddingBot}) => {
                         {category}
                     </Title>
                 </Box>
-                <Box m={0} style={{flex: 2}}>
-                    <Swiper
-                        spaceBetween={7}
-                        slidesPerView={1.2}>
-                        {products.map((product, index) => (
-                            <SwiperSlide key={product.id}>
-                                <Category product={product}/>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
+                <Box className="product-row" >
+                    <Row style={{ width: `calc(${products.length * 80}vw - ${products.length * 20}px + ${(products.length - 1) * 8}px)` }}>
+                        {products.map(product => <Col key={product._id} className="product-column">
+                            <Category product={product} />
+                        </Col>)}
+                    </Row>
                 </Box>
             </Box>
             <Box ml={0}
@@ -65,7 +59,7 @@ const HotItem = ({category, index, paddingBot}) => {
                  }}
             >
                 <Button size='xsmall'
-                        onClick={electronicSelect}
+                        onClick={viewAll}
                         style={{
                             color: '#0068FF'
                         }}
