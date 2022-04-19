@@ -2,12 +2,7 @@ import { createStore } from "zmp-core/lite";
 import { getAccessToken } from "./services/zalo";
 import { loadUserFromCache } from "./services/storage";
 import { getCurrentUser, login } from "./services/auth";
-import {
-  getFakeUsers,
-  getFakeProducts,
-  getElectronicCategories,
-  getHouseholeCategories,
-} from "./services/fake_data";
+import { getFakeUsers, getFakeProducts } from "./services/fake_data";
 
 const store = createStore({
   state: {
@@ -23,8 +18,6 @@ const store = createStore({
     u: null,
     user: getFakeUsers(),
     products: getFakeProducts(),
-    electronicCategories: getElectronicCategories(),
-    householdCategories: getHouseholeCategories(),
   },
   getters: {
     categories({ state }) {
@@ -41,12 +34,6 @@ const store = createStore({
     },
     products({ state }) {
       return state.products;
-    },
-    electronicCategories({ state }) {
-      return state.electronicCategories;
-    },
-    householdCategories({ state }) {
-      return state.householdCategories;
     },
   },
   actions: {
