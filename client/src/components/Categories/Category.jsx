@@ -98,11 +98,6 @@ const Category = ({ product, category, border }) => {
         <Box m={0} style={{ position: "absolute", right: 8, top: 8 }}>
           <Icon className="demo-icon " zmp="zi-heart-solid" size={20} />
         </Box>
-        <Box m={0} style={{ position: "absolute", right: 8, bottom: 16 }}>
-          <Text size="xxxsmall" style={{ marginBottom: 0 }}>
-            1 tháng trước
-          </Text>
-        </Box>
       </Box>
     </Card>
   );
