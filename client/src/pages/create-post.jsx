@@ -58,7 +58,7 @@ const createPostPage = () => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <Title bold>Hình ảnh và mô tả</Title>
-          <input {...register("photo")} type="file" multiple></input>
+          <input {...register("images")} type="file" multiple></input>
           <Title size="small" style={{}}>
             Thêm ảnh rao bán (tối đa 10 ảnh) *
           </Title>

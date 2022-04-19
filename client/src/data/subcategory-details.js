@@ -16,17 +16,17 @@ export const phoneManufacturer = [
 ];
 export const phoneColor = [
   "",
-  "đen",
-  "đen bóng/jetblack",
-  "đỏ",
-  "hồng",
-  "trắng",
-  "vàng",
-  "vàng hồng",
-  "xám",
-  "xanh dương",
-  "xanh lá",
-  "khác",
+  "Đen",
+  "Đen bóng/Jetblack",
+  "Đỏ",
+  "Hồng",
+  "Trắng",
+  "Vàng",
+  "Vàng hồng",
+  "Xám",
+  "Xanh dương",
+  "Xanh lá",
+  "Khác",
 ];
 
 export const phoneStorage = [
