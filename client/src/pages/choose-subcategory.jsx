@@ -11,10 +11,10 @@ const createPostPage = () => {
   const [subCategoriesList, setSubCategoriesList] = useState([]);
   const zmproute = zmp.views.main.router.currentRoute;
   useEffect(() => {
-    if (zmproute.query?.category == "Thiết bị điện tử") {
+    if (zmproute.query?.category === "Thiết bị điện tử") {
       setSubCategoriesList(electronicSubcategories);
     } else setSubCategoriesList(householdSubcategories);
-  }, [zmproute.query]);
+  });
 
   const handleOnClick = ({ subcategory }) => {
     const zmprouter = zmp.views.main.router;
