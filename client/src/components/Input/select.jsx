@@ -21,6 +21,11 @@ const Select = React.forwardRef((props, ref) => {
           </option>
         ))}
       </select>
+      {errorMessage && (
+        <Text size="large" className="custom-select__error-message">
+          {errorMessage}
+        </Text>
+      )}
     </Box>
   );
 });

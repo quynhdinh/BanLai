@@ -67,6 +67,12 @@
   border-radius: 8px;
   padding: 0;
   margin: 0 0 8px 0;
+  &__error-message {
+    color: rgba(239, 78, 73, 1);
+    margin: 4px 0 4px 0;
+    font-size: 12px;
+    line-height: 16px;
+  }
   select {
     width: 100%;
     appearance: none;

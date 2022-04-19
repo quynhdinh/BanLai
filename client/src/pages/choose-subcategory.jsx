@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Page, List, Box, Title, useStore, zmp } from "zmp-framework/react";
+import { Page, List, Box, Title, zmp } from "zmp-framework/react";
 import CustomListItem from "../components/custom-listitem";
 import NavbarBack from "../components/navbar-back";
+import {
+  electronicSubcategories,
+  householdSubcategories,
+} from "../data/subcategory-list";
 
 const createPostPage = () => {
-  var electronicCategories = useStore("electronicCategories");
-  var householdCategories = useStore("householdCategories");
   const [subCategoriesList, setSubCategoriesList] = useState([]);
   const zmproute = zmp.views.main.router.currentRoute;
   useEffect(() => {
     if (zmproute.query?.category == "Thiết bị điện tử") {
-      setSubCategoriesList(electronicCategories);
-    } else setSubCategoriesList(householdCategories);
+      setSubCategoriesList(electronicSubcategories);
+    } else setSubCategoriesList(householdSubcategories);
   }, [zmproute.query]);
 
   const handleOnClick = ({ subcategory }) => {
@@ -36,9 +38,9 @@ const createPostPage = () => {
         {subCategoriesList.map((item, index) => (
           <CustomListItem
             key={index}
-            title={item.title}
+            title={item}
             onClick={() => {
-              handleOnClick({ subcategory: item.title });
+              handleOnClick({ subcategory: item });
             }}
           />
         ))}

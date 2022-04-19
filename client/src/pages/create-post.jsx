@@ -6,6 +6,30 @@ import CustomInput, { Select } from "../components/Input";
 import TextArea from "../components/Input/text-area";
 import { city, HaNoi, HoChiMinh } from "../data/city-district";
 import { titleHints, priceHints } from "../data/input-hint";
+import {
+  airConditionerCoolingCapacity,
+  airConditionerManufacturer,
+  fridgeManufacturer,
+  fridgeVolume,
+  laptopCPU,
+  laptopGPU,
+  laptopHHD,
+  laptopManufacturer,
+  laptopRAM,
+  laptopScreen,
+  phoneColor,
+  phoneManufacturer,
+  phoneStorage,
+  tabletManufacturer,
+  tabletScreen,
+  tabletSIM,
+  tabletStorage,
+  televisionManufacturer,
+  washingMachineCapacity,
+  washingMachineDoor,
+  washingMachineManufacturer,
+} from "../data/subcategory-details";
+
 import CategoryBox from "../components/category-box";
 
 const createPostPage = () => {
@@ -68,6 +92,249 @@ const createPostPage = () => {
             placeholder="Mô tả"
             label="Mô tả sản phẩm"
           />
+          {zmproute.query?.subcategory === "Điện thoại" && (
+            <>
+              <Title bold>Thông tin chi tiết</Title>
+              <Select
+                {...register("productDetails.manufacturer", {
+                  required: "Vui lòng chọn hãng sản xuất",
+                })}
+                label="Hãng sản xuất"
+                compulsory
+                option={phoneManufacturer}
+                errorMessage={
+                  errors?.productDetails?.manufacturer &&
+                  errors?.productDetails?.manufacturer.message
+                }
+              />
+              <Select
+                {...register("productDetails.color")}
+                label="Màu sắc"
+                option={phoneColor}
+              />
+              <Select
+                {...register("productDetails.storage")}
+                label="Dung lượng"
+                option={phoneStorage}
+              />
+            </>
+          )}
+          {zmproute.query?.subcategory === "Điện thoại" && (
+            <>
+              <Title bold>Thông tin chi tiết</Title>
+              <Select
+                {...register("productDetails.manufacturer", {
+                  required: "Vui lòng chọn hãng sản xuất",
+                })}
+                label="Hãng sản xuất"
+                compulsory
+                option={tabletManufacturer}
+                errorMessage={
+                  errors?.productDetails?.manufacturer &&
+                  errors?.productDetails?.manufacturer.message
+                }
+              />
+              <Select
+                {...register("productDetails.SIM")}
+                label="Hỗ trợ thẻ sim"
+                option={tabletSIM}
+              />
+              <Select
+                {...register("productDetails.storage")}
+                label="Dung lượng"
+                option={tabletStorage}
+              />
+              <Select
+                {...register("productDetails.screen")}
+                label="Kích thước màn hình"
+                option={tabletScreen}
+              />
+            </>
+          )}
+          {zmproute.query?.subcategory === "Máy tính bảng" && (
+            <>
+              <Title bold>Thông tin chi tiết</Title>
+              <Select
+                {...register("productDetails.manufacturer", {
+                  required: "Vui lòng chọn hãng sản xuất",
+                })}
+                label="Hãng sản xuất"
+                compulsory
+                option={tabletManufacturer}
+                errorMessage={
+                  errors?.productDetails?.manufacturer &&
+                  errors?.productDetails?.manufacturer.message
+                }
+              />
+              <Select
+                {...register("productDetails.SIM")}
+                label="Hỗ trợ thẻ sim"
+                option={tabletSIM}
+              />
+              <Select
+                {...register("productDetails.storage")}
+                label="Dung lượng"
+                option={tabletStorage}
+              />
+              <Select
+                {...register("productDetails.screen")}
+                label="Kích thước màn hình"
+                option={tabletScreen}
+              />
+            </>
+          )}
+          {zmproute.query?.subcategory === "Laptop" && (
+            <>
+              <Title bold>Thông tin chi tiết</Title>
+              <Select
+                {...register("productDetails.manufacturer", {
+                  required: "Vui lòng chọn hãng sản xuất",
+                })}
+                label="Hãng sản xuất"
+                compulsory
+                option={laptopManufacturer}
+                errorMessage={
+                  errors?.productDetails?.manufacturer &&
+                  errors?.productDetails?.manufacturer.message
+                }
+              />
+              <Select
+                {...register("productDetails.CPU")}
+                label="CPU"
+                option={laptopCPU}
+              />
+              <Select
+                {...register("productDetails.RAM")}
+                label="Dung lượng RAM"
+                option={laptopRAM}
+              />
+              <Select
+                {...register("productDetails.HHD")}
+                label="Ổ cứng"
+                option={laptopHHD}
+              />
+              <Select
+                {...register("productDetails.GPU")}
+                label="Card đồ họa"
+                option={laptopGPU}
+              />
+              <Select
+                {...register("productDetails.screen")}
+                label="Kích thước màn hình"
+                option={laptopScreen}
+              />
+            </>
+          )}
+          {zmproute.query?.subcategory === "Tivi" && (
+            <>
+              <Title bold>Thông tin chi tiết</Title>
+              <Select
+                {...register("productDetails.manufacturer", {
+                  required: "Vui lòng chọn hãng sản xuất",
+                })}
+                label="Hãng sản xuất"
+                compulsory
+                option={televisionManufacturer}
+                errorMessage={
+                  errors?.productDetails?.manufacturer &&
+                  errors?.productDetails?.manufacturer.message
+                }
+              />
+            </>
+          )}
+          {zmproute.query?.subcategory === "Tủ lạnh" && (
+            <>
+              <Title bold>Thông tin chi tiết</Title>
+              <Select
+                {...register("productDetails.manufacturer", {
+                  required: "Vui lòng chọn hãng sản xuất",
+                })}
+                label="Hãng sản xuất"
+                compulsory
+                option={fridgeManufacturer}
+                errorMessage={
+                  errors?.productDetails?.manufacturer &&
+                  errors?.productDetails?.manufacturer.message
+                }
+              />
+              <Select
+                {...register("productDetails.volume")}
+                label="Dung tích"
+                option={fridgeVolume}
+              />
+            </>
+          )}
+          {zmproute.query?.subcategory === "Tủ lạnh" && (
+            <>
+              <Title bold>Thông tin chi tiết</Title>
+              <Select
+                {...register("productDetails.manufacturer", {
+                  required: "Vui lòng chọn hãng sản xuất",
+                })}
+                label="Hãng sản xuất"
+                compulsory
+                option={fridgeManufacturer}
+                errorMessage={
+                  errors?.productDetails?.manufacturer &&
+                  errors?.productDetails?.manufacturer.message
+                }
+              />
+              <Select
+                {...register("productDetails.volume")}
+                label="Dung tích"
+                option={fridgeVolume}
+              />
+            </>
+          )}
+          {zmproute.query?.subcategory === "Điều hòa" && (
+            <>
+              <Title bold>Thông tin chi tiết</Title>
+              <Select
+                {...register("productDetails.manufacturer", {
+                  required: "Vui lòng chọn hãng sản xuất",
+                })}
+                label="Hãng sản xuất"
+                compulsory
+                option={airConditionerManufacturer}
+                errorMessage={
+                  errors?.productDetails?.manufacturer &&
+                  errors?.productDetails?.manufacturer.message
+                }
+              />
+              <Select
+                {...register("productDetails.coolingCapacity")}
+                label="Công suất làm lạnh"
+                option={airConditionerCoolingCapacity}
+              />
+            </>
+          )}
+          {zmproute.query?.subcategory === "Máy giặt" && (
+            <>
+              <Title bold>Thông tin chi tiết</Title>
+              <Select
+                {...register("productDetails.manufacturer", {
+                  required: "Vui lòng chọn hãng sản xuất",
+                })}
+                label="Hãng sản xuất"
+                compulsory
+                option={washingMachineManufacturer}
+                errorMessage={
+                  errors?.productDetails?.manufacturer &&
+                  errors?.productDetails?.manufacturer.message
+                }
+              />
+              <Select
+                {...register("productDetails.coolingCapacity")}
+                label="Khối lượng giặt"
+                option={washingMachineCapacity}
+              />
+              <Select
+                {...register("productDetails.coolingCapacity")}
+                label="Loại cửa"
+                option={washingMachineDoor}
+              />
+            </>
+          )}
           <Title bold>Thông tin liên lạc</Title>
           <Select
             {...register("city")}
