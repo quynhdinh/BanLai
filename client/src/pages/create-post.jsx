@@ -6,6 +6,7 @@ import CustomInput, { Select } from "../components/Input";
 import TextArea from "../components/Input/text-area";
 import { city, HaNoi, HoChiMinh } from "../data/city-district";
 import { titleHints, priceHints } from "../data/input-hint";
+import CategoryBox from "../components/category-box";
 
 const createPostPage = () => {
   const zmproute = zmp.views.main.router.currentRoute;
@@ -26,23 +27,10 @@ const createPostPage = () => {
     <Page name="create-post">
       <NavbarBack title="Tạo tin đăng" linkLeft={"/choose-subcategory/"} />
       <Box px={4}>
-        <Box
-          p={2}
-          mx={0}
-          my={4}
-          flex
-          flexDirection="row"
-          textAlign="center"
-          justifyContent="center"
-          style={{
-            border: "1px solid rgba(102, 118, 133, 1)",
-            borderRadius: "4px",
-          }}
-        >
-          <Title size="small" style={{ marginBottom: 0 }}>
-            {zmproute.query?.category}/{zmproute.query?.subcategory}
-          </Title>
-        </Box>
+        <CategoryBox
+          category={zmproute.query?.category}
+          subcategory={zmproute.query?.subcategory}
+        />
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <Title bold>Hình ảnh và mô tả</Title>
@@ -73,7 +61,7 @@ const createPostPage = () => {
             {...register("condition")}
             label="Tình trạng sản phẩm"
             compulsory
-            option={["Đã qua sử dụng", "Còn mới"]}
+            option={["Đã qua sử dụng", "Còn mới", "Còn bảo hành"]}
           />
           <TextArea
             {...register("description")}
