@@ -57,7 +57,7 @@ router.get('/by-user/:zaloId', async function (req, res, next) {
 router.post('/', upload.array("images", 4), postValidate.validateCreatePost(), async (req, res, next) => {
     try {
         const {
-            category, subCategory, zaloId, city, district, status, images, condition,
+            category, subCategory, zaloId, city, district, images, condition,
             title, price, description, productDetails
         } = req.body
 
@@ -81,7 +81,7 @@ router.post('/', upload.array("images", 4), postValidate.validateCreatePost(), a
             category,
             subCategory,
             city, district,
-            status, images, condition,
+            images, condition,
             title, price, description,
             productDetails
         });
