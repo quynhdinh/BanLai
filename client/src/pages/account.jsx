@@ -15,7 +15,7 @@ const AccountPage = ({zmproute}) => {
                 <ListItem link='/user/'>
                     <UserCard user={u}/>
                 </ListItem>
-                <ListItem link='/saved-posts/' title='Tin đăng đã lưu'>
+                <ListItem link='/care-list/' title='Tin đăng đã lưu'>
                     <Icon className='list-icon' slot='media' zmp='zi-heart-solid' color={'#ff3b30'} size={16}/>
                 </ListItem>
             </List>

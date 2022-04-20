@@ -1,23 +1,26 @@
-import React from "react";
-
-import { Box, Page } from "zmp-framework/react";
-import Category from "../components/Categories/Category";
+import React from 'react';
+import {
+    Page, Card, Searchbar, Box, Tabbar, Link, Tabs, Tab, useStore, SkeletonText
+} from 'zmp-framework/react';
+import NavigationBar from "../components/NavigationBar";
+import PostItem from "../components/PostItem";
 import NavbarBack from "../components/navbar-back";
+import {Category} from "../components/Categories";
 
-const CareListPage = () => {
-  return (
-    <Page name="care-list">
-      <NavbarBack title="Tin đã lưu" />
-      <Box>
-        <Category border />
-        <Category border />
-        <Category border />
-        <Category border />
-        <Category border />
-        <Category border />
-      </Box>
-    </Page>
-  );
-};
-
-export default CareListPage;
+const managePostPage = ({zmproute}) => {
+    const products = useStore('products')
+    return (
+        <Page className='page-box page-with-navbar'>
+            <NavbarBack
+                title="Danh sách tin đã lưu"
+                linkLeft={'/account/'}
+            />
+            {
+                products.map((item, index) => (
+                <Category key={index} product={item} border/>
+                ))
+            }
+        </Page>
+    )
+}
+export default managePostPage
