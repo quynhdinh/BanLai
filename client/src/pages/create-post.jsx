@@ -40,7 +40,14 @@ const createPostPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    data = {
+      ...data,
+      category: zmproute.query?.category,
+      subCategory: zmproute.query?.subcategory,
+    };
+    console.log(data);
+  };
 
   const handleChangeDistrictList = (e) => {
     if (e.target.value === "Hà Nội") setDistrictOptions(HaNoi);
