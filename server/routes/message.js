@@ -2,24 +2,38 @@ const express = require('express');
 const db = require('../models');
 const AuthService = require('../services/auth-service');
 const router = express.Router();
+const ObjectId = require('mongodb').ObjectId;
+router.use(AuthService.verify);
 
-// router.use(AuthService.verify);
 
+// tra ve ten mat hang, zaloId partner, createdAt, name, avatar
 router.get('/:type', async (req, res, next) => {
     try {
-        const type = req.params["type"].toInt()
+        const type = parseInt(req.params["type"])
         if (type !== 0 && type !== 1) {
             return res.send({
                 error: -1,
                 msg: 'Param không hợp lệ',
             });
         }
-        const zaloId = req.body
-        const messages = await db.Messages.find({zaloId: zaloId, type: type})
+        const zaloId = req.user.zaloId
+        const messages = await db.Messages.find({owner: zaloId, type: type})
+        const mess = JSON.parse(JSON.stringify(messages))
+        for(let i = 0; i < mess.length; i++){
+            // User.find({'userID': {$in:array}});
+            const user = await db.Users.find({zaloId: mess[i].partner})
+            const post = await db.Posts.find({_id: ObjectId(mess[i].postId)})
+            const u = JSON.parse(JSON.stringify(user))
+            const p = JSON.parse(JSON.stringify(post))
+            console.log(p)
+            mess[i].picture = u[0].picture
+            mess[i].name = u[0].name
+            mess[i].title = p[0].title
+        }
         res.send({
             error: 0,
             msg: 'Lấy danh sách tin nhắn thành công',
-            data: messages,
+            data: mess,
         });
     } catch (error) {
         res.send({error: -1, message: 'Unknown exception'});
@@ -30,11 +44,11 @@ router.get('/:type', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     try {
         const {
-            sender, receiver, type, postId
+            owner, partner, type, postId
         } = req.body
         const doc = await db.Messages.create({
-            sender: sender,
-            receiver: receiver,
+            owner: owner,
+            partner: partner,
             type: type,
             postId: postId
         })
