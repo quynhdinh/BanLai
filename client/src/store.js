@@ -3,11 +3,16 @@ import { getAccessToken } from "./services/zalo";
 import { loadUserFromCache } from "./services/storage";
 import { getCurrentUser, login } from "./services/auth";
 import { getFakeUsers, getFakeProducts } from "./services/fake_data";
+import {getMessagesByType} from "./services/message";
 
 const store = createStore({
   state: {
     jwt: null,
     loadingCategories: false,
+    buyMessages: [],
+    sellMessages: [],
+    loadingProducts: true,
+    loadingProducts1: true,
     categories: [
       [1, "Technology"],
       [2, "Technology"],
@@ -25,6 +30,18 @@ const store = createStore({
     },
     loadingCategories({ state }) {
       return state.loadingCategories;
+    },
+    loadingProducts({ state }) {
+      return state.loadingProducts
+    },
+    loadingProducts1({ state }) {
+      return state.loadingProducts1
+    },
+    sellMessages({ state }) {
+      return state.sellMessages
+    },
+    buyMessages({ state }) {
+      return state.buyMessages
     },
     u({ state }) {
       return state.u;
@@ -67,6 +84,19 @@ const store = createStore({
           dispatch("setUser", user);
         }
       }
+    },
+    async fetchMessagesByType({ state }) {
+      state.loadingProducts = true
+      const buyMessages = await getMessagesByType(0)
+      if (buyMessages.length) {
+        state.buyMessages = buyMessages
+      }
+      state.loadingProducts = false
+      const sellMessages = await getMessagesByType(1)
+      if (sellMessages.length) {
+        state.sellMessages = sellMessages
+      }
+      state.loadingProducts1 = false
     },
   },
   addProduct({ state }, product) {
