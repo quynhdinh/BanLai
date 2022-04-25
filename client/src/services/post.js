@@ -1,21 +1,4 @@
-import config from '../config'
-import store from '../store'
-
-const base = config.BASE_URL
-
-export const request = async (method, url, data) => {
-    const headers = {'Content-Type': 'application/json'}
-    const token = store.state.jwt
-    if (token) {
-        headers.Authorization = `Bearer ${token}`
-    }
-
-    return fetch(`${base}/${url}`, {
-        method: method,
-        body: JSON.stringify(data),
-        headers
-    })
-}
+import {request} from "./auth";
 
 export const getPostsByCategory = async (category) => {
     try {
