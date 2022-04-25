@@ -7,11 +7,9 @@ import {
     Title,
     Text, zmp, Button, Row, Col
 } from "zmp-framework/react"
-
 import Category from "./Category"
 
-const HotItem = ({category, index, paddingBot}) => {
-    const products = useStore('products')
+const HotItem = ({category, products, index, paddingBot}) => {
     const zmproute = zmp.views.main.router
 
     function viewAll() {

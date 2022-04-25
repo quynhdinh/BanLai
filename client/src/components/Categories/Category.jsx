@@ -30,7 +30,7 @@ const Category = ({ product, category, border }) => {
           style={{ position: "relative" }}
         >
           <img
-            src={product.images[0]}
+            src={product.images[0].url}
             style={{
               objectFit: "cover",
               width: 102,

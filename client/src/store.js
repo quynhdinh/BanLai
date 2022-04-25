@@ -1,8 +1,9 @@
-import { createStore } from "zmp-core/lite";
-import { getAccessToken } from "./services/zalo";
-import { loadUserFromCache } from "./services/storage";
-import { getCurrentUser, login } from "./services/auth";
-import { getFakeUsers, getFakeProducts } from "./services/fake_data";
+import {createStore} from "zmp-core/lite";
+import {getAccessToken} from "./services/zalo";
+import {loadUserFromCache} from "./services/storage";
+import {getCurrentUser, login} from "./services/auth";
+import {getFakeUsers, getFakeProducts} from "./services/fake_data";
+import {getPostsByCategory} from "./services/post";
 
 const store = createStore({
   state: {
@@ -18,29 +19,41 @@ const store = createStore({
     u: null,
     user: getFakeUsers(),
     products: getFakeProducts(),
+    posts: [],
+    electronicItems: [],
+    houseItems: [],
   },
   getters: {
-    categories({ state }) {
+    categories({state}) {
       return state.categories;
     },
-    loadingCategories({ state }) {
+    loadingCategories({state}) {
       return state.loadingCategories;
     },
-    u({ state }) {
+    posts({state}) {
+      return state.posts
+    },
+    electronicItems({state}) {
+      return state.electronicItems
+    },
+    houseItems({state}) {
+      return state.houseItems
+    },
+    u({state}) {
       return state.u;
     },
-    user({ state }) {
+    user({state}) {
       return state.user;
     },
-    products({ state }) {
+    products({state}) {
       return state.products;
     },
   },
   actions: {
-    setUser({ state }, data) {
-      state.user = { ...state.user, ...data };
+    setUser({state}, data) {
+      state.user = {...state.user, ...data};
     },
-    setU({ state }, u) {
+    setU({state}, u) {
       state.u = {
         displayName: u.name,
         avatar: u.picture,
@@ -48,13 +61,25 @@ const store = createStore({
         online: true,
       };
     },
-    setJwt({ state }, jwt) {
+    setJwt({state}, jwt) {
       state.jwt = jwt;
     },
-    addProduct({ state }, product) {
+    addProduct({state}, product) {
       state.products = [...state.products, product];
     },
-    async login({ dispatch }) {
+    async fetchPosts({state}, {category}) {
+      const posts = await getPostsByCategory(category)
+      state.posts = posts
+    },
+    async fetchElectronicItems({state}) {
+      const posts = await getPostsByCategory(0)
+      state.electronicItems = posts
+    },
+    async fetchHouseItems({state}) {
+      const posts = await getPostsByCategory(1)
+      state.houseItems = posts
+    },
+    async login({dispatch}) {
       const cachedUser = await loadUserFromCache();
       if (cachedUser) {
         dispatch("setUser", cachedUser);
@@ -68,9 +93,6 @@ const store = createStore({
         }
       }
     },
-  },
-  addProduct({ state }, product) {
-    state.products = [...state.products, product];
   },
 });
 
