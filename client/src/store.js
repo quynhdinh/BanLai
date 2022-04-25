@@ -68,40 +68,16 @@ const store = createStore({
             state.products = [...state.products, product];
         },
         async fetchPosts({state}, {category}) {
-            // state.loadingProducts = true
-            // const cachedProducts = await loadProductsFromCache()
-            // if (cachedProducts.length) {
-            //   state.products = cachedProducts
-            //   state.loadingProducts = false
-            // }
             const posts = await getPostsByCategory(category)
             state.posts = posts
-            // saveProductsToCache(products)
-            // state.loadingProducts = false
         },
         async fetchElectronicItems({state}) {
-            // state.loadingProducts = true
-            // const cachedProducts = await loadProductsFromCache()
-            // if (cachedProducts.length) {
-            //   state.products = cachedProducts
-            //   state.loadingProducts = false
-            // }
             const posts = await getPostsByCategory(0)
             state.electronicItems = posts
-            // saveProductsToCache(products)
-            // state.loadingProducts = false
         },
         async fetchHouseItems({state}) {
-            // state.loadingProducts = true
-            // const cachedProducts = await loadProductsFromCache()
-            // if (cachedProducts.length) {
-            //   state.products = cachedProducts
-            //   state.loadingProducts = false
-            // }
             const posts = await getPostsByCategory(1)
             state.houseItems = posts
-            // saveProductsToCache(products)
-            // state.loadingProducts = false
         },
         async login({dispatch}) {
             const cachedUser = await loadUserFromCache();
