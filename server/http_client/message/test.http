@@ -1,0 +1,14 @@
+GET http://localhost:5000/api/messages/0
+Accept: application/json
+###
+
+###
+POST http://localhost:5000/api/messages
+Content-Type: application/json
+
+{
+  "owner": "3024770787876860996",
+  "partner": "3552843429939960048",
+  "type": 0,
+  "postId": "625fbab0802e34fc55a25341"
+}
