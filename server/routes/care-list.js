@@ -1,15 +1,23 @@
 const express = require('express');
 const db = require('../models');
-const AuthService = require("../services/auth-service");
+const {ObjectId} = require("mongodb");
 const router = express.Router();
+const AuthService = require("../services/auth-service");
+router.use(AuthService.verify)
 
 router.get('/', async (req, res, next) => {
     try {
-        const result = await db.CarePostMapping.find({})
+        const _zaloId = req.user.zaloId
+        const result = await db.CarePostMapping.find({zaloId: _zaloId})
+        const careList = JSON.parse(JSON.stringify(result))
+        for(let i = 0; i < careList.length; i++){
+            const post = await db.Posts.find({_id: ObjectId(careList[i].postId)})
+            careList[i].postDetail = JSON.parse(JSON.stringify(post))
+        }
         res.send({
             error: 0,
             msg: 'Lấy thông tin quan tâm bài đăng thành công',
-            data: result,
+            data: careList,
         })
     } catch (error) {
         res.send({error: -1, msg: 'Unknown exception'});
@@ -17,13 +25,13 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.post('/', AuthService.verify, async (req, res) => {
+router.post('/', async (req, res) => {
     const zaloId = req.user.zaloId
-    const postId = req.postId
-
+    const id = req.body.postId
+    console.log(id)
     const mapping = await db.CarePostMapping.create({
         zaloId: zaloId,
-        postId: postId
+        postId: id
     })
     res.send({
         error: 0,
@@ -33,22 +41,7 @@ router.post('/', AuthService.verify, async (req, res) => {
     return res.send({error: 0, msg: 'Success', data: req.user});
 });
 
-router.get('/:zaloId', async function (req, res, next) {
-    try {
-        const param = req.params["zaloId"].toString()
-        const result = await db.CarePostMapping.find({zaloId: param})
-        res.send({
-            error: 0,
-            msg: 'Lấy danh sách quan tâm của user thành công',
-            data: result,
-        })
-    } catch (error) {
-        res.send({error: -1, msg: 'Unknown exception'});
-        console.log('API-Exception', error);
-    }
-});
-
-router.delete('/:postId', AuthService.verify, async (req, res, next) => {
+router.delete('/:postId', async (req, res, next) => {
     try {
         const _postId = req.params["postId"].toString()
         const _zaloId = req.user.zaloId

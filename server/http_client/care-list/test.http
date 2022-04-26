@@ -1,0 +1,12 @@
+POST http://localhost:5000/api/carelist
+Content-Type: application/json
+
+{
+  "postId": "625fbab0802e34fc55a25341"
+}
+
+###
+
+// xem tất cả các post
+GET http://localhost:5000/api/carelist
+Accept: application/json
