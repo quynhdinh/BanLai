@@ -1,18 +1,17 @@
-import { createStore } from "zmp-core/lite";
-import { getAccessToken } from "./services/zalo";
-import { loadUserFromCache } from "./services/storage";
-import { getCurrentUser, login } from "./services/auth";
-import { getFakeUsers, getFakeProducts } from "./services/fake_data";
-import {getMessagesByType} from "./services/message";
+import {createStore} from "zmp-core/lite";
+import {getAccessToken} from "./services/zalo";
+import {loadUserFromCache} from "./services/storage";
+import {getCurrentUser, login} from "./services/auth";
+import {getFakeProducts, getFakeUsers} from "./services/fake_data";
+import {getMessages} from "./services/message";
+import {getPostsByCategory} from "./services/post";
 
 const store = createStore({
   state: {
     jwt: null,
     loadingCategories: false,
-    buyMessages: [],
-    sellMessages: [],
-    loadingProducts: true,
-    loadingProducts1: true,
+    messages: [],
+    loadingMessages: true,
     categories: [
       [1, "Technology"],
       [2, "Technology"],
@@ -46,17 +45,11 @@ const store = createStore({
     u({state}) {
       return state.u
     },
-    loadingProducts({ state }) {
-      return state.loadingProducts
+    loadingMessages({ state }) {
+      return state.loadingMessages
     },
-    loadingProducts1({ state }) {
-      return state.loadingProducts1
-    },
-    sellMessages({ state }) {
-      return state.sellMessages
-    },
-    buyMessages({ state }) {
-      return state.buyMessages
+    messages({ state }) {
+      return state.messages
     },
     user({state}) {
       return state.user;
@@ -109,18 +102,10 @@ const store = createStore({
         }
       }
     },
-    async fetchMessagesByType({ state }) {
-      state.loadingProducts = true
-      const buyMessages = await getMessagesByType(0)
-      if (buyMessages.length) {
-        state.buyMessages = buyMessages
-      }
-      state.loadingProducts = false
-      const sellMessages = await getMessagesByType(1)
-      if (sellMessages.length) {
-        state.sellMessages = sellMessages
-      }
-      state.loadingProducts1 = false
+    async fetchMessages({state}) {
+      state.loadingMessages = true
+      state.messages = await getMessages()
+      state.loadingMessages = false
     },
   },
 });

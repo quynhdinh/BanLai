@@ -7,14 +7,12 @@ import MessageItem from "../components/MessageItem/message-item";
 import store from "../store";
 
 const messagePage = ({zmproute}) => {
-  const loading = useStore('loadingProducts')
-  const loading1 = useStore('loadingProducts1')
-  const buyMessages = useStore('buyMessages')
-  const sellMessages = useStore('sellMessages')
+  const messages = useStore('messages')
+  const loading = useStore('loadingMessages')
   const spacing = '20px'
 
   useEffect(() => {
-    store.dispatch('fetchMessagesByType')
+    store.dispatch('fetchMessages')
   }, [])
 
   return (
@@ -37,7 +35,10 @@ const messagePage = ({zmproute}) => {
             </Box> :
             <Box style={{marginBottom: "50px"}}>
               <Card inset>
-                {buyMessages.map((item, index) => (
+                {messages.filter(function (obj) {
+                  const o = JSON.parse(JSON.stringify(obj))
+                  return o.type === "0";
+                }).map((item, index) => (
                   <MessageItem key={index} product={item} marginTop={index === 0 ? '0px' : spacing}/>
                 ))}
               </Card>
@@ -45,7 +46,7 @@ const messagePage = ({zmproute}) => {
           }
         </Tab>
         <Tab id="tab-2" className="page-content">
-          {loading1 ?
+          {loading ?
             <Box m={0} px={4} pb={2}>
               <Row gap="gap_4" className="mt-4">
                 <Col><SkeletonBlock effect="wave" height="200px"/></Col>
@@ -54,7 +55,10 @@ const messagePage = ({zmproute}) => {
             </Box> :
             <Box>
               <Card inset>
-                {sellMessages.map((item, index) => (
+                {messages.filter(function (obj) {
+                  const o = JSON.parse(JSON.stringify(obj))
+                  return o.type === "1";
+                }).map((item, index) => (
                   <MessageItem key={index} product={item} marginTop={index === 0 ? '0px' : spacing}/>
                 ))}
               </Card>
