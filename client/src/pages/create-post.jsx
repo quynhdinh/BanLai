@@ -29,8 +29,19 @@ import {
   washingMachineDoor,
   washingMachineManufacturer,
 } from "../data/subcategory-details";
+import { serialize } from "object-to-formdata";
 
 import CategoryBox from "../components/category-box";
+import store from "../store";
+
+function getFormData(object) {
+  const formData = new FormData();
+  Object.keys(object).forEach((key) => {
+    if (typeof object[key] !== "object") formData.append(key, object[key]);
+    else formData.append(key, JSON.stringify(object[key]));
+  });
+  return formData;
+}
 
 const createPostPage = () => {
   const zmproute = zmp.views.main.router.currentRoute;
@@ -45,8 +56,21 @@ const createPostPage = () => {
       ...data,
       category: zmproute.query?.category,
       subCategory: zmproute.query?.subcategory,
+      zaloId: "hihihihihihihihi",
     };
-    console.log(data);
+    // console.log(data);
+    // store.dispatch("createPost", {data});
+    //   console.log(data);
+    const formData = serialize(data);
+    fetch("http://localhost:5001/api/posts/", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Content-Type": "form-data",
+      },
+    }).then((res) => {
+      console.log(res);
+    });
   };
 
   const handleChangeDistrictList = (e) => {

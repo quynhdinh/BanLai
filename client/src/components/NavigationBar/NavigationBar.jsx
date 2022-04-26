@@ -69,11 +69,11 @@ const NavigationBar = () => {
       </div>
       <Link
         noLinkClass
-        onClick={() => switchTab("/messages/")}
+        onClick={() => switchTab("/post-detail")}
         className="flex flex-col items-center	"
-        tabLinkActive={activePath === "/messages/"}
+        tabLinkActive={activePath === "/post-detail"}
       >
-        <SearchIcon active={activePath === "/messages/"} />
+        <SearchIcon active={activePath === "/post-detail"} />
         <Text
           size="xxxsmall"
           className="navbar-item-label text-gray-dark font-extrabold"
