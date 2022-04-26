@@ -7,17 +7,10 @@ router.use(AuthService.verify);
 
 
 // tra ve ten mat hang, zaloId partner, createdAt, name, avatar
-router.get('/:type', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
-        const type = parseInt(req.params["type"])
-        if (type !== 0 && type !== 1) {
-            return res.send({
-                error: -1,
-                msg: 'Param không hợp lệ',
-            });
-        }
         const zaloId = req.user.zaloId
-        const messages = await db.Messages.find({owner: zaloId, type: type})
+        const messages = await db.Messages.find({owner: zaloId})
         const mess = JSON.parse(JSON.stringify(messages))
         for(let i = 0; i < mess.length; i++){
             // User.find({'userID': {$in:array}});
