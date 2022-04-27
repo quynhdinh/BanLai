@@ -4,7 +4,7 @@ import {loadUserFromCache} from "./services/storage";
 import {getCurrentUser, login} from "./services/auth";
 import {getFakeProducts, getFakeUsers} from "./services/fake_data";
 import {getMessages} from "./services/message";
-import {getPostsByCategory} from "./services/post";
+import {closePost, getPostsByCategory, getUserPosts, repostPost} from "./services/post";
 import {getCareList} from "./services/care-list";
 
 const store = createStore({
@@ -17,6 +17,7 @@ const store = createStore({
     user: getFakeUsers(),
     products: getFakeProducts(),
     posts: [],
+    userPosts: [],
     electronicItems: [],
     houseItems: [],
     careList: [],
@@ -51,6 +52,9 @@ const store = createStore({
     },
     careList({state}) {
       return state.careList;
+    },
+    userPosts({state}) {
+      return state.user;
     },
   },
   actions: {
@@ -110,6 +114,17 @@ const store = createStore({
       const list = await getCareList()
       state.careList = list;
       state.loadingFlag = false
+    },
+    async fetchUserPosts({state}) {
+      state.loadingFlag = true
+      state.userPosts = await getUserPosts();
+      state.loadingFlag = false
+    },
+    async closePost({state, postId}) {
+      const list = await closePost(postId)
+    },
+    async repostPost({state, postId}) {
+      const list = await repostPost(postId)
     },
   },
 });
