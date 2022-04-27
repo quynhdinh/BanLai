@@ -4,7 +4,7 @@ import {
   ArticleIcon,
   HomeIcon,
   MenuIcon,
-  SearchIcon,
+  Time,
   PlusIcon,
 } from "../Icons";
 import useCurrentRoute from "../../hooks/useCurrentRoute";
@@ -73,7 +73,7 @@ const NavigationBar = () => {
         className="flex flex-col items-center	"
         tabLinkActive={activePath === "/messages/"}
       >
-        <SearchIcon active={activePath === "/messages/"} />
+        <Time active={activePath === "/messages/"} />
         <Text
           size="xxxsmall"
           className="navbar-item-label text-gray-dark font-extrabold"
