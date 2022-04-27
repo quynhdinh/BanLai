@@ -10,20 +10,6 @@ const upload = require('../services/multer')
 const cloudinary = require('../services/cloudinary')
 const fs = require('fs');
 
-router.get('/', async (req, res, next) => {
-    try {
-        const result = await db.Posts.find({})
-        res.send({
-            error: 0,
-            msg: 'Lấy danh sách bài đăng thành công',
-            data: result,
-        })
-    } catch (error) {
-        res.send({error: -1, msg: 'Unknown exception'});
-        console.log('API-Exception', error);
-    }
-});
-
 router.get('/:postId', async function (req, res, next) {
     try {
         const param = req.params["postId"].toString()
@@ -173,49 +159,6 @@ router.put('/viewCount/:postId', async (req, res, next) => {
     }
 });
 
-router.put('/repost/:postId', async (req, res, next) => {
-    try {
-        const param = req.params["postId"].toString()
-        const p = await db.Posts.findOneAndUpdate({_id: param}, {'status': 'Active'}, {new: true})
-        if (p) {
-            res.send({
-                error: 0,
-                msg: 'Active bài đăng thành công',
-                data: p
-            })
-        } else {
-            res.send({
-                error: -1,
-                msg: 'Không tìm thấy bài đăng',
-            })
-        }
-    } catch (error) {
-        res.send({error: -1, msg: 'Unknown exception'});
-        console.log('API-Exception', error);
-    }
-});
-
-router.put('/close-post/:postId', async (req, res, next) => {
-    try {
-        const param = req.params["postId"].toString()
-        const p = await db.Posts.findOneAndUpdate({_id: param}, {'status': 'Closed'}, {new: true})
-        if (p) {
-            res.send({
-                error: 0,
-                msg: 'Ẩn bài đăng thành công',
-                data: p
-            })
-        } else {
-            res.send({
-                error: -1,
-                msg: 'Không tìm thấy bài đăng',
-            })
-        }
-    } catch (error) {
-        res.send({error: -1, msg: 'Unknown exception'});
-        console.log('API-Exception', error);
-    }
-});
 
 router.get('/by-category/:categoryId', async (req, res, next) => {
     try {

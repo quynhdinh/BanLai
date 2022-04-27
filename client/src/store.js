@@ -106,7 +106,6 @@ const store = createStore({
       state.loadingFlag = false
     },
     async fetchCareList({state}) {
-      console.log("fetchCareList")
       state.loadingFlag = true
       const list = await getCareList()
       state.careList = list;
