@@ -1,18 +1,17 @@
 import React, {useEffect} from 'react';
-import {Page, Box, Tabbar, Link, Tabs, Tab, useStore, SkeletonText, Row, Col, SkeletonBlock} from 'zmp-framework/react';
+import {Page, Box, useStore, Row, Col, SkeletonBlock, Button} from 'zmp-framework/react';
 import NavbarBack from "../components/navbar-back";
 import {Category} from "../components/Categories";
 import store from "../store";
 
 const managePostPage = ({zmproute}) => {
-  const products = useStore('products')
   const careList = useStore('careList')
   const loading = useStore('loadingFlag')
 
   useEffect(() => {
     store.dispatch('fetchCareList')
-    console.log("careList: " + JSON.stringify(careList))
   }, [])
+
   return (
     <Page className='page-box page-with-navbar'>
       <NavbarBack
@@ -26,9 +25,15 @@ const managePostPage = ({zmproute}) => {
             <Col><SkeletonBlock effect="wave" height="200px"/></Col>
           </Row>
         </Box> :
-          products.map((item, index) => (
-            <Category key={index} product={item} border/>
-          ))
+        careList.map((item, index) => (
+          <Category key={index} product={{
+            images: item.postDetail[0].images,
+            price: item.postDetail[0].price,
+            title: item.postDetail[0].title,
+            district: item.postDetail[0].district,
+            city: item.postDetail[0].city
+          }} border/>
+        ))
       }
     </Page>
   )
