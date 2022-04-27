@@ -129,8 +129,8 @@ function serialize(obj, cfg, fd, pre) {
       }
 
       const key = pre ? pre : prop;
-      console.log("pre", pre);
-      console.log("prop", prop);
+      // console.log("pre", pre);
+      // console.log("prop", prop);
 
       serialize(value, cfg, fd, key);
     });
@@ -141,6 +141,7 @@ function serialize(obj, cfg, fd, pre) {
   return fd;
 }
 
+console.log(watch(""));
 const createPostPage = () => {
   const user = useStore("u");
   const zmproute = zmp.views.main.router.currentRoute;
@@ -149,6 +150,7 @@ const createPostPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
   const onSubmit = (data) => {
     data = {
@@ -158,18 +160,29 @@ const createPostPage = () => {
       zaloId: "aaaaaaaaaaaaa",
     };
     var formData = serialize(data);
-  
+    console.log(data);
     // store.dispatch("createPost", { formData });
-    fetch("http://zmp-banlai.herokuapp.com/api/posts/", {
-      method: "POST",
-      body: formData,
-      headers: {
-        "Content-Type":
-          "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
-      },
-    }).then((res) => {
-      console.log(res);
-    });
+    // fetch("http://zmp-banlai.herokuapp.com/api/posts/", {
+    //   method: "POST",
+    //   body: formData,
+    //   headers: {
+    //     "Content-Type":
+    //       "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+    //   },
+    // }).then((res) => {
+    //   console.log(res);
+    // });
+  };
+
+  const formatCurrency = (e) => {
+    var amount = e.target.value;
+    if (amount.length === 0) return "0";
+    amount = amount.replace(/\./g, "");
+    const result = parseFloat(amount)
+      .toFixed(0)
+      .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+    if (result === "NaN") return "0";
+    e.target.value = result;
   };
 
   const handleChangeDistrictList = (e) => {
@@ -186,7 +199,7 @@ const createPostPage = () => {
           subcategory={zmproute.query?.subcategory}
         />
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
           <Title bold>Hình ảnh và mô tả</Title>
           <input {...register("images")} type="file" multiple></input>
           <Title size="small" style={{}}>
@@ -210,6 +223,8 @@ const createPostPage = () => {
             compulsory
             hintMessage={priceHints}
             errorMessage={errors?.price && errors?.price.message}
+            pattern="^-?[0-9]\d*\.?\d*$"
+            onKeyUp={(e) => formatCurrency(e)}
           />
           <Select
             {...register("condition")}
