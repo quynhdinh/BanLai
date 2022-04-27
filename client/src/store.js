@@ -13,13 +13,6 @@ const store = createStore({
     loadingCategories: false,
     messages: [],
     loadingFlag: true,
-    categories: [
-      [1, "Technology"],
-      [2, "Technology"],
-      [3, "Technology"],
-      [4, "Technology"],
-      [5, "Technology"],
-    ],
     u: null,
     user: getFakeUsers(),
     products: getFakeProducts(),
@@ -29,9 +22,6 @@ const store = createStore({
     careList: [],
   },
   getters: {
-    categories({state}) {
-      return state.categories;
-    },
     loadingCategories({state}) {
       return state.loadingCategories;
     },
