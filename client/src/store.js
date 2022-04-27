@@ -1,8 +1,9 @@
-import { createStore } from "zmp-core/lite";
-import { getAccessToken } from "./services/zalo";
-import { loadUserFromCache } from "./services/storage";
-import { getCurrentUser, login } from "./services/auth";
-import { getFakeUsers, getFakeProducts } from "./services/fake_data";
+import {createStore} from "zmp-core/lite";
+import {getAccessToken} from "./services/zalo";
+import {loadUserFromCache} from "./services/storage";
+import {getCurrentUser, login} from "./services/auth";
+import {getFakeProducts, getFakeUsers} from "./services/fake_data";
+import {getMessages} from "./services/message";
 import { getPostsByCategory, getPostDetails, createPost } from "./services/post";
 
 const store = createStore({
@@ -100,6 +101,10 @@ const store = createStore({
           dispatch("setUser", user);
         }
       }
+    },
+    async createPost({ state }, { data }) {
+      const response = await createPost(data)
+      console.log("here", response);
     },
     async createPost({ state }, { data }) {
       const response = await createPost(data)
