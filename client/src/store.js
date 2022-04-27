@@ -5,13 +5,14 @@ import {getCurrentUser, login} from "./services/auth";
 import {getFakeProducts, getFakeUsers} from "./services/fake_data";
 import {getMessages} from "./services/message";
 import {getPostsByCategory} from "./services/post";
+import {getCareList} from "./services/care-list";
 
 const store = createStore({
   state: {
     jwt: null,
     loadingCategories: false,
     messages: [],
-    loadingMessages: true,
+    loadingFlag: true,
     categories: [
       [1, "Technology"],
       [2, "Technology"],
@@ -25,6 +26,7 @@ const store = createStore({
     posts: [],
     electronicItems: [],
     houseItems: [],
+    careList: [],
   },
   getters: {
     categories({state}) {
@@ -45,8 +47,8 @@ const store = createStore({
     u({state}) {
       return state.u
     },
-    loadingMessages({ state }) {
-      return state.loadingMessages
+    loadingFlag({ state }) {
+      return state.loadingFlag
     },
     messages({ state }) {
       return state.messages
@@ -56,6 +58,9 @@ const store = createStore({
     },
     products({state}) {
       return state.products;
+    },
+    careList({state}) {
+      return state.careList;
     },
   },
   actions: {
@@ -75,6 +80,9 @@ const store = createStore({
     },
     addProduct({state}, product) {
       state.products = [...state.products, product];
+    },
+    addCareItem({state}, careItem) {
+      state.careList = [...state.careList, careItem];
     },
     async fetchPosts({state}, {category}) {
       const posts = await getPostsByCategory(category)
@@ -103,9 +111,16 @@ const store = createStore({
       }
     },
     async fetchMessages({state}) {
-      state.loadingMessages = true
+      state.loadingFlag = true
       state.messages = await getMessages()
-      state.loadingMessages = false
+      state.loadingFlag = false
+    },
+    async fetchCareList({state}) {
+      console.log("fetchCareList")
+      state.loadingFlag = true
+      const list = await getCareList()
+      state.careList = list;
+      state.loadingFlag = false
     },
   },
 });

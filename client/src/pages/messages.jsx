@@ -8,7 +8,7 @@ import store from "../store";
 
 const messagePage = ({zmproute}) => {
   const messages = useStore('messages')
-  const loading = useStore('loadingMessages')
+  const loading = useStore('loadingFlag')
   const spacing = '20px'
 
   useEffect(() => {
