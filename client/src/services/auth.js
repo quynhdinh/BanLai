@@ -4,7 +4,7 @@ import store from '../store'
 const base = config.BASE_URL
 
 export const request = async (method, url, data) => {
-  const headers = { 'Content-Type': 'form-data' }
+  const headers = { 'Content-Type': 'application/json' }
   const token = store.state.jwt
   if (token) {
     headers.Authorization = `Bearer ${token}`
@@ -16,6 +16,21 @@ export const request = async (method, url, data) => {
     headers
   })
 }
+
+export const requestFormData = async (method, url, data) => {
+  const headers = { 'Content-Type': 'form-data' }
+  const token = store.state.jwt
+  if (token) {
+    headers.Authorization = `Bearer ${token}`
+  }
+
+  return fetch(`${base}/${url}`, {
+    method: method,
+    body: data,
+    headers
+  })
+}
+
 
 export const login = async (accessToken) => {
   try {

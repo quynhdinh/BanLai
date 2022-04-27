@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Page, Button, Box, zmp, Title } from "zmp-framework/react";
+import { Page, Button, Box, zmp, Title, useStore } from "zmp-framework/react";
 import NavbarBack from "../components/navbar-back";
 import { useForm } from "react-hook-form";
 import CustomInput, { Select } from "../components/Input";
@@ -29,21 +29,120 @@ import {
   washingMachineDoor,
   washingMachineManufacturer,
 } from "../data/subcategory-details";
-import { serialize } from "object-to-formdata";
+// import { serialize } from "object-to-formdata";
 
 import CategoryBox from "../components/category-box";
-import store from "../store";
+function isUndefined(value) {
+  return value === undefined;
+}
 
-function getFormData(object) {
-  const formData = new FormData();
-  Object.keys(object).forEach((key) => {
-    if (typeof object[key] !== "object") formData.append(key, object[key]);
-    else formData.append(key, JSON.stringify(object[key]));
-  });
-  return formData;
+function isNull(value) {
+  return value === null;
+}
+
+function isBoolean(value) {
+  return typeof value === "boolean";
+}
+
+function isObject(value) {
+  return value === Object(value);
+}
+
+function isArray(value) {
+  return Array.isArray(value);
+}
+
+function isDate(value) {
+  return value instanceof Date;
+}
+
+function isBlob(value, isReactNative) {
+  return isReactNative
+    ? isObject(value) && !isUndefined(value.uri)
+    : isObject(value) &&
+        typeof value.size === "number" &&
+        typeof value.type === "string" &&
+        typeof value.slice === "function";
+}
+
+function isFile(value, isReactNative) {
+  return (
+    isBlob(value, isReactNative) &&
+    typeof value.name === "string" &&
+    (isObject(value.lastModifiedDate) || typeof value.lastModified === "number")
+  );
+}
+
+function initCfg(value) {
+  return isUndefined(value) ? false : value;
+}
+
+function serialize(obj, cfg, fd, pre) {
+  cfg = cfg || {};
+  fd = fd || new FormData();
+
+  cfg.indices = initCfg(cfg.indices);
+  cfg.nullsAsUndefineds = initCfg(cfg.nullsAsUndefineds);
+  cfg.booleansAsIntegers = initCfg(cfg.booleansAsIntegers);
+  cfg.allowEmptyArrays = initCfg(cfg.allowEmptyArrays);
+  cfg.noFilesWithArrayNotation = initCfg(cfg.noFilesWithArrayNotation);
+  cfg.dotsForObjectNotation = initCfg(cfg.dotsForObjectNotation);
+
+  const isReactNative = typeof fd.getParts === "function";
+
+  if (isUndefined(obj)) {
+    return fd;
+  } else if (isNull(obj)) {
+    if (!cfg.nullsAsUndefineds) {
+      fd.append(pre, "");
+    }
+  } else if (isBoolean(obj)) {
+    if (cfg.booleansAsIntegers) {
+      fd.append(pre, obj ? 1 : 0);
+    } else {
+      fd.append(pre, obj);
+    }
+  } else if (isArray(obj)) {
+    if (obj.length) {
+      obj.forEach((value, index) => {
+        let key = pre + "[" + (cfg.indices ? index : "") + "]";
+
+        if (cfg.noFilesWithArrayNotation && isFile(value, isReactNative)) {
+          key = pre;
+        }
+
+        serialize(value, cfg, fd, key);
+      });
+    } else if (cfg.allowEmptyArrays) {
+      fd.append(pre + "[]", "");
+    }
+  } else if (isDate(obj)) {
+    fd.append(pre, obj.toISOString());
+  } else if (isObject(obj) && !isBlob(obj, isReactNative)) {
+    Object.keys(obj).forEach((prop) => {
+      const value = obj[prop];
+
+      if (isArray(value)) {
+        while (prop.length > 2 && prop.lastIndexOf("[]") === prop.length - 2) {
+          prop = prop.substring(0, prop.length - 2);
+        }
+      }
+
+      const key = pre ? pre : prop;
+      console.log("pre", pre);
+      console.log("prop", prop);
+
+      serialize(value, cfg, fd, key);
+    });
+  } else {
+    fd.append(pre, obj);
+  }
+
+  return fd;
 }
 
 const createPostPage = () => {
+  const user = useStore("u");
   const zmproute = zmp.views.main.router.currentRoute;
   const [districtOptions, setDistrictOptions] = useState(HoChiMinh);
   const {
@@ -56,17 +155,17 @@ const createPostPage = () => {
       ...data,
       category: zmproute.query?.category,
       subCategory: zmproute.query?.subcategory,
-      zaloId: "hihihihihihihihi",
+      zaloId: "aaaaaaaaaaaaa",
     };
-    // console.log(data);
-    // store.dispatch("createPost", {data});
-    //   console.log(data);
-    const formData = serialize(data);
-    fetch("http://localhost:5001/api/posts/", {
+    var formData = serialize(data);
+  
+    // store.dispatch("createPost", { formData });
+    fetch("http://zmp-banlai.herokuapp.com/api/posts/", {
       method: "POST",
       body: formData,
       headers: {
-        "Content-Type": "form-data",
+        "Content-Type":
+          "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
       },
     }).then((res) => {
       console.log(res);

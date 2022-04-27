@@ -1,4 +1,4 @@
-import { request } from "./auth";
+import { request, requestFormData } from "./auth";
 
 export const getPostsByCategory = async (category) => {
   try {
@@ -27,7 +27,7 @@ export const getPostDetails = async (id) => {
 export const createPost = async (data) => {
   try {
     const url = "api/posts/";
-    const response = await (await request("POST", url, data)).json();
+    const response = await (await requestFormData("POST", url, data)).json();
     console.log(response.data);
     return response.data;
   } catch (error) {
