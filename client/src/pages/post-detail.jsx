@@ -7,7 +7,6 @@ import {
 } from "zmp-framework/react";
 import "../css/swiper.css";
 import UserCard from "../components/user-card";
-import form from "./form";
 import Categories, {Category} from "../components/Categories";
 const url = "https://tophinhanhdep.com/wp-content/uploads/2021/10/Beautiful-Scenery-Wallpapers.jpg"
 const url2 = 'https://www.notebookcheck.net/uploads/tx_nbc2/4_to_3_Teaser_Apple_iPhone_13_Pro.jpg'

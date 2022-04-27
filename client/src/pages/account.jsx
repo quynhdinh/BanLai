@@ -12,7 +12,7 @@ const AccountPage = ({zmproute}) => {
         <Page className='page-box page-with-navbar'>
             <NavigationBar active={zmproute.path}/>
             <List>
-                <ListItem link='/user/'>
+                <ListItem>
                     <UserCard user={u}/>
                 </ListItem>
                 <ListItem link='/care-list/' title='Tin đăng đã lưu'>

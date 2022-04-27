@@ -1,6 +1,6 @@
 import React, {useEffect} from "react"
 import {
-  Page, useStore, Tabbar, Link, Tabs, Tab, Card, Box, Row, Col, SkeletonBlock, Button
+  Page, useStore, Tabbar, Link, Tabs, Tab, Card, Box, Row, Col, SkeletonBlock
 } from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar"
 import MessageItem from "../components/MessageItem/message-item";

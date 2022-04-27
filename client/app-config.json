@@ -11,11 +11,7 @@
   "listSyncJS": [],
   "listAsyncJS": [],
   "pages": [
-    "/user",
-    "/form",
-    "/dynamic-route",
     "/saved-posts",
-    "/about",
     "/404",
     "/home",
     "/manage-post",

@@ -1,14 +1,12 @@
 import React, {useState} from 'react';
 import {
     Page,
-    useStore,
-    SkeletonImage,
-    SkeletonText,
-    Searchbar, Box, Icon, Text, Card, Link, zmp, Button,
+    Box,
+    zmp,
+    Button,
 } from 'zmp-framework/react';
 import NavigationBar from '../components/NavigationBar';
 import Categories from "../components/Categories";
-import PostFilter from "../components/HomeMisc/PostFilter";
 
 const HomePage = () => {
     const zmproute = zmp.views.main.router
