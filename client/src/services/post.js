@@ -1,4 +1,4 @@
-import { request, requestFormData } from "./auth";
+import {request, requestFormData} from "./auth";
 
 export const getPostsByCategory = async (category) => {
   try {

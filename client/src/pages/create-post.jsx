@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Page, Button, Box, zmp, Title, useStore } from "zmp-framework/react";
+import React, {useEffect, useState} from "react";
+import {Page, Button, Box, zmp, Title, useStore} from "zmp-framework/react";
 import NavbarBack from "../components/navbar-back";
-import { useForm } from "react-hook-form";
-import CustomInput, { Select } from "../components/Input";
+import {useForm} from "react-hook-form";
+import CustomInput, {Select} from "../components/Input";
 import TextArea from "../components/Input/text-area";
-import { city, HaNoi, HoChiMinh } from "../data/city-district";
-import { titleHints, priceHints } from "../data/input-hint";
+import {city, HaNoi, HoChiMinh} from "../data/city-district";
+import {titleHints, priceHints} from "../data/input-hint";
 import {
   airConditionerCoolingCapacity,
   airConditionerManufacturer,
@@ -29,119 +29,9 @@ import {
   washingMachineDoor,
   washingMachineManufacturer,
 } from "../data/subcategory-details";
-// import { serialize } from "object-to-formdata";
-
+import store from "../store";
 import CategoryBox from "../components/category-box";
-function isUndefined(value) {
-  return value === undefined;
-}
 
-function isNull(value) {
-  return value === null;
-}
-
-function isBoolean(value) {
-  return typeof value === "boolean";
-}
-
-function isObject(value) {
-  return value === Object(value);
-}
-
-function isArray(value) {
-  return Array.isArray(value);
-}
-
-function isDate(value) {
-  return value instanceof Date;
-}
-
-function isBlob(value, isReactNative) {
-  return isReactNative
-    ? isObject(value) && !isUndefined(value.uri)
-    : isObject(value) &&
-        typeof value.size === "number" &&
-        typeof value.type === "string" &&
-        typeof value.slice === "function";
-}
-
-function isFile(value, isReactNative) {
-  return (
-    isBlob(value, isReactNative) &&
-    typeof value.name === "string" &&
-    (isObject(value.lastModifiedDate) || typeof value.lastModified === "number")
-  );
-}
-
-function initCfg(value) {
-  return isUndefined(value) ? false : value;
-}
-
-function serialize(obj, cfg, fd, pre) {
-  cfg = cfg || {};
-  fd = fd || new FormData();
-
-  cfg.indices = initCfg(cfg.indices);
-  cfg.nullsAsUndefineds = initCfg(cfg.nullsAsUndefineds);
-  cfg.booleansAsIntegers = initCfg(cfg.booleansAsIntegers);
-  cfg.allowEmptyArrays = initCfg(cfg.allowEmptyArrays);
-  cfg.noFilesWithArrayNotation = initCfg(cfg.noFilesWithArrayNotation);
-  cfg.dotsForObjectNotation = initCfg(cfg.dotsForObjectNotation);
-
-  const isReactNative = typeof fd.getParts === "function";
-
-  if (isUndefined(obj)) {
-    return fd;
-  } else if (isNull(obj)) {
-    if (!cfg.nullsAsUndefineds) {
-      fd.append(pre, "");
-    }
-  } else if (isBoolean(obj)) {
-    if (cfg.booleansAsIntegers) {
-      fd.append(pre, obj ? 1 : 0);
-    } else {
-      fd.append(pre, obj);
-    }
-  } else if (isArray(obj)) {
-    if (obj.length) {
-      obj.forEach((value, index) => {
-        let key = pre + "[" + (cfg.indices ? index : "") + "]";
-
-        if (cfg.noFilesWithArrayNotation && isFile(value, isReactNative)) {
-          key = pre;
-        }
-
-        serialize(value, cfg, fd, key);
-      });
-    } else if (cfg.allowEmptyArrays) {
-      fd.append(pre + "[]", "");
-    }
-  } else if (isDate(obj)) {
-    fd.append(pre, obj.toISOString());
-  } else if (isObject(obj) && !isBlob(obj, isReactNative)) {
-    Object.keys(obj).forEach((prop) => {
-      const value = obj[prop];
-
-      if (isArray(value)) {
-        while (prop.length > 2 && prop.lastIndexOf("[]") === prop.length - 2) {
-          prop = prop.substring(0, prop.length - 2);
-        }
-      }
-
-      const key = pre ? pre : prop;
-      // console.log("pre", pre);
-      // console.log("prop", prop);
-
-      serialize(value, cfg, fd, key);
-    });
-  } else {
-    fd.append(pre, obj);
-  }
-
-  return fd;
-}
-
-console.log(watch(""));
 const createPostPage = () => {
   const user = useStore("u");
   const zmproute = zmp.views.main.router.currentRoute;
@@ -149,29 +39,17 @@ const createPostPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    watch,
+    formState: {errors},
   } = useForm();
   const onSubmit = (data) => {
+    console.log(data)
     data = {
       ...data,
       category: zmproute.query?.category,
       subCategory: zmproute.query?.subcategory,
-      zaloId: "aaaaaaaaaaaaa",
+      zaloId: 'aa',
     };
-    var formData = serialize(data);
-    console.log(data);
-    // store.dispatch("createPost", { formData });
-    // fetch("http://zmp-banlai.herokuapp.com/api/posts/", {
-    //   method: "POST",
-    //   body: formData,
-    //   headers: {
-    //     "Content-Type":
-    //       "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
-    //   },
-    // }).then((res) => {
-    //   console.log(res);
-    // });
+    store.dispatch("createPost", {data});
   };
 
   const formatCurrency = (e) => {
@@ -192,7 +70,7 @@ const createPostPage = () => {
 
   return (
     <Page name="create-post">
-      <NavbarBack title="Tạo tin đăng" linkLeft={"/choose-subcategory/"} />
+      <NavbarBack title="Tạo tin đăng" linkLeft={"/choose-subcategory/"}/>
       <Box px={4}>
         <CategoryBox
           category={zmproute.query?.category}
@@ -217,7 +95,7 @@ const createPostPage = () => {
             errorMessage={errors?.title && errors?.title.message}
           />
           <CustomInput
-            {...register("price", { required: "Vui lòng nhập giá rao bán" })}
+            {...register("price", {required: "Vui lòng nhập giá rao bán"})}
             placeholder="Nhập giá rao bán"
             label="Giá rao bán"
             compulsory

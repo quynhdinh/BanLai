@@ -88,6 +88,10 @@ const store = createStore({
       const postDetails = await getPostDetails(id);
       state.postDetails = postDetails;
     },
+    async createPost({ state }, { data }) {
+      const response = await createPost(data)
+      console.log("here", response);
+    },
     async login({ dispatch }) {
       const cachedUser = await loadUserFromCache();
       if (cachedUser) {
@@ -101,10 +105,6 @@ const store = createStore({
           dispatch("setUser", user);
         }
       }
-    },
-    async createPost({ state }, { data }) {
-      const response = await createPost(data)
-      console.log("here", response);
     },
   },
 });

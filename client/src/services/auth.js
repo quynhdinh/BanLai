@@ -1,10 +1,11 @@
 import config from '../config'
 import store from '../store'
+import {serialize} from './form_data'
 
 const base = config.BASE_URL
 
 export const request = async (method, url, data) => {
-  const headers = { 'Content-Type': 'application/json' }
+  const headers = {'Content-Type': 'application/json'}
   const token = store.state.jwt
   if (token) {
     headers.Authorization = `Bearer ${token}`
@@ -18,7 +19,9 @@ export const request = async (method, url, data) => {
 }
 
 export const requestFormData = async (method, url, data) => {
-  const headers = { 'Content-Type': 'form-data' }
+  console.log(data)
+  var formData = serialize(data)
+  const headers = {}
   const token = store.state.jwt
   if (token) {
     headers.Authorization = `Bearer ${token}`
@@ -26,7 +29,7 @@ export const requestFormData = async (method, url, data) => {
 
   return fetch(`${base}/${url}`, {
     method: method,
-    body: data,
+    body: formData,
     headers
   })
 }
