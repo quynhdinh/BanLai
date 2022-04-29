@@ -91,7 +91,7 @@ const Category = ({ product, category, border }) => {
             }}
           >
             <Text size="xxxsmall" style={{ marginBottom: 0 }}>
-                {product.district} {product.city}
+                {product.district}, {product.city}
             </Text>
           </Box>
         </Box>

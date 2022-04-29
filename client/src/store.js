@@ -4,32 +4,25 @@ import {loadUserFromCache} from "./services/storage";
 import {getCurrentUser, login} from "./services/auth";
 import {getFakeProducts, getFakeUsers} from "./services/fake_data";
 import {getMessages} from "./services/message";
-import {getPostsByCategory} from "./services/post";
+import {closePost, getPostsByCategory, getUserPosts, repostPost} from "./services/post";
+import {getCareList} from "./services/care-list";
 
 const store = createStore({
   state: {
     jwt: null,
     loadingCategories: false,
     messages: [],
-    loadingMessages: true,
-    categories: [
-      [1, "Technology"],
-      [2, "Technology"],
-      [3, "Technology"],
-      [4, "Technology"],
-      [5, "Technology"],
-    ],
+    loadingFlag: true,
     u: null,
     user: getFakeUsers(),
     products: getFakeProducts(),
     posts: [],
+    userPosts: [],
     electronicItems: [],
     houseItems: [],
+    careList: [],
   },
   getters: {
-    categories({state}) {
-      return state.categories;
-    },
     loadingCategories({state}) {
       return state.loadingCategories;
     },
@@ -45,8 +38,8 @@ const store = createStore({
     u({state}) {
       return state.u
     },
-    loadingMessages({ state }) {
-      return state.loadingMessages
+    loadingFlag({ state }) {
+      return state.loadingFlag
     },
     messages({ state }) {
       return state.messages
@@ -56,6 +49,12 @@ const store = createStore({
     },
     products({state}) {
       return state.products;
+    },
+    careList({state}) {
+      return state.careList;
+    },
+    userPosts({state}) {
+      return state.user;
     },
   },
   actions: {
@@ -75,6 +74,9 @@ const store = createStore({
     },
     addProduct({state}, product) {
       state.products = [...state.products, product];
+    },
+    addCareItem({state}, careItem) {
+      state.careList = [...state.careList, careItem];
     },
     async fetchPosts({state}, {category}) {
       const posts = await getPostsByCategory(category)
@@ -103,9 +105,26 @@ const store = createStore({
       }
     },
     async fetchMessages({state}) {
-      state.loadingMessages = true
+      state.loadingFlag = true
       state.messages = await getMessages()
-      state.loadingMessages = false
+      state.loadingFlag = false
+    },
+    async fetchCareList({state}) {
+      state.loadingFlag = true
+      const list = await getCareList()
+      state.careList = list;
+      state.loadingFlag = false
+    },
+    async fetchUserPosts({state}) {
+      state.loadingFlag = true
+      state.userPosts = await getUserPosts();
+      state.loadingFlag = false
+    },
+    async closePost({state, postId}) {
+      const list = await closePost(postId)
+    },
+    async repostPost({state, postId}) {
+      const list = await repostPost(postId)
     },
   },
 });

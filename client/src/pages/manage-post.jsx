@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Page, Card, Searchbar, Box, Tabbar, Link, Tabs, Tab, useStore, SkeletonText
+    Page, Card, Searchbar, Box, Tabbar, Link, Tabs, Tab, useStore
 } from 'zmp-framework/react';
 import NavigationBar from "../components/NavigationBar";
 import PostItem from "../components/PostItem";

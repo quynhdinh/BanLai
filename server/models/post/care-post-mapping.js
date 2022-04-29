@@ -3,7 +3,7 @@ const {Schema} = mongoose;
 
 const schema = new mongoose.Schema({
     zaloId: {type: String, required: true},
-    postId: {type: Schema.Types.ObjectId, ref: 'Post', required: true},
-}, {collection: 'CarePostMapping'});
+    postId: {type: String, required: true}
+}, {collection: 'carepostmapping'});
 
-module.exports = mongoose.model('CarePostMapping', schema);
+module.exports = mongoose.model('carepostmapping', schema);
