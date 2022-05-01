@@ -9,10 +9,21 @@ const upload = require('../services/multer')
 const cloudinary = require('../services/cloudinary')
 const fs = require('fs');
 
-router.get('/hottest-posts', async (req, res, next) => {
+router.get('/hottest-posts/:categoryId', async (req, res, next) => {
   try {
-
-    const posts = await db.Posts.find().sort({viewCount: -1}).limit(4);
+    const param = parseInt(req.params["categoryId"])
+    var category = ""
+    if (param === 0) {
+      category = "Thiết bị điện tử"
+    } else if (param === 1) {
+      category = "Đồ nội thất và gia dụng"
+    } else {
+      return res.send({
+        error: -1,
+        msg: 'Param không hợp lệ'
+      })
+    }
+    const posts = await db.Posts.find({category: category}).sort({viewCount: -1}).limit(4);
     res.send({
       error: 0,
       msg: 'Lấy danh sách bài đăng thành công',
