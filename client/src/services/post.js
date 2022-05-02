@@ -12,6 +12,18 @@ export const getPostsByCategory = async (category) => {
     }
 }
 
+export const getHottestPosts = async (category) => {
+    try {
+        const url = 'api/posts/hottest-posts/' + category
+        const response = await (await request('GET', url)).json()
+        console.log('response: ', response.data)
+        return response.data
+    } catch (error) {
+        console.log("Error fetching posts:", error)
+        return []
+    }
+}
+
 export const getUserPosts = async () => {
     try {
         const url = 'api/posts/'

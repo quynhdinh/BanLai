@@ -36,7 +36,7 @@ const electronicListPage = () => {
         </div>
       </Box>
       <Tab className="page-content">
-        <Box class-name="post-list">
+        <Box>
           <div style={{
             marginBottom: "150px",
           }}>

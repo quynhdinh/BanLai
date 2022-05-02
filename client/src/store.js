@@ -4,7 +4,7 @@ import {loadUserFromCache} from "./services/storage";
 import {getCurrentUser, login} from "./services/auth";
 import {getFakeProducts, getFakeUsers} from "./services/fake_data";
 import {getMessages} from "./services/message";
-import {closePost, getPostsByCategory, getUserPosts, repostPost} from "./services/post";
+import {closePost, getHottestPosts, getPostsByCategory, getUserPosts, repostPost} from "./services/post";
 import {getCareList} from "./services/care-list";
 
 const store = createStore({
@@ -20,6 +20,8 @@ const store = createStore({
     userPosts: [],
     electronicItems: [],
     houseItems: [],
+    hottestElectronicItems: [],
+    hottestHouseItems: [],
     careList: [],
   },
   getters: {
@@ -34,6 +36,12 @@ const store = createStore({
     },
     houseItems({state}) {
       return state.houseItems
+    },
+    hottestElectronicItems({state}) {
+      return state.hottestElectronicItems
+    },
+    hottestHouseItems({state}) {
+      return state.hottestHouseItems
     },
     u({state}) {
       return state.u
@@ -89,6 +97,14 @@ const store = createStore({
     async fetchHouseItems({state}) {
       const posts = await getPostsByCategory(1)
       state.houseItems = posts
+    },
+    async fetchHottestElectronicItems({state}) {
+      const posts = await getHottestPosts(0)
+      state.hottestElectronicItems = posts
+    },
+    async fetchHottestHouseItems({state}) {
+      const posts = await getHottestPosts(1)
+      state.hottestHouseItems = posts
     },
     async login({dispatch}) {
       const cachedUser = await loadUserFromCache();
