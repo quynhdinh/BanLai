@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, Box, ListItem } from "zmp-framework/react";
+import { Icon } from "zmp-framework/react";
 
 const HeartIcon = ({ isLiked, handleLikeUnlike }) => {
   return (
