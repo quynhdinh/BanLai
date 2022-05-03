@@ -15,9 +15,7 @@ const CustomInput = React.forwardRef((props, ref) => {
       {label && (
         <Text style={{ marginBottom: "2px", color: "#667685" }}>
           {label}
-          {compulsory && (
-            <span style={{ color: "rgba(239, 78, 73, 1)" }}> *</span>
-          )}
+          {compulsory && <span className="text-color-rl300"> *</span>}
         </Text>
       )}
       <input ref={ref} {...rest} onFocus={handleFocus} onBlur={handleBlur} />
@@ -31,7 +29,10 @@ const CustomInput = React.forwardRef((props, ref) => {
         </Box>
       )}
       {errorMessage && (
-        <Text size="large" className="custom-input__error-message">
+        <Text
+          size="large"
+          className="text-color-rl300 custom-input__error-message"
+        >
           {errorMessage}
         </Text>
       )}

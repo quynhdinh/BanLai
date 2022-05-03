@@ -1,62 +1,72 @@
-import React, {useState} from 'react';
-import {
-    Page,
-    Box,
-    zmp,
-    Button,
-} from 'zmp-framework/react';
-import NavigationBar from '../components/NavigationBar';
+import React, { useState } from "react";
+import { Page, Box, zmp, Button, Text, Title } from "zmp-framework/react";
+import NavigationBar from "../components/NavigationBar";
 import Categories from "../components/Categories";
+import pc from "../static/icons/PC.svg";
+import bed from "../static/icons/Bed.svg";
 
 const HomePage = () => {
-    const zmproute = zmp.views.main.router
+  const zmproute = zmp.views.main.router;
 
-    function electronicSelect() {
-        zmproute.navigate('/electronic-list')
-    }
+  const handleOnClick = ({ navigateLink }) => {
+    zmproute.navigate(navigateLink);
+  };
 
-    function houseItemSelect() {
-        zmproute.navigate('/house-item-list')
-    }
+  return (
+    <Page name="home" navbarLarge>
+      <NavigationBar />
+      <Box flex flexDirection="row" style={{ justifyContent: "center" }}>
+        {categoryList.map((item, index) => (
+          <CategoryIcon
+            key={index}
+            title={item.title}
+            icon={item.icon}
+            onClick={() => {
+              zmproute.navigate(item.navigateLink);
+            }}
+          />
+        ))}
+      </Box>
 
-    return (
-        <Page name="home"
-              navbarLarge
+      <Categories />
+    </Page>
+  );
+};
+
+const categoryList = [
+  { title: "Thiết bị điện tử", icon: pc, navigateLink: "/electronic-list" },
+  {
+    title: "Đồ gia dụng, Nội thất",
+    icon: bed,
+    navigateLink: "/house-item-list",
+  },
+];
+const CategoryIcon = ({ title, icon, onClick }) => (
+  <div onClick={onClick}>
+    <Box
+      flex
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+      className="border-color-bl300"
+      px={4}
+      pt={2}
+      m={2}
+      style={{ border: "1px solid", maxWidth: 150, borderRadius:8 }}
+    >
+      <img src={icon} className="custom-icon" />
+      <Box m={0} style={{ height: 44 }}>
+        <Title
+          className="text-color-bl300"
+          size="xsmall"
+          bold
+          textAlign="center"
         >
-            <NavigationBar/>
-            <Box flex flexDirection="row" style={{justifyContent: "center"}}>
-                <Box style={{position: "flex", right: "10%"}}>
-                    <Button
-                        onClick={electronicSelect}
-                        style={{
-                            backgroundColor: "grey",
-                            color: "black",
-                            width: "120px",
-                            height: "100px"
+          {title}
+        </Title>
+      </Box>
+    </Box>
+  </div>
+);
 
-                        }}
-                    >
-                        Đồ điện tử
-                    </Button>
-                </Box>
-
-                <Box style={{position: "flex", left: "10%"}}>
-                    <Button
-                        onClick={houseItemSelect}
-                        style={{
-                            backgroundColor: "grey",
-                            color: "black",
-                            width: "120px",
-                            height: "100px"
-                        }}
-                    >
-                        Đồ gia dụng
-                    </Button>
-                </Box>
-            </Box>
-
-            <Categories/>
-        </Page>
-    );
-}
 export default HomePage;

@@ -41,7 +41,7 @@ const electronicListPage = () => {
             marginBottom: "150px",
           }}>
             {electronicItems.map((item, index) => (
-              <Category product={item}/>
+              <Category key={index} product={item} border/>
             ))}
           </div>
         </Box>
