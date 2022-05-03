@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Text } from "zmp-framework/react";
-import "./style.scss";
+import "../../css/input.scss";
 const CustomInput = React.forwardRef((props, ref) => {
   const { compulsory, label, errorMessage, hintMessage, ...rest } = props;
   const [hintShown, setHintShown] = useState(false);

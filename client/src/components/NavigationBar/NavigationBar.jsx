@@ -1,14 +1,12 @@
 import React, { useRef, useState } from "react";
 import { Link, Tabbar, Text, zmp } from "zmp-framework/react";
-import {
-  ArticleIcon,
-  HomeIcon,
-  MenuIcon,
-  Time,
-  PlusIcon,
-} from "../Icons";
 import useCurrentRoute from "../../hooks/useCurrentRoute";
 import "./styles.scss";
+import { AiFillHome } from "react-icons/ai";
+import { BiMessageDetail } from "react-icons/bi";
+import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
+import { FaRegUser } from "react-icons/fa";
+import CreatePostIcon from "../../static/icons/CreatePost.svg"
 
 const NavigationBar = () => {
   const currentPath = useCurrentRoute();
@@ -35,9 +33,9 @@ const NavigationBar = () => {
         className="flex flex-col items-center	"
         tabLinkActive={activePath === "/"}
       >
-        <HomeIcon active={activePath === "/"} />
+        <AiFillHome size={24} />
         <Text
-          size="xxxsmall"
+          size="xxsmall"
           className="navbar-item-label navbar-item-label text-gray-dark font-roboto"
         >
           Trang chủ
@@ -49,9 +47,9 @@ const NavigationBar = () => {
         className="flex flex-col items-center	"
         tabLinkActive={activePath === "/manage-post/"}
       >
-        <ArticleIcon active={activePath === "/manage-post/"} />
+        <BsReverseLayoutTextSidebarReverse size={21} />
         <Text
-          size="xxxsmall"
+          size="xxsmall"
           className="navbar-item-label text-gray-dark font-extrabold"
         >
           Quản lý tin
@@ -64,7 +62,7 @@ const NavigationBar = () => {
           className="write-blog rounded-full border-white bg-blue border-4 items-center"
           tabLinkActive={activePath === "/choose-category/"}
         >
-          <PlusIcon />
+          <img src ={CreatePostIcon}/>
         </Link>
       </div>
       <Link
@@ -73,9 +71,9 @@ const NavigationBar = () => {
         className="flex flex-col items-center	"
         tabLinkActive={activePath === "/messages/"}
       >
-        <Time active={activePath === "/messages/"} />
+        <BiMessageDetail size={24} />
         <Text
-          size="xxxsmall"
+          size="xxsmall"
           className="navbar-item-label text-gray-dark font-extrabold"
         >
           Tin nhắn
@@ -87,9 +85,9 @@ const NavigationBar = () => {
         tabLinkActive={activePath === "/account/"}
         onClick={() => switchTab("/account/")}
       >
-        <MenuIcon active={activePath === "/account/"} />
+        <FaRegUser size={22} />
         <Text
-          size="xxxsmall"
+          size="xxsmall"
           className="navbar-item-label text-gray-dark font-extrabold"
         >
           Tài khoản

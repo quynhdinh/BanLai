@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Text } from "zmp-framework/react";
-import "./style.scss";
+import "../../css/input.scss";
 const Select = React.forwardRef((props, ref) => {
   const { compulsory, label, errorMessage, option, onChange, ...rest } = props;
 
