@@ -38,7 +38,7 @@ const houseItemListPage = () => {
             marginBottom: "150px",
           }}>
             {houseItems.map((item, index) => (
-              <Category product={item}/>
+              <Category key={index} product={item} border/>
             ))}
           </div>
         </Box>

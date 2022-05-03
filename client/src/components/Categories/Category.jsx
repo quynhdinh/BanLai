@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Icon, Text, Box } from "zmp-framework/react";
-import {moneyFormat} from "../../util/number";
+import { moneyFormat } from "../../util/number";
+import HeartIcon from "../heart-icon";
 
 const Category = ({ product, category, border }) => {
   return (
@@ -74,12 +75,12 @@ const Category = ({ product, category, border }) => {
                 WebkitBoxOrient: "vertical",
               }}
             >
-                {product.title}
+              {product.title}
             </Text>
           </Box>
 
           <Text style={{ color: "rgba(239, 78, 73, 1)", fontWeight: 700 }}>
-              {moneyFormat(product.price)}
+            {moneyFormat(product.price)}
           </Text>
           <Box
             p={1}
@@ -91,12 +92,12 @@ const Category = ({ product, category, border }) => {
             }}
           >
             <Text size="xxxsmall" style={{ marginBottom: 0 }}>
-                {product.district}, {product.city}
+              {product.district}, {product.city}
             </Text>
           </Box>
         </Box>
         <Box m={0} style={{ position: "absolute", right: 8, top: 8 }}>
-          <Icon className="demo-icon " zmp="zi-heart-solid" size={20} />
+          <HeartIcon isLiked={true} />
         </Box>
       </Box>
     </Card>
