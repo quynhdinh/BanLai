@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Link, Tabbar, Text, zmp } from "zmp-framework/react";
 import useCurrentRoute from "../../hooks/useCurrentRoute";
 import "./styles.scss";
@@ -6,7 +6,7 @@ import { AiFillHome } from "react-icons/ai";
 import { BiMessageDetail } from "react-icons/bi";
 import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
-import CreatePostIcon from "../../static/icons/CreatePost.svg"
+import CreatePostIcon from "../../static/icons/CreatePost.svg";
 
 const NavigationBar = () => {
   const currentPath = useCurrentRoute();
@@ -62,7 +62,7 @@ const NavigationBar = () => {
           className="write-blog rounded-full border-white bg-blue border-4 items-center"
           tabLinkActive={activePath === "/choose-category/"}
         >
-          <img src ={CreatePostIcon}/>
+          <img src={CreatePostIcon} />
         </Link>
       </div>
       <Link

@@ -1,59 +1,81 @@
-import {request} from "./auth";
+import { request, requestFormData } from "./auth";
 
 export const getPostsByCategory = async (category) => {
-    try {
-        const url = 'api/posts/by-category/' + category
-        const response = await (await request('GET', url)).json()
-        console.log('response: ', response.data)
-        return response.data
-    } catch (error) {
-        console.log("Error fetching posts:", error)
-        return []
-    }
-}
+  try {
+    const url = "api/posts/by-category/" + category;
+    const response = await (await request("GET", url)).json();
+    console.log("response: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching posts:", error);
+    return [];
+  }
+};
 
 export const getHottestPosts = async (category) => {
-    try {
-        const url = 'api/posts/hottest-posts/' + category
-        const response = await (await request('GET', url)).json()
-        console.log('response: ', response.data)
-        return response.data
-    } catch (error) {
-        console.log("Error fetching posts:", error)
-        return []
-    }
-}
+  try {
+    const url = "api/posts/hottest-posts/" + category;
+    const response = await (await request("GET", url)).json();
+    console.log("response: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching posts:", error);
+    return [];
+  }
+};
 
 export const getUserPosts = async () => {
-    try {
-        const url = 'api/posts/'
-        const response = await (await request('GET', url)).json()
-        return response.data
-    } catch (error) {
-        console.log("Error fetching posts:", error)
-        return []
-    }
-}
+  try {
+    const url = "api/posts/";
+    const response = await (await request("GET", url)).json();
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching posts:", error);
+    return [];
+  }
+};
 
 export const closePost = async (postId) => {
-    try {
-        const url = 'api/posts/close-post/' + postId
-        const response = await (await request('PUT', url)).json()
-        return response.data
-    } catch (error) {
-        console.log("Error fetching posts:", error)
-        return []
-    }
-}
-
+  try {
+    const url = "api/posts/close-post/" + postId;
+    const response = await (await request("PUT", url)).json();
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching posts:", error);
+    return [];
+  }
+};
 
 export const repostPost = async (postId) => {
-    try {
-        const url = 'api/posts/repost/' + postId
-        const response = await (await request('PUT', url)).json()
-        return response.data
-    } catch (error) {
-        console.log("Error fetching posts:", error)
-        return []
-    }
-}
+  try {
+    const url = "api/posts/repost/" + postId;
+    const response = await (await request("PUT", url)).json();
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching posts:", error);
+    return [];
+  }
+};
+export const getPostDetails = async (id) => {
+  try {
+    const url = "api/posts/" + id;
+    const response = await (await request("GET", url)).json();
+    console.log("response: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching posts:", error);
+    return [];
+  }
+};
+
+export const createPost = async (data) => {
+  try {
+    const url = "api/posts/";
+    const response = await (await requestFormData("POST", url, data)).json();
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log("Error creating post. Details: ", error);
+    return false;
+  }
+};

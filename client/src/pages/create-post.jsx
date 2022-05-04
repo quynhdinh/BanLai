@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Page, Button, Box, zmp, Title } from "zmp-framework/react";
+import React, {useEffect, useState} from "react";
+import {Page, Button, Box, zmp, Title, useStore} from "zmp-framework/react";
 import NavbarBack from "../components/navbar-back";
-import { useForm } from "react-hook-form";
-import CustomInput, { Select } from "../components/Input";
+import {useForm} from "react-hook-form";
+import CustomInput, {Select} from "../components/Input";
 import TextArea from "../components/Input/text-area";
-import { city, HaNoi, HoChiMinh } from "../data/city-district";
-import { titleHints, priceHints } from "../data/input-hint";
+import {city, HaNoi, HoChiMinh} from "../data/city-district";
+import {titleHints, priceHints} from "../data/input-hint";
 import {
   airConditionerCoolingCapacity,
   airConditionerManufacturer,
@@ -29,24 +29,38 @@ import {
   washingMachineDoor,
   washingMachineManufacturer,
 } from "../data/subcategory-details";
-
+import store from "../store";
 import CategoryBox from "../components/category-box";
 
 const createPostPage = () => {
+  const user = useStore("u");
   const zmproute = zmp.views.main.router.currentRoute;
   const [districtOptions, setDistrictOptions] = useState(HoChiMinh);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {errors},
   } = useForm();
   const onSubmit = (data) => {
+    console.log(data)
     data = {
       ...data,
       category: zmproute.query?.category,
       subCategory: zmproute.query?.subcategory,
+      zaloId: 'aa',
     };
-    console.log(data);
+    store.dispatch("createPost", {data});
+  };
+
+  const formatCurrency = (e) => {
+    var amount = e.target.value;
+    if (amount.length === 0) return "0";
+    amount = amount.replace(/\./g, "");
+    const result = parseFloat(amount)
+      .toFixed(0)
+      .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+    if (result === "NaN") return "0";
+    e.target.value = result;
   };
 
   const handleChangeDistrictList = (e) => {
@@ -56,14 +70,14 @@ const createPostPage = () => {
 
   return (
     <Page name="create-post">
-      <NavbarBack title="Tạo tin đăng" linkLeft={"/choose-subcategory/"} />
+      <NavbarBack title="Tạo tin đăng" linkLeft={"/choose-subcategory/"}/>
       <Box px={4}>
         <CategoryBox
           category={zmproute.query?.category}
           subcategory={zmproute.query?.subcategory}
         />
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
           <Title bold>Hình ảnh và mô tả</Title>
           <input {...register("images")} type="file" multiple></input>
           <Title size="small" style={{}}>
@@ -81,12 +95,14 @@ const createPostPage = () => {
             errorMessage={errors?.title && errors?.title.message}
           />
           <CustomInput
-            {...register("price", { required: "Vui lòng nhập giá rao bán" })}
+            {...register("price", {required: "Vui lòng nhập giá rao bán"})}
             placeholder="Nhập giá rao bán"
             label="Giá rao bán"
             compulsory
             hintMessage={priceHints}
             errorMessage={errors?.price && errors?.price.message}
+            pattern="^-?[0-9]\d*\.?\d*$"
+            onKeyUp={(e) => formatCurrency(e)}
           />
           <Select
             {...register("condition")}

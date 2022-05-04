@@ -24,6 +24,7 @@
     "/electronic-list",
     "/house-item-list",
     "/seller-profile",
-    "/care-list"
+    "/care-list",
+    "/post-detail"
   ]
 }
