@@ -35,28 +35,6 @@ router.get('/hottest-posts/:categoryId', async (req, res, next) => {
   }
 });
 
-router.get('/:postId', async function (req, res, next) {
-  try {
-    const param = req.params["postId"].toString()
-    const result = await db.Posts.find({_id: param})
-    const _zaloId = req.user.zaloId
-    const user = await db.Users.find({zaloId: _zaloId})
-    const postCount = await db.Posts.count({zaloId: _zaloId})
-    const u = JSON.parse(JSON.stringify(user))
-    result.picture = u.picture
-    result.ownerName = u.name
-    result.postCount = postCount
-    res.send({
-      error: 0,
-      msg: 'Lấy thông tin bài đăng thành công',
-      data: result,
-    })
-  } catch (error) {
-    res.send({error: -1, msg: 'Unknown exception'});
-    console.log('API-Exception', error);
-  }
-});
-
 router.get('/by-user/:zaloId', async function (req, res, next) {
   try {
     const _zaloId = req.params["zaloId"].toString()
