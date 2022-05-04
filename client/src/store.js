@@ -2,7 +2,7 @@ import { createStore } from "zmp-core/lite";
 import { getAccessToken } from "./services/zalo";
 import { loadUserFromCache } from "./services/storage";
 import { getCurrentUser, login } from "./services/auth";
-import { getFakeProducts, getFakeUsers } from "./services/fake_data";
+import { getFakeProducts, getFakeUsers } from "./services/get_data";
 import { getMessages } from "./services/message";
 import {
   closePost,
