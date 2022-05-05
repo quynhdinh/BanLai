@@ -97,9 +97,6 @@ export const serialize = (obj, cfg, fd, pre) => {
       }
 
       const key = pre ? pre : prop;
-      // console.log("pre", pre);
-      // console.log("prop", prop);
-
       serialize(value, cfg, fd, key);
     });
   } else {

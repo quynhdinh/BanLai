@@ -1,16 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {
-  Avatar,
-  Box, Card, Col,
-  List, ListItem,
-  Page, Searchbar, Tab, Tabs,
-  useStore,
-  zmp,
-} from "zmp-framework/react";
-import NavbarBack from "../components/navbar-back";
+import {Box, Page, Searchbar, Tab, useStore,} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import PostFilter from "../components/HomeMisc/PostFilter";
-import PostItem from "../components/PostItem";
 import store from "../store";
 import Category from "../components/Categories/Category";
 
@@ -32,7 +23,6 @@ const electronicListPage = () => {
                      onChange={e => setKeyword(e.target.value)} type="text" placeholder="Tìm sản phẩm"
                      clearButton onSearchbarClear={() => setKeyword('')}/>
           <PostFilter>{"Thiết bị điện tử"}</PostFilter>
-          {/*<PostFilter>{"Đã qua sử dụng"}</PostFilter>*/}
         </div>
       </Box>
       <Tab className="page-content">
