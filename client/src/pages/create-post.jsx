@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Page, Button, Box, zmp, Title, useStore} from "zmp-framework/react";
+import React, {useState} from "react";
+import {Page, Button, Box, zmp, Title} from "zmp-framework/react";
 import NavbarBack from "../components/navbar-back";
 import {useForm} from "react-hook-form";
 import CustomInput, {Select} from "../components/Input";
@@ -33,7 +33,6 @@ import store from "../store";
 import CategoryBox from "../components/category-box";
 
 const createPostPage = () => {
-  const user = useStore("u");
   const zmproute = zmp.views.main.router.currentRoute;
   const [districtOptions, setDistrictOptions] = useState(HoChiMinh);
   const {
@@ -79,7 +78,7 @@ const createPostPage = () => {
 
         <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
           <Title bold>Hình ảnh và mô tả</Title>
-          <input {...register("images")} type="file" multiple></input>
+          <input {...register("images")} type="file" multiple/>
           <Title size="small" style={{}}>
             Thêm ảnh rao bán (tối đa 10 ảnh) *
           </Title>

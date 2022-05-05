@@ -21,4 +21,7 @@ const getReadableTimeGap = (mili) => {
     } else return ""
 };
 
-export { moneyFormat, getReadableTimeGap}
+export {
+    moneyFormat,
+    getReadableTimeGap
+}

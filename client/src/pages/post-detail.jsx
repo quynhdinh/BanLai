@@ -1,18 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  Page,
-  Navbar,
-  Swiper,
-  SwiperSlide,
-  Text,
-  Title,
-  Icon,
-  useStore,
-  Avatar,
-  Box,
-  Grid,
-  GridItem,
-} from "zmp-framework/react";
+import {Page, Navbar, Swiper, SwiperSlide, Text, Title, Icon, useStore, Avatar, Box, Grid, GridItem,} from "zmp-framework/react";
 import "../css/swiper.css";
 import UserCard from "../components/user-card";
 import store from "../store";

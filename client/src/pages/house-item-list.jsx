@@ -1,12 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {
-  Box,
-  List, ListItem,
-  Page, Searchbar, Tab,
-  useStore,
-  zmp,
-} from "zmp-framework/react";
-import NavbarBack from "../components/navbar-back";
+import {Box, Searchbar, Page, Tab, useStore,} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import PostFilter from "../components/HomeMisc/PostFilter";
 import Category from "../components/Categories/Category";
@@ -29,7 +22,6 @@ const houseItemListPage = () => {
                      onChange={e => setKeyword(e.target.value)} type="text" placeholder="Tìm sản phẩm"
                      clearButton onSearchbarClear={() => setKeyword('')}/>
           <PostFilter>{"Đồ gia dụng"}</PostFilter>
-          {/*<PostFilter>{"Đã qua sử dụng"}</PostFilter>*/}
         </div>
       </Box>
       <Tab className="page-content">
