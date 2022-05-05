@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, Box, ListItem, Title } from "zmp-framework/react";
+import { Box, Title } from "zmp-framework/react";
 
 const CategoryBox = ({ category, subcategory }) => {
   return (

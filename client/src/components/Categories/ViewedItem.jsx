@@ -1,9 +1,9 @@
 import React from "react";
-import { Card, Icon, Text, Box, Title } from "zmp-framework/react";
+import { Card, Text, Box, Title } from "zmp-framework/react";
 import { moneyFormat } from "../../util/number";
 import HeartIcon from "../heart-icon";
 
-const ViewedItem = ({ product }) => {
+const ViewedItem = ({ _product }) => {
   return (
     <Card style={{ padding: 0 }}>
       <Box style={{ width: "140px" }}>

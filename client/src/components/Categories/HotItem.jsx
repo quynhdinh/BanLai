@@ -1,12 +1,5 @@
-import React, {useEffect, useRef, useState} from "react"
-import {
-    Box,
-    useStore,
-    Swiper,
-    SwiperSlide,
-    Title,
-    Text, zmp, Button, Row, Col
-} from "zmp-framework/react"
+import React from "react"
+import {Box, Title, zmp, Button, Row, Col} from "zmp-framework/react"
 import Category from "./Category"
 
 const HotItem = ({category, products, index, paddingBot}) => {
