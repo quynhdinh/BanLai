@@ -14,10 +14,10 @@ const getReadableTimeGap = (mili) => {
         return d + " ngày trước"
     } else if(h > 0){
         return h + " giờ trước"
-    } else if(h > 0){
-        return h + " phút trước"
     } else if(m > 0){
-        return h + " giây trước"
+        return m + " phút trước"
+    } else if(s > 0){
+        return s + " giây trước"
     } else return ""
 };
 
