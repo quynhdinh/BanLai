@@ -4,15 +4,7 @@ import { loadUserFromCache } from "./services/storage";
 import { getCurrentUser, login } from "./services/auth";
 import { getFakeProducts, getFakeUsers } from "./services/get_data";
 import { getMessages } from "./services/message";
-import {
-  closePost,
-  getHottestPosts,
-  getPostsByCategory,
-  getUserPosts,
-  repostPost,
-  createPost,
-  getPostDetails,
-} from "./services/post";
+import {closePost, getHottestPosts, getPostsByCategory, getUserPosts, repostPost, createPost, getPostDetails} from "./services/post";
 import { getCareList } from "./services/care-list";
 
 const store = createStore({
@@ -151,8 +143,7 @@ const store = createStore({
     },
     async fetchCareList({ state }) {
       state.loadingFlag = true;
-      const list = await getCareList();
-      state.careList = list;
+      state.careList = await getCareList();
       state.loadingFlag = false;
     },
     async fetchUserPosts({ state }) {

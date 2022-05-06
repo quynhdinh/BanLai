@@ -3,7 +3,7 @@ import { Card, Icon, Text, Box } from "zmp-framework/react";
 import { moneyFormat } from "../../util/number";
 import HeartIcon from "../heart-icon";
 
-const Category = ({ product, category, border }) => {
+const Category = ({ product, border }) => {
   return (
     <Card style={{ padding: 0 }}>
       <Box

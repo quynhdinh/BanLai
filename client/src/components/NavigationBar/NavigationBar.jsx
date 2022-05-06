@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link, Tabbar, Text, zmp } from "zmp-framework/react";
 import useCurrentRoute from "../../hooks/useCurrentRoute";
 import "./styles.scss";
@@ -15,8 +15,6 @@ const NavigationBar = () => {
   if (currentPath[currentPath.length - 1] !== "/") {
     activePath = `${currentPath}/`;
   }
-  const tabHistory = useRef([activePath]);
-
   const switchTab = (tabLink) => {
     console.log("switch to " + tabLink);
     zmp.views.current.router.navigate(tabLink, {
