@@ -1,13 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  Page,
-  Box,
-  useStore,
-  Row,
-  Col,
-  SkeletonBlock,
-  Button,
-} from "zmp-framework/react";
+import {Page, Box, useStore, Row, Col, SkeletonBlock} from "zmp-framework/react";
 import NavbarBack from "../components/navbar-back";
 import { Category } from "../components/Categories";
 import store from "../store";

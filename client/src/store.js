@@ -70,7 +70,7 @@ const store = createStore({
       return state.careList;
     },
     userPosts({ state }) {
-      return state.user;
+      return state.userPosts;
     },
   },
   actions: {

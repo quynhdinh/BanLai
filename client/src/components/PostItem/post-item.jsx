@@ -2,7 +2,7 @@ import React from 'react';
 import {Box, Button, Icon, Text, Title} from 'zmp-framework/react';
 import {moneyFormat} from "../../util/number";
 
-const PostItem = ({product, marginTop}) => {
+const PostItem = ({product, marginTop, sold}) => {
   return (
     <div style={{display: 'flex', width: '100%', marginTop: marginTop}}>
       <Box
@@ -22,8 +22,7 @@ const PostItem = ({product, marginTop}) => {
             width: 102,
             height: 102,
             borderRadius: 4,
-          }}
-        />
+          }}/>
         <Box
           px={1}
           m={0}
@@ -44,7 +43,7 @@ const PostItem = ({product, marginTop}) => {
             size="xxxsmall"
             style={{color: "#ffffff", marginBottom: 0, marginLeft: 2}}
           >
-            4
+            {product.images.length}
           </Text>
         </Box>
       </Box>
@@ -53,8 +52,8 @@ const PostItem = ({product, marginTop}) => {
         <Text size='xsmall' style={{marginTop: 3, color: 'red'}}>{moneyFormat(product.price)}</Text>
         <Button
           className="filter-button"
-          typeName="primary"
-          small>Đã bán/Ẩn bài</Button>
+          typeName={sold ? "secondary" : "primary"}
+          small>{sold ? "Đăng lại" : "Đã bán / Ẩn bài"}</Button>
       </div>
     </div>
   )
