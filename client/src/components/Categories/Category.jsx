@@ -59,7 +59,7 @@ const Category = ({ product, border }) => {
               size="xxxsmall"
               style={{ color: "#ffffff", marginBottom: 0, marginLeft: 2 }}
             >
-              4
+              {product.images.length}
             </Text>
           </Box>
         </Box>
