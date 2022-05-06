@@ -7,7 +7,7 @@ router.use(AuthService.verify);
 
 router.get('/', async (req, res, next) => {
   try {
-    const zaloId = req.body.zaloId
+    const zaloId = req.user.zaloId
     const posts = await db.Posts.find({zaloId: zaloId})
     res.send({
       error: 0,
