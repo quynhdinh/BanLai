@@ -1,11 +1,11 @@
-import { createStore } from "zmp-core/lite";
-import { getAccessToken } from "./services/zalo";
-import { loadUserFromCache } from "./services/storage";
-import { getCurrentUser, login } from "./services/auth";
-import { getFakeProducts, getFakeUsers } from "./services/get_data";
-import { getMessages } from "./services/message";
-import {closePost, getHottestPosts, getPostsByCategory, getUserPosts, repostPost, createPost, getPostDetails} from "./services/post";
-import { getCareList } from "./services/care-list";
+import {createStore} from "zmp-core/lite";
+import {getAccessToken} from "./services/zalo";
+import {loadUserFromCache} from "./services/storage";
+import {getCurrentUser, login} from "./services/auth";
+import {getFakeProducts, getFakeUsers} from "./services/get_data";
+import {getMessages} from "./services/message";
+import {closePost, createPost, getHottestPosts, getPostDetails, getPostsByCategory, getUserPosts, repostPost} from "./services/post";
+import {getCareList} from "./services/care-list";
 
 const store = createStore({
   state: {
@@ -27,57 +27,57 @@ const store = createStore({
   },
 
   getters: {
-    categories({ state }) {
+    categories({state}) {
       return state.categories;
     },
-    loadingCategories({ state }) {
+    loadingCategories({state}) {
       return state.loadingCategories;
     },
-    posts({ state }) {
+    posts({state}) {
       return state.posts;
     },
-    postDetails({ state }) {
+    postDetails({state}) {
       return state.postDetails;
     },
-    electronicItems({ state }) {
+    electronicItems({state}) {
       return state.electronicItems;
     },
-    hottestElectronicItems({ state }) {
+    hottestElectronicItems({state}) {
       return state.hottestElectronicItems;
     },
-    hottestHouseItems({ state }) {
+    hottestHouseItems({state}) {
       return state.hottestHouseItems;
     },
-    u({ state }) {
+    u({state}) {
       return state.u;
     },
-    loadingFlag({ state }) {
+    loadingFlag({state}) {
       return state.loadingFlag;
     },
-    messages({ state }) {
+    messages({state}) {
       return state.messages;
     },
-    houseItems({ state }) {
+    houseItems({state}) {
       return state.houseItems;
     },
-    user({ state }) {
+    user({state}) {
       return state.user;
     },
-    products({ state }) {
+    products({state}) {
       return state.products;
     },
-    careList({ state }) {
+    careList({state}) {
       return state.careList;
     },
-    userPosts({ state }) {
+    userPosts({state}) {
       return state.userPosts;
     },
   },
   actions: {
-    setUser({ state }, data) {
-      state.user = { ...state.user, ...data };
+    setUser({state}, data) {
+      state.user = {...state.user, ...data};
     },
-    setU({ state }, u) {
+    setU({state}, u) {
       state.u = {
         displayName: u.name,
         avatar: u.picture,
@@ -85,44 +85,46 @@ const store = createStore({
         online: true,
       };
     },
-    setJwt({ state }, jwt) {
+    setJwt({state}, jwt) {
       state.jwt = jwt;
     },
-    addProduct({ state }, product) {
+    addProduct({state}, product) {
       state.products = [...state.products, product];
     },
-    addCareItem({ state }, careItem) {
+    addCareItem({state}, careItem) {
       state.careList = [...state.careList, careItem];
     },
-    async fetchPosts({ state }, { category }) {
-      const posts = await getPostsByCategory(category);
-      state.posts = posts;
+    async fetchPosts({state}, {category}) {
+      state.posts = await getPostsByCategory(category);
     },
-    async fetchElectronicItems({ state }) {
-      const posts = await getPostsByCategory(0);
-      state.electronicItems = posts;
+    async fetchElectronicItems({state}) {
+      state.loadingFlag = true;
+      state.electronicItems = await getPostsByCategory(0);
+      state.loadingFlag = false;
     },
-    async fetchHouseItems({ state }) {
-      const posts = await getPostsByCategory(1);
-      state.houseItems = posts;
+    async fetchHouseItems({state}) {
+      state.loadingFlag = true;
+      state.houseItems = await getPostsByCategory(1);
+      state.loadingFlag = false;
     },
-    async fetchHottestElectronicItems({ state }) {
-      const posts = await getHottestPosts(0);
-      state.hottestElectronicItems = posts;
+    async fetchHottestElectronicItems({state}) {
+      state.loadingFlag = true;
+      state.hottestElectronicItems = await getHottestPosts(0);
+      state.loadingFlag = false;
     },
-    async fetchHottestHouseItems({ state }) {
-      const posts = await getHottestPosts(1);
-      state.hottestHouseItems = posts;
+    async fetchHottestHouseItems({state}) {
+      state.loadingFlag = true;
+      state.hottestHouseItems = await getHottestPosts(1);
+      state.loadingFlag = false;
     },
-    async fetchPostDetail({ state }, { id }) {
-      const postDetails = await getPostDetails(id);
-      state.postDetails = postDetails;
+    async fetchPostDetail({state}, {id}) {
+      state.postDetails = await getPostDetails(id);
     },
-    async createPost({ state }, { data }) {
+    async createPost({state}, {data}) {
       const response = await createPost(data);
       console.log("here", response);
     },
-    async login({ dispatch }) {
+    async login({dispatch}) {
       const cachedUser = await loadUserFromCache();
       if (cachedUser) {
         dispatch("setUser", cachedUser);
@@ -136,25 +138,25 @@ const store = createStore({
         }
       }
     },
-    async fetchMessages({ state }) {
+    async fetchMessages({state}) {
       state.loadingFlag = true;
       state.messages = await getMessages();
       state.loadingFlag = false;
     },
-    async fetchCareList({ state }) {
+    async fetchCareList({state}) {
       state.loadingFlag = true;
       state.careList = await getCareList();
       state.loadingFlag = false;
     },
-    async fetchUserPosts({ state }) {
+    async fetchUserPosts({state}) {
       state.loadingFlag = true;
       state.userPosts = await getUserPosts();
       state.loadingFlag = false;
     },
-    async closePost({ state, postId }) {
+    async closePost({state, postId}) {
       const list = await closePost(postId);
     },
-    async repostPost({ state, postId }) {
+    async repostPost({state, postId}) {
       const list = await repostPost(postId);
     },
   },

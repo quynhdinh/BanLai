@@ -3,6 +3,7 @@ import {Page, Card, Searchbar, Box, Tabbar, Link, Tabs, Tab, useStore, Button, R
 import NavigationBar from "../components/NavigationBar";
 import PostItem from "../components/PostItem";
 import store from "../store";
+import Loading from "../components/Loading";
 
 // Trang quản lý bài đăng
 const managePostPage = ({zmproute}) => {
@@ -35,13 +36,7 @@ const managePostPage = ({zmproute}) => {
       </div>
       <Tabs>
         <Tab id="tab-1" className="page-content" tabActive>
-          {loading ?
-            <Box m={0} px={4} pb={2}>
-              <Row gap="gap_4" className="mt-4">
-                <Col><SkeletonBlock effect="wave" height="200px"/></Col>
-                <Col><SkeletonBlock effect="wave" height="200px"/></Col>
-              </Row>
-            </Box> :
+          {loading ? <Loading/> :
             <Box style={{marginBottom: "150px"}}>
               <Card inset>
                 {userPosts.filter(function (obj) {
@@ -62,12 +57,7 @@ const managePostPage = ({zmproute}) => {
         </Tab>
         <Tab id="tab-2" className="page-content">
           {loading ?
-            <Box m={0} px={4} pb={2}>
-              <Row gap="gap_4" className="mt-4">
-                <Col><SkeletonBlock effect="wave" height="200px"/></Col>
-                <Col><SkeletonBlock effect="wave" height="200px"/></Col>
-              </Row>
-            </Box> :
+            <Loading/> :
             <Box style={{marginBottom: "150px"}}>
               <Card inset>
                 {userPosts.filter(function (obj) {

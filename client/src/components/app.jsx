@@ -10,7 +10,7 @@ const MyApp = () => {
 
   // ZMP Parameters
   const zmpparams = {
-    name: 'BanLai', // App name
+    name: 'BanLai',
       theme: 'auto', // Automatic theme detection
       // App store
       store: store,
@@ -23,7 +23,6 @@ const MyApp = () => {
 
   return (
     <App { ...zmpparams } >
-
         {/* Your main view, should have "view-main" class */}
         <View main className="safe-areas" url="/" />
 

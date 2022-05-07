@@ -1,11 +1,11 @@
 import React, {useEffect} from "react"
-import {
-  Page, useStore, Tabbar, Link, Tabs, Tab, Card, Box, Row, Col, SkeletonBlock
-} from "zmp-framework/react";
+import {Page, useStore, Tabbar, Link, Tabs, Tab, Card, Box} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar"
 import MessageItem from "../components/MessageItem/message-item";
 import store from "../store";
+import Loading from "../components/Loading";
 
+//Trang quản lý tin nhắn (Tôi mua/Tôi bán)
 const messagePage = ({zmproute}) => {
   const messages = useStore('messages')
   const loading = useStore('loadingFlag')
@@ -27,12 +27,7 @@ const messagePage = ({zmproute}) => {
       <Tabs>
         <Tab id="tab-1" className="page-content" tabActive>
           {loading ?
-            <Box m={0} px={4} pb={2}>
-              <Row gap="gap_4" className="mt-4">
-                <Col><SkeletonBlock effect="wave" height="200px"/></Col>
-                <Col><SkeletonBlock effect="wave" height="200px"/></Col>
-              </Row>
-            </Box> :
+            <Loading/> :
             <Box style={{marginBottom: "50px"}}>
               <Card inset>
                 {messages.filter(function (obj) {
@@ -47,12 +42,7 @@ const messagePage = ({zmproute}) => {
         </Tab>
         <Tab id="tab-2" className="page-content">
           {loading ?
-            <Box m={0} px={4} pb={2}>
-              <Row gap="gap_4" className="mt-4">
-                <Col><SkeletonBlock effect="wave" height="200px"/></Col>
-                <Col><SkeletonBlock effect="wave" height="200px"/></Col>
-              </Row>
-            </Box> :
+            <Loading/> :
             <Box>
               <Card inset>
                 {messages.filter(function (obj) {
