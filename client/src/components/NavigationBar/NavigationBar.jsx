@@ -16,7 +16,6 @@ const NavigationBar = () => {
     activePath = `${currentPath}/`;
   }
   const switchTab = (tabLink) => {
-    console.log("switch to " + tabLink);
     zmp.views.current.router.navigate(tabLink, {
       browserHistory: false,
       animate: false,

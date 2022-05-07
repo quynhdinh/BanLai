@@ -9,12 +9,10 @@ const Categories = () => {
   useEffect(() => {
     store.dispatch("fetchHottestElectronicItems");
   }, []);
-  console.log("electronic", electronicItems);
   const houseItems = useStore("hottestHouseItems");
   useEffect(() => {
     store.dispatch("fetchHottestHouseItems");
   }, []);
-  console.log("house: ", houseItems);
   return (
     <Box ml={0} mr={0}>
       <HotItem
