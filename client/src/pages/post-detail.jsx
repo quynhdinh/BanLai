@@ -1,19 +1,43 @@
 import React, { useEffect } from "react";
-import {Page, Navbar, Swiper, SwiperSlide, Text, Title, Icon, useStore, Avatar, Box, Grid, GridItem,} from "zmp-framework/react";
+import {
+  Page,
+  Navbar,
+  Swiper,
+  SwiperSlide,
+  Text,
+  Title,
+  Icon,
+  useStore,
+  Avatar,
+  Box,
+  Grid,
+  GridItem,
+  ListInput,
+  List,
+} from "zmp-framework/react";
 import "../css/swiper.css";
 import UserCard from "../components/user-card";
 import store from "../store";
+import MessageBox from "../components/message-box";
+import zalo from "../static/icons/Zalo.svg";
+import facebook from "../static/icons/Facebook.svg";
+import messeger from "../static/icons/Messenger.svg";
+import link from "../static/icons/Link.svg";
 
+const linkItems = [zalo, facebook, messeger, link];
 export default () => {
   const user = useStore("user");
   const postDetails = useStore("postDetails");
   useEffect(() => {
-    store.dispatch("fetchPostDetail", { id: "625fbb1e802e34fc55a25343" });
+    store.dispatch("fetchPostDetail", { id: "626b8291669a242ed89e2ed0" });
   }, []);
+
   return (
     <Page name="post-detail">
       <Navbar backLink="Back" />
-      <Swiper pagination navigation loop>
+      <Box m={0} style={{ position: "relative" }}></Box>
+      <MessageBox isTexted={false} />
+      {/* <Swiper pagination navigation loop>
         {postDetails[0]?.images.map((item, index) => (
           <SwiperSlide key={index}>
             <img src={item.url} />
@@ -51,38 +75,16 @@ export default () => {
         </Title>
         <Text size="xsmall">{postDetails[0]?.description}</Text>
 
-        <Box ml={0} flexDirection="row" alignItems="left" inline>
-          <Avatar
-            size={56}
-            src={
-              "https://inkythuatso.com/uploads/thumbnails/800/2021/09/zalo-logo-inkythuatso-14-15-05-01.jpg"
-            }
-          />
-          <Avatar
-            style={{ marginLeft: 16 }}
-            size={56}
-            src={
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Facebook_icon_2013.svg/800px-Facebook_icon_2013.svg.png"
-            }
-          />
-          <Avatar
-            style={{ marginLeft: 16 }}
-            size={56}
-            src={
-              "https://logos-world.net/wp-content/uploads/2021/02/Facebook-Messenger-Logo-2020-present.jpg"
-            }
-          />
-          <Avatar
-            style={{ marginLeft: 16 }}
-            size={56}
-            src={
-              "https://cdn1.iconfinder.com/data/icons/web-design-and-development-50/64/110-512.png"
-            }
-          />
-        </Box>
+        
         <Title bold>Thông tin người bán</Title>
         <UserCard user={user}></UserCard>
         <Title bold>Sản phẩm tương tự</Title>
+        
+      </Box> */}
+      <Box ml={0} flexDirection="row" alignItems="left" inline>
+        {linkItems.map((item, index) => (
+          <img key={index} src={item} style={{marginRight:8}}/>
+        ))}
       </Box>
     </Page>
   );
@@ -103,6 +105,7 @@ const PostTag = ({ children }) => (
     {children}
   </Text>
 );
+
 const DetailsDescription = ({ title, description }) => (
   <GridItem style={{ padding: 0, alignItems: "flex-start" }}>
     <Text className="text-color-nl500">{title}</Text>
