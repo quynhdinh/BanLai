@@ -4,7 +4,7 @@ import useCurrentRoute from "../../hooks/useCurrentRoute";
 import "./styles.scss";
 import { AiFillHome } from "react-icons/ai";
 import { BiMessageDetail } from "react-icons/bi";
-import { BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
+import { RiFileList2Line } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa";
 import CreatePostIcon from "../../static/icons/CreatePost.svg";
 
@@ -47,7 +47,7 @@ const NavigationBar = () => {
         className="flex flex-col items-center	"
         tabLinkActive={activePath === "/manage-post/"}
       >
-        <BsReverseLayoutTextSidebarReverse size={21} />
+        <RiFileList2Line size={24} />
         <Text
           size="xxsmall"
           className="navbar-item-label text-gray-dark font-extrabold"
@@ -85,7 +85,7 @@ const NavigationBar = () => {
         tabLinkActive={activePath === "/account/"}
         onClick={() => switchTab("/account/")}
       >
-        <FaRegUser size={22} />
+        <FaRegUser size={24} />
         <Text
           size="xxsmall"
           className="navbar-item-label text-gray-dark font-extrabold"

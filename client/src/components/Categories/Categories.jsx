@@ -21,13 +21,11 @@ const Categories = () => {
         category="Thiết bị điện tử"
         products={electronicItems}
         index={0}
-        paddingBot={1}
       />
       <HotItem
         category="Đồ gia dụng và nội thất"
         products={houseItems}
         index={1}
-        paddingBot={1}
       />
       <ViewedItem />
     </Box>

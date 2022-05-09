@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Icon, Text, Box } from "zmp-framework/react";
+import { Card, Icon, Text, Box, Title } from "zmp-framework/react";
 import { moneyFormat } from "../../util/number";
 import HeartIcon from "../heart-icon";
 
@@ -11,13 +11,13 @@ const Category = ({ product, category, border }) => {
         flexDirection="row"
         p={2}
         m={0}
+        className="border-color-nl700"
         style={{
           position: "relative",
           height: "120px",
-          border: border ? "" : "0.5px solid black",
-          borderTop: border ? "0.5px solid #E4E8EC" : "0.5px solid black",
-          borderBottom: border ? "0.5px solid #E4E8EC" : "0.5px solid black",
+          borderTop: border ? "0.5px solid" : "",
           borderRadius: border ? "" : "8px",
+          boxShadow: border ? "" : "1px 0px 4px rgba(0, 0, 0, 0.25)",
         }}
       >
         <Box
@@ -54,10 +54,15 @@ const Category = ({ product, category, border }) => {
               borderRadius: 2,
             }}
           >
-            <Icon zmp="zi-photo" size={16} style={{ color: "#ffffff" }} />
+            <Icon
+              zmp=" zi-photo "
+              className="text-color-white demo-icon"
+              size={16}
+            />
             <Text
               size="xxxsmall"
-              style={{ color: "#ffffff", marginBottom: 0, marginLeft: 2 }}
+              className="text-color-white"
+              style={{ marginBottom: 0, marginLeft: 2 }}
             >
               4
             </Text>
@@ -79,14 +84,14 @@ const Category = ({ product, category, border }) => {
             </Text>
           </Box>
 
-          <Text style={{ color: "rgba(239, 78, 73, 1)", fontWeight: 700 }}>
+          <Title size="xsmall" className="text-color-rl300" bold>
             {moneyFormat(product.price)}
-          </Text>
+          </Title>
           <Box
             p={1}
             m={0}
+            className="bg-color-lg700"
             style={{
-              background: "#E4E8EC",
               borderRadius: 2,
               width: "fit-content",
             }}
