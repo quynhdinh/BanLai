@@ -4,11 +4,14 @@ import NavigationBar from "../components/NavigationBar";
 import PostFilter from "../components/HomeMisc/PostFilter";
 import Category from "../components/Categories/Category";
 import store from "../store";
+import Loading from "../components/Loading";
 
 const houseItemListPage = () => {
   const [keyword, setKeyword] = useState('')
-    const houseItems = useStore('houseItems')
-    useEffect(() => {
+  const houseItems = useStore('houseItems')
+  const loading = useStore("loadingFlag");
+
+  useEffect(() => {
         store.dispatch('fetchHouseItems')
     }, [])
   return (
@@ -25,15 +28,18 @@ const houseItemListPage = () => {
         </div>
       </Box>
       <Tab className="page-content">
-        <Box>
-          <div style={{
-            marginBottom: "150px",
-          }}>
-            {houseItems.map((item, index) => (
-              <Category key={index} product={item} border/>
-            ))}
-          </div>
-        </Box>
+        {
+          loading ? <Loading/> :
+            <Box>
+              <div style={{
+                marginBottom: "150px",
+              }}>
+                {houseItems.map((item, index) => (
+                  <Category key={index} product={item} border/>
+                ))}
+              </div>
+            </Box>
+        }
       </Tab>
     </Page>
   )

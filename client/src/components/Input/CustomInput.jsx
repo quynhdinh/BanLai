@@ -4,10 +4,10 @@ import "../../css/input.scss";
 const CustomInput = React.forwardRef((props, ref) => {
   const { compulsory, label, errorMessage, hintMessage, ...rest } = props;
   const [hintShown, setHintShown] = useState(false);
-  const handleFocus = (e) => {
+  const handleFocus = (_e) => {
     setHintShown(true);
   };
-  const handleBlur = (e) => {
+  const handleBlur = (_e) => {
     setHintShown(false);
   };
   return (

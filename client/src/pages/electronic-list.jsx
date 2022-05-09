@@ -4,14 +4,15 @@ import NavigationBar from "../components/NavigationBar";
 import PostFilter from "../components/HomeMisc/PostFilter";
 import store from "../store";
 import Category from "../components/Categories/Category";
+import Loading from "../components/Loading";
 
 const electronicListPage = () => {
   const [keyword, setKeyword] = useState('')
+  const loading = useStore("loadingFlag");
   const electronicItems = useStore('electronicItems')
   useEffect(() => {
     store.dispatch('fetchElectronicItems')
   }, [])
-  const spacing = '20px'
   return (
     <Page pageContent={false}
           name="electronic-list"
@@ -26,15 +27,18 @@ const electronicListPage = () => {
         </div>
       </Box>
       <Tab className="page-content">
-        <Box>
-          <div style={{
-            marginBottom: "150px",
-          }}>
-            {electronicItems.map((item, index) => (
-              <Category key={index} product={item} border/>
-            ))}
-          </div>
-        </Box>
+        {
+          loading ? <Loading/> :
+            <Box>
+              <div style={{
+                marginBottom: "150px",
+              }}>
+                {electronicItems.map((item, index) => (
+                  <Category key={index} product={item} border/>
+                ))}
+              </div>
+            </Box>
+        }
       </Tab>
     </Page>
   )

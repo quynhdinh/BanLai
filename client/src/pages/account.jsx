@@ -3,7 +3,8 @@ import {Page, useStore, List, ListItem, Box, Title, Icon} from "zmp-framework/re
 import NavigationBar from "../components/NavigationBar"
 import UserCard from '../components/user-card';
 
-const AccountPage = ({zmproute}) => {
+// Trang tài khoản
+const account = ({zmproute}) => {
   const user = useStore('user');
   const _u = useStore('u')
   const u = _u ? _u : user[0];
@@ -45,4 +46,4 @@ const AccountPage = ({zmproute}) => {
     </Page>
   )
 }
-export default AccountPage
+export default account
