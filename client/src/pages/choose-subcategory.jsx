@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Page, List, Box, Title, zmp } from "zmp-framework/react";
 import CustomListItem from "../components/custom-listitem";
 import NavbarBack from "../components/navbar-back";
-import {getSubCategories} from "../services/get_data";
+import { getSubCategories } from "../services/get_data";
 
 const createPostPage = () => {
   const [subCategoriesList, setSubCategoriesList] = useState([]);
   const zmproute = zmp.views.main.router.currentRoute;
   useEffect(() => {
     if (zmproute.query?.category === "Thiết bị điện tử") {
-      setSubCategoriesList(getSubCategories("Thiết bị điện tử"))
+      setSubCategoriesList(getSubCategories("Thiết bị điện tử"));
     } else setSubCategoriesList(getSubCategories("Đồ gia dụng, nội thất"));
   });
-
   const handleOnClick = ({ subcategory }) => {
     const zmprouter = zmp.views.main.router;
     zmprouter.navigate(

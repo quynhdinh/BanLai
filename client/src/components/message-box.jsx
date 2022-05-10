@@ -16,7 +16,9 @@ const MessageBox = ({ isTexted }) => {
       m={0}
       px={3}
       py={4}
+      className="bg-color-white"
       style={{
+        zIndex: 10000,
         position: "fixed",
         bottom: "0",
         width: "-webkit-fill-available",

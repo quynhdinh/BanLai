@@ -28,9 +28,9 @@ function isBlob(value, isReactNative) {
   return isReactNative
     ? isObject(value) && !isUndefined(value.uri)
     : isObject(value) &&
-    typeof value.size === "number" &&
-    typeof value.type === "string" &&
-    typeof value.slice === "function";
+        typeof value.size === "number" &&
+        typeof value.type === "string" &&
+        typeof value.slice === "function";
 }
 
 function isFile(value, isReactNative) {
@@ -104,5 +104,4 @@ export const serialize = (obj, cfg, fd, pre) => {
   }
 
   return fd;
-}
-
+};
