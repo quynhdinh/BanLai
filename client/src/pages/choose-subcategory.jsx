@@ -12,7 +12,7 @@ const createPostPage = () => {
       setSubCategoriesList(getSubCategories("Thiết bị điện tử"));
     } else setSubCategoriesList(getSubCategories("Đồ gia dụng, nội thất"));
   });
-  const handleOnClick = ({ subcategory }) => {
+  const handleCreatePost = ({ subcategory }) => {
     const zmprouter = zmp.views.main.router;
     zmprouter.navigate(
       {
@@ -36,7 +36,7 @@ const createPostPage = () => {
             key={index}
             title={item}
             onClick={() => {
-              handleOnClick({ subcategory: item });
+              handleCreatePost({ subcategory: item });
             }}
           />
         ))}

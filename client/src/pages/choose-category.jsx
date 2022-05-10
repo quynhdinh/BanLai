@@ -5,7 +5,7 @@ import NavbarBack from "../components/navbar-back";
 
 const createPostPage = () => {
   const categoriesList = ["Thiết bị điện tử", "Đồ gia dụng, nội thất"];
-  const handleOnClick = ({ category }) => {
+  const handleChooseSubCategory = ({ category }) => {
     const zmprouter = zmp.views.main.router;
     zmprouter.navigate(
       {
@@ -30,7 +30,7 @@ const createPostPage = () => {
             key={index}
             title={item}
             onClick={() => {
-              handleOnClick({ category: item });
+              handleChooseSubCategory({ category: item });
             }}
           />
         ))}
