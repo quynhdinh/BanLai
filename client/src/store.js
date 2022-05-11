@@ -23,7 +23,17 @@ const store = createStore({
     hottestElectronicItems: [],
     hottestHouseItems: [],
     careList: [],
-    postDetails: [],
+    postDetails: {
+      images: [],
+      title: "",
+      district: "",
+      city: "",
+      price: 0,
+      createdAt: 0,
+      condition: "",
+      description: "",
+    },
+    viewingPostId: null,
   },
 
   getters: {
@@ -72,6 +82,9 @@ const store = createStore({
     userPosts({state}) {
       return state.userPosts;
     },
+    viewingPostId({state}) {
+      return state.viewingPostId;
+    },
   },
   actions: {
     setUser({state}, data) {
@@ -87,6 +100,9 @@ const store = createStore({
     },
     setJwt({state}, jwt) {
       state.jwt = jwt;
+    },
+    setViewingPostId({state}, postId) {
+      state.viewingPostId = postId;
     },
     addProduct({state}, product) {
       state.products = [...state.products, product];
@@ -118,7 +134,9 @@ const store = createStore({
       state.loadingFlag = false;
     },
     async fetchPostDetail({state}, {id}) {
+      state.loadingFlag = true;
       state.postDetails = await getPostDetails(id);
+      state.loadingFlag = false;
     },
     async createPost({state}, {data}) {
       const response = await createPost(data);

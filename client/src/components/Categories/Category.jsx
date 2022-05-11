@@ -2,14 +2,15 @@ import React from "react";
 import { Card, Icon, Text, Box, Title, zmp } from "zmp-framework/react";
 import { moneyFormat } from "../../util/number";
 import HeartIcon from "../heart-icon";
+import store from "../../store";
 
 const Category = ({ product, border }) => {
   const handleViewDetail = () => () => {
     const zmprouter = zmp.views.main.router;
+    store.dispatch('setViewingPostId', product._id )
     zmprouter.navigate(
       {
         path: "/post-detail",
-        query: { id: product._id },
       },
       { transition: "zmp-push" }
     );

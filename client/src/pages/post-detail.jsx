@@ -1,43 +1,29 @@
 import React, { useEffect } from "react";
-import {
-  Page,
-  Navbar,
-  Swiper,
-  SwiperSlide,
-  Text,
-  Title,
-  Icon,
-  useStore,
-  Box,
-  Grid,
-  GridItem,
-  zmp,
-} from "zmp-framework/react";
+import {Page, Navbar, Swiper, SwiperSlide, Text, Title, Icon, useStore, Box, GridItem} from "zmp-framework/react";
 import "../css/swiper.css";
 import store from "../store";
 import MessageBox from "../components/message-box";
 import zalo from "../static/icons/Zalo.svg";
 import facebook from "../static/icons/Facebook.svg";
-import messeger from "../static/icons/Messenger.svg";
+import messenger from "../static/icons/Messenger.svg";
 import link from "../static/icons/Link.svg";
-import { getReadableTimeGap } from "../util/number";
+import {getReadableTimeGap, moneyFormat} from "../util/number";
 import { ViewedItem } from "../components/Categories/";
 
-const linkItems = [zalo, facebook, messeger, link];
+const linkItems = [zalo, facebook, messenger, link];
 export default () => {
-  const zmproute = zmp.views.main.router.currentRoute;
   const postDetails = useStore("postDetails");
+  const viewingPostId = useStore("viewingPostId")
   useEffect(() => {
-    store.dispatch("fetchPostDetail", { id: zmproute.query?.id });
-  }, [zmproute.query?.id]);
-  console.log(zmproute.query?.id);
+    store.dispatch("fetchPostDetail", { id: viewingPostId});
+  }, []);
   return (
     <Page name="post-detail">
       <Navbar backLink="Back" />
-      <Box m={0} style={{ position: "relative" }}></Box>
+      <Box m={0} style={{position: "relative"}}/>
       <MessageBox isTexted={false} />
       <Swiper pagination navigation loop>
-        {postDetails?.[0]?.images.map((item, index) => (
+        {postDetails.images.map((item, index) => (
           <SwiperSlide key={index}>
             <img src={item.url} />
           </SwiperSlide>
@@ -45,26 +31,23 @@ export default () => {
       </Swiper>
       <Box ml={5} style={{ paddingBottom: 200 }}>
         <Title className="item-name" size={"normal"} bold>
-          {postDetails?.[0]?.title}
+          {postDetails.title}
         </Title>
         <Title className="item-price" bold>
-          {postDetails?.[0]?.price
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-          đ
+          {moneyFormat(postDetails.price)}
         </Title>
         <Icon className="liked" zmp="zi-heart" colorTheme={"red"} />
         <Box flexDirection="row" m={0}>
           <PostTag>
-            {postDetails?.[0]?.district}, {postDetails?.[0]?.city}
+            {postDetails.district}, {postDetails.city}
           </PostTag>
           <PostTag>
-            Tin đăng {getReadableTimeGap(postDetails?.[0]?.createdAt)}
+            Tin đăng {getReadableTimeGap(postDetails.createdAt)}
           </PostTag>
         </Box>
         <Description
           title="Tình trạng sản phẩm"
-          description={postDetails?.[0]?.condition}
+          description={postDetails.condition}
         />
         {/* {postDetails?.[0]?.productDetails ? (
           <>
@@ -82,7 +65,7 @@ export default () => {
         )} */}
         <Description
           title="Mô tả sản phẩm"
-          description={postDetails?.[0]?.description}
+          description={postDetails.description}
         />
         <Title size="small" bold>
           Chia sẻ bài đăng
