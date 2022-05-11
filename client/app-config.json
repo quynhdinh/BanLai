@@ -25,6 +25,7 @@
     "/house-item-list",
     "/seller-profile",
     "/care-list",
-    "/post-detail"
+    "/post-detail",
+    "/posts-filter"
   ]
 }
