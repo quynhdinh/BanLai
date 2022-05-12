@@ -86,4 +86,53 @@ router.get('/:postId', async function (req, res, next) {
     console.log('API-Exception', error);
   }
 });
+
+router.get('/hottest-posts/:categoryId', async (req, res, next) => {
+  try {
+    const param = parseInt(req.params["categoryId"])
+    if(param !== 0 && param !== 1){
+      return res.send({
+        error: -1,
+        msg: 'Param không hợp lệ'
+      })
+    }
+    const category = (param === 0 ? "Thiết bị điện tử" : "Đồ nội thất và gia dụng")
+    const posts = await db.Posts.find({category: category}).sort({viewCount: -1}).limit(4);
+    res.send({
+      error: 0,
+      msg: 'Lấy danh sách bài đăng thành công',
+      data: posts,
+    })
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
+});
+
+router.get('/by-category/:categoryId', async (req, res, next) => {
+  try {
+    const param = parseInt(req.params["categoryId"])
+    var category = ""
+    if (param === 0) {
+      category = "Thiết bị điện tử"
+    } else if (param === 1) {
+      category = "Đồ nội thất và gia dụng"
+    } else {
+      return res.send({
+        error: -1,
+        msg: 'Param không hợp lệ'
+      })
+    }
+    const posts = await db.Posts.find({category: category})
+    res.send({
+      error: 0,
+      msg: 'Lấy danh sách bài đăng thành công',
+      data: posts,
+    })
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
+});
+
 module.exports = router;
