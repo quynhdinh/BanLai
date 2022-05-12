@@ -4,23 +4,10 @@ const {validationResult} = require('express-validator');
 const AuthService = require("../services/auth-service");
 const {postValidate} = require("../helpers/post-validator");
 const router = express.Router();
-router.use(AuthService.verify);
+// router.use(AuthService.verify);
 const upload = require('../services/multer')
 const cloudinary = require('../services/cloudinary')
 const fs = require('fs');
-
-async function addIsLiked(zaloId, posts) {
-  const postsArr = JSON.parse(JSON.stringify(posts))
-  for (let i = 0; i < postsArr.length; i++) {
-    let isLiked = 0
-    const findCarePost = await db.CarePostMapping.find({"zaloId": zaloId, "postId": postsArr[i]._id}).countDocuments()
-    if (findCarePost > 0) {
-      isLiked = 1;
-    }
-    postsArr[i].isLiked = isLiked
-  }
-  return postsArr
-}
 
 router.get('/hottest-posts/:categoryId', async (req, res, next) => {
   try {
@@ -36,12 +23,11 @@ router.get('/hottest-posts/:categoryId', async (req, res, next) => {
         msg: 'Param không hợp lệ'
       })
     }
-    const posts = await db.Posts.find({category: category}).sort({viewCount: -1}).limit(4)
-    let postArr = await addIsLiked(req.user.zaloId, posts)
+    const posts = await db.Posts.find({category: category}).sort({viewCount: -1}).limit(4);
     res.send({
       error: 0,
       msg: 'Lấy danh sách bài đăng thành công',
-      data: postArr,
+      data: posts,
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
@@ -79,11 +65,10 @@ router.get('/by-category/:categoryId', async (req, res, next) => {
       })
     }
     const posts = await db.Posts.find({category: category})
-    let postArr = await addIsLiked(req.user.zaloId, posts)
     res.send({
       error: 0,
       msg: 'Lấy danh sách bài đăng thành công',
-      data: postArr,
+      data: posts,
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
