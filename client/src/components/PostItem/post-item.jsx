@@ -49,7 +49,9 @@ const PostItem = ({product, marginTop, sold}) => {
       </Box>
       <div style={{marginLeft: 16}}>
         <Title size='xsmall' style={{marginBottom: 0}}>{product.title}</Title>
-        <Text size='xsmall' style={{marginTop: 3, color: 'red'}}>{moneyFormat(product.price)}</Text>
+        <Title size="xsmall" className="text-color-rl300" bold>
+          {moneyFormat(product.price)}
+        </Title>
         <Button
           className="filter-button"
           typeName={sold ? "secondary" : "primary"}

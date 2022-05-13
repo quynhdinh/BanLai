@@ -82,7 +82,7 @@ const Category = ({ product, border }) => {
           </Box>
           <Box style={{ flex: 1 }} my={0}>
             <Box p={0} m={0} style={{ height: 48 }}>
-              <Text
+              <Title
                 size="xsmall"
                 style={{
                   marginRight: 16,
@@ -93,7 +93,7 @@ const Category = ({ product, border }) => {
                 }}
               >
                 {product.title}
-              </Text>
+              </Title>
             </Box>
             <Title size="xsmall" className="text-color-rl300" bold>
               {moneyFormat(product.price)}
