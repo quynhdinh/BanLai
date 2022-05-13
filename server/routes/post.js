@@ -9,7 +9,20 @@ const upload = require('../services/multer')
 const cloudinary = require('../services/cloudinary')
 const fs = require('fs');
 
-router.get('/hottest-posts/:categoryId', async (req, res, next) => {
+async function addIsLiked(zaloId, posts) {
+  const postsArr = JSON.parse(JSON.stringify(posts))
+  for (let i = 0; i < postsArr.length; i++) {
+    let isLiked = 0
+    const findCarePost = await db.CarePostMapping.find({"zaloId": zaloId, "postId": postsArr[i]._id}).countDocuments()
+    if (findCarePost > 0) {
+      isLiked = 1;
+    }
+    postsArr[i].isLiked = isLiked
+  }
+  return postsArr
+}
+
+router.get('/hottest-posts/:categoryId', AuthService.verify, async (req, res, next) => {
   try {
     const param = parseInt(req.params["categoryId"])
     var category = ""

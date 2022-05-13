@@ -125,11 +125,17 @@ const store = createStore({
     },
     async fetchHottestElectronicItems({state}) {
       state.loadingFlag = true;
+      while (!state.jwt) {
+        await new Promise(resolve => setTimeout(resolve, 100))
+      }
       state.hottestElectronicItems = await getHottestPosts(0);
       state.loadingFlag = false;
     },
     async fetchHottestHouseItems({state}) {
       state.loadingFlag = true;
+      while (!state.jwt) {
+        await new Promise(resolve => setTimeout(resolve, 100))
+      }
       state.hottestHouseItems = await getHottestPosts(1);
       state.loadingFlag = false;
     },
