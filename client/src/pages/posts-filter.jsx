@@ -1,8 +1,7 @@
 import React from 'react';
-import {Page, Card, Title, Box, Range} from 'zmp-framework/react';
+import {Page, Title, Box, Range} from 'zmp-framework/react';
 import NavbarBack from '../components/navbar-back';
 import {Select} from "../components/Input";
-import TextArea from "../components/Input/text-area";
 
 const PostsFilter = () => (
   <Page name="posts-filter">
