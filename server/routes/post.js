@@ -4,7 +4,7 @@ const {validationResult} = require('express-validator');
 const AuthService = require("../services/auth-service");
 const {postValidate} = require("../helpers/post-validator");
 const router = express.Router();
-router.use(AuthService.verify);
+// router.use(AuthService.verify);
 const upload = require('../services/multer')
 const cloudinary = require('../services/cloudinary')
 const fs = require('fs');
@@ -22,7 +22,7 @@ async function addIsLiked(zaloId, posts) {
   return postsArr
 }
 
-router.get('/hottest-posts/:categoryId', async (req, res, next) => {
+router.get('/hottest-posts/:categoryId', AuthService.verify, async (req, res, next) => {
   try {
     const param = parseInt(req.params["categoryId"])
     var category = ""
