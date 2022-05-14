@@ -67,18 +67,19 @@ router.put('/close-post/:postId', async (req, res, next) => {
 router.get('/:postId', async function (req, res, next) {
   try {
     const param = req.params["postId"].toString()
-    const result = await db.Posts.find({_id: param})
+    let _post = await db.Posts.find({_id: param})
+    const data = JSON.parse(JSON.stringify(_post))[0]
     const zaloId = req.user.zaloId
     const user = await db.Users.find({zaloId: zaloId})
     const postCount = await db.Posts.count({zaloId: zaloId})
-    const u = JSON.parse(JSON.stringify(user))
-    result.picture = u.picture
-    result.ownerName = u.name
-    result.postCount = postCount
+    const u = JSON.parse(JSON.stringify(user))[0]
+    data.name = u.name
+    data.picture = u.picture
+    data.postCount = postCount
     res.send({
       error: 0,
       msg: 'Lấy thông tin bài đăng thành công',
-      data: result,
+      data: data,
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});

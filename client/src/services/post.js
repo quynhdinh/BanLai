@@ -58,7 +58,7 @@ export const getPostDetails = async (id) => {
   try {
     const url = "api/posts/" + id;
     const response = await (await request("GET", url)).json();
-    return response.data[0];
+    return response.data;
   } catch (error) {
     console.log("Error getting post detail:", error);
     return [];
