@@ -4,7 +4,6 @@ const db = require("../models");
 const router = express.Router();
 router.use(AuthService.verify);
 
-
 router.get('/', async (req, res, next) => {
   try {
     const zaloId = req.user.zaloId
@@ -69,9 +68,9 @@ router.get('/:postId', async function (req, res, next) {
   try {
     const param = req.params["postId"].toString()
     const result = await db.Posts.find({_id: param})
-    const _zaloId = req.user.zaloId
-    const user = await db.Users.find({zaloId: _zaloId})
-    const postCount = await db.Posts.count({zaloId: _zaloId})
+    const zaloId = req.user.zaloId
+    const user = await db.Users.find({zaloId: zaloId})
+    const postCount = await db.Posts.count({zaloId: zaloId})
     const u = JSON.parse(JSON.stringify(user))
     result.picture = u.picture
     result.ownerName = u.name
@@ -90,10 +89,10 @@ router.get('/:postId', async function (req, res, next) {
 // Lấy danh sách bài đăng của 1 user(zaloId)
 router.get('/by-user/:zaloId', async function (req, res, next) {
   try {
-    const _zaloId = req.params["zaloId"].toString()
-    let result = await db.Posts.find({zaloId: _zaloId})
-    const user = await db.Users.find({zaloId: _zaloId})
-    const postCount = await db.Posts.count({zaloId: _zaloId})
+    const zaloId = req.params["zaloId"].toString()
+    let result = await db.Posts.find({zaloId: zaloId})
+    const user = await db.Users.find({zaloId: zaloId})
+    const postCount = await db.Posts.count({zaloId: zaloId})
     const u = JSON.parse(JSON.stringify(user))[0]
     res.send({
       error: 0,
@@ -110,4 +109,63 @@ router.get('/by-user/:zaloId', async function (req, res, next) {
     console.log('API-Exception', error);
   }
 })
+
+async function addIsLiked(zaloId, posts) {
+  const postsArr = JSON.parse(JSON.stringify(posts))
+  for (let i = 0; i < postsArr.length; i++) {
+    let isLiked = 0
+    const countLikedPost = await db.CarePostMapping.find({"zaloId": zaloId, "postId": postsArr[i]._id}).countDocuments()
+    if (countLikedPost > 0) {
+      isLiked = 1;
+    }
+    postsArr[i].isLiked = isLiked
+  }
+  return postsArr
+}
+
+router.get('/hottest-posts/:categoryId', async (req, res, next) => {
+  try {
+    const param = parseInt(req.params["categoryId"])
+    if (param !== 0 && param !== 1)
+      return res.send({
+        error: -1,
+        msg: 'Param không hợp lệ'
+      })
+    const category = (param === 0 ? "Thiết bị điện tử" : "Đồ nội thất và gia dụng")
+    const posts = await db.Posts.find({category: category}).sort({viewCount: -1}).limit(4)
+    let postArr = await addIsLiked(req.user.zaloId, posts)
+    res.send({
+      error: 0,
+      msg: 'Lấy danh sách bài đăng hot thành công',
+      data: postArr,
+    })
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
+});
+
+router.get('/by-category/:categoryId', async (req, res, next) => {
+  try {
+    const param = parseInt(req.params["categoryId"])
+    if(param  !== 0 && param !== 1){
+      return res.send({
+        error: -1,
+        msg: 'Param không hợp lệ'
+      })
+    }
+    const category = (param === 0 ? "Thiết bị điện tử" : "Đồ nội thất và gia dụng")
+    const posts = await db.Posts.find({category: category})
+    let postArr = await addIsLiked(req.user.zaloId, posts)
+    res.send({
+      error: 0,
+      msg: 'Lấy danh sách bài đăng thành công',
+      data: postArr,
+    })
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
+});
+
 module.exports = router;
