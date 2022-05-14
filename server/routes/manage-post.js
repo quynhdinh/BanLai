@@ -86,4 +86,28 @@ router.get('/:postId', async function (req, res, next) {
     console.log('API-Exception', error);
   }
 });
+
+// Lấy danh sách bài đăng của 1 user(zaloId)
+router.get('/by-user/:zaloId', async function (req, res, next) {
+  try {
+    const _zaloId = req.params["zaloId"].toString()
+    let result = await db.Posts.find({zaloId: _zaloId})
+    const user = await db.Users.find({zaloId: _zaloId})
+    const postCount = await db.Posts.count({zaloId: _zaloId})
+    const u = JSON.parse(JSON.stringify(user))[0]
+    res.send({
+      error: 0,
+      msg: 'Lấy thông tin bài đăng tv thành công',
+      data: result,
+      extra: {
+        name: u.name,
+        picture: u.picture,
+        postCount: postCount,
+      }
+    })
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
+})
 module.exports = router;

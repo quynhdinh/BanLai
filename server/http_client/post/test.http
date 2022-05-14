@@ -84,3 +84,8 @@ Content-Type: application/json
     "color": "đen"
   }
 }
+
+###
+// lấy danh sách post của 1 user
+GET http://localhost:5000/api/posts/by-user/3024770787876860996
+Content-Type: application/json
