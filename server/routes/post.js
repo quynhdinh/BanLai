@@ -36,11 +36,12 @@ router.get('/hottest-posts/:categoryId', AuthService.verify, async (req, res, ne
         msg: 'Param không hợp lệ'
       })
     }
-    const posts = await db.Posts.find({category: category}).sort({viewCount: -1}).limit(4);
+    const posts = await db.Posts.find({category: category}).sort({viewCount: -1}).limit(4)
+    let postArr = await addIsLiked(req.user.zaloId, posts)
     res.send({
       error: 0,
       msg: 'Lấy danh sách bài đăng thành công',
-      data: posts,
+      data: postArr,
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
@@ -78,10 +79,11 @@ router.get('/by-category/:categoryId', async (req, res, next) => {
       })
     }
     const posts = await db.Posts.find({category: category})
+    let postArr = await addIsLiked(req.user.zaloId, posts)
     res.send({
       error: 0,
       msg: 'Lấy danh sách bài đăng thành công',
-      data: posts,
+      data: postArr,
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
