@@ -35,6 +35,7 @@ import CategoryBox from "../components/category-box";
 const createPostPage = () => {
   const zmproute = zmp.views.main.router.currentRoute;
   const [districtOptions, setDistrictOptions] = useState(HoChiMinh);
+  const u = useStore('u')
   const {
     register,
     handleSubmit,
@@ -45,7 +46,7 @@ const createPostPage = () => {
       ...data,
       category: zmproute.query?.category,
       subCategory: zmproute.query?.subcategory,
-      zaloId: "aa",
+      zaloId: u.zaloId,
     };
     console.log(data);
     store.dispatch("createPost", { data });
