@@ -199,7 +199,7 @@ export const washingMachineManufacturer = [
   "TCL",
   "Sharp",
 ];
-export const washingMachineDoor = ["", "Cửa ngang", "Cửa trên"];
+export const washingMachineDoor = ["", "Cửa trước", "Cửa trên"];
 export const washingMachineCapacity = [
   "",
   "Dưới 8 Kg (2-3 người)",

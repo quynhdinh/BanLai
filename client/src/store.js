@@ -10,11 +10,10 @@ import {getCareList} from "./services/care-list";
 const store = createStore({
   state: {
     jwt: null,
-    loadingCategories: false,
     messages: [],
     loadingFlag: true,
     u: null,
-    user: getFakeUsers(),
+    fakeUser: getFakeUsers(),
     products: getFakeProducts(),
     posts: [],
     userPosts: [],
@@ -39,9 +38,6 @@ const store = createStore({
   getters: {
     categories({state}) {
       return state.categories;
-    },
-    loadingCategories({state}) {
-      return state.loadingCategories;
     },
     posts({state}) {
       return state.posts;
@@ -70,8 +66,8 @@ const store = createStore({
     houseItems({state}) {
       return state.houseItems;
     },
-    user({state}) {
-      return state.user;
+    fakeUser({state}) {
+      return state.fakeUser;
     },
     products({state}) {
       return state.products;
@@ -87,11 +83,9 @@ const store = createStore({
     },
   },
   actions: {
-    setUser({state}, data) {
-      state.user = {...state.user, ...data};
-    },
     setU({state}, u) {
       state.u = {
+        zaloId: u.zaloId,
         displayName: u.name,
         avatar: u.picture,
         createdAt: u.createdAt,
@@ -125,11 +119,17 @@ const store = createStore({
     },
     async fetchHottestElectronicItems({state}) {
       state.loadingFlag = true;
+      while (!state.jwt) {
+        await new Promise(resolve => setTimeout(resolve, 100))
+      }
       state.hottestElectronicItems = await getHottestPosts(0);
       state.loadingFlag = false;
     },
     async fetchHottestHouseItems({state}) {
       state.loadingFlag = true;
+      while (!state.jwt) {
+        await new Promise(resolve => setTimeout(resolve, 100))
+      }
       state.hottestHouseItems = await getHottestPosts(1);
       state.loadingFlag = false;
     },
@@ -145,14 +145,14 @@ const store = createStore({
     async login({dispatch}) {
       const cachedUser = await loadUserFromCache();
       if (cachedUser) {
-        dispatch("setUser", cachedUser);
+        dispatch("setU", cachedUser);
       }
       const token = await getAccessToken();
       const success = await login(token);
       if (success) {
         const user = await getCurrentUser();
         if (user) {
-          dispatch("setUser", user);
+          dispatch("setU", user);
         }
       }
     },

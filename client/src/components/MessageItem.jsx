@@ -1,6 +1,6 @@
 import React from 'react';
 import {Avatar, Text, Title} from 'zmp-framework/react';
-import {getReadableTimeGap} from "../../util/number";
+import {getReadableTimeGap} from "../util/number";
 
 const MessageItem = ({product, marginTop}) => {
   return (

@@ -5,9 +5,9 @@ import UserCard from '../components/user-card';
 
 // Trang tài khoản
 const account = ({zmproute}) => {
-  const user = useStore('user');
+  const fakeUser = useStore('fakeUser');
   const _u = useStore('u')
-  const u = _u ? _u : user[0];
+  const u = _u ? _u : fakeUser[0];
 
   return (
     <Page className='page-box page-with-navbar'>

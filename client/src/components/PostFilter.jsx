@@ -1,6 +1,6 @@
 import {Icon, Text} from "zmp-framework/react";
 import React from "react";
-import '../../css/post-filter.css'
+import '../css/post-filter.css'
 
 const onClickTag = () => {
     console.log("closed filters clicked")

@@ -4,37 +4,15 @@ import NavbarBack from "../components/navbar-back";
 import { useForm } from "react-hook-form";
 import CustomInput, { Select } from "../components/Input";
 import TextArea from "../components/Input/text-area";
-import { city, HaNoi, HoChiMinh } from "../data/city-district";
-import { titleHints, priceHints } from "../data/input-hint";
-import {
-  airConditionerCoolingCapacity,
-  airConditionerManufacturer,
-  fridgeManufacturer,
-  fridgeVolume,
-  laptopCPU,
-  laptopGPU,
-  laptopHHD,
-  laptopManufacturer,
-  laptopRAM,
-  laptopScreen,
-  phoneColor,
-  phoneManufacturer,
-  phoneStorage,
-  tabletManufacturer,
-  tabletScreen,
-  tabletSIM,
-  tabletStorage,
-  televisionManufacturer,
-  washingMachineCapacity,
-  washingMachineDoor,
-  washingMachineManufacturer,
-} from "../data/subcategory-details";
+import {airConditionerCoolingCapacity, airConditionerManufacturer, fridgeManufacturer, fridgeVolume, laptopCPU, laptopGPU, laptopHHD, laptopManufacturer, laptopRAM, laptopScreen, phoneColor, phoneManufacturer, phoneStorage, tabletManufacturer, tabletScreen, tabletSIM, tabletStorage, televisionManufacturer, washingMachineCapacity, washingMachineDoor, washingMachineManufacturer} from "../data/subcategory-details";
 import store from "../store";
 import CategoryBox from "../components/category-box";
+import {getCities, getDistricts, getHints} from "../services/get_data";
 
 const createPostPage = () => {
   const zmproute = zmp.views.main.router.currentRoute;
-  const [districtOptions, setDistrictOptions] = useState(HoChiMinh);
+  const [districtOptions, setDistrictOptions] = useState(getDistricts("Hồ Chí Minh"));
+  const u = useStore('u')
   const {
     register,
     handleSubmit,
@@ -45,28 +23,13 @@ const createPostPage = () => {
       ...data,
       category: zmproute.query?.category,
       subCategory: zmproute.query?.subcategory,
-      zaloId: "aa",
+      zaloId: u.zaloId,
     };
-    console.log(data);
     store.dispatch("createPost", { data });
   };
-
-  // const formatCurrency = (e) => {
-  //   var amount = e.target.value;
-  //   if (amount.length === 0) return "0";
-  //   amount = amount.replace(/\./g, "");
-  //   const result = parseFloat(amount)
-  //     .toFixed(0)
-  //     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-  //   if (result === "NaN") return "0";
-  //   e.target.value = result;
-  // };
-
   const handleChangeDistrictList = (e) => {
-    if (e.target.value === "Hà Nội") setDistrictOptions(HaNoi);
-    else setDistrictOptions(HoChiMinh);
+    setDistrictOptions(getDistricts(e.target.value));
   };
-
   return (
     <Page name="create-post">
       <NavbarBack title="Tạo tin đăng" linkLeft={"/choose-subcategory/"} />
@@ -90,7 +53,7 @@ const createPostPage = () => {
             placeholder="Nhập tiêu đề rao bán"
             label="Tiêu đề rao bán"
             compulsory
-            hintMessage={titleHints}
+            hintMessage={getHints("title")}
             errorMessage={errors?.title && errors?.title.message}
           />
           <CustomInput
@@ -98,7 +61,7 @@ const createPostPage = () => {
             placeholder="Nhập giá rao bán"
             label="Giá rao bán"
             compulsory
-            hintMessage={priceHints}
+            hintMessage={getHints("price")}
             errorMessage={errors?.price && errors?.price.message}
             pattern="^-?[0-9]\d*\.?\d*$"
             onKeyUp={(e) => formatCurrency(e)}
@@ -311,7 +274,7 @@ const createPostPage = () => {
             label="Tỉnh/Thành phố"
             compulsory
             onChange={handleChangeDistrictList}
-            option={city}
+            option={getCities()}
           />
           <Select
             {...register("district")}
