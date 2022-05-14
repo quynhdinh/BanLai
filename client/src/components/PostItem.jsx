@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, Button, Icon, Text, Title} from 'zmp-framework/react';
-import {moneyFormat} from "../../util/number";
+import {moneyFormat} from "../util/number";
 
 const PostItem = ({product, marginTop, sold}) => {
   return (

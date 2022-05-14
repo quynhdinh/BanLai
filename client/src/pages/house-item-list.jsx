@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Box, Searchbar, Page, Tab, useStore,} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
-import PostFilter from "../components/HomeMisc/PostFilter";
+import PostFilter from "../components/PostFilter";
 import Category from "../components/Categories/Category";
 import store from "../store";
 import Loading from "../components/Loading";

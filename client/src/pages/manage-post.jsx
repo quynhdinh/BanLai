@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {Page, Card, Searchbar, Box, Tabbar, Link, Tabs, Tab, useStore, Button, Row, Col, SkeletonBlock} from 'zmp-framework/react';
 import NavigationBar from "../components/NavigationBar";
-import PostItem from "../components/PostItem";
 import store from "../store";
 import Loading from "../components/Loading";
+import PostItem from "../components/PostItem";
 
 // Trang quản lý bài đăng
 const managePostPage = ({zmproute}) => {

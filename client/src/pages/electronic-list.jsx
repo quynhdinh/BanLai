@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Box, Page, Searchbar, Tab, useStore, zmp,} from "zmp-framework/react";
+import {Box, Page, Searchbar, Tab, useStore, zmp} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import store from "../store";
 import Category from "../components/Categories/Category";

@@ -10,7 +10,6 @@ import {getCareList} from "./services/care-list";
 const store = createStore({
   state: {
     jwt: null,
-    loadingCategories: false,
     messages: [],
     loadingFlag: true,
     u: null,
@@ -39,9 +38,6 @@ const store = createStore({
   getters: {
     categories({state}) {
       return state.categories;
-    },
-    loadingCategories({state}) {
-      return state.loadingCategories;
     },
     posts({state}) {
       return state.posts;
