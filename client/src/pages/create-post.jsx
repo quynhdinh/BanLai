@@ -4,15 +4,15 @@ import NavbarBack from "../components/navbar-back";
 import { useForm } from "react-hook-form";
 import CustomInput, { Select } from "../components/Input";
 import TextArea from "../components/Input/text-area";
-import { city, HaNoi, HoChiMinh } from "../data/city-district";
 import { titleHints, priceHints } from "../data/input-hint";
 import {airConditionerCoolingCapacity, airConditionerManufacturer, fridgeManufacturer, fridgeVolume, laptopCPU, laptopGPU, laptopHHD, laptopManufacturer, laptopRAM, laptopScreen, phoneColor, phoneManufacturer, phoneStorage, tabletManufacturer, tabletScreen, tabletSIM, tabletStorage, televisionManufacturer, washingMachineCapacity, washingMachineDoor, washingMachineManufacturer} from "../data/subcategory-details";
 import store from "../store";
 import CategoryBox from "../components/category-box";
+import {getCities, getDistricts} from "../services/get_data";
 
 const createPostPage = () => {
   const zmproute = zmp.views.main.router.currentRoute;
-  const [districtOptions, setDistrictOptions] = useState(HoChiMinh);
+  const [districtOptions, setDistrictOptions] = useState(getDistricts("Hồ Chí Minh"));
   const u = useStore('u')
   const {
     register,
@@ -29,8 +29,7 @@ const createPostPage = () => {
     store.dispatch("createPost", { data });
   };
   const handleChangeDistrictList = (e) => {
-    if (e.target.value === "Hà Nội") setDistrictOptions(HaNoi);
-    else setDistrictOptions(HoChiMinh);
+    setDistrictOptions(getDistricts(e.target.value));
   };
   return (
     <Page name="create-post">
@@ -276,7 +275,7 @@ const createPostPage = () => {
             label="Tỉnh/Thành phố"
             compulsory
             onChange={handleChangeDistrictList}
-            option={city}
+            option={getCities()}
           />
           <Select
             {...register("district")}
