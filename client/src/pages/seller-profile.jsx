@@ -5,10 +5,10 @@ import NavbarBack from "../components/navbar-back";
 import UserCard from "../components/user-card";
 
 const SellerProfilePage = () => {
-  const user = useStore("user");
+  const fakeUser = useStore("fakeUser");
 
   const _u = useStore("u");
-  const u = _u ? _u : user[0];
+  const u = _u ? _u : fakeUser[0];
 
   return (
     <Page name="seller-profile">

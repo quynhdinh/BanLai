@@ -13,7 +13,7 @@ const store = createStore({
     messages: [],
     loadingFlag: true,
     u: null,
-    user: getFakeUsers(),
+    fakeUser: getFakeUsers(),
     products: getFakeProducts(),
     posts: [],
     userPosts: [],
@@ -66,8 +66,8 @@ const store = createStore({
     houseItems({state}) {
       return state.houseItems;
     },
-    user({state}) {
-      return state.user;
+    fakeUser({state}) {
+      return state.fakeUser;
     },
     products({state}) {
       return state.products;
@@ -83,11 +83,9 @@ const store = createStore({
     },
   },
   actions: {
-    setUser({state}, data) {
-      state.user = {...state.user, ...data};
-    },
     setU({state}, u) {
       state.u = {
+        zaloId: u.zaloId,
         displayName: u.name,
         avatar: u.picture,
         createdAt: u.createdAt,
@@ -147,14 +145,14 @@ const store = createStore({
     async login({dispatch}) {
       const cachedUser = await loadUserFromCache();
       if (cachedUser) {
-        dispatch("setUser", cachedUser);
+        dispatch("setU", cachedUser);
       }
       const token = await getAccessToken();
       const success = await login(token);
       if (success) {
         const user = await getCurrentUser();
         if (user) {
-          dispatch("setUser", user);
+          dispatch("setU", user);
         }
       }
     },

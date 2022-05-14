@@ -6,29 +6,7 @@ import CustomInput, { Select } from "../components/Input";
 import TextArea from "../components/Input/text-area";
 import { city, HaNoi, HoChiMinh } from "../data/city-district";
 import { titleHints, priceHints } from "../data/input-hint";
-import {
-  airConditionerCoolingCapacity,
-  airConditionerManufacturer,
-  fridgeManufacturer,
-  fridgeVolume,
-  laptopCPU,
-  laptopGPU,
-  laptopHHD,
-  laptopManufacturer,
-  laptopRAM,
-  laptopScreen,
-  phoneColor,
-  phoneManufacturer,
-  phoneStorage,
-  tabletManufacturer,
-  tabletScreen,
-  tabletSIM,
-  tabletStorage,
-  televisionManufacturer,
-  washingMachineCapacity,
-  washingMachineDoor,
-  washingMachineManufacturer,
-} from "../data/subcategory-details";
+import {airConditionerCoolingCapacity, airConditionerManufacturer, fridgeManufacturer, fridgeVolume, laptopCPU, laptopGPU, laptopHHD, laptopManufacturer, laptopRAM, laptopScreen, phoneColor, phoneManufacturer, phoneStorage, tabletManufacturer, tabletScreen, tabletSIM, tabletStorage, televisionManufacturer, washingMachineCapacity, washingMachineDoor, washingMachineManufacturer} from "../data/subcategory-details";
 import store from "../store";
 import CategoryBox from "../components/category-box";
 
@@ -48,26 +26,12 @@ const createPostPage = () => {
       subCategory: zmproute.query?.subcategory,
       zaloId: u.zaloId,
     };
-    console.log(data);
     store.dispatch("createPost", { data });
   };
-
-  // const formatCurrency = (e) => {
-  //   var amount = e.target.value;
-  //   if (amount.length === 0) return "0";
-  //   amount = amount.replace(/\./g, "");
-  //   const result = parseFloat(amount)
-  //     .toFixed(0)
-  //     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-  //   if (result === "NaN") return "0";
-  //   e.target.value = result;
-  // };
-
   const handleChangeDistrictList = (e) => {
     if (e.target.value === "Hà Nội") setDistrictOptions(HaNoi);
     else setDistrictOptions(HoChiMinh);
   };
-
   return (
     <Page name="create-post">
       <NavbarBack title="Tạo tin đăng" linkLeft={"/choose-subcategory/"} />
