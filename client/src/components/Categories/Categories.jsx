@@ -6,14 +6,11 @@ import { ViewedItem } from ".";
 import Loading from "../loading";
 
 const Categories = () => {
-  const electronicItems = useStore("hottestElectronicItems");
   const loading = useStore("loadingFlag");
-  useEffect(() => {
-    store.dispatch("fetchHottestElectronicItems");
-  }, []);
+  const electronicItems = useStore("hottestElectronicItems");
   const houseItems = useStore("hottestHouseItems");
   useEffect(() => {
-    store.dispatch("fetchHottestHouseItems");
+    store.dispatch("fetchHottestItems");
   }, []);
   return (
     <Box ml={0} mr={0}>
