@@ -9,59 +9,6 @@ const upload = require('../services/multer')
 const cloudinary = require('../services/cloudinary')
 const fs = require('fs');
 
-async function addIsLiked(zaloId, posts) {
-  const postsArr = JSON.parse(JSON.stringify(posts))
-  for (let i = 0; i < postsArr.length; i++) {
-    let isLiked = 0
-    const findCarePost = await db.CarePostMapping.find({"zaloId": zaloId, "postId": postsArr[i]._id}).countDocuments()
-    if (findCarePost > 0) {
-      isLiked = 1;
-    }
-    postsArr[i].isLiked = isLiked
-  }
-  return postsArr
-}
-
-router.get('/hottest-posts/:categoryId', AuthService.verify, async (req, res, next) => {
-  try {
-    const param = parseInt(req.params["categoryId"])
-    var category = ""
-    if (param === 0) {
-      category = "Thiết bị điện tử"
-    } else if (param === 1) {
-      category = "Đồ nội thất và gia dụng"
-    } else {
-      return res.send({
-        error: -1,
-        msg: 'Param không hợp lệ'
-      })
-    }
-    const posts = await db.Posts.find({category: category}).sort({viewCount: -1}).limit(4);
-    res.send({
-      error: 0,
-      msg: 'Lấy danh sách bài đăng thành công',
-      data: posts,
-    })
-  } catch (error) {
-    res.send({error: -1, msg: 'Unknown exception'});
-    console.log('API-Exception', error);
-  }
-});
-
-router.get('/by-user/:zaloId', async function (req, res, next) {
-  try {
-    const _zaloId = req.params["zaloId"].toString()
-    const result = await db.Posts.find({zaloId: _zaloId})
-    res.send({
-      error: 0,
-      msg: 'Lấy thông tin bài đăng thành công',
-      data: result,
-    })
-  } catch (error) {
-    res.send({error: -1, msg: 'Unknown exception'});
-    console.log('API-Exception', error);
-  }
-})
 
 router.post('/', upload.array("images", 4), postValidate.validateCreatePost(), async (req, res, next) => {
   try {

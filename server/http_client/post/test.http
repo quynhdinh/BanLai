@@ -4,7 +4,7 @@ Accept: application/json
 
 ###
 // lấy 1 post bằng id
-GET http://localhost:5000/api/posts/624ea0f71e88fd8a60835eff
+GET http://localhost:5000/api/posts/625fbab0802e34fc55a25341
 Content-Type: application/json
 
 
@@ -84,3 +84,8 @@ Content-Type: application/json
     "color": "đen"
   }
 }
+
+###
+// lấy danh sách post của 1 user
+GET http://localhost:5000/api/posts/by-user/3024770787876860996
+Content-Type: application/json
