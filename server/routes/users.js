@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.post('/update-follow-status', AuthService.verify, async (req, res, next) => {
+router.post('/update-follow-status', AuthService.verify, async (req, res) => {
     try {
         const zaloId = req.user.zaloId
         const isFollowing = req.body.status

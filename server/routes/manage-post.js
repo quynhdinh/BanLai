@@ -5,7 +5,7 @@ const {addIsLiked, isLiked} = require("./helper");
 const router = express.Router();
 router.use(AuthService.verify);
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
   try {
     const zaloId = req.user.zaloId
     const posts = await db.Posts.find({zaloId: zaloId})
@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
 });
 
 
-router.put('/repost/:postId', async (req, res, next) => {
+router.put('/repost/:postId', async (req, res) => {
   try {
     const param = req.params["postId"].toString()
     const p = await db.Posts.findOneAndUpdate({_id: param}, {'status': 'Active'}, {new: true})
@@ -43,7 +43,7 @@ router.put('/repost/:postId', async (req, res, next) => {
   }
 });
 
-router.put('/close-post/:postId', async (req, res, next) => {
+router.put('/close-post/:postId', async (req, res) => {
   try {
     const param = req.params["postId"].toString()
     const p = await db.Posts.findOneAndUpdate({_id: param}, {'status': 'Closed'}, {new: true})
@@ -65,7 +65,7 @@ router.put('/close-post/:postId', async (req, res, next) => {
   }
 });
 
-router.get('/:postId', async function (req, res, next) {
+router.get('/:postId', async function (req, res) {
   try {
     const postId = req.params["postId"].toString()
     let _post = await db.Posts.find({_id: postId})
@@ -90,7 +90,7 @@ router.get('/:postId', async function (req, res, next) {
 });
 
 // Lấy danh sách bài đăng của 1 user(zaloId)
-router.get('/by-user/:zaloId', async function (req, res, next) {
+router.get('/by-user/:zaloId', async function (req, res) {
   try {
     const zaloId = req.params["zaloId"].toString()
     let result = await db.Posts.find({zaloId: zaloId})
@@ -113,7 +113,7 @@ router.get('/by-user/:zaloId', async function (req, res, next) {
   }
 })
 
-router.get('/hottest-posts/:categoryId', async (req, res, next) => {
+router.get('/hottest-posts/:categoryId', async (req, res) => {
   try {
     const param = parseInt(req.params["categoryId"])
     if (param !== 0 && param !== 1)
@@ -135,7 +135,7 @@ router.get('/hottest-posts/:categoryId', async (req, res, next) => {
   }
 });
 
-router.get('/by-category/:categoryId', async (req, res, next) => {
+router.get('/by-category/:categoryId', async (req, res) => {
   try {
     const param = parseInt(req.params["categoryId"])
     if(param  !== 0 && param !== 1){

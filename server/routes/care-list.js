@@ -5,7 +5,7 @@ const router = express.Router();
 const AuthService = require("../services/auth-service");
 router.use(AuthService.verify)
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
     try {
         const _zaloId = req.user.zaloId
         const result = await db.CarePostMapping.find({zaloId: _zaloId})
@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
     return res.send({error: 0, msg: 'Success', data: req.user});
 });
 
-router.delete('/:postId', async (req, res, next) => {
+router.delete('/:postId', async (req, res) => {
     try {
         const _postId = req.params["postId"].toString()
         const _zaloId = req.user.zaloId

@@ -10,7 +10,7 @@ const cloudinary = require('../services/cloudinary')
 const fs = require('fs');
 
 
-router.post('/', upload.array("images", 4), postValidate.validateCreatePost(), async (req, res, next) => {
+router.post('/', upload.array("images", 4), postValidate.validateCreatePost(), async (req, res) => {
   try {
     const {
       category, subCategory, zaloId, city, district, images, condition,
@@ -100,7 +100,7 @@ router.put('/:postId', async (req, res) => {
   }
 })
 
-router.put('/viewCount/:postId', async (req, res, next) => {
+router.put('/viewCount/:postId', async (req, res) => {
   try {
     const param = req.params["postId"].toString()
     const p = await db.Posts.findOneAndUpdate({_id: param}, {$inc: {'viewCount': 1}}, {new: true})

@@ -5,7 +5,7 @@ const router = express.Router();
 const ObjectId = require('mongodb').ObjectId;
 router.use(AuthService.verify);
 
-router.get('/', async (req, res, _next) => {
+router.get('/', async (req, res) => {
   try {
     const _messages = await db.Messages.find({owner: req.user.zaloId})
     const messages = JSON.parse(JSON.stringify(_messages))
@@ -29,7 +29,7 @@ router.get('/', async (req, res, _next) => {
   }
 });
 
-router.post('/', async (req, res, _next) => {
+router.post('/', async (req, res) => {
   try {
     const {partner, type, postId} = req.body
     const msg = await db.Messages.create({
