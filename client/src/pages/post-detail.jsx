@@ -1,5 +1,16 @@
 import React, { useEffect } from "react";
-import {Page, Navbar, Swiper, SwiperSlide, Text, Title, Icon, useStore, Box, GridItem} from "zmp-framework/react";
+import {
+  Page,
+  Navbar,
+  Swiper,
+  SwiperSlide,
+  Text,
+  Title,
+  Icon,
+  useStore,
+  Box,
+  GridItem,
+} from "zmp-framework/react";
 import "../css/swiper.css";
 import store from "../store";
 import MessageBox from "../components/message-box";
@@ -7,20 +18,21 @@ import zalo from "../static/icons/Zalo.svg";
 import facebook from "../static/icons/Facebook.svg";
 import messenger from "../static/icons/Messenger.svg";
 import link from "../static/icons/Link.svg";
-import {getReadableTimeGap, moneyFormat} from "../util/number";
+import { getReadableTimeGap, moneyFormat } from "../util/number";
 import { ViewedItem } from "../components/Categories/";
+import UserCard from "../components/user-card";
 
 const linkItems = [zalo, facebook, messenger, link];
 export default () => {
   const postDetails = useStore("postDetails");
-  const viewingPostId = useStore("viewingPostId")
+  const viewingPostId = useStore("viewingPostId");
   useEffect(() => {
-    store.dispatch("fetchPostDetail", { id: viewingPostId});
+    store.dispatch("fetchPostDetail", { id: viewingPostId });
   }, []);
   return (
     <Page name="post-detail">
       <Navbar backLink="Back" />
-      <Box m={0} style={{position: "relative"}}/>
+      <Box m={0} style={{ position: "relative" }} />
       <MessageBox isTexted={false} />
       <Swiper pagination navigation loop>
         {postDetails.images.map((item, index) => (
@@ -29,7 +41,7 @@ export default () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <Box ml={5} style={{ paddingBottom: 200 }}>
+      <Box ml={5}>
         <Title className="item-name" size={"normal"} bold>
           {postDetails.title}
         </Title>
@@ -49,6 +61,7 @@ export default () => {
           title="Tình trạng sản phẩm"
           description={postDetails.condition}
         />
+
         {/* {postDetails?.[0]?.productDetails ? (
           <>
             <Title size="small" bold>
@@ -67,14 +80,10 @@ export default () => {
           title="Mô tả sản phẩm"
           description={postDetails.description}
         />
-        <Title size="small" bold>
-          Chia sẻ bài đăng
-        </Title>
-        <Box ml={0} flexDirection="row" alignItems="left" inline>
-          {linkItems.map((item, index) => (
-            <img key={index} src={item} style={{ marginRight: 12 }} />
-          ))}
-        </Box>
+        <SharePost />
+      </Box>
+      <SellerInfo postDetails={postDetails} />
+      <Box ml={5} style={{ paddingBottom: 200 }}>
         <Title bold>Sản phẩm tương tự</Title>
         <ViewedItem />
       </Box>
@@ -95,7 +104,7 @@ const Description = ({ title, description }) => (
 
 const PostTag = ({ children }) => (
   <Text
-    size="xsmall"
+    size="xxsmall"
     className="r-round bg-color-lg700 text-color-black"
     style={{
       padding: "4px",
@@ -114,4 +123,37 @@ const DetailsDescription = ({ title, description }) => (
     <Text className="text-color-nl500">{title}</Text>
     <Title className="text-color-nl300">{description}</Title>
   </GridItem>
+);
+
+const SellerInfo = ({ postDetails }) => (
+  <div
+    className="border-color-nl700"
+    style={{
+      borderTop: "1px solid",
+      borderBottom: "1px solid",
+      margin: "12px 0",
+      padding: "8px 24px",
+    }}
+  >
+    <Title bold>Thông tin người bán</Title>
+    <UserCard
+      avatar={postDetails.picture}
+      displayName={postDetails.name}
+      postCount={postDetails.postCount}
+      title="tin đang rao"
+    />
+  </div>
+);
+
+const SharePost = ({}) => (
+  <div>
+    <Title size="small" bold>
+      Chia sẻ bài đăng
+    </Title>
+    <Box ml={0} flexDirection="row" alignItems="left" inline>
+      {linkItems.map((item, index) => (
+        <img key={index} src={item} style={{ marginRight: 12 }} />
+      ))}
+    </Box>
+  </div>
 );

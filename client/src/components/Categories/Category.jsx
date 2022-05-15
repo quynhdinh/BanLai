@@ -27,7 +27,7 @@ const Category = ({ product, border }) => {
           style={{
             position: "relative",
             height: "120px",
-            borderTop: border ? "0.5px solid" : "",
+            borderBottom: border ? "0.5px solid" : "",
             borderRadius: border ? "" : "8px",
             boxShadow: border ? "" : "1px 0px 4px rgba(0, 0, 0, 0.25)",
           }}
@@ -113,7 +113,7 @@ const Category = ({ product, border }) => {
             </Box>
           </Box>
           <Box m={0} style={{ position: "absolute", right: 8, top: 8 }}>
-            <HeartIcon isLiked={true} />
+            <HeartIcon isLiked={product.isLiked} />
           </Box>
         </Box>
       </Card>

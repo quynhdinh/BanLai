@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, Box, Text, Button } from "zmp-framework/react";
+import { Icon, Box, Text, Button, Tab } from "zmp-framework/react";
 import CustomInput from "./Input";
 
 const MessageBox = ({ isTexted }) => {
@@ -34,25 +34,10 @@ const MessageBox = ({ isTexted }) => {
               placeholder="Nhắn tin với người bán qua Zalo"
               id="message"
             />
-            <Box
-              m={0}
-              ml={4}
-              flex
-              className="bg-color-bl300"
-              justifyContent="center"
-              alignItems="center"
-              style={{ borderRadius: "50%", width: 48, height: 48 }}
-            >
-              <Icon className="color-white demo-icon" zmp="zi-send-solid" />
-            </Box>
+            <MessageButton/>
           </Box>
-          <Box m={0}>
-            <Box
-              m={0}
-              mt={2}
-              flex
-              style={{ overflowX: "scroll", width: "max-content" }}
-            >
+          <Tab className="page-content" m={0} style={{ padding: 0 }}>
+            <Box m={0} mt={2} flex style={{ width: "max-content" }}>
               {hintMessages.map((item, index) => (
                 <HintMessage
                   key={index}
@@ -62,7 +47,7 @@ const MessageBox = ({ isTexted }) => {
                 </HintMessage>
               ))}
             </Box>
-          </Box>
+          </Tab>
         </>
       ) : (
         <>
@@ -91,6 +76,22 @@ const HintMessage = ({ children, onClick }) => (
     >
       {children}
     </Text>
+  </div>
+);
+
+const MessageButton = ({ onClick }) => (
+  <div onClick={onClick}>
+  <Box
+    m={0}
+    ml={4}
+    flex
+    className="bg-color-bl300"
+    justifyContent="center"
+    alignItems="center"
+    style={{ borderRadius: "50%", width: 48, height: 48 }}
+  >
+    <Icon className="color-white demo-icon" zmp="zi-send-solid" />
+  </Box>
   </div>
 );
 

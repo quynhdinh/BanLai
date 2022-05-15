@@ -1,18 +1,22 @@
-import React from 'react';
-import {Avatar, Text, Title} from 'zmp-framework/react';
+import React from "react";
+import { Avatar, Box, Text, Title } from "zmp-framework/react";
 
-const UserCard = ({ user }) => {
+const UserCard = ({ avatar, displayName, title, postCount }) => {
   return (
-    <div style={{ display: 'flex', width: '100%' }}>
-      <Avatar story={user.story} online={user.online} src={user.avatar}/>
-      <div style={{ marginLeft: 16 }}>
-        <Title style={{ marginBottom: 0 }}>{user.displayName}</Title>
-          <Text className='mt-1' size='xxsmall'>Thành viên Bán Lại</Text>
-      </div>
-    </div>
-  )
+    <Box flex m={0}>
+      <Avatar src={avatar} />
+      <Box m={0} ml={4}>
+        <Title size="small" style={{ marginBottom: 0 }}>
+          {displayName}
+        </Title>
+        <Text className="mt-1" size="xxsmall">
+          <span className="text-color-bl300">{postCount}</span> {title}
+        </Text>
+      </Box>
+    </Box>
+  );
 };
 
-UserCard.displayName = 'zmp-user-card'
+UserCard.displayName = "zmp-user-card";
 
 export default UserCard;
