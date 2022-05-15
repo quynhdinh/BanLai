@@ -164,11 +164,17 @@ const store = createStore({
       state.userPosts = await getUserPosts();
       state.loadingFlag = false;
     },
-    async closePost({state, postId}) {
-      const list = await closePost(postId);
+    async closePost({state}, postId) {
+      const errorCode = await closePost(postId);
+      if (errorCode === 0) {
+        store.dispatch('fetchUserPosts')
+      }
     },
-    async repostPost({state, postId}) {
-      const list = await repostPost(postId);
+    async repostPost({state}, postId) {
+      const errorCode = await repostPost(postId);
+      if (errorCode === 0) {
+        store.dispatch('fetchUserPosts')
+      }
     },
   },
 });

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Box, Button, Icon, Text, Title} from 'zmp-framework/react';
 import {moneyFormat} from "../util/number";
+import store from "../store";
 
 const PostItem = ({product, marginTop, sold}) => {
   return (
@@ -54,8 +55,12 @@ const PostItem = ({product, marginTop, sold}) => {
         </Title>
         <Button
           className="filter-button"
-          typeName={sold ? "secondary" : "primary"}
-          small>{sold ? "Đăng lại" : "Đã bán / Ẩn bài"}</Button>
+          typeName={sold ? "secondary" : "primary"} small
+          onClick={() => {
+            store.dispatch(sold ? "repostPost" : "closePost", product.id)
+          }}>{
+          sold ? "Đăng lại" : "Đã bán / Ẩn bài"}
+        </Button>
       </div>
     </div>
   )
