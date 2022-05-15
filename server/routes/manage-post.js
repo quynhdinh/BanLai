@@ -1,6 +1,7 @@
 const express = require('express');
 const AuthService = require("../services/auth-service");
 const db = require("../models");
+const {addIsLiked, isLiked} = require("./helper");
 const router = express.Router();
 router.use(AuthService.verify);
 
@@ -66,8 +67,8 @@ router.put('/close-post/:postId', async (req, res, next) => {
 
 router.get('/:postId', async function (req, res, next) {
   try {
-    const param = req.params["postId"].toString()
-    let _post = await db.Posts.find({_id: param})
+    const postId = req.params["postId"].toString()
+    let _post = await db.Posts.find({_id: postId})
     const data = JSON.parse(JSON.stringify(_post))[0]
     const zaloId = req.user.zaloId
     const user = await db.Users.find({zaloId: zaloId})
@@ -76,6 +77,7 @@ router.get('/:postId', async function (req, res, next) {
     data.name = u.name
     data.picture = u.picture
     data.postCount = postCount
+    data.isLiked = await isLiked(zaloId, postId)
     res.send({
       error: 0,
       msg: 'Lấy thông tin bài đăng thành công',
@@ -110,19 +112,6 @@ router.get('/by-user/:zaloId', async function (req, res, next) {
     console.log('API-Exception', error);
   }
 })
-
-async function addIsLiked(zaloId, posts) {
-  const postsArr = JSON.parse(JSON.stringify(posts))
-  for (let i = 0; i < postsArr.length; i++) {
-    let isLiked = 0
-    const countLikedPost = await db.CarePostMapping.find({"zaloId": zaloId, "postId": postsArr[i]._id}).countDocuments()
-    if (countLikedPost > 0) {
-      isLiked = 1;
-    }
-    postsArr[i].isLiked = isLiked
-  }
-  return postsArr
-}
 
 router.get('/hottest-posts/:categoryId', async (req, res, next) => {
   try {
@@ -168,5 +157,4 @@ router.get('/by-category/:categoryId', async (req, res, next) => {
     console.log('API-Exception', error);
   }
 });
-
 module.exports = router;
