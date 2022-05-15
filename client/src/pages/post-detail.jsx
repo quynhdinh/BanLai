@@ -1,16 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  Page,
-  Navbar,
-  Swiper,
-  SwiperSlide,
-  Text,
-  Title,
-  Icon,
-  useStore,
-  Box,
-  GridItem,
-} from "zmp-framework/react";
+import {Page, Navbar, Swiper, SwiperSlide, Text, Title, useStore, Box, GridItem} from "zmp-framework/react";
 import "../css/swiper.css";
 import store from "../store";
 import MessageBox from "../components/message-box";
@@ -21,6 +10,7 @@ import link from "../static/icons/Link.svg";
 import { getReadableTimeGap, moneyFormat } from "../util/number";
 import { ViewedItem } from "../components/Categories/";
 import UserCard from "../components/user-card";
+import HeartIcon from "../components/heart-icon";
 
 const linkItems = [zalo, facebook, messenger, link];
 export default () => {
@@ -48,7 +38,7 @@ export default () => {
         <Title className="item-price" bold>
           {moneyFormat(postDetails.price)}
         </Title>
-        <Icon className="liked" zmp="zi-heart" colorTheme={"red"} />
+        <HeartIcon isLiked={postDetails.isLiked}/>
         <Box flexDirection="row" m={0}>
           <PostTag>
             {postDetails.district}, {postDetails.city}
