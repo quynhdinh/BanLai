@@ -18,7 +18,7 @@ mongoose.connection.once('open', function() {
 
 const db = {};
 db.Users = require('./user.js');
-db.Posts = require('./post/post');
-db.CarePostMapping = require('./post/care-post-mapping');
+db.Posts = require('./post');
+db.CarePostMapping = require('./care-post-mapping');
 db.Messages = require('./message');
 module.exports = db;
