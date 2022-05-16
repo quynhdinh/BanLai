@@ -4,7 +4,7 @@ import CustomListItem from "../components/custom-listitem";
 import NavbarBack from "../components/navbar-back";
 import { getSubCategories } from "../services/get_data";
 
-const createPostPage = () => {
+export default () => {
   const [subCategoriesList, setSubCategoriesList] = useState([]);
   const zmproute = zmp.views.main.router.currentRoute;
   useEffect(() => {
@@ -44,4 +44,3 @@ const createPostPage = () => {
     </Page>
   );
 };
-export default createPostPage;

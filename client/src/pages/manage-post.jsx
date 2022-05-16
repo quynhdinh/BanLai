@@ -6,7 +6,7 @@ import Loading from "../components/Loading";
 import PostItem from "../components/PostItem";
 
 // Trang quản lý bài đăng
-const managePostPage = ({zmproute}) => {
+export default ({zmproute}) => {
   const userPosts = useStore('userPosts')
   const loading = useStore('loadingFlag')
   const spacing = '20px'
@@ -84,4 +84,3 @@ const managePostPage = ({zmproute}) => {
     </Page>
   )
 }
-export default managePostPage

@@ -135,7 +135,7 @@ const SellerInfo = ({ postDetails }) => (
   </div>
 );
 
-const SharePost = ({}) => (
+const SharePost = () => (
   <div>
     <Title size="small" bold>
       Chia sẻ bài đăng

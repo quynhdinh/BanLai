@@ -6,7 +6,7 @@ import Loading from "../components/Loading";
 import MessageItem from "../components/MessageItem";
 
 //Trang quản lý tin nhắn (Tôi mua/Tôi bán)
-const messagePage = ({ zmproute }) => {
+export default ({ zmproute }) => {
   const messages = useStore("messages");
   const loading = useStore("loadingFlag");
 
@@ -60,5 +60,3 @@ const messagePage = ({ zmproute }) => {
     </Page>
   );
 };
-
-export default messagePage;

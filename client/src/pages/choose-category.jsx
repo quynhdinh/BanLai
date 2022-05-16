@@ -3,7 +3,7 @@ import { Page, List, Box, Title, zmp } from "zmp-framework/react";
 import CustomListItem from "../components/custom-listitem";
 import NavbarBack from "../components/navbar-back";
 
-const createPostPage = () => {
+export default () => {
   const categoriesList = ["Thiết bị điện tử", "Đồ gia dụng, nội thất"];
   const handleChooseSubCategory = ({ category }) => {
     const zmprouter = zmp.views.main.router;
@@ -38,4 +38,3 @@ const createPostPage = () => {
     </Page>
   );
 };
-export default createPostPage;

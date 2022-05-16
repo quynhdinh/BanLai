@@ -4,7 +4,7 @@ import Category from "../components/Categories/Category";
 import NavbarBack from "../components/navbar-back";
 import UserCard from "../components/user-card";
 
-const SellerProfilePage = () => {
+export default () => {
   const fakeUser = useStore("fakeUser");
 
   const _u = useStore("u");
@@ -30,5 +30,3 @@ const SellerProfilePage = () => {
     </Page>
   );
 };
-
-export default SellerProfilePage;

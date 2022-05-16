@@ -3,7 +3,7 @@ import {Page, Title, Box, Range} from 'zmp-framework/react';
 import NavbarBack from '../components/navbar-back';
 import {Select} from "../components/Input";
 
-const PostsFilter = () => (
+export default () => (
   <Page name="posts-filter">
     <NavbarBack title="Tìm kiếm" linkLeft={"/electronic-list"} />
     <Select
@@ -32,5 +32,3 @@ const PostsFilter = () => (
       </Box>
   </Page>
 );
-
-export default PostsFilter;

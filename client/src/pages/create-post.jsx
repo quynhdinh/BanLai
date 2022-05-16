@@ -9,7 +9,7 @@ import store from "../store";
 import CategoryBox from "../components/category-box";
 import {getCities, getDistricts, getHints} from "../services/get_data";
 
-const createPostPage = () => {
+export default () => {
   const zmproute = zmp.views.main.router.currentRoute;
   const [districtOptions, setDistrictOptions] = useState(getDistricts("Hồ Chí Minh"));
   const u = useStore('u')
@@ -290,4 +290,3 @@ const createPostPage = () => {
     </Page>
   );
 };
-export default createPostPage;
