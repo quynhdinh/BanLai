@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Page, Card, Searchbar, Box, Tabbar, Link, Tabs, Tab, useStore, Button, Row, Col, SkeletonBlock} from 'zmp-framework/react';
+import {Page, Card, Searchbar, Box, Tabbar, Link, Tabs, Tab, useStore} from 'zmp-framework/react';
 import NavigationBar from "../components/NavigationBar";
 import store from "../store";
 import Loading from "../components/Loading";
@@ -41,10 +41,11 @@ const managePostPage = ({zmproute}) => {
               <Card inset>
                 {userPosts.filter(function (obj) {
                   const o = JSON.parse(JSON.stringify(obj))
-                  return o.status === "active";
+                  return o.status === "Active";
                 }).map((item, index) => (
                   <PostItem key={index}
                             product={{
+                              id: item._id,
                               images: item.images,
                               price: item.price,
                               title: item.title,
@@ -62,10 +63,11 @@ const managePostPage = ({zmproute}) => {
               <Card inset>
                 {userPosts.filter(function (obj) {
                   const o = JSON.parse(JSON.stringify(obj))
-                  return o.status !== "active";
+                  return o.status === "Closed";
                 }).map((item, index) => (
                   <PostItem key={index}
                             product={{
+                              id: item._id,
                               images: item.images,
                               price: item.price,
                               title: item.title,

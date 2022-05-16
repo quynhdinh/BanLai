@@ -1,8 +1,23 @@
-import React from 'react';
-import {Box, Button, Icon, Text, Title} from 'zmp-framework/react';
+import React, {useRef} from 'react';
+import {Box, Button, Icon, Text, Title, zmp} from 'zmp-framework/react';
 import {moneyFormat} from "../util/number";
+import store from "../store";
 
 const PostItem = ({product, marginTop, sold}) => {
+  const toast = useRef(null);
+
+  function onClickButton() {
+    store.dispatch(sold ? "repostPost" : "closePost", product.id)
+    if (!toast.current) {
+      toast.current = zmp.toast.create({
+        text: sold ? "Đăng lại bài viết thành công" : "Ẩn bài viết thành công",
+        position: 'bottom',
+        closeTimeout: 1000
+      });
+    }
+    toast.current.open();
+  }
+
   return (
     <div style={{display: 'flex', width: '100%', marginTop: marginTop}}>
       <Box
@@ -54,8 +69,10 @@ const PostItem = ({product, marginTop, sold}) => {
         </Title>
         <Button
           className="filter-button"
-          typeName={sold ? "secondary" : "primary"}
-          small>{sold ? "Đăng lại" : "Đã bán / Ẩn bài"}</Button>
+          typeName={sold ? "secondary" : "primary"} small
+          onClick={() => onClickButton()}>
+          {sold ? "Đăng lại" : "Đã bán / Ẩn bài"}
+        </Button>
       </div>
     </div>
   )

@@ -37,7 +37,7 @@ export const closePost = async (postId) => {
   try {
     const url = "api/posts/close-post/" + postId;
     const response = await (await request("PUT", url)).json();
-    return response.data;
+    return response.error;
   } catch (error) {
     console.log("Error close post:", error);
     return [];
@@ -48,7 +48,7 @@ export const repostPost = async (postId) => {
   try {
     const url = "api/posts/repost/" + postId;
     const response = await (await request("PUT", url)).json();
-    return response.data;
+    return response.error;
   } catch (error) {
     console.log("Error repost post:", error);
     return [];

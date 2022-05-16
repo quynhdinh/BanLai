@@ -2,13 +2,7 @@ const db = require("../models");
 
 async function isLiked(zaloId, postId) {
   const entry = await db.CarePostMapping.find({"zaloId": zaloId, "postId": postId})
-  if (entry) {
-    console.log("ok")
-    return 1
-  } else{
-    console.log("fail")
-    return 0
-  }
+  return entry ? 1 : 0
 }
 
 async function addIsLiked(zaloId, posts) {

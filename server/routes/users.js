@@ -7,20 +7,21 @@ const router = express.Router();
 router.get('/logged-in', AuthService.verify, (req, res) => {
     return res.send({error: 0, msg: 'Success', data: req.user});
 });
-router.get('/', async (req, res) => {
-    try {
-        const result = await db.Users.find({})
-        res.send({
-            error: 0,
-            count: result.length,
-            msg: 'Lấy danh sách người dùng thành công',
-            data: result,
-        })
-    } catch (error) {
-        res.send({error: -1, msg: 'Unknown exception'});
-        console.log('API-Exception', error);
-    }
+
+router.get('/', async (_req, res) => {
+  try {
+    const result = await db.Users.find({})
+    res.send({
+      error: 0,
+      msg: 'Lấy danh sách người dùng thành công',
+      data: result,
+    })
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
 });
+
 router.post('/login', async (req, res) => {
     try {
         const accessToken = req.body.accessToken;
