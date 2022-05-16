@@ -5,7 +5,7 @@ import {Category} from "../components/Categories";
 import store from "../store";
 import Loading from "../components/loading";
 
-const managePostPage = ({zmproute}) => {
+const managePostPage = () => {
   const careList = useStore("careList");
   const loading = useStore("loadingFlag");
 

@@ -137,7 +137,7 @@ router.get('/hottest-posts/:categoryId', async (req, res) => {
 router.get('/by-category/:categoryId', async (req, res) => {
   try {
     const param = parseInt(req.params["categoryId"])
-    if(param  !== 0 && param !== 1){
+    if (param !== 0 && param !== 1) {
       return res.send({
         error: -1,
         msg: 'Param không hợp lệ'

@@ -1,7 +1,5 @@
-import { zmp } from 'zmp-framework/react'
 import api from 'zmp-sdk'
 import config from '../config'
-import store from '../store'
 
 export const getAccessToken = () => new Promise(resolve => {
   api.login({

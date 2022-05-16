@@ -1,14 +1,11 @@
 const express = require('express');
 const db = require('../models');
 const {validationResult} = require('express-validator');
-const AuthService = require("../services/auth-service");
 const {postValidate} = require("../helpers/post-validator");
 const router = express.Router();
-// router.use(AuthService.verify);
 const upload = require('../services/multer')
 const cloudinary = require('../services/cloudinary')
 const fs = require('fs');
-
 
 router.post('/', upload.array("images", 4), postValidate.validateCreatePost(), async (req, res) => {
   try {

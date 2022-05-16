@@ -131,7 +131,7 @@ const store = createStore({
       state.postDetails = await getPostDetails(id);
       state.loadingFlag = false;
     },
-    async createPost({state}, {data}) {
+    async createPost({_state}, {data}) {
       const response = await createPost(data);
       console.log("here", response);
     },
@@ -164,13 +164,13 @@ const store = createStore({
       state.userPosts = await getUserPosts();
       state.loadingFlag = false;
     },
-    async closePost({state}, postId) {
+    async closePost({_state}, postId) {
       const errorCode = await closePost(postId);
       if (errorCode === 0) {
         store.dispatch('fetchUserPosts')
       }
     },
-    async repostPost({state}, postId) {
+    async repostPost({_state}, postId) {
       const errorCode = await repostPost(postId);
       if (errorCode === 0) {
         store.dispatch('fetchUserPosts')

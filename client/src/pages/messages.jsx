@@ -1,14 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  Page,
-  useStore,
-  Tabbar,
-  Link,
-  Tabs,
-  Tab,
-  Card,
-  Box,
-} from "zmp-framework/react";
+import {Page, useStore, Tabbar, Link, Tabs, Tab, Box} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import store from "../store";
 import Loading from "../components/Loading";
@@ -18,7 +9,6 @@ import MessageItem from "../components/MessageItem";
 const messagePage = ({ zmproute }) => {
   const messages = useStore("messages");
   const loading = useStore("loadingFlag");
-  const spacing = "20px";
 
   useEffect(() => {
     store.dispatch("fetchMessages");

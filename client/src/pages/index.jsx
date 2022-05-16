@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Page, Box, zmp, Button, Text, Title } from "zmp-framework/react";
+import React from "react";
+import { Page, Box, zmp, Title } from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import Categories from "../components/Categories";
 import pc from "../static/icons/PC.svg";
@@ -7,10 +7,6 @@ import bed from "../static/icons/Bed.svg";
 
 const HomePage = () => {
   const zmproute = zmp.views.main.router;
-
-  const handleOnClick = ({ navigateLink }) => {
-    zmproute.navigate(navigateLink);
-  };
 
   return (
     <Page name="home" navbarLarge>
