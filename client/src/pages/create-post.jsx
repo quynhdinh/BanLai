@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Page, Button, Box, zmp, Title, useStore } from "zmp-framework/react";
+import React, {useState} from "react";
+import {Page, Button, Box, zmp, Title, useStore} from "zmp-framework/react";
 import NavbarBack from "../components/navbar-back";
-import { useForm } from "react-hook-form";
-import CustomInput, { Select } from "../components/Input";
+import {useForm} from "react-hook-form";
+import CustomInput, {Select} from "../components/Input";
 import TextArea from "../components/Input/text-area";
 import {airConditionerCoolingCapacity, airConditionerManufacturer, fridgeManufacturer, fridgeVolume, laptopCPU, laptopGPU, laptopHHD, laptopManufacturer, laptopRAM, laptopScreen, phoneColor, phoneManufacturer, phoneStorage, tabletManufacturer, tabletScreen, tabletSIM, tabletStorage, televisionManufacturer, washingMachineCapacity, washingMachineDoor, washingMachineManufacturer} from "../data/subcategory-details";
 import store from "../store";
@@ -10,29 +10,66 @@ import CategoryBox from "../components/category-box";
 import {getCities, getDistricts, getHints} from "../services/get_data";
 
 export default () => {
+  //upload image to cloudinary
+  const images = []
+  async function uploadImage(image) {
+    const data = new FormData()
+    data.append("file", image)
+    data.append("upload_preset", "BanLai")
+    data.append("cloud_name", "BanLai")
+    try {
+      const response = await fetch("https://api.cloudinary.com/v1_1/BanLai/image/upload", {
+        method: "post",
+        body: data
+      })
+      const json = await response.json();
+      const url = {
+        url: json.secure_url
+      }
+      images.push(url)
+    } catch (error) {
+      console.log('error: ', error)
+    }
+  }
+
   const zmproute = zmp.views.main.router.currentRoute;
   const [districtOptions, setDistrictOptions] = useState(getDistricts("Hồ Chí Minh"));
   const u = useStore('u')
   const {
     register,
+    getValues,
     handleSubmit,
-    formState: { errors },
+    formState: {errors},
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    const zmprouter = zmp.views.main.router;
+    const files = getValues("images")
+    for (const file of files) {
+      await uploadImage(file)
+    }
+    console.log("image array:", images)
     data = {
       ...data,
+      images: images,
       category: zmproute.query?.category,
       subCategory: zmproute.query?.subcategory,
       zaloId: u.zaloId,
     };
-    store.dispatch("createPost", { data });
+    await store.dispatch("createPost", {data});
+    zmprouter.navigate(
+      {
+        path: "/post-detail",
+      },
+      { transition: "zmp-push" }
+    );
+
   };
   const handleChangeDistrictList = (e) => {
     setDistrictOptions(getDistricts(e.target.value));
   };
   return (
     <Page name="create-post">
-      <NavbarBack title="Tạo tin đăng" linkLeft={"/choose-subcategory/"} />
+      <NavbarBack title="Tạo tin đăng" linkLeft={"/choose-subcategory/"}/>
       <Box px={4}>
         <CategoryBox
           category={zmproute.query?.category}
@@ -41,7 +78,7 @@ export default () => {
 
         <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
           <Title bold>Hình ảnh và mô tả</Title>
-          <input {...register("images")} type="file" multiple />
+          <input {...register("images")} type="file" multiple/>
           <Title size="small" style={{}}>
             Thêm ảnh rao bán (tối đa 10 ảnh) *
           </Title>
@@ -57,7 +94,7 @@ export default () => {
             errorMessage={errors?.title && errors?.title.message}
           />
           <CustomInput
-            {...register("price", { required: "Vui lòng nhập giá rao bán" })}
+            {...register("price", {required: "Vui lòng nhập giá rao bán"})}
             placeholder="Nhập giá rao bán"
             label="Giá rao bán"
             compulsory

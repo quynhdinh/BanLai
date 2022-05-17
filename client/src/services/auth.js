@@ -18,23 +18,6 @@ export const request = async (method, url, data) => {
   })
 }
 
-export const requestFormData = async (method, url, data) => {
-  console.log(data)
-  var formData = serialize(data)
-  const headers = {}
-  const token = store.state.jwt
-  if (token) {
-    headers.Authorization = `Bearer ${token}`
-  }
-
-  return fetch(`${base}/${url}`, {
-    method: method,
-    body: formData,
-    headers
-  })
-}
-
-
 export const login = async (accessToken) => {
   try {
     const response = await (await request('POST', 'users/login', {
