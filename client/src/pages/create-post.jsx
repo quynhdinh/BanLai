@@ -4,34 +4,12 @@ import NavbarBack from "../components/navbar-back";
 import {useForm} from "react-hook-form";
 import CustomInput, {Select} from "../components/Input";
 import TextArea from "../components/Input/text-area";
-import {
-  airConditionerCoolingCapacity,
-  airConditionerManufacturer,
-  fridgeManufacturer,
-  fridgeVolume,
-  laptopCPU,
-  laptopGPU,
-  laptopHHD,
-  laptopManufacturer,
-  laptopRAM,
-  laptopScreen,
-  phoneColor,
-  phoneManufacturer,
-  phoneStorage,
-  tabletManufacturer,
-  tabletScreen,
-  tabletSIM,
-  tabletStorage,
-  televisionManufacturer,
-  washingMachineCapacity,
-  washingMachineDoor,
-  washingMachineManufacturer
-} from "../data/subcategory-details";
+import {airConditionerCoolingCapacity, airConditionerManufacturer, fridgeManufacturer, fridgeVolume, laptopCPU, laptopGPU, laptopHHD, laptopManufacturer, laptopRAM, laptopScreen, phoneColor, phoneManufacturer, phoneStorage, tabletManufacturer, tabletScreen, tabletSIM, tabletStorage, televisionManufacturer, washingMachineCapacity, washingMachineDoor, washingMachineManufacturer} from "../data/subcategory-details";
 import store from "../store";
 import CategoryBox from "../components/category-box";
 import {getCities, getDistricts, getHints} from "../services/get_data";
 
-const createPostPage = () => {
+export default () => {
   //upload image to cloudinary
   const images = []
   async function uploadImage(image) {
@@ -349,4 +327,3 @@ const createPostPage = () => {
     </Page>
   );
 };
-export default createPostPage;
