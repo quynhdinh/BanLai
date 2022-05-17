@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const {Schema} = mongoose;
 
 const schema = new mongoose.Schema({
     owner: {type: String, required: true},
