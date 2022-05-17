@@ -1,5 +1,15 @@
-import React, { useEffect } from "react";
-import {Page, Navbar, Swiper, SwiperSlide, Text, Title, useStore, Box, GridItem} from "zmp-framework/react";
+import React, { useEffect, useState } from "react";
+import {
+  Page,
+  Navbar,
+  Swiper,
+  SwiperSlide,
+  Text,
+  Title,
+  useStore,
+  Box,
+  GridItem,
+} from "zmp-framework/react";
 import "../css/swiper.css";
 import store from "../store";
 import MessageBox from "../components/message-box";
@@ -14,11 +24,34 @@ import HeartIcon from "../components/heart-icon";
 
 const linkItems = [zalo, facebook, messenger, link];
 export default () => {
+  const [preTime, setPreTime] = useState(0);
   const postDetails = useStore("postDetails");
   const viewingPostId = useStore("viewingPostId");
   useEffect(() => {
     store.dispatch("fetchPostDetail", { id: viewingPostId });
   }, []);
+
+  const handleLikeUnlike = (postDetails) => {
+    const nowTime = Date.now();
+    setPreTime(nowTime);
+    if (nowTime - preTime < 250) {
+      return;
+    }
+    if (postDetails.isLiked === 0) {
+      store.dispatch("fakeLikeUnlikePostList", {
+        postId: postDetails._id,
+        isLiked: postDetails.isLiked,
+      });
+      store.dispatch("likePost", { postId: postDetails._id });
+    } else {
+      store.dispatch("fakeLikeUnlikePostList", {
+        postId: postDetails._id,
+        isLiked: postDetails.isLiked,
+      });
+      store.dispatch("unlikePost", { postId: postDetails._id });
+    }
+  };
+
   return (
     <Page name="post-detail">
       <Navbar backLink="Back" />
@@ -35,10 +68,18 @@ export default () => {
         <Title className="item-name" size={"normal"} bold>
           {postDetails.title}
         </Title>
-        <Title className="item-price" bold>
-          {moneyFormat(postDetails.price)}
-        </Title>
-        <HeartIcon isLiked={postDetails.isLiked}/>
+        <Box m={0} flex>
+          <Title className="item-price" bold style={{ flex: 1 }}>
+            {moneyFormat(postDetails.price)}
+          </Title>
+          <HeartIcon
+            isLiked={postDetails.isLiked}
+            handleLikeUnlike={(e) => {
+              e.stopPropagation();
+              return handleLikeUnlike(postDetails);
+            }}
+          />
+        </Box>
         <Box flexDirection="row" m={0}>
           <PostTag>
             {postDetails.district}, {postDetails.city}

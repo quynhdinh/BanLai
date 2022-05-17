@@ -126,7 +126,7 @@ const store = createStore({
       state.houseItems = await getPostsByCategory(1);
       state.loadingFlag = false;
     },
-    async fetchHottestItems({state}) {
+    async fetchHottestItems({ state }) {
       state.loadingFlag = true;
       while (!state.jwt) {
         await new Promise((resolve) => setTimeout(resolve, 100));
@@ -140,7 +140,7 @@ const store = createStore({
       state.postDetails = await getPostDetails(id);
       state.loadingFlag = false;
     },
-    async createPost({_state}, {data}) {
+    async createPost({ _state }, { data }) {
       const response = await createPost(data);
       console.log("here", response);
     },
@@ -173,16 +173,16 @@ const store = createStore({
       state.userPosts = await getUserPosts();
       state.loadingFlag = false;
     },
-    async closePost({_state}, postId) {
+    async closePost({ _state }, postId) {
       const errorCode = await closePost(postId);
       if (errorCode === 0) {
-        store.dispatch('fetchUserPosts')
+        store.dispatch("fetchUserPosts");
       }
     },
-    async repostPost({_state}, postId) {
+    async repostPost({ _state }, postId) {
       const errorCode = await repostPost(postId);
       if (errorCode === 0) {
-        store.dispatch('fetchUserPosts')
+        store.dispatch("fetchUserPosts");
       }
     },
     async likePost({ state }, data) {
@@ -236,6 +236,9 @@ const store = createStore({
         return item;
       });
       state.houseItems = newHouseList;
+      const newPostDetails = state.postDetails;
+      newPostDetails.isLiked = data.isLiked === 1 ? 0 : 1;
+      state.postDetails = newPostDetails;
     },
   },
 });
