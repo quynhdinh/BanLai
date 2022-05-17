@@ -1,0 +1,17 @@
+POST http://localhost:5000/api/viewedposts
+Content-Type: application/json
+
+{
+  "postId": "625fbab0802e34fc55a25341",
+  "zaloId": "3024770787876860996"
+}
+
+###
+POST http://localhost:5000/api/viewedposts/count/625fbab0802e34fc55a25341
+Content-Type: application/json
+
+{
+  "postId": "625fbab0802e34fc55a25341",
+  "zaloId": "3024770787876860996"
+}
+
