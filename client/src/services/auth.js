@@ -1,6 +1,5 @@
 import config from '../config'
 import store from '../store'
-import {serialize} from './form_data'
 
 const base = config.BASE_URL
 
