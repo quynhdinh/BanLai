@@ -6,16 +6,16 @@ if (!fs.existsSync("./uploads")) {
 }
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: function (_req, _file, cb) {
         cb(null, "./uploads");
     },
-    filename: function (req, file, cb) {
+    filename: function (_req, _file, cb) {
         cb(null, file.originalname);
     },
 });
 
 
-const fileFilter = (req, file, cb) => {
+const fileFilter = (_req, file, cb) => {
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
         cb(null, true)
     } else {

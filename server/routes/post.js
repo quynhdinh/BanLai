@@ -1,16 +1,10 @@
 const express = require('express');
 const db = require('../models');
 const {validationResult} = require('express-validator');
-const AuthService = require("../services/auth-service");
 const {postValidate} = require("../helpers/post-validator");
 const router = express.Router();
-// router.use(AuthService.verify);
-const upload = require('../services/multer')
-const cloudinary = require('../services/cloudinary')
-const fs = require('fs');
 
-
-router.post('/', upload.array("images", 4), postValidate.validateCreatePost(), async (req, res) => {
+router.post('/', postValidate.validateCreatePost(), async (req, res) => {
   try {
     const {
       category, subCategory, zaloId, city, district, images, condition,
@@ -18,12 +12,6 @@ router.post('/', upload.array("images", 4), postValidate.validateCreatePost(), a
     } = req.body
 
     const errors = validationResult(req);
-    if (Object.keys(req.files).length === 0) {
-      return res.send({
-        error: 1,
-        massage: 'Hình ảnh không được để trống',
-      })
-    }
     if (!errors.isEmpty()) {
       return res.send({
         error: 1,
@@ -32,7 +20,7 @@ router.post('/', upload.array("images", 4), postValidate.validateCreatePost(), a
       })
     }
 
-    let post = new db.Posts({
+    let post = await db.Posts.create({
       zaloId,
       category,
       subCategory,
@@ -42,19 +30,6 @@ router.post('/', upload.array("images", 4), postValidate.validateCreatePost(), a
       productDetails
     });
 
-    const uploader = async (path) => await cloudinary.uploads(path, 'Images');
-
-    const urls = []
-    const files = req.files;
-    for (const file of files) {
-      const {path} = file;
-      const newPath = await uploader(path)
-      urls.push(newPath)
-      fs.unlinkSync(path)
-    }
-    post['images'] = urls; // add the urls to object
-
-    await post.save();
     res.send({
       error: 0,
       msg: 'Tạo bài thành công!',

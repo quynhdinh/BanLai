@@ -5,8 +5,7 @@ import store from "../store";
 import Category from "../components/Categories/Category";
 import Loading from "../components/Loading";
 
-
-const electronicListPage = () => {
+export default () => {
   const zmproute = zmp.views.main.router;
 
   function postFilter() {
@@ -49,5 +48,3 @@ const electronicListPage = () => {
     </Page>
   )
 }
-
-export default electronicListPage;

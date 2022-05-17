@@ -6,14 +6,14 @@ import Category from "../components/Categories/Category";
 import store from "../store";
 import Loading from "../components/Loading";
 
-const houseItemListPage = () => {
+export default () => {
   const [keyword, setKeyword] = useState('')
   const houseItems = useStore('houseItems')
   const loading = useStore("loadingFlag");
 
   useEffect(() => {
-        store.dispatch('fetchHouseItems')
-    }, [])
+    store.dispatch('fetchHouseItems')
+  }, [])
   return (
     <Page pageContent={false}
           name="house-item-list"
@@ -44,5 +44,3 @@ const houseItemListPage = () => {
     </Page>
   )
 }
-
-export default houseItemListPage;

@@ -5,7 +5,7 @@ import {Category} from "../components/Categories";
 import store from "../store";
 import Loading from "../components/loading";
 
-const managePostPage = ({zmproute}) => {
+export default () => {
   const careList = useStore("careList");
   const loading = useStore("loadingFlag");
 
@@ -36,4 +36,3 @@ const managePostPage = ({zmproute}) => {
     </Page>
   );
 };
-export default managePostPage;

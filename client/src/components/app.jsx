@@ -6,7 +6,7 @@ import {
 } from 'zmp-framework/react';
 import store from '../store';
 
-const MyApp = () => {
+export default () => {
 
   // ZMP Parameters
   const zmpparams = {
@@ -29,4 +29,3 @@ const MyApp = () => {
     </App>
   );
 }
-export default MyApp;

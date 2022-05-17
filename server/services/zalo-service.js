@@ -14,7 +14,7 @@ service.getZaloProfile = (accessToken) => {
                 fields: 'id,name,birthday,picture'
             },
             json: true
-        }, (error, response, body) => {
+        }, (error, _response, body) => {
             if (error) return reject(error);
             return resolve(body);
         });
@@ -39,7 +39,7 @@ service.sendMessage = (userId, text) => {
                 }
             },
             json: true
-        }, (error, response, body) => {
+        }, (error, _response, body) => {
             if (error) return reject(error);
             return resolve(body);
         });

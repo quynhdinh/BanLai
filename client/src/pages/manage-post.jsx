@@ -6,7 +6,7 @@ import Loading from "../components/Loading";
 import PostItem from "../components/PostItem";
 
 // Trang quản lý bài đăng
-const managePostPage = ({zmproute}) => {
+export default ({zmproute}) => {
   const userPosts = useStore('userPosts')
   const loading = useStore('loadingFlag')
   const spacing = '20px'
@@ -63,7 +63,7 @@ const managePostPage = ({zmproute}) => {
               <Card inset>
                 {userPosts.filter(function (obj) {
                   const o = JSON.parse(JSON.stringify(obj))
-                  return o.status === "Closed";
+                  return o.status !== "active"; // sold, closed
                 }).map((item, index) => (
                   <PostItem key={index}
                             product={{
@@ -84,4 +84,3 @@ const managePostPage = ({zmproute}) => {
     </Page>
   )
 }
-export default managePostPage

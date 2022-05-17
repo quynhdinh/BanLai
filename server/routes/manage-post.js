@@ -7,8 +7,7 @@ router.use(AuthService.verify);
 
 router.get('/', async (req, res) => {
   try {
-    const zaloId = req.user.zaloId
-    const posts = await db.Posts.find({zaloId: zaloId})
+    const posts = await db.Posts.find({zaloId: req.user.zaloId})
     res.send({
       error: 0,
       msg: 'Lấy danh sách bài đăng thành công',
@@ -24,7 +23,7 @@ router.get('/', async (req, res) => {
 router.put('/repost/:postId', async (req, res) => {
   try {
     const param = req.params["postId"].toString()
-    const p = await db.Posts.findOneAndUpdate({_id: param}, {'status': 'Active'}, {new: true})
+    const p = await db.Posts.findOneAndUpdate({_id: param, zaloId: req.user.zaloId}, {'status': 'active'}, {new: true})
     if (p) {
       res.send({
         error: 0,
@@ -45,8 +44,8 @@ router.put('/repost/:postId', async (req, res) => {
 
 router.put('/close-post/:postId', async (req, res) => {
   try {
-    const param = req.params["postId"].toString()
-    const p = await db.Posts.findOneAndUpdate({_id: param}, {'status': 'Closed'}, {new: true})
+    const postId = req.params["postId"].toString()
+    const p = await db.Posts.findOneAndUpdate({_id: postId,  zaloId: req.user.zaloId}, {'status': 'closed'}, {new: true})
     if (p) {
       res.send({
         error: 0,
@@ -138,7 +137,7 @@ router.get('/hottest-posts/:categoryId', async (req, res) => {
 router.get('/by-category/:categoryId', async (req, res) => {
   try {
     const param = parseInt(req.params["categoryId"])
-    if(param  !== 0 && param !== 1){
+    if (param !== 0 && param !== 1) {
       return res.send({
         error: -1,
         msg: 'Param không hợp lệ'
