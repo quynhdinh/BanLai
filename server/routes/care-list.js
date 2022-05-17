@@ -25,17 +25,29 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const id = req.body.postId
-  const mapping = await db.CarePostMapping.create({
-    zaloId: req.user.zaloId,
-    postId: id
-  })
-  res.send({
-    error: 0,
-    msg: 'Thêm bài đăng vào danh sách quan tâm thành công!',
-    data: mapping,
-  })
-  return res.send({error: 0, msg: 'Success', data: req.user});
+  try {
+    const id = req.body.postId
+    const mapping = await db.CarePostMapping.create({
+      zaloId: req.user.zaloId,
+      postId: id
+    })
+    if (mapping) {
+      res.send({
+        error: 0,
+        msg: 'Thêm bài đăng vào danh sách quan tâm thành công!',
+        data: mapping,
+      })
+    } else {
+      res.send({
+        error: 0,
+        msg: 'Có lỗi thêm vào danh sách quan tâm',
+        data: mapping,
+      })
+    }
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
 });
 
 router.delete('/:postId', async (req, res) => {
