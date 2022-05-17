@@ -23,7 +23,7 @@ export default () => {
     <Page name="post-detail">
       <Navbar backLink="Back" />
       <Box m={0} style={{ position: "relative" }} />
-      <MessageBox isTexted={false} />
+      <MessageBox isTexted={true} />
       <Swiper pagination navigation loop>
         {postDetails.images.map((item, index) => (
           <SwiperSlide key={index}>

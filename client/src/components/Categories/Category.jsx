@@ -1,13 +1,24 @@
-import React from "react";
-import { Card, Icon, Text, Box, Title, zmp } from "zmp-framework/react";
+import React, { useState } from "react";
+import {
+  Card,
+  Icon,
+  Text,
+  Box,
+  Title,
+  zmp,
+  useStore,
+} from "zmp-framework/react";
 import { moneyFormat } from "../../util/number";
 import HeartIcon from "../heart-icon";
 import store from "../../store";
 
 const Category = ({ product, border }) => {
+  const user = useStore("u");
+  const [preTime, setPreTime] = useState(0);
+
   const handleViewDetail = () => () => {
     const zmprouter = zmp.views.main.router;
-    store.dispatch('setViewingPostId', product._id )
+    store.dispatch("setViewingPostId", product._id);
     zmprouter.navigate(
       {
         path: "/post-detail",
@@ -15,6 +26,27 @@ const Category = ({ product, border }) => {
       { transition: "zmp-push" }
     );
   };
+  const handleLikeUnlike = (product) => {
+    const nowTime = Date.now();
+    setPreTime(nowTime);
+    if (nowTime - preTime < 250) {
+      return;
+    }
+    if (product.isLiked == 0) {
+      store.dispatch("fakeLikeUnlikePostList", {
+        postId: product._id,
+        isLiked: product.isLiked,
+      });
+      store.dispatch("likePost", { postId: product._id });
+    } else {
+      store.dispatch("fakeLikeUnlikePostList", {
+        postId: product._id,
+        isLiked: product.isLiked,
+      });
+      store.dispatch("likePost", { postId: product._id });
+    }
+  };
+
   return (
     <div onClick={handleViewDetail()}>
       <Card style={{ padding: 0 }}>
@@ -43,7 +75,7 @@ const Category = ({ product, border }) => {
             style={{ position: "relative" }}
           >
             <img
-              src={product.images[0].url}
+              src={product.images[0]?.url}
               style={{
                 objectFit: "cover",
                 width: 102,
@@ -51,34 +83,7 @@ const Category = ({ product, border }) => {
                 borderRadius: 4,
               }}
             />
-            <Box
-              px={1}
-              m={0}
-              flex
-              alignItems="center"
-              style={{
-                position: "absolute",
-                background: "rgba(0, 0, 0, 0.5)",
-                width: "fit-content",
-                height: 20,
-                top: 4,
-                left: 4,
-                borderRadius: 2,
-              }}
-            >
-              <Icon
-                zmp=" zi-photo "
-                className="text-color-white demo-icon"
-                size={16}
-              />
-              <Text
-                size="xxxsmall"
-                className="text-color-white"
-                style={{ marginBottom: 0, marginLeft: 2 }}
-              >
-                {product.images.length}
-              </Text>
-            </Box>
+            <ImageCount product={product} />
           </Box>
           <Box style={{ flex: 1 }} my={0}>
             <Box p={0} m={0} style={{ height: 48 }}>
@@ -113,11 +118,44 @@ const Category = ({ product, border }) => {
             </Box>
           </Box>
           <Box m={0} style={{ position: "absolute", right: 8, top: 8 }}>
-            <HeartIcon isLiked={product.isLiked} />
+            <HeartIcon
+              isLiked={product.isLiked}
+              handleLikeUnlike={(e) => {
+                e.stopPropagation();
+                return handleLikeUnlike(product);
+              }}
+            />
           </Box>
         </Box>
       </Card>
     </div>
   );
 };
+
+const ImageCount = ({ product }) => (
+  <Box
+    px={1}
+    m={0}
+    flex
+    alignItems="center"
+    style={{
+      position: "absolute",
+      background: "rgba(0, 0, 0, 0.5)",
+      width: "fit-content",
+      height: 20,
+      top: 4,
+      left: 4,
+      borderRadius: 2,
+    }}
+  >
+    <Icon zmp=" zi-photo " className="text-color-white demo-icon" size={16} />
+    <Text
+      size="xxxsmall"
+      className="text-color-white"
+      style={{ marginBottom: 0, marginLeft: 2 }}
+    >
+      {product.images.length}
+    </Text>
+  </Box>
+);
 export default Category;

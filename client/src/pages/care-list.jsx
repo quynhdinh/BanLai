@@ -27,6 +27,7 @@ const managePostPage = ({zmproute}) => {
               title: item.postDetail[0].title,
               district: item.postDetail[0].district,
               city: item.postDetail[0].city,
+              isLiked: item.postDetail[0].isLiked,
             }}
             border
           />
