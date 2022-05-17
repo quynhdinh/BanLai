@@ -13,7 +13,6 @@ import HeartIcon from "../heart-icon";
 import store from "../../store";
 
 const Category = ({ product, border }) => {
-  const user = useStore("u");
   const [preTime, setPreTime] = useState(0);
 
   const handleViewDetail = () => () => {
@@ -32,7 +31,7 @@ const Category = ({ product, border }) => {
     if (nowTime - preTime < 250) {
       return;
     }
-    if (product.isLiked == 0) {
+    if (product.isLiked === 0) {
       store.dispatch("fakeLikeUnlikePostList", {
         postId: product._id,
         isLiked: product.isLiked,
@@ -43,7 +42,7 @@ const Category = ({ product, border }) => {
         postId: product._id,
         isLiked: product.isLiked,
       });
-      store.dispatch("likePost", { postId: product._id });
+      store.dispatch("unlikePost", { postId: product._id });
     }
   };
 
