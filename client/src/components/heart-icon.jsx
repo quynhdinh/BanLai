@@ -6,7 +6,7 @@ const HeartIcon = ({ isLiked, handleLikeUnlike }) => {
     <div onClick={handleLikeUnlike}>
       <Icon
         className="text-color-rl300 demo-icon"
-        zmp={isLiked === true ? "zi-heart-solid" : "zi-heart"}
+        zmp={isLiked === 1 ? "zi-heart-solid" : "zi-heart"}
         size={20}
       />
     </div>
