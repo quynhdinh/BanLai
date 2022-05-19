@@ -1,14 +1,16 @@
 const express = require('express');
 const db = require('../models');
+const AuthService = require("../services/auth-service");
 const {validationResult} = require('express-validator');
 const {postValidate} = require("../helpers/post-validator");
 const router = express.Router();
+router.use(AuthService.verify);
 
 router.post('/', postValidate.validateCreatePost(), async (req, res) => {
   try {
+    const zaloId = req.user.zaloId
     const {
-      category, subCategory, zaloId, city, district, images, condition,
-      title, price, description, productDetails
+      category, subCategory, city, district, images, condition, title, price, description, productDetails
     } = req.body
 
     const errors = validationResult(req);
@@ -19,17 +21,19 @@ router.post('/', postValidate.validateCreatePost(), async (req, res) => {
         data: errors.array()
       })
     }
-
-    let post = await db.Posts.create({
-      zaloId,
-      category,
-      subCategory,
-      city, district,
-      images, condition,
-      title, price, description,
-      productDetails
+    const post = await db.Posts.create({
+      zaloId: zaloId,
+      category: category,
+      subCategory: subCategory,
+      city: city,
+      district: district,
+      images: images,
+      condition: condition,
+      title: title,
+      price: price,
+      description: description,
+      productDetails: productDetails
     });
-
     res.send({
       error: 0,
       msg: 'Tạo bài thành công!',
@@ -46,9 +50,9 @@ router.post('/', postValidate.validateCreatePost(), async (req, res) => {
 router.put('/:postId', async (req, res) => {
   try {
     const param = req.params["postId"].toString()
+    const zaloId = req.user.zaloId
     const {
-      category, subCategory, zaloId, city, district, status, condition,
-      title, price, description, productDetails
+      category, subCategory, city, district, status, condition, title, price, description, productDetails
     } = req.body
     const p = await db.Posts.findByIdAndUpdate({_id: param}, {
         zaloId: zaloId,

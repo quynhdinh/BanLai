@@ -34,7 +34,6 @@ export default () => {
 
   const zmproute = zmp.views.main.router.currentRoute;
   const [districtOptions, setDistrictOptions] = useState(getDistricts("Hồ Chí Minh"));
-  const u = useStore('u')
   const {
     register,
     getValues,
@@ -53,7 +52,6 @@ export default () => {
       images: images,
       category: zmproute.query?.category,
       subCategory: zmproute.query?.subcategory,
-      zaloId: u.zaloId,
     };
     await store.dispatch("createPost", {data});
     zmprouter.navigate(
