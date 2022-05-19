@@ -3,7 +3,7 @@ import { Box, useStore } from "zmp-framework/react";
 import HotItem from "./HotItem";
 import store from "../../store";
 import { ViewedItem } from ".";
-import Loading from "../loading";
+import Loading from "../Loading";
 
 const Categories = () => {
   const loading = useStore("loadingFlag");
