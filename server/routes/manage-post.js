@@ -122,7 +122,7 @@ router.get('/hottest-posts/:categoryId', async (req, res) => {
       })
     const category = (param === 0 ? "Thiết bị điện tử" : "Đồ nội thất và gia dụng")
     const posts = await db.Posts.find({category: category}).sort({createdAt: -1}).limit(4)
-    let postArr = await addIsLiked(req.user.zaloId, posts)
+    const postArr = await addIsLiked(req.user.zaloId, posts)
     res.send({
       error: 0,
       msg: 'Lấy danh sách bài đăng hot thành công',
@@ -145,7 +145,7 @@ router.get('/by-category/:categoryId', async (req, res) => {
     }
     const category = (param === 0 ? "Thiết bị điện tử" : "Đồ nội thất và gia dụng")
     const posts = await db.Posts.find({category: category})
-    let postArr = await addIsLiked(req.user.zaloId, posts)
+    const postArr = await addIsLiked(req.user.zaloId, posts)
     res.send({
       error: 0,
       msg: 'Lấy danh sách bài đăng thành công',

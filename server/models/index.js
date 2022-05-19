@@ -21,5 +21,5 @@ db.Users = require('./user.js');
 db.Posts = require('./post');
 db.CarePostMapping = require('./care-post-mapping');
 db.Messages = require('./message');
-db.ViewedPost = require('./viewed-post-mapping');
+db.ViewedPostMapping = require('./viewed-post-mapping');
 module.exports = db;

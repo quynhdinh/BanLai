@@ -7,7 +7,7 @@ router.use(AuthService.verify)
 router.post('/', async (req, res) => {
   try {
     const postId = req.body
-    const mapping = await db.ViewedPost.updateOne({
+    const mapping = await db.ViewedPostMapping.updateOne({
       zaloId: req.user.zaloId,
       postId: postId,
     }, {$inc: {count: 1}}, {upsert: true})
@@ -33,7 +33,7 @@ router.post("/count/:postId", async (req, res) => {
   try {
     const postId = req.params["postId"].toString()
     const count =
-      await db.ViewedPost
+      await db.ViewedPostMapping
       .find({zaloId: req.user.zaloId, postId: postId}, {count: 1, _id: 0})
       .select("count")
     res.send({error: 0, msg: 'Thành công', data: count[0].count});
