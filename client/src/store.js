@@ -1,19 +1,11 @@
-import { createStore } from "zmp-core/lite";
-import { getAccessToken } from "./services/zalo";
-import { loadUserFromCache } from "./services/storage";
-import { getCurrentUser, login } from "./services/auth";
-import { getFakeProducts, getFakeUsers } from "./services/get_data";
-import { getMessages } from "./services/message";
-import {
-  closePost,
-  createPost,
-  getHottestPosts,
-  getPostDetails,
-  getPostsByCategory,
-  getUserPosts,
-  repostPost,
-} from "./services/post";
-import { getCareList, likePost, unlikePost } from "./services/care-list";
+import {createStore} from "zmp-core/lite";
+import {getAccessToken} from "./services/zalo";
+import {loadUserFromCache} from "./services/storage";
+import {getCurrentUser, login} from "./services/auth";
+import {getFakeProducts, getFakeUsers} from "./services/get_data";
+import {getMessages} from "./services/message";
+import {closePost, createPost, getHottestPosts, getPostDetails, getPostsByCategory, getUserPosts, repostPost,} from "./services/post";
+import {getCareList, likePost, unlikePost} from "./services/care-list";
 
 const store = createStore({
   state: {
@@ -186,27 +178,13 @@ const store = createStore({
       }
     },
     async likePost({ _state }, data) {
-      const response = await likePost(data);
-      console.log("like post response", response);
+      await likePost(data);
     },
     async unlikePost({ _state }, data) {
-      const response = await unlikePost(data);
-      console.log("unlike post response", response);
+      await unlikePost(data);
     },
     async fakeLikeUnlikePostList({ state }, data) {
-      const newHotElectronicList = state.hottestElectronicItems.map(
-        item => {
-          if (item._id === data.postId) {
-            return {
-              ...item,
-              isLiked: data.isLiked === 1 ? 0 : 1,
-            };
-          }
-          return item;
-        }
-      );
-      state.hottestElectronicItems = newHotElectronicList;
-      const newHottestHouseList = state.hottestHouseItems.map(item => {
+      const processItem = (item) => {
         if (item._id === data.postId) {
           return {
             ...item,
@@ -214,28 +192,11 @@ const store = createStore({
           };
         }
         return item;
-      });
-      state.hottestHouseItems = newHottestHouseList;
-      const newElectronicList = state.electronicItems.map(item => {
-        if (item._id === data.postId) {
-          return {
-            ...item,
-            isLiked: data.isLiked === 1 ? 0 : 1,
-          };
-        }
-        return item;
-      });
-      state.electronicItems = newElectronicList;
-      const newHouseList = state.houseItems.map(item => {
-        if (item._id === data.postId) {
-          return {
-            ...item,
-            isLiked: data.isLiked === 1 ? 0 : 1,
-          };
-        }
-        return item;
-      });
-      state.houseItems = newHouseList;
+      }
+      state.hottestElectronicItems = state.hottestElectronicItems.map(item => processItem(item));
+      state.hottestHouseItems = state.hottestHouseItems.map(item => processItem(item));
+      state.electronicItems = state.electronicItems.map(item => processItem(item));
+      state.houseItems = state.houseItems.map(item => processItem(item));
       const newPostDetails = state.postDetails;
       newPostDetails.isLiked = data.isLiked === 1 ? 0 : 1;
       state.postDetails = newPostDetails;
