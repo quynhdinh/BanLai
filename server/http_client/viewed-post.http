@@ -15,3 +15,8 @@ Content-Type: application/json
   "zaloId": "3024770787876860996"
 }
 
+###
+GET http://localhost:5000/api/viewedposts
+Content-Type: application/json
+
+###
