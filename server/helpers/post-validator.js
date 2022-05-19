@@ -12,7 +12,7 @@ const validateCreatePost = () => {
   ];
 };
 
-let postValidate = {
+const postValidate = {
   validateCreatePost: validateCreatePost,
 };
 
