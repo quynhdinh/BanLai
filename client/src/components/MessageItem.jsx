@@ -1,10 +1,18 @@
 import React from "react";
-import { Avatar, Text, Title } from "zmp-framework/react";
+import {Avatar, Text, Title} from "zmp-framework/react";
 import { getReadableTimeGap } from "../util/number";
+import api from "zmp-sdk";
 
+const handleOpenChat = (p) => () => {
+  api.openChat({
+    type: 'user',
+    id: p.partner,
+  });
+};
 const MessageItem = ({ product }) => {
   return (
     <div
+      onClick={handleOpenChat(product)}
       className="border-color-nl700"
       style={{
         display: "flex",
