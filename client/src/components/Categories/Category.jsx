@@ -5,8 +5,7 @@ import {
   Text,
   Box,
   Title,
-  zmp,
-  useStore,
+  zmp
 } from "zmp-framework/react";
 import { moneyFormat } from "../../util/number";
 import HeartIcon from "../heart-icon";
@@ -25,24 +24,24 @@ const Category = ({ product, border }) => {
       { transition: "zmp-push" }
     );
   };
-  const handleLikeUnlike = (product) => {
+  const handleLikeUnlike = (post) => {
     const nowTime = Date.now();
     setPreTime(nowTime);
     if (nowTime - preTime < 250) {
       return;
     }
-    if (product.isLiked === 0) {
+    if (post.isLiked === 0) {
       store.dispatch("fakeLikeUnlikePostList", {
-        postId: product._id,
-        isLiked: product.isLiked,
+        postId: post._id,
+        isLiked: post.isLiked,
       });
-      store.dispatch("likePost", { postId: product._id });
+      store.dispatch("likePost", { postId: post._id });
     } else {
       store.dispatch("fakeLikeUnlikePostList", {
-        postId: product._id,
-        isLiked: product.isLiked,
+        postId: post._id,
+        isLiked: post.isLiked,
       });
-      store.dispatch("unlikePost", { postId: product._id });
+      store.dispatch("unlikePost", { postId: post._id });
     }
   };
 

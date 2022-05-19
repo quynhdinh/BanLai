@@ -185,17 +185,17 @@ const store = createStore({
         store.dispatch("fetchUserPosts");
       }
     },
-    async likePost({ state }, data) {
+    async likePost({ _state }, data) {
       const response = await likePost(data);
       console.log("like post response", response);
     },
-    async unlikePost({ state }, data) {
+    async unlikePost({ _state }, data) {
       const response = await unlikePost(data);
       console.log("unlike post response", response);
     },
     async fakeLikeUnlikePostList({ state }, data) {
       const newHotElectronicList = state.hottestElectronicItems.map(
-        (item, i) => {
+        item => {
           if (item._id === data.postId) {
             return {
               ...item,
@@ -206,7 +206,7 @@ const store = createStore({
         }
       );
       state.hottestElectronicItems = newHotElectronicList;
-      const newHottestHouseList = state.hottestHouseItems.map((item, i) => {
+      const newHottestHouseList = state.hottestHouseItems.map(item => {
         if (item._id === data.postId) {
           return {
             ...item,
@@ -216,7 +216,7 @@ const store = createStore({
         return item;
       });
       state.hottestHouseItems = newHottestHouseList;
-      const newElectronicList = state.electronicItems.map((item, i) => {
+      const newElectronicList = state.electronicItems.map(item => {
         if (item._id === data.postId) {
           return {
             ...item,
@@ -226,7 +226,7 @@ const store = createStore({
         return item;
       });
       state.electronicItems = newElectronicList;
-      const newHouseList = state.houseItems.map((item, i) => {
+      const newHouseList = state.houseItems.map(item => {
         if (item._id === data.postId) {
           return {
             ...item,

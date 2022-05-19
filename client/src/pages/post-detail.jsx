@@ -31,24 +31,24 @@ export default () => {
     store.dispatch("fetchPostDetail", { id: viewingPostId });
   }, []);
 
-  const handleLikeUnlike = (postDetails) => {
+  const handleLikeUnlike = (details) => {
     const nowTime = Date.now();
     setPreTime(nowTime);
     if (nowTime - preTime < 250) {
       return;
     }
-    if (postDetails.isLiked === 0) {
+    if (details.isLiked === 0) {
       store.dispatch("fakeLikeUnlikePostList", {
-        postId: postDetails._id,
-        isLiked: postDetails.isLiked,
+        postId: details._id,
+        isLiked: details.isLiked,
       });
-      store.dispatch("likePost", { postId: postDetails._id });
+      store.dispatch("likePost", { postId: details._id });
     } else {
       store.dispatch("fakeLikeUnlikePostList", {
-        postId: postDetails._id,
-        isLiked: postDetails.isLiked,
+        postId: details._id,
+        isLiked: details.isLiked,
       });
-      store.dispatch("unlikePost", { postId: postDetails._id });
+      store.dispatch("unlikePost", { postId: details._id });
     }
   };
 
