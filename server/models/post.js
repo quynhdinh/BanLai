@@ -11,7 +11,6 @@ const postSchema = new mongoose.Schema({
     title: {type: String, required: true},
     price: {type: Number, required: true},
     description: String,
-    viewCount: {type: Number, default: 0},
     productDetails: Object,
     images: [{
         type: Object,

@@ -9,7 +9,6 @@ Content-Type: application/json
 
 
 ###
-#viewCount không cần gửi vì mặc định bằng 0
 POST http://localhost:5000/api/posts
 Content-Type: application/json
 
@@ -49,10 +48,6 @@ Content-Type: application/json
     "color": "xanh"
   }
 }
-
-###
-PUT http://localhost:5000/api/posts/viewCount/624ea0f71e88fd8a60835eff
-Content-Type: application/json
 
 ###
 

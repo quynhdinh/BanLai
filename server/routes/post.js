@@ -75,26 +75,4 @@ router.put('/:postId', async (req, res) => {
   }
 })
 
-router.put('/viewCount/:postId', async (req, res) => {
-  try {
-    const param = req.params["postId"].toString()
-    const p = await db.Posts.findOneAndUpdate({_id: param}, {$inc: {'viewCount': 1}}, {new: true})
-    if (p) {
-      res.send({
-        error: 0,
-        msg: 'Cập nhận lượt xem bài đăng thành công',
-        data: p
-      })
-    } else {
-      res.send({
-        error: -1,
-        msg: 'Không tìm thấy bài đăng',
-      })
-    }
-  } catch (error) {
-    res.send({error: -1, msg: 'Unknown exception'});
-    console.log('API-Exception', error);
-  }
-});
-
 module.exports = router;

@@ -121,7 +121,7 @@ router.get('/hottest-posts/:categoryId', async (req, res) => {
         msg: 'Param không hợp lệ'
       })
     const category = (param === 0 ? "Thiết bị điện tử" : "Đồ nội thất và gia dụng")
-    const posts = await db.Posts.find({category: category}).sort({viewCount: -1}).limit(4)
+    const posts = await db.Posts.find({category: category}).sort({createdAt: -1}).limit(4)
     let postArr = await addIsLiked(req.user.zaloId, posts)
     res.send({
       error: 0,
