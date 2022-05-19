@@ -41,7 +41,7 @@ export default ({zmproute}) => {
               <Card inset>
                 {userPosts.filter(function (obj) {
                   const o = JSON.parse(JSON.stringify(obj))
-                  return o.status === "Active";
+                  return o.status === "active";
                 }).map((item, index) => (
                   <PostItem key={index}
                             product={{
