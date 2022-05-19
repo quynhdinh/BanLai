@@ -6,6 +6,35 @@ const {postValidate} = require("../helpers/post-validator");
 const router = express.Router();
 router.use(AuthService.verify);
 
+router.get('/search', async (req, res) => {
+  try {
+    const filters = req.query;
+    const data = await db.Posts.find();
+    const filteredPosts = data.filter(post => {
+      let isValid = true;
+      for (let key in filters) {
+        if (key == "price") {
+          isValid = isValid && parseInt(post[key]) < parseInt(filters[key]);
+        } else if (key == "keyWord") {
+          console.log("key word:" + filters[key] + ".." + post['title']);
+          isValid = isValid && post['title'].includes(filters[key]);
+        } else {
+          isValid = isValid && post[key] == filters[key];
+        }
+      }
+      return isValid;
+    });
+    res.send({
+      error: 0,
+      msg: 'Lấy danh sách bài đăng thành công',
+      data: filteredPosts,
+    })
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
+})
+
 router.post('/', postValidate.validateCreatePost(), async (req, res) => {
   try {
     const zaloId = req.user.zaloId

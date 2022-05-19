@@ -45,7 +45,7 @@ router.put('/repost/:postId', async (req, res) => {
 router.put('/close-post/:postId', async (req, res) => {
   try {
     const postId = req.params["postId"].toString()
-    const p = await db.Posts.findOneAndUpdate({_id: postId,  zaloId: req.user.zaloId}, {'status': 'closed'}, {new: true})
+    const p = await db.Posts.findOneAndUpdate({_id: postId, zaloId: req.user.zaloId}, {'status': 'closed'}, {new: true})
     if (p) {
       res.send({
         error: 0,
@@ -156,14 +156,4 @@ router.get('/by-category/:categoryId', async (req, res) => {
     console.log('API-Exception', error);
   }
 });
-
-router.get('/search', async (req, res) => {
-  try {
-    const { keyWord, price, category, condition, city, district } = req.query
-    const posts = await db.Posts.find({"keyWord": /m/})
-  } catch(error) {
-    res.send({error: -1, msg: 'Unknown exception'});
-    console.log('API-Exception', error);
-  }
-})
 module.exports = router;
