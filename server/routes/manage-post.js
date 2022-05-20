@@ -77,6 +77,7 @@ router.get('/:postId', async function (req, res) {
     data.picture = u.picture
     data.postCount = postCount
     data.isLiked = await isLiked(zaloId, postId)
+    data.relatedPosts = await db.Posts.find({subCategory: data.subCategory}).sort({createdAt: -1}).limit(5);
     res.send({
       error: 0,
       msg: 'Lấy thông tin bài đăng thành công',
