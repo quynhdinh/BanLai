@@ -9,25 +9,23 @@ router.use(AuthService.verify);
 router.get('/search', async (req, res) => {
   try {
     const filters = req.query;
-    const data = await db.Posts.find();
-    const filteredPosts = data.filter(post => {
+    const allPosts = await db.Posts.find();
+    const filteredPosts = allPosts.filter(post => {
       let isValid = true;
-      for (let key in filters) {
-        if (key == "price") {
-          isValid = isValid && parseInt(post[key]) < parseInt(filters[key]);
-        } else if (key == "keyWord") {
-          console.log("key word:" + filters[key] + ".." + post['title']);
-          isValid = isValid && post['title'].includes(filters[key]);
+      for (let key in filters)
+        if (key === "price") {
+          isValid &= parseInt(post['price']) <= parseInt(filters[key])
+        } else if (key === "keyWord") {
+          isValid &= post['title'].includes(filters[key]);
         } else {
-          isValid = isValid && post[key] == filters[key];
+          isValid &= post[key] === filters[key];
         }
-      }
       return isValid;
     });
     res.send({
       error: 0,
-      msg: 'Lấy danh sách bài đăng thành công',
-      data: filteredPosts,
+      msg: 'Lấy danh sách bài đăng tìm kiếm thành công',
+      data: filteredPosts
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
