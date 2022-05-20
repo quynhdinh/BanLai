@@ -3,7 +3,7 @@ import {Page, useStore} from "zmp-framework/react";
 import NavbarBack from "../components/navbar-back";
 import {Category} from "../components/Categories";
 import store from "../store";
-import Loading from "../components/loading";
+import Loading from "../components/Loading";
 
 export default () => {
   const careList = useStore("careList");
