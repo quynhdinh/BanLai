@@ -45,7 +45,7 @@ router.put('/repost/:postId', async (req, res) => {
 router.put('/close-post/:postId', async (req, res) => {
   try {
     const postId = req.params["postId"].toString()
-    const p = await db.Posts.findOneAndUpdate({_id: postId,  zaloId: req.user.zaloId}, {'status': 'closed'}, {new: true})
+    const p = await db.Posts.findOneAndUpdate({_id: postId, zaloId: req.user.zaloId}, {'status': 'closed'}, {new: true})
     if (p) {
       res.send({
         error: 0,
