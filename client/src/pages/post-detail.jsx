@@ -8,7 +8,7 @@ import {
   Title,
   useStore,
   Box,
-  GridItem,
+  GridItem
 } from "zmp-framework/react";
 import "../css/swiper.css";
 import store from "../store";

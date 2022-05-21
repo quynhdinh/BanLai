@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Page, Button, Box, zmp, Title, useStore} from "zmp-framework/react";
+import {Page, Button, Box, zmp, Title} from "zmp-framework/react";
 import NavbarBack from "../components/navbar-back";
 import {useForm} from "react-hook-form";
 import CustomInput, {Select} from "../components/Input";
@@ -28,7 +28,7 @@ export default () => {
       }
       images.push(url)
     } catch (error) {
-      console.log('error: ', error)
+      console.log('Error when upload file to Cloudinary: ', error)
     }
   }
 
@@ -46,7 +46,7 @@ export default () => {
     for (const file of files) {
       await uploadImage(file)
     }
-    console.log("image array:", images)
+    console.log("image array: ", images)
     data = {
       ...data,
       images: images,

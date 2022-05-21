@@ -2,7 +2,7 @@ const express = require('express');
 const db = require('../models');
 const AuthService = require("../services/auth-service");
 const {validationResult} = require('express-validator');
-const {postValidate} = require("../helpers/post-validator");
+const {validateCreatePost} = require("./helper");
 const router = express.Router();
 router.use(AuthService.verify);
 
@@ -33,7 +33,7 @@ router.get('/search', async (req, res) => {
   }
 })
 
-router.post('/', postValidate.validateCreatePost(), async (req, res) => {
+router.post('/', validateCreatePost(), async (req, res) => {
   try {
     const zaloId = req.user.zaloId
     const {

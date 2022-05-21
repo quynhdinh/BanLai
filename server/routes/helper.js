@@ -1,16 +1,30 @@
 const db = require("../models");
+const {check} = require("express-validator");
 
-async function isLiked(zaloId, postId) {
+const isLiked = async (zaloId, postId) => {
   const entry = await db.CarePostMapping.find({"zaloId": zaloId, "postId": postId})
   return entry ? 1 : 0
-}
+};
 
-async function addIsLiked(zaloId, posts) {
+const addIsLiked = async (zaloId, posts) => {
   const postsArr = JSON.parse(JSON.stringify(posts))
   for (let post of postsArr) {
     const countLikedPost = await db.CarePostMapping.find({"zaloId": zaloId, "postId": post._id}).countDocuments()
     post.isLiked = (countLikedPost > 0 ? 1 : 0)
   }
   return postsArr
-}
-module.exports = {addIsLiked, isLiked};
+};
+
+const validateCreatePost = () => {
+  return [
+    check('category', 'Danh mục không được để trống').notEmpty(),
+    check('subCategory', 'Danh mục chi tiết không được để trống').notEmpty(),
+    check('city', 'Thành phố không được trống').notEmpty(),
+    check('district', 'Quận,huyện không được trống').notEmpty(),
+    check('condition', 'Trạng thái sản phẩm không được để trống').notEmpty(),
+    check('price', 'Giá sản phẩm không được để trống').notEmpty(),
+    check('title', 'Tiêu đề không được để trống').notEmpty(),
+  ];
+};
+
+module.exports = {addIsLiked, isLiked, validateCreatePost};
