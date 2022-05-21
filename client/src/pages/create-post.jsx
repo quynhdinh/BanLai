@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Page, Button, Box, zmp, Title} from "zmp-framework/react";
+import {Page, Button, Box, zmp, Title, useStore, ToastPreloader} from "zmp-framework/react";
 import NavbarBack from "../components/navbar-back";
 import {useForm} from "react-hook-form";
 import CustomInput, {Select} from "../components/Input";
@@ -10,7 +10,7 @@ import CategoryBox from "../components/category-box";
 import {getCities, getDistricts, getHints} from "../services/get_data";
 
 export default () => {
-  //upload image to cloudinary
+  const loading = useStore("loadingFlag");
   const images = []
   async function uploadImage(image) {
     const data = new FormData()
@@ -19,7 +19,7 @@ export default () => {
     data.append("cloud_name", "BanLai")
     try {
       const response = await fetch("https://api.cloudinary.com/v1_1/BanLai/image/upload", {
-        method: "post",
+        method: "POST",
         body: data
       })
       const json = await response.json();
@@ -68,6 +68,7 @@ export default () => {
   return (
     <Page name="create-post">
       <NavbarBack title="Tạo tin đăng" linkLeft={"/choose-subcategory/"}/>
+      <ToastPreloader visible={loading} text='Đăng bài viết'/>
       <Box px={4}>
         <CategoryBox
           category={zmproute.query?.category}

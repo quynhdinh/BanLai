@@ -132,9 +132,10 @@ const store = createStore({
       state.postDetails = await getPostDetails(id);
       state.loadingFlag = false;
     },
-    async createPost({ _state }, { data }) {
-      const response = await createPost(data);
-      console.log("here", response);
+    async createPost({ state }, { data }) {
+      state.loadingFlag = true;
+      await createPost(data);
+      state.loadingFlag = false;
     },
     async login({ dispatch }) {
       const cachedUser = await loadUserFromCache();
