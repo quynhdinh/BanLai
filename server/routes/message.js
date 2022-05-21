@@ -34,9 +34,9 @@ router.post('/', async (req, res) => {
     const {partner, type, postId} = req.body
     const msg = await db.Messages.create({
       owner: req.user.zaloId,
-      partner: partner,
-      type: type,
-      postId: postId
+      partner: partner.toString(),
+      type: type.toString(),
+      postId: postId.toString()
     })
     res.send({
       error: 0,

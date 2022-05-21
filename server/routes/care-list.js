@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const id = req.body.postId
+    const id = req.body.postId.toString()
     const mapping = await db.CarePostMapping.create({
       zaloId: req.user.zaloId,
       postId: id

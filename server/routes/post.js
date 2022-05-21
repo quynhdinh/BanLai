@@ -50,15 +50,15 @@ router.post('/', validateCreatePost(), async (req, res) => {
     }
     const post = await db.Posts.create({
       zaloId: zaloId,
-      category: category,
-      subCategory: subCategory,
-      city: city,
-      district: district,
+      category: category.toString(),
+      subCategory: subCategory.toString(),
+      city: city.toString(),
+      district: district.toString(),
       images: images,
-      condition: condition,
-      title: title,
-      price: price,
-      description: description,
+      condition: condition.toString(),
+      title: title.toString(),
+      price: parseInt(price),
+      description: description.toString(),
       productDetails: productDetails
     });
     res.send({

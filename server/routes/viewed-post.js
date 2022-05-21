@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
     const postId = req.body
     const mapping = await db.ViewedPostMapping.updateOne({
       zaloId: req.user.zaloId,
-      postId: postId,
+      postId: postId.toString(),
     }, {$inc: {count: 1}}, {upsert: true})
     if (mapping) {
       res.send({
