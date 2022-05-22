@@ -2,7 +2,7 @@ import {createStore} from "zmp-core/lite";
 import {getAccessToken} from "./services/zalo";
 import {loadUserFromCache} from "./services/storage";
 import {getCurrentUser, login} from "./services/auth";
-import {getFakeProducts, getFakeUsers} from "./services/data";
+import {getFakeUsers} from "./services/data";
 import {getMessages} from "./services/message";
 import {
   closePost,
@@ -23,7 +23,6 @@ const store = createStore({
     loadingFlag: true,
     u: null,
     fakeUser: getFakeUsers(),
-    products: getFakeProducts(),
     posts: [],
     userPosts: [],
     electronicItems: [],
@@ -79,9 +78,6 @@ const store = createStore({
     fakeUser({state}) {
       return state.fakeUser;
     },
-    products({state}) {
-      return state.products;
-    },
     careList({state}) {
       return state.careList;
     },
@@ -107,9 +103,6 @@ const store = createStore({
     },
     setViewingPostId({state}, postId) {
       state.viewingPostId = postId;
-    },
-    addProduct({state}, product) {
-      state.products = [...state.products, product];
     },
     addCareItem({state}, careItem) {
       state.careList = [...state.careList, careItem];

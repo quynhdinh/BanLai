@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Page, Title, Box, Range, Searchbar, Button} from 'zmp-framework/react';
 import NavbarBack from '../components/navbar-back';
 import {Select} from "../components/Input";
-import {getCities, getDistricts} from "../services/get_data";
+import {getCities, getDistricts} from "../services/data";
 
 export default () => {
   const [districtOptions, setDistrictOptions] = useState(getDistricts("Hồ Chí Minh"));

@@ -1,12 +1,7 @@
-import products from "../data/products.json";
 import users from "../data/users.json";
 import subCategories from "../data/subCategories.json";
 import locations from "../data/locations.json";
 import hints from "../data/input-hints.json";
-
-export const getFakeProducts = () => {
-  return products;
-};
 
 export const getFakeUsers = () => {
   return users;
