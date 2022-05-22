@@ -1,20 +1,32 @@
-import React from 'react';
-import {Page, Title, Box, Range} from 'zmp-framework/react';
+import React, {useState} from 'react';
+import {Page, Title, Box, Range, Searchbar, Button} from 'zmp-framework/react';
 import NavbarBack from '../components/navbar-back';
 import {Select} from "../components/Input";
+import {getCities, getDistricts} from "../services/get_data";
 
-export default () => (
-  <Page name="posts-filter">
-    <NavbarBack title="Tìm kiếm" linkLeft={"/electronic-list"} />
-    <Select
-      label="Danh mục sản phẩm"
-      compulsory
-      option={["Tất cả"]}
-    />
-
-    <Title>
-      Khoảng Giá
-    </Title>
+export default () => {
+  const [districtOptions, setDistrictOptions] = useState(getDistricts("Hồ Chí Minh"));
+  const handleChangeDistrictList = (e) => {
+    setDistrictOptions(getDistricts(e.target.value));
+  };
+  const handleSearchButton = () => {
+  }
+  return (
+    <Page name="posts-filter">
+      <NavbarBack title="Tìm kiếm" linkLeft={"/electronic-list"}/>
+      <Searchbar
+        disableButtonText="Cancel"
+        placeholder="Từ khóa"
+        clearButton={true}
+      ></Searchbar>
+      <Select
+        label="Danh mục sản phẩm"
+        compulsory
+        option={["Tất cả"]}
+      />
+      <Title>
+        Khoảng Giá
+      </Title>
       <Box my='4'>
         <Range
           min={0}
@@ -30,5 +42,28 @@ export default () => (
           }}
         />
       </Box>
-  </Page>
-);
+      <Select
+
+        label="Tình trạng sản phẩm"
+        compulsory
+        option={["Đã qua sử dụng", "Còn mới", "Còn bảo hành"]}
+      />
+      <Select
+
+        label="Tỉnh/Thành phố"
+        compulsory
+        onChange={handleChangeDistrictList}
+        option={getCities()}
+      />
+      <Select
+
+        label="Quận/Huyện"
+        compulsory
+        option={districtOptions}
+      />
+      <Button onClick={handleSearchButton} type="submit" typeName="primary" large responsive>
+        Tìm kiếm
+      </Button>
+    </Page>
+  )
+};
