@@ -1,15 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {
-  Page,
-  Navbar,
-  Swiper,
-  SwiperSlide,
-  Text,
-  Title,
-  useStore,
-  Box,
-  GridItem, Row, Col
-} from "zmp-framework/react";
+import {Page, Navbar, Swiper, SwiperSlide, Text, Title, useStore, Box, GridItem, Row, Col} from "zmp-framework/react";
 import "../css/swiper.css";
 import store from "../store";
 import MessageBox from "../components/message-box";
@@ -18,7 +8,6 @@ import facebook from "../static/icons/Facebook.svg";
 import messenger from "../static/icons/Messenger.svg";
 import link from "../static/icons/Link.svg";
 import {getReadableTimeGap, moneyFormat} from "../util/number";
-import {ViewedItem} from "../components/Categories/";
 import UserCard from "../components/user-card";
 import HeartIcon from "../components/heart-icon";
 import Loading from "../components/Loading";
