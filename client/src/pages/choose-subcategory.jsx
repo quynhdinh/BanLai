@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Page, List, Box, Title, zmp } from "zmp-framework/react";
 import CustomListItem from "../components/custom-listitem";
 import NavbarBack from "../components/navbar-back";
-import { getSubCategories } from "../services/get_data";
+import { getSubCategories } from "../services/data";
 
 export default () => {
   const [subCategoriesList, setSubCategoriesList] = useState([]);

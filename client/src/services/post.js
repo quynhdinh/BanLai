@@ -84,7 +84,6 @@ export const getPostDetails = async (id) => {
 
 export const createPost = async (data) => {
   try {
-    console.log("data before request:", data)
     const url = "api/posts/";
     const response = await (await request("POST", url, data)).json();
     await store.dispatch('setViewingPostId', response.data._id);

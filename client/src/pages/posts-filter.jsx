@@ -9,8 +9,6 @@ export default () => {
   const handleChangeDistrictList = (e) => {
     setDistrictOptions(getDistricts(e.target.value));
   };
-  const handleSearchButton = () => {
-  }
   return (
     <Page name="posts-filter">
       <NavbarBack title="Tìm kiếm" linkLeft={"/electronic-list"}/>
@@ -18,7 +16,7 @@ export default () => {
         disableButtonText="Cancel"
         placeholder="Từ khóa"
         clearButton={true}
-      ></Searchbar>
+      />
       <Select
         label="Danh mục sản phẩm"
         compulsory
@@ -43,20 +41,17 @@ export default () => {
         />
       </Box>
       <Select
-
         label="Tình trạng sản phẩm"
         compulsory
         option={["Đã qua sử dụng", "Còn mới", "Còn bảo hành"]}
       />
       <Select
-
         label="Tỉnh/Thành phố"
         compulsory
         onChange={handleChangeDistrictList}
         option={getCities()}
       />
       <Select
-
         label="Quận/Huyện"
         compulsory
         option={districtOptions}
