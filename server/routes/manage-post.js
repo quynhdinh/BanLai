@@ -23,7 +23,10 @@ router.get('/', async (req, res) => {
 router.put('/repost/:postId', async (req, res) => {
   try {
     const param = req.params["postId"].toString()
-    const p = await db.Posts.findOneAndUpdate({_id: param, zaloId: req.user.zaloId}, {'status': 'active'}, {new: true})
+    const p = await db.Posts.findOneAndUpdate({
+      _id: param,
+      zaloId: req.user.zaloId
+    }, {'status': 'active'}, {new: true})
     if (p) {
       res.send({
         error: 0,
@@ -45,7 +48,10 @@ router.put('/repost/:postId', async (req, res) => {
 router.put('/close-post/:postId', async (req, res) => {
   try {
     const postId = req.params["postId"].toString()
-    const p = await db.Posts.findOneAndUpdate({_id: postId, zaloId: req.user.zaloId}, {'status': 'closed'}, {new: true})
+    const p = await db.Posts.findOneAndUpdate({
+      _id: postId,
+      zaloId: req.user.zaloId
+    }, {'status': 'closed'}, {new: true})
     if (p) {
       res.send({
         error: 0,
@@ -122,7 +128,7 @@ router.get('/hottest-posts/:categoryId', async (req, res) => {
         msg: 'Param không hợp lệ'
       })
     const category = (param === 0 ? "Thiết bị điện tử" : "Đồ nội thất và gia dụng")
-    const posts = await db.Posts.find({category: category}).sort({createdAt: -1}).limit(4)
+    const posts = await db.Posts.find({category: category, status: "active"}).sort({createdAt: -1}).limit(4)
     const postArr = await addIsLiked(req.user.zaloId, posts)
     res.send({
       error: 0,
@@ -145,7 +151,7 @@ router.get('/by-category/:categoryId', async (req, res) => {
       })
     }
     const category = (param === 0 ? "Thiết bị điện tử" : "Đồ nội thất và gia dụng")
-    const posts = await db.Posts.find({category: category})
+    const posts = await db.Posts.find({category: category, status: "active"})
     const postArr = await addIsLiked(req.user.zaloId, posts)
     res.send({
       error: 0,
