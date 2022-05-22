@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import {
   Page,
   Navbar,
@@ -8,7 +8,7 @@ import {
   Title,
   useStore,
   Box,
-  GridItem
+  GridItem, Row, Col
 } from "zmp-framework/react";
 import "../css/swiper.css";
 import store from "../store";
@@ -17,10 +17,12 @@ import zalo from "../static/icons/Zalo.svg";
 import facebook from "../static/icons/Facebook.svg";
 import messenger from "../static/icons/Messenger.svg";
 import link from "../static/icons/Link.svg";
-import { getReadableTimeGap, moneyFormat } from "../util/number";
-import { ViewedItem } from "../components/Categories/";
+import {getReadableTimeGap, moneyFormat} from "../util/number";
+import {ViewedItem} from "../components/Categories/";
 import UserCard from "../components/user-card";
 import HeartIcon from "../components/heart-icon";
+import Loading from "../components/Loading";
+import Category from "../components/Categories/Category";
 
 const linkItems = [zalo, facebook, messenger, link];
 export default () => {
@@ -28,7 +30,7 @@ export default () => {
   const postDetails = useStore("postDetails");
   const viewingPostId = useStore("viewingPostId");
   useEffect(() => {
-    store.dispatch("fetchPostDetail", { id: viewingPostId });
+    store.dispatch("fetchPostDetail", {id: viewingPostId});
   }, []);
 
   const handleLikeUnlike = (details) => {
@@ -42,25 +44,25 @@ export default () => {
         postId: details._id,
         isLiked: details.isLiked,
       });
-      store.dispatch("likePost", { postId: details._id });
+      store.dispatch("likePost", {postId: details._id});
     } else {
       store.dispatch("fakeLikeUnlikePostList", {
         postId: details._id,
         isLiked: details.isLiked,
       });
-      store.dispatch("unlikePost", { postId: details._id });
+      store.dispatch("unlikePost", {postId: details._id});
     }
   };
 
   return (
     <Page name="post-detail">
-      <Navbar backLink="Back" />
-      <Box m={0} style={{ position: "relative" }} />
-      <MessageBox isTexted={true} />
+      <Navbar backLink="Back"/>
+      <Box m={0} style={{position: "relative"}}/>
+      <MessageBox isTexted={true}/>
       <Swiper pagination navigation loop>
         {postDetails.images.map((item, index) => (
           <SwiperSlide key={index}>
-            <img src={item.url} />
+            <img src={item.url}/>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -69,7 +71,7 @@ export default () => {
           {postDetails.title}
         </Title>
         <Box m={0} flex>
-          <Title className="item-price" bold style={{ flex: 1 }}>
+          <Title className="item-price" bold style={{flex: 1}}>
             {moneyFormat(postDetails.price)}
           </Title>
           <HeartIcon
@@ -111,29 +113,49 @@ export default () => {
           title="Mô tả sản phẩm"
           description={postDetails.description}
         />
-        <SharePost />
+        <SharePost/>
       </Box>
-      <SellerInfo postDetails={postDetails} />
-      <Box ml={5} style={{ paddingBottom: 200 }}>
+      <SellerInfo postDetails={postDetails}/>
+      <Box ml={5} style={{paddingBottom: 200}}>
         <Title bold>Sản phẩm tương tự</Title>
-        <ViewedItem />
+        {postDetails.relatedPosts ? (
+          <RelatedPosts relatedPosts={postDetails.relatedPosts}/>) : <Loading/>
+        }
       </Box>
     </Page>
   );
 };
 
-const Description = ({ title, description }) => (
+const RelatedPosts = ({relatedPosts}) => (
+  <Box className="product-row" p={1}>
+    <Row
+      style={{
+        width: `calc(${relatedPosts.length * 80}vw - ${
+          relatedPosts.length * 20
+        }px + ${(relatedPosts.length - 1) * 8}px)`,
+      }}
+    >
+      {relatedPosts.map((post) => (
+        <Col key={post._id} className="product-column">
+          <Category product={post}/>
+        </Col>
+      ))}
+    </Row>
+  </Box>
+)
+
+const Description = ({title, description}) => (
   <>
     <Title size="small" bold>
       {title}
     </Title>
-    <Text size="xsmall" style={{ whiteSpace: "break-spaces" }}>
+    <Text size="xsmall" style={{whiteSpace: "break-spaces"}}>
       {description}
     </Text>
   </>
 );
 
-const PostTag = ({ children }) => (
+const PostTag = ({children}) => (
   <Text
     size="xxsmall"
     className="r-round bg-color-lg700 text-color-black"
@@ -149,14 +171,14 @@ const PostTag = ({ children }) => (
   </Text>
 );
 
-const DetailsDescription = ({ title, description }) => (
-  <GridItem style={{ padding: 0, alignItems: "flex-start" }}>
+const DetailsDescription = ({title, description}) => (
+  <GridItem style={{padding: 0, alignItems: "flex-start"}}>
     <Text className="text-color-nl500">{title}</Text>
     <Title className="text-color-nl300">{description}</Title>
   </GridItem>
 );
 
-const SellerInfo = ({ postDetails }) => (
+const SellerInfo = ({postDetails}) => (
   <div
     className="border-color-nl700"
     style={{
@@ -183,7 +205,7 @@ const SharePost = () => (
     </Title>
     <Box ml={0} flexDirection="row" alignItems="left" inline>
       {linkItems.map((item, index) => (
-        <img key={index} src={item} style={{ marginRight: 12 }} />
+        <img key={index} src={item} style={{marginRight: 12}}/>
       ))}
     </Box>
   </div>
