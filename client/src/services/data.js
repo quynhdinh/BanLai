@@ -1,11 +1,6 @@
-import users from "../data/users.json";
 import subCategories from "../data/subCategories.json";
 import locations from "../data/locations.json";
 import hints from "../data/input-hints.json";
-
-export const getFakeUsers = () => {
-  return users;
-};
 
 export const getSubCategories = (category) => {
   return subCategories[category];

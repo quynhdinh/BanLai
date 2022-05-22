@@ -2,7 +2,6 @@ import {createStore} from "zmp-core/lite";
 import {getAccessToken} from "./services/zalo";
 import {loadUserFromCache} from "./services/storage";
 import {getCurrentUser, login} from "./services/auth";
-import {getFakeUsers} from "./services/data";
 import {getMessages} from "./services/message";
 import {
   closePost,
@@ -22,7 +21,11 @@ const store = createStore({
     messages: [],
     loadingFlag: true,
     u: null,
-    fakeUser: getFakeUsers(),
+    fakeUser: {
+      displayName: "Thành viên bán lại",
+      avatar: "https://i.imgur.com/aWdfgHg.jpeg",
+      online: true,
+    },
     posts: [],
     userPosts: [],
     electronicItems: [],
@@ -94,7 +97,6 @@ const store = createStore({
         zaloId: u.zaloId,
         displayName: u.name,
         avatar: u.picture,
-        createdAt: u.createdAt,
         online: true,
       };
     },

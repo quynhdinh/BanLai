@@ -15,7 +15,7 @@ import UserCard from "../components/user-card";
 const account = ({ zmproute }) => {
   const fakeUser = useStore("fakeUser");
   const _u = useStore("u");
-  const u = _u ? _u : fakeUser[0];
+  const u = _u ? _u : fakeUser;
 
   return (
     <Page className="page-box page-with-navbar">

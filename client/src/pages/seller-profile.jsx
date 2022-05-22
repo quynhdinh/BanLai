@@ -6,9 +6,8 @@ import UserCard from "../components/user-card";
 
 export default () => {
   const fakeUser = useStore("fakeUser");
-
   const _u = useStore("u");
-  const u = _u ? _u : fakeUser[0];
+  const u = _u ? _u : fakeUser;
 
   return (
     <Page name="seller-profile">
