@@ -1,3 +1,4 @@
+const {adminJs, router} = require('./routes/admin')
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // access origin
 app.use(cors())
 
+app.use(adminJs.options.rootPath, router);
 app.use('/', require('./routes/index'));
 app.use('/apis', require('./routes/index'));
 app.use('/users', require('./routes/users'));
