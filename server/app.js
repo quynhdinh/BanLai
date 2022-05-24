@@ -22,6 +22,7 @@ app.use(cors())
 
 app.use('/', require('./routes/index'));
 app.use('/apis', require('./routes/index'));
+app.use("/admin", require('./routes/admin'));
 app.use('/users', require('./routes/users'));
 app.use('/api/posts', require('./routes/post'));
 app.use('/api/posts', require('./routes/manage-post'));
