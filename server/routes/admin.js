@@ -8,9 +8,8 @@ AdminJS.registerAdapter(AdminJSMongoose)
 
 const adminJs = new AdminJS({
   databases: [mongoose],
-  rootPath: '/admin',
 })
 
 const router = AdminJSExpress.buildRouter(adminJs)
 
-module.exports = {adminJs, router};
+module.exports = router;
