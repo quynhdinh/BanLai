@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { Box, Page, useStore } from "zmp-framework/react";
+import { Box, Navbar, Page, useStore } from "zmp-framework/react";
 import Category from "../components/Categories/Category";
-import NavbarBack from "../components/navbar-back";
 import UserCard from "../components/user-card";
 import store from "../store";
 
@@ -9,11 +8,11 @@ export default () => {
   const sellerInfo = useStore("sellerInfo");
   const zaloId = useStore("viewingZaloId");
   useEffect(() => {
-    store.dispatch("fetchSellerInfo", { zaloId: zaloId });
+    store.dispatch("fetchSellerInfo", zaloId);
   }, []);
   return (
     <Page name="seller-info">
-      <NavbarBack title="Thông tin người bán" />
+      <Navbar title="Thông tin người bán" backLink="Back" />
       <Box
         m={0}
         px={5}

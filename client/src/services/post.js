@@ -96,7 +96,7 @@ export const createPost = async (data) => {
 
 export const getSellerInfo = async (zaloId) => {
   try {
-    const url = "api/posts/by-user/" + zaloId.zaloId;
+    const url = "api/posts/by-user/" + zaloId;
     const response = await (await request("GET", url)).json();
     return response;
   } catch (error) {

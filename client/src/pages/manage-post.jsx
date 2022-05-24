@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import {
   Page,
-  Card,
   Searchbar,
   Box,
   Tabbar,

@@ -40,8 +40,8 @@ export default () => {
 
   const handleViewSellerProfile = ({ zaloId }) => {
     const zmprouter = zmp.views.main.router;
+    store.dispatch("setViewingZaloId", zaloId);
     zmprouter.navigate({ path: "/seller-info" }, { transition: "zmp-push" });
-    store.dispatch("setViewingZaloId", { zaloId: zaloId });
   };
 
   const handleLikeUnlike = (details) => {
