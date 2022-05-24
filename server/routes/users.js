@@ -82,21 +82,19 @@ router.get('/fake/:zaloId', async (req, res) => {
     const zaloIds = users.map(obj => obj.zaloId).filter(id => id !== zaloId)
     const posts = await db.Posts.find({}).select("_id")
     const postIds = posts.map(obj => obj._id)
-    for (let i = 0; i < zaloIds.length; i++) {
-      for (let i = 0; i < 5; i++) {
-        await db.Messages.create({
-          owner: zaloId,
-          partner: zaloIds[Math.floor(Math.random() * zaloIds.length)],
-          type: 0,
-          postId: postIds[Math.floor(Math.random() * postIds.length)]
-        })
-        await db.Messages.create({
-          owner: zaloId,
-          partner: zaloIds[Math.floor(Math.random() * zaloIds.length)],
-          type: 1,
-          postId: postIds[Math.floor(Math.random() * postIds.length)]
-        })
-      }
+    for (let zId of zaloIds) {
+      await db.Messages.create({
+        owner: zaloId,
+        partner: zId,
+        type: 0,
+        postId: postIds[Math.floor(Math.random() * postIds.length)]
+      })
+      await db.Messages.create({
+        owner: zaloId,
+        partner: zId,
+        type: 1,
+        postId: postIds[Math.floor(Math.random() * postIds.length)]
+      })
     }
     return res.send({
       error: 0,
