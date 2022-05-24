@@ -29,12 +29,7 @@ import Loading from "../components/Loading";
 import Category from "../components/Categories/Category";
 
 const linkItems = [zalo, facebook, messenger, link];
-const visits = {
-  "2017-05-05": 2,
-  "2017-05-06": 8,
-  "2017-05-07": 10,
-  "2017-05-08": 1,
-};
+
 export default () => {
   const [preTime, setPreTime] = useState(0);
   const postDetails = useStore("postDetails");
@@ -69,7 +64,6 @@ export default () => {
       store.dispatch("unlikePost", { postId: details._id });
     }
   };
-  console.log(postDetails.productDetails);
 
   return (
     <Page name="post-detail">
