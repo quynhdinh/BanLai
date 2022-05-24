@@ -75,14 +75,14 @@ router.get('/:postId', async function (req, res) {
     const postId = req.params["postId"].toString()
     let _post = await db.Posts.find({_id: postId})
     const data = JSON.parse(JSON.stringify(_post))[0]
-    const zaloId = req.user.zaloId
-    const user = await db.Users.find({zaloId: zaloId})
-    const postCount = await db.Posts.count({zaloId: zaloId})
+    const sellerId = data.zaloId
+    const user = await db.Users.find({zaloId: sellerId})
+    const postCount = await db.Posts.count({zaloId: sellerId})
     const u = JSON.parse(JSON.stringify(user))[0]
     data.name = u.name
     data.picture = u.picture
     data.postCount = postCount
-    data.isLiked = await isLiked(zaloId, postId)
+    data.isLiked = await isLiked(sellerId, postId)
     data.relatedPosts = await db.Posts.find({subCategory: data.subCategory}).sort({createdAt: -1}).limit(5);
     res.send({
       error: 0,
