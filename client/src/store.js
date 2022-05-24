@@ -116,8 +116,8 @@ const store = createStore({
     setViewingPostId({ state }, postId) {
       state.viewingPostId = postId;
     },
-    setViewingZaloId({ state }, zaloId) {
-      state.viewingZaloId = "3024770787876860996";
+    setViewingZaloId({ state }, _zaloId) {
+      state.viewingZaloId = _zaloId;
     },
     addCareItem({ state }, careItem) {
       state.careList = [...state.careList, careItem];

@@ -7,8 +7,6 @@ export const getProductDetailTitle = (title) => {
     return "Dung lượng";
   } else if (title === "screen") {
     return "Màn hình";
-  } else if (title === "screen") {
-    return "Màn hình";
   } else if (title === "volume") {
     return "Dung tích";
   } else if (title === "coolingCapacity") {
