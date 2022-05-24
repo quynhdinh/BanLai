@@ -45,7 +45,7 @@ export default () => {
 
   const handleViewSellerProfile = ({ zaloId }) => {
     const zmprouter = zmp.views.main.router;
-    zmprouter.navigate({ path: "/seller-profile" }, { transition: "zmp-push" });
+    zmprouter.navigate({ path: "/seller-info" }, { transition: "zmp-push" });
     store.dispatch("setViewingZaloId", { zaloId: zaloId });
   };
 

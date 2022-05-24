@@ -100,7 +100,7 @@ export const getSellerInfo = async (zaloId) => {
     const response = await (await request("GET", url)).json();
     return response;
   } catch (error) {
-    console.log("Error fetching posts by category:", error);
+    console.log("Error fetching seller info:", error);
     return [];
   }
 };

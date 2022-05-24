@@ -8,12 +8,11 @@ import store from "../store";
 export default () => {
   const sellerInfo = useStore("sellerInfo");
   const zaloId = useStore("viewingZaloId");
-  console.log("here:,", zaloId);
   useEffect(() => {
     store.dispatch("fetchSellerInfo", { zaloId: zaloId });
   }, []);
   return (
-    <Page name="seller-profile">
+    <Page name="seller-info">
       <NavbarBack title="Thông tin người bán" />
       <Box
         m={0}
