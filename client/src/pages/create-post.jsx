@@ -272,12 +272,12 @@ export default () => {
                 }
               />
               <Select
-                {...register("productDetails.coolingCapacity")}
+                {...register("productDetails.washingCapacity")}
                 label="Khối lượng giặt"
                 option={washingMachineCapacity}
               />
               <Select
-                {...register("productDetails.coolingCapacity")}
+                {...register("productDetails.door")}
                 label="Loại cửa"
                 option={washingMachineDoor}
               />

@@ -1,4 +1,4 @@
-import {request} from "./auth";
+import { request } from "./auth";
 import store from "../store";
 
 export const getPostsByCategory = async (category) => {
@@ -28,7 +28,7 @@ export const getFilteredPosts = async (condition) => {
     let query = "";
     Object.entries(condition).forEach(([key, value]) => {
       console.log(key, value);
-      query += '?' + key + '=' + value
+      query += "?" + key + "=" + value;
     });
     const url = "api/posts/search" + query;
     const response = await (await request("GET", url)).json();
@@ -37,7 +37,7 @@ export const getFilteredPosts = async (condition) => {
     console.log("Error search posts:", error);
     return [];
   }
-}
+};
 
 export const getUserPosts = async () => {
   try {
@@ -86,10 +86,21 @@ export const createPost = async (data) => {
   try {
     const url = "api/posts/";
     const response = await (await request("POST", url, data)).json();
-    await store.dispatch('setViewingPostId', response.data._id);
+    await store.dispatch("setViewingPostId", response.data._id);
     return response.data;
   } catch (error) {
     console.log("Error creating post. Details: ", error);
     return false;
+  }
+};
+
+export const getSellerInfo = async (zaloId) => {
+  try {
+    const url = "api/posts/by-user/" + zaloId.zaloId;
+    const response = await (await request("GET", url)).json();
+    return response;
+  } catch (error) {
+    console.log("Error fetching posts by category:", error);
+    return [];
   }
 };
