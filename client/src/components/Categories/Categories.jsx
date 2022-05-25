@@ -13,7 +13,7 @@ const Categories = () => {
     store.dispatch("fetchHottestItems");
   }, []);
   return (
-    <Box ml={0} mr={0}>
+    <Box ml={0} mr={0} style={{ marginBottom: "50px" }}>
       {loading ? (
         <Loading />
       ) : (

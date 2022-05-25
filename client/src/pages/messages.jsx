@@ -44,7 +44,7 @@ export default ({ zmproute }) => {
           {loading ? (
             <Loading />
           ) : (
-            <Box>
+            <Box style={{ marginBottom: "50px" }}>
               {messages
                 .filter(function (obj) {
                   const o = JSON.parse(JSON.stringify(obj));
