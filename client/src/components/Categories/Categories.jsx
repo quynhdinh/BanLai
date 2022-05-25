@@ -2,15 +2,16 @@ import React, { useEffect } from "react";
 import { Box, useStore } from "zmp-framework/react";
 import HotItem from "./HotItem";
 import store from "../../store";
-import { ViewedItem } from ".";
 import Loading from "../Loading";
 
 const Categories = () => {
   const loading = useStore("loadingFlag");
   const electronicItems = useStore("hottestElectronicItems");
   const houseItems = useStore("hottestHouseItems");
+  const viewedItems = useStore("viewedItems");
   useEffect(() => {
     store.dispatch("fetchHottestItems");
+    store.dispatch("fetchViewedItems");
   }, []);
   return (
     <Box ml={0} mr={0} style={{ marginBottom: "50px" }}>
@@ -32,7 +33,15 @@ const Categories = () => {
           index={1}
         />
       )}
-      <ViewedItem />
+      {loading ? (
+        <Loading/>
+      ) : (
+        <HotItem
+          category="Sản phẩm đã xem"
+          products={viewedItems}
+          index={2}
+        />
+      )}
     </Box>
   );
 };

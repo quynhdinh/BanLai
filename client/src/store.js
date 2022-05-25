@@ -11,7 +11,7 @@ import {
   getPostDetails,
   getPostsByCategory,
   getSellerInfo,
-  getUserPosts,
+  getUserPosts, getViewedPosts,
   repostPost,
 } from "./services/post";
 import { getCareList, likePost, unlikePost } from "./services/care-list";
@@ -33,6 +33,7 @@ const store = createStore({
     houseItems: [],
     hottestElectronicItems: [],
     hottestHouseItems: [],
+    viewedItems: [],
     careList: [],
     postDetails: {
       images: [],
@@ -69,6 +70,9 @@ const store = createStore({
     },
     hottestHouseItems({ state }) {
       return state.hottestHouseItems;
+    },
+    viewedItems({ state }) {
+      return state.viewedItems;
     },
     u({ state }) {
       return state.u;
@@ -142,6 +146,14 @@ const store = createStore({
       }
       state.hottestElectronicItems = await getHottestPosts(0);
       state.hottestHouseItems = await getHottestPosts(1);
+      state.loadingFlag = false;
+    },
+    async fetchViewedItems({ state }) {
+      state.loadingFlag = true;
+      while (!state.jwt) {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      }
+      state.viewedItems = await getViewedPosts();
       state.loadingFlag = false;
     },
     async fetchFilteredPosts({ state }, { condition }) {

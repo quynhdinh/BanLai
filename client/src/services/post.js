@@ -23,6 +23,17 @@ export const getHottestPosts = async (category) => {
   }
 };
 
+export const getViewedPosts = async () => {
+  try {
+    const url = "api/viewedposts/"
+    const response = await (await request("GET", url)).json();
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching viewed posts:", error);
+    return [];
+  }
+};
+
 export const getFilteredPosts = async (condition) => {
   try {
     let query = "";

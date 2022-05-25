@@ -18,7 +18,7 @@ const HotItem = ({ category, products, index}) => {
 
   return (
     <Box m={0}>
-      <Box m={0} style={{ height: 12 }} className="bg-color-lg600"></Box>
+      <Box m={0} style={{height: 12}} className="bg-color-lg600"/>
       <Box flex ml={4} flexDirection="column">
         <Box m={0} style={{ flex: 1 }}>
           <Title bold>{category}</Title>
