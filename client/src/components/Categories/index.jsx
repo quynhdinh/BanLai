@@ -1,11 +1,11 @@
 import Categories from "./Categories"
 import Category from './Category'
-import HotItem from './HotItem'
+import PostTray from './post-tray'
 import ViewedItem from './ViewedItem'
 
 import './styles.scss'
 
 export {Category}
-export {HotItem}
+export {PostTray}
 export {ViewedItem}
 export default Categories

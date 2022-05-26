@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Title, zmp, Button, Row, Col } from "zmp-framework/react";
 import Category from "./Category";
 
-const HotItem = ({ category, products, index}) => {
+export default ({ category, products, index}) => {
   const zmproute = zmp.views.main.router;
 
   function viewAll() {
@@ -50,11 +50,9 @@ const HotItem = ({ category, products, index}) => {
             borderBottom: "1px solid",
           }}
         >
-          <Button size="xsmall">Xem tất cả</Button>
+          {index === 0 || index === 1 ? <Button size="xsmall">Xem tất cả</Button> : <></>}
         </Box>
       </div>
     </Box>
   );
 };
-
-export default HotItem;
