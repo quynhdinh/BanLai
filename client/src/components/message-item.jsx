@@ -9,7 +9,8 @@ const handleOpenChat = (p) => () => {
     id: p.partner,
   });
 };
-const MessageItem = ({ product }) => {
+
+export default ({ product }) => {
   return (
     <div
       onClick={handleOpenChat(product)}
@@ -38,7 +39,3 @@ const MessageItem = ({ product }) => {
     </div>
   );
 };
-
-MessageItem.displayName = "zmp-message-card";
-
-export default MessageItem;

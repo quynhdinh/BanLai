@@ -4,7 +4,7 @@ import { moneyFormat } from "../util/number";
 import store from "../store";
 import CustomImage from "./custom-image";
 
-const PostItem = ({ product, sold }) => {
+export default ({ product, sold }) => {
   const toast = useRef(null);
 
   function onClickButton() {
@@ -83,7 +83,3 @@ const PostItem = ({ product, sold }) => {
     </div>
   );
 };
-
-PostItem.displayName = "zmp-post-card";
-
-export default PostItem;

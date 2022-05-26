@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  Page,
-  useStore,
-  List,
-  ListItem,
-  Box,
-  Title,
-  Icon,
-} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
+import {Page, useStore, List, ListItem, Box, Title, Icon} from "zmp-framework/react";
 import UserCard from "../components/user-card";
 
 // Trang tài khoản

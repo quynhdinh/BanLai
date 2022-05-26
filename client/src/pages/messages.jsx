@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import {Page, useStore, Tabbar, Link, Tabs, Tab, Box} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import store from "../store";
-import MessageItem from "../components/MessageItem";
+import MessageItem from "../components/message-item";
 import LoadingVertical from "../components/loading-vertical";
 
 //Trang quản lý tin nhắn (Tôi mua/Tôi bán)

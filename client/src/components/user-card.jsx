@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, Box, Text, Title } from "zmp-framework/react";
 
-const UserCard = ({ avatar, displayName, title, postCount }) => {
+export default ({ avatar, displayName, title, postCount }) => {
   return (
     <Box flex m={0}>
       <Avatar src={avatar} />
@@ -16,7 +16,3 @@ const UserCard = ({ avatar, displayName, title, postCount }) => {
     </Box>
   );
 };
-
-UserCard.displayName = "zmp-user-card";
-
-export default UserCard;

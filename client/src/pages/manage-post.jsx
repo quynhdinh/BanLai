@@ -1,24 +1,14 @@
 import React, { useEffect } from "react";
-import {
-  Page,
-  Searchbar,
-  Box,
-  Tabbar,
-  Link,
-  Tabs,
-  Tab,
-  useStore,
-} from "zmp-framework/react";
-import NavigationBar from "../components/NavigationBar";
+import {Page, Searchbar, Box, Tabbar, Link, Tabs, Tab, useStore} from "zmp-framework/react";
 import store from "../store";
-import PostItem from "../components/PostItem";
 import LoadingVertical from "../components/loading-vertical";
+import NavigationBar from "../components/NavigationBar";
+import PostItem from "../components/post-item";
 
 // Trang quản lý bài đăng
 export default ({ zmproute }) => {
   const userPosts = useStore("userPosts");
   const loading = useStore("loadingFlag");
-  const spacing = "20px";
 
   useEffect(() => {
     store.dispatch("fetchUserPosts");
@@ -63,7 +53,6 @@ export default ({ zmproute }) => {
                       price: item.price,
                       title: item.title,
                     }}
-                    marginTop={index === 0 ? "0px" : spacing}
                   />
                 ))}
             </Box>
@@ -88,7 +77,6 @@ export default ({ zmproute }) => {
                       price: item.price,
                       title: item.title,
                     }}
-                    marginTop={index === 0 ? "0px" : spacing}
                     sold
                   />
                 ))}
