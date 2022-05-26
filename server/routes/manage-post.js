@@ -121,19 +121,15 @@ router.get('/by-user/:zaloId', async function (req, res) {
 
 router.get('/hottest-posts/:categoryId', async (req, res) => {
   try {
-    const param = parseInt(req.params["categoryId"])
-    if (param !== 0 && param !== 1)
-      return res.send({
-        error: -1,
-        msg: 'Param không hợp lệ'
-      })
-    const category = (param === 0 ? "Thiết bị điện tử" : "Đồ nội thất và gia dụng")
-    const posts = await db.Posts.find({category: category, status: "active"}).sort({createdAt: -1}).limit(4)
+    const posts = await db.Posts.find({category: "Thiết bị điện tử", status: "active"}).sort({createdAt: -1}).limit(4)
+    const posts2 = await db.Posts.find({category: "Đồ nội thất và gia dụng", status: "active"}).sort({createdAt: -1}).limit(4)
     const postArr = await addIsLiked(req.user.zaloId, posts)
+    const postArr2 = await addIsLiked(req.user.zaloId, posts2)
     res.send({
       error: 0,
       msg: 'Lấy danh sách bài đăng hot thành công',
       data: postArr,
+      data2: postArr2,
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});

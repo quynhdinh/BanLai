@@ -12,11 +12,10 @@ export const getPostsByCategory = async (category) => {
   }
 };
 
-export const getHottestPosts = async (category) => {
+export const getHottestPosts = async () => {
   try {
-    const url = "api/posts/hottest-posts/" + category;
-    const response = await (await request("GET", url)).json();
-    return response.data;
+    const url = "api/posts/hottest-posts/1";
+    return await (await request("GET", url)).json();
   } catch (error) {
     console.log("Error fetching hottest posts:", error);
     return [];
@@ -108,8 +107,7 @@ export const createPost = async (data) => {
 export const getSellerInfo = async (zaloId) => {
   try {
     const url = "api/posts/by-user/" + zaloId;
-    const response = await (await request("GET", url)).json();
-    return response;
+    return await (await request("GET", url)).json();
   } catch (error) {
     console.log("Error fetching seller info:", error);
     return [];

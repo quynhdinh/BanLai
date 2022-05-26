@@ -145,8 +145,9 @@ const store = createStore({
       while (!state.jwt) {
         await new Promise((resolve) => setTimeout(resolve, 100));
       }
-      state.hottestElectronicItems = await getHottestPosts(0);
-      state.hottestHouseItems = await getHottestPosts(1);
+      const response = await getHottestPosts();
+      state.hottestElectronicItems = response.data
+      state.hottestHouseItems = response.data2
       state.loadingFlag = false;
     },
     async fetchViewedItems({ state }) {
