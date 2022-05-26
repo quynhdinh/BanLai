@@ -11,8 +11,9 @@ import {
   getPostDetails,
   getPostsByCategory,
   getSellerInfo,
-  getUserPosts, getViewedPosts,
-  repostPost,
+  getUserPosts,
+  getViewedPosts,
+  repostPost
 } from "./services/post";
 import { getCareList, likePost, unlikePost } from "./services/care-list";
 
@@ -241,13 +242,9 @@ const store = createStore({
       const newPostDetails = state.postDetails;
       newPostDetails.isLiked = data.isLiked === 1 ? 0 : 1;
       state.postDetails = newPostDetails;
-      const newCareList = state.careList.filter((item) => {
-        if (item.postDetail[0]._id === data.postId) {
-          return false;
-        }
-        return true;
+      state.careList = state.careList.filter((item) => {
+        return item.postDetail[0]._id !== data.postId
       });
-      state.careList = newCareList;
     },
     async fetchSellerInfo({ state }, zaloId) {
       state.loadingFlag = true;
