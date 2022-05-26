@@ -3,7 +3,7 @@ import {Box, Page, Searchbar, Tab, useStore, zmp} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import store from "../store";
 import Category from "../components/Categories/Category";
-import Loading from "../components/Loading";
+import LoadingHorizontal from "../components/loading-horizontal";
 
 export default () => {
   const zmproute = zmp.views.main.router;
@@ -33,7 +33,7 @@ export default () => {
       </Box>
       <Tab className="page-content">
         {
-          loading ? <Loading/> :
+          loading ? <LoadingHorizontal/> :
             <Box>
               <div style={{
                 marginBottom: "150px",

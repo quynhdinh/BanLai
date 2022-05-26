@@ -25,7 +25,7 @@ import { getReadableTimeGap, moneyFormat } from "../util/number";
 import { getProductDetailTitle } from "../util/productDetail";
 import UserCard from "../components/user-card";
 import HeartIcon from "../components/heart-icon";
-import Loading from "../components/Loading";
+import LoadingHorizontal from "../components/loading-horizontal";
 import Category from "../components/Categories/Category";
 
 const linkItems = [zalo, facebook, messenger, link];
@@ -125,7 +125,7 @@ export default () => {
         {postDetails.relatedPosts ? (
           <RelatedPosts relatedPosts={postDetails.relatedPosts} />
         ) : (
-          <Loading />
+          <LoadingHorizontal />
         )}
       </Box>
     </Page>

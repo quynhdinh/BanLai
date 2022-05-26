@@ -11,8 +11,8 @@ import {
 } from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import store from "../store";
-import Loading from "../components/Loading";
 import PostItem from "../components/PostItem";
+import LoadingVertical from "../components/loading-vertical";
 
 // Trang quản lý bài đăng
 export default ({ zmproute }) => {
@@ -46,7 +46,7 @@ export default ({ zmproute }) => {
       <Tabs>
         <Tab id="tab-1" className="page-content" tabActive>
           {loading ? (
-            <Loading />
+            <LoadingVertical />
           ) : (
             <Box style={{ marginBottom: "150px" }}>
               {userPosts
@@ -71,7 +71,7 @@ export default ({ zmproute }) => {
         </Tab>
         <Tab id="tab-2" className="page-content">
           {loading ? (
-            <Loading />
+            <LoadingVertical />
           ) : (
             <Box style={{ marginBottom: "150px" }}>
               {userPosts

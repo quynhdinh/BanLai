@@ -1,8 +1,8 @@
 import React from "react";
 import {Box, Col, Row, SkeletonBlock} from "zmp-framework/react";
 
-// Thanh loading chờ load từ server
-const Loading = () => {
+// Thanh loading chờ load từ server hàng ngang
+const LoadingHorizontal = () => {
   return (
     <Box m={0} px={4} pb={2}>
       <Row gap="gap_4" className="mt-4">
@@ -17,4 +17,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default LoadingHorizontal;

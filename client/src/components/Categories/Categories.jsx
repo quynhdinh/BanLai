@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Box, useStore } from "zmp-framework/react";
 import HotItem from "./HotItem";
 import store from "../../store";
-import Loading from "../Loading";
+import LoadingHorizontal from "../loading-horizontal";
 
 const Categories = () => {
   const loading = useStore("loadingFlag");
@@ -16,7 +16,7 @@ const Categories = () => {
   return (
     <Box ml={0} mr={0} style={{ marginBottom: "50px" }}>
       {loading ? (
-        <Loading />
+        <LoadingHorizontal />
       ) : (
         <HotItem
           category="Thiết bị điện tử"
@@ -25,7 +25,7 @@ const Categories = () => {
         />
       )}
       {loading ? (
-        <Loading />
+        <LoadingHorizontal />
       ) : (
         <HotItem
           category="Đồ gia dụng và nội thất"
@@ -34,7 +34,7 @@ const Categories = () => {
         />
       )}
       {loading ? (
-        <Loading/>
+        <LoadingHorizontal/>
       ) : (
         <HotItem
           category="Sản phẩm đã xem"

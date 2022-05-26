@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import {Page, useStore, Tabbar, Link, Tabs, Tab, Box} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import store from "../store";
-import Loading from "../components/Loading";
 import MessageItem from "../components/MessageItem";
+import LoadingVertical from "../components/loading-vertical";
 
 //Trang quản lý tin nhắn (Tôi mua/Tôi bán)
 export default ({ zmproute }) => {
@@ -26,7 +26,7 @@ export default ({ zmproute }) => {
       <Tabs>
         <Tab id="tab-1" className="page-content" tabActive>
           {loading ? (
-            <Loading />
+            <LoadingVertical />
           ) : (
             <Box style={{ marginBottom: "50px" }}>
               {messages
@@ -42,7 +42,7 @@ export default ({ zmproute }) => {
         </Tab>
         <Tab id="tab-2" className="page-content">
           {loading ? (
-            <Loading />
+            <LoadingVertical />
           ) : (
             <Box style={{ marginBottom: "50px" }}>
               {messages

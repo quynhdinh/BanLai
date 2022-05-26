@@ -4,7 +4,7 @@ import NavigationBar from "../components/NavigationBar";
 import PostFilter from "../components/PostFilter";
 import Category from "../components/Categories/Category";
 import store from "../store";
-import Loading from "../components/Loading";
+import LoadingHorizontal from "../components/loading-horizontal";
 
 export default () => {
   const [keyword, setKeyword] = useState('')
@@ -29,7 +29,7 @@ export default () => {
       </Box>
       <Tab className="page-content">
         {
-          loading ? <Loading/> :
+          loading ? <LoadingHorizontal/> :
             <Box>
               <div style={{
                 marginBottom: "150px",
