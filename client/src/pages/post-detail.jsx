@@ -1,19 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  Page,
-  Navbar,
-  Swiper,
-  SwiperSlide,
-  Text,
-  Title,
-  useStore,
-  Box,
-  GridItem,
-  Row,
-  Col,
-  zmp,
-  Grid,
-} from "zmp-framework/react";
+import React, {useEffect, useState} from "react";
+import {Page, Navbar, Swiper, SwiperSlide, Text, Title, useStore, Box, GridItem, Grid, zmp} from "zmp-framework/react";
 import "../css/swiper.css";
 import store from "../store";
 import MessageBox from "../components/message-box";
@@ -26,7 +12,7 @@ import { getProductDetailTitle } from "../util/productDetail";
 import UserCard from "../components/user-card";
 import HeartIcon from "../components/heart-icon";
 import LoadingHorizontal from "../components/loading-horizontal";
-import Category from "../components/Categories/Category";
+import {PostTray} from "../components/Categories";
 
 const linkItems = [zalo, facebook, messenger, link];
 
@@ -120,35 +106,21 @@ export default () => {
           handleViewSellerProfile({ zaloId: postDetails.zaloId });
         }}
       />
-      <Box ml={5} style={{ paddingBottom: 200 }}>
+      <Box ml={5} style={{paddingBottom: 200}}>
         <Title bold>Sản phẩm tương tự</Title>
         {postDetails.relatedPosts ? (
-          <RelatedPosts relatedPosts={postDetails.relatedPosts} />
+          <PostTray
+            category=""
+            products={postDetails.relatedPosts}
+            index={-1}
+          />
         ) : (
-          <LoadingHorizontal />
+          <LoadingHorizontal/>
         )}
       </Box>
     </Page>
   );
 };
-
-const RelatedPosts = ({ relatedPosts }) => (
-  <Box className="product-row" p={1}>
-    <Row
-      style={{
-        width: `calc(${relatedPosts.length * 80}vw - ${
-          relatedPosts.length * 20
-        }px + ${(relatedPosts.length - 1) * 8}px)`,
-      }}
-    >
-      {relatedPosts.map((post) => (
-        <Col key={post._id} className="product-column">
-          <Category product={post} />
-        </Col>
-      ))}
-    </Row>
-  </Box>
-);
 
 const Description = ({ title, description }) => (
   <>

@@ -21,7 +21,7 @@ export default ({ category, products, index}) => {
       <Box m={0} style={{height: 12}} className="bg-color-lg600"/>
       <Box flex ml={4} flexDirection="column">
         <Box m={0} style={{ flex: 1 }}>
-          <Title bold>{category}</Title>
+          {category === "" ? <></> : <Title bold>{category}</Title>}
         </Box>
         <Box className="product-row" p={1}>
           <Row

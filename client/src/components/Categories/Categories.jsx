@@ -39,7 +39,7 @@ const Categories = () => {
         <PostTray
           category="Sản phẩm đã xem"
           products={viewedItems}
-          index={2}
+          index={-1}
         />
       )}
     </Box>
