@@ -124,12 +124,6 @@ const store = createStore({
     setViewingZaloId({ state }, _zaloId) {
       state.viewingZaloId = _zaloId;
     },
-    addCareItem({ state }, careItem) {
-      state.careList = [...state.careList, careItem];
-    },
-    async fetchPosts({ state }, { category }) {
-      state.posts = await getPostsByCategory(category);
-    },
     async fetchElectronicItems({ state }) {
       state.loadingFlag = true;
       state.electronicItems = await getPostsByCategory(0);

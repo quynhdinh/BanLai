@@ -3,7 +3,7 @@ import {Box, Page, Searchbar, Tab, useStore, zmp} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import store from "../store";
 import Category from "../components/Categories/Category";
-import LoadingHorizontal from "../components/loading-horizontal";
+import {LoadingHorizontal} from "../components/loading";
 
 export default () => {
   const zmproute = zmp.views.main.router;

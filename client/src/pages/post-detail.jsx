@@ -11,8 +11,8 @@ import { getReadableTimeGap, moneyFormat } from "../util/number";
 import { getProductDetailTitle } from "../util/productDetail";
 import UserCard from "../components/user-card";
 import HeartIcon from "../components/heart-icon";
-import LoadingHorizontal from "../components/loading-horizontal";
 import {PostTray} from "../components/Categories";
+import {LoadingHorizontal} from "../components/loading";
 
 const linkItems = [zalo, facebook, messenger, link];
 

@@ -3,7 +3,7 @@ import {Page, useStore, Tabbar, Link, Tabs, Tab, Box} from "zmp-framework/react"
 import NavigationBar from "../components/NavigationBar";
 import store from "../store";
 import MessageItem from "../components/message-item";
-import LoadingVertical from "../components/loading-vertical";
+import {LoadingVertical} from "../components/loading";
 
 //Trang quản lý tin nhắn (Tôi mua/Tôi bán)
 export default ({ zmproute }) => {

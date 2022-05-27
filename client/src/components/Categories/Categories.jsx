@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Box, useStore } from "zmp-framework/react";
 import PostTray from "./post-tray";
 import store from "../../store";
-import LoadingHorizontal from "../loading-horizontal";
+import {LoadingHorizontal} from "../loading";
 
 const Categories = () => {
   const loading = useStore("loadingFlag");
