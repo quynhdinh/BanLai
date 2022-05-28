@@ -31,8 +31,7 @@ export default ({ zmproute }) => {
             <Box style={{ marginBottom: "50px" }}>
               {messages
                 .filter(function (obj) {
-                  const o = JSON.parse(JSON.stringify(obj));
-                  return o.type === "0";
+                  return obj.type === "0";
                 })
                 .map((item, index) => (
                   <MessageItem key={index} product={item} />
@@ -47,8 +46,7 @@ export default ({ zmproute }) => {
             <Box style={{ marginBottom: "50px" }}>
               {messages
                 .filter(function (obj) {
-                  const o = JSON.parse(JSON.stringify(obj));
-                  return o.type === "1";
+                  return obj.type === "1";
                 })
                 .map((item, index) => (
                   <MessageItem key={index} product={item} />

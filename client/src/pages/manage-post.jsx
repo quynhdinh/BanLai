@@ -41,8 +41,7 @@ export default ({ zmproute }) => {
             <Box style={{ marginBottom: "150px" }}>
               {userPosts
                 .filter(function (obj) {
-                  const o = JSON.parse(JSON.stringify(obj));
-                  return o.status === "active";
+                  return obj.status === "active";
                 })
                 .map((item, index) => (
                   <PostItem
@@ -65,8 +64,7 @@ export default ({ zmproute }) => {
             <Box style={{ marginBottom: "150px" }}>
               {userPosts
                 .filter(function (obj) {
-                  const o = JSON.parse(JSON.stringify(obj));
-                  return o.status !== "active"; // sold, closed
+                  return obj.status !== "active"; // sold, closed
                 })
                 .map((item, index) => (
                   <PostItem

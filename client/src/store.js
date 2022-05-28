@@ -224,16 +224,11 @@ const store = createStore({
         }
         return item;
       };
-      state.hottestElectronicItems = state.hottestElectronicItems.map((item) =>
-        processItem(item)
-      );
-      state.hottestHouseItems = state.hottestHouseItems.map((item) =>
-        processItem(item)
-      );
-      state.electronicItems = state.electronicItems.map((item) =>
-        processItem(item)
-      );
+      state.hottestElectronicItems = state.hottestElectronicItems.map((item) => processItem(item));
+      state.hottestHouseItems = state.hottestHouseItems.map((item) => processItem(item));
+      state.electronicItems = state.electronicItems.map((item) => processItem(item));
       state.houseItems = state.houseItems.map((item) => processItem(item));
+      state.viewedItems = state.viewedItems.map((item) => processItem(item));
       const newPostDetails = state.postDetails;
       newPostDetails.isLiked = data.isLiked === 1 ? 0 : 1;
       state.postDetails = newPostDetails;

@@ -36,19 +36,11 @@ export default () => {
     if (nowTime - preTime < 250) {
       return;
     }
-    if (details.isLiked === 0) {
-      store.dispatch("fakeLikeUnlikePostList", {
-        postId: details._id,
-        isLiked: details.isLiked,
-      });
-      store.dispatch("likePost", { postId: details._id });
-    } else {
-      store.dispatch("fakeLikeUnlikePostList", {
-        postId: details._id,
-        isLiked: details.isLiked,
-      });
-      store.dispatch("unlikePost", { postId: details._id });
-    }
+    store.dispatch("fakeLikeUnlikePostList", {
+      postId: details._id,
+      isLiked: details.isLiked,
+    });
+    store.dispatch(details.isLiked === 0 ? "likePost" : "unlikePost", {postId: details._id});
   };
 
   return (
