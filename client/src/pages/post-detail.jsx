@@ -13,6 +13,7 @@ import UserCard from "../components/user-card";
 import HeartIcon from "../components/heart-icon";
 import {PostTray} from "../components/Categories";
 import {LoadingHorizontal} from "../components/loading";
+import {updateViewCount} from "../services/viewed-post";
 
 const linkItems = [zalo, facebook, messenger, link];
 
@@ -22,6 +23,7 @@ export default () => {
   const viewingPostId = useStore("viewingPostId");
   useEffect(() => {
     store.dispatch("fetchPostDetail", { id: viewingPostId });
+    store.dispatch("updateViewCount", { postId: viewingPostId });
   }, []);
 
   const handleViewSellerProfile = ({ zaloId }) => {

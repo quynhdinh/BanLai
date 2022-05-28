@@ -16,6 +16,7 @@ import {
   repostPost
 } from "./services/post";
 import { getCareList, likePost, unlikePost } from "./services/care-list";
+import {updateViewCount} from "./services/viewed-post";
 
 const store = createStore({
   state: {
@@ -161,6 +162,9 @@ const store = createStore({
       state.loadingFlag = true;
       state.postDetails = await getPostDetails(id);
       state.loadingFlag = false;
+    },
+    async updateViewCount({state}, {postId}) {
+      await updateViewCount(postId);
     },
     async createPost({ state }, { data }) {
       state.loadingFlag = true;
