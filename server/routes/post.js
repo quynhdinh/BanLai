@@ -28,7 +28,7 @@ router.put('/repost/:postId', async (req, res) => {
     const p = await db.Posts.findOneAndUpdate({
       _id: param,
       zaloId: req.user.zaloId
-    }, {'status': 'active'}, {new: true})
+    }, {'status': 'active'})
     if (p) {
       res.send({
         error: 0,
@@ -54,7 +54,7 @@ router.put('/close-post/:postId', async (req, res) => {
     const p = await db.Posts.findOneAndUpdate({
       _id: postId,
       zaloId: req.user.zaloId
-    }, {'status': 'closed'}, {new: true})
+    }, {'status': 'closed'})
     if (p) {
       res.send({
         error: 0,
