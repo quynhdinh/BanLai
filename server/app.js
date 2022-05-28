@@ -23,9 +23,8 @@ app.use(cors())
 app.use('/', require('./routes/index'));
 app.use('/apis', require('./routes/index'));
 app.use("/admin", require('./routes/admin'));
-app.use('/users', require('./routes/users'));
+app.use('/users', require('./routes/user'));
 app.use('/api/posts', require('./routes/post'));
-app.use('/api/posts', require('./routes/manage-post'));
 app.use('/api/carelist', require('./routes/care-list'));
 app.use('/api/messages', require('./routes/message'));
 app.use('/api/viewedposts', require('./routes/viewed-post'));
