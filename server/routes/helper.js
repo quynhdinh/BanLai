@@ -8,7 +8,7 @@ const isLiked = async (zaloId, postId) => {
 
 const addIsLiked = async (zaloId, posts) => {
   for (let post of posts) {
-    const countLikedPost = await db.CarePostMapping.find({"zaloId": zaloId, "postId": post._id}).countDocuments()
+    const countLikedPost = await db.CarePostMapping.countDocuments({"zaloId": zaloId, "postId": post._id})
     post.isLiked = (countLikedPost > 0 ? 1 : 0)
   }
   return posts

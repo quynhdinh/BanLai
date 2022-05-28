@@ -10,3 +10,9 @@ Content-Type: application/json
 // xem tất cả các post
 GET http://localhost:5000/api/carelist
 Accept: application/json
+
+###
+
+// Xóa khỏi danh sách quan tâm
+DELETE http://localhost:5000/api/carelist/234
+Accept: application/json

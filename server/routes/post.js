@@ -6,6 +6,7 @@ const {validateCreatePost, isLiked, addIsLiked} = require("./helper");
 const router = express.Router();
 router.use(AuthService.verify);
 
+// Lấy danh sách bài đăng
 router.get('/', async (req, res) => {
   try {
     const posts = await db.Posts.find({zaloId: req.user.zaloId})
@@ -20,6 +21,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Active lại 1 bài đăng
 router.put('/repost/:postId', async (req, res) => {
   try {
     const param = req.params["postId"].toString()
@@ -45,6 +47,7 @@ router.put('/repost/:postId', async (req, res) => {
   }
 });
 
+// Đóng 1 bài đăng
 router.put('/close-post/:postId', async (req, res) => {
   try {
     const postId = req.params["postId"].toString()
@@ -70,6 +73,7 @@ router.put('/close-post/:postId', async (req, res) => {
   }
 });
 
+// Lấy thông tin 1 bài đăng
 router.get('/:postId', async (req, res) => {
   try {
     const postId = req.params["postId"].toString()
@@ -116,6 +120,7 @@ router.get('/by-user/:zaloId', async (req, res) => {
   }
 })
 
+// Tìm những bài đăng mới nhất
 router.get('/hottest-posts/:categoryId', async (req, res) => {
   try {
     const posts = await db.Posts.find({category: "Thiết bị điện tử", status: "active"}).sort({createdAt: -1}).limit(4).lean()
@@ -134,6 +139,7 @@ router.get('/hottest-posts/:categoryId', async (req, res) => {
   }
 });
 
+// Tìm kiếm bài đăng theo danh mục
 router.get('/by-category/:categoryId', async (req, res) => {
   try {
     const param = parseInt(req.params["categoryId"])
@@ -157,6 +163,7 @@ router.get('/by-category/:categoryId', async (req, res) => {
   }
 });
 
+// Tìm kiếm bài đăng
 router.get('/search', async (req, res) => {
   try {
     const filters = req.query;
@@ -184,6 +191,7 @@ router.get('/search', async (req, res) => {
   }
 })
 
+// Tạo bài đăng
 router.post('/', validateCreatePost(), async (req, res) => {
   try {
     const {
@@ -223,7 +231,7 @@ router.post('/', validateCreatePost(), async (req, res) => {
   }
 });
 
-//update the post
+// Update bài đăng
 router.put('/:postId', async (req, res) => {
   try {
     const param = req.params["postId"].toString()
