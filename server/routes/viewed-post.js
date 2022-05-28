@@ -52,7 +52,7 @@ router.get('/', async (req, res) => {
       (await db.ViewedPostMapping.find({zaloId: zaloId}, {postId: 1, _id: 0}).sort({count: -1}))
       .map(p => p.postId)
       .map(p => Types.ObjectId(p))
-    const posts = await db.Posts.find({'_id': {$in: filter}})
+    const posts = await db.Posts.find({'_id': {$in: filter}}).lean()
     const response = await addIsLiked(zaloId, posts)
     res.send({
       error: 0,

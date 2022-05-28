@@ -73,21 +73,19 @@ router.put('/close-post/:postId', async (req, res) => {
 router.get('/:postId', async function (req, res) {
   try {
     const postId = req.params["postId"].toString()
-    let _post = await db.Posts.find({_id: postId})
-    const data = JSON.parse(JSON.stringify(_post))[0]
-    const sellerId = data.zaloId
-    const user = await db.Users.find({zaloId: sellerId})
-    const postCount = await db.Posts.count({zaloId: sellerId})
-    const u = JSON.parse(JSON.stringify(user))[0]
-    data.name = u.name
-    data.picture = u.picture
-    data.postCount = postCount
-    data.isLiked = await isLiked(sellerId, postId)
-    data.relatedPosts = await db.Posts.find({subCategory: data.subCategory}).sort({createdAt: -1}).limit(5);
+    const response = await db.Posts.findOne({_id: postId}).lean()
+    const sellerId = response.zaloId
+    const user = await db.Users.findOne({zaloId: sellerId})
+    const postCount = await db.Posts.countDocuments({zaloId: sellerId})
+    response.name = user.name
+    response.picture = user.picture
+    response.postCount = postCount
+    response.isLiked = await isLiked(sellerId, postId)
+    response.relatedPosts = await db.Posts.find({subCategory: response.subCategory}).sort({createdAt: -1}).limit(5);
     res.send({
       error: 0,
       msg: 'Lấy thông tin bài đăng thành công',
-      data: data,
+      data: response,
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
@@ -99,17 +97,16 @@ router.get('/:postId', async function (req, res) {
 router.get('/by-user/:zaloId', async function (req, res) {
   try {
     const zaloId = req.params["zaloId"].toString()
-    let result = await db.Posts.find({zaloId: zaloId})
-    const user = await db.Users.find({zaloId: zaloId})
-    const postCount = await db.Posts.count({zaloId: zaloId})
-    const u = JSON.parse(JSON.stringify(user))[0]
+    const result = await db.Posts.find({zaloId: zaloId})
+    const user = await db.Users.findOne({zaloId: zaloId})
+    const postCount = await db.Posts.countDocuments({zaloId: zaloId})
     res.send({
       error: 0,
       msg: 'Lấy thông tin bài đăng tv thành công',
       data: result,
       extra: {
-        name: u.name,
-        picture: u.picture,
+        name: user.name,
+        picture: user.picture,
         postCount: postCount,
       }
     })
@@ -121,8 +118,8 @@ router.get('/by-user/:zaloId', async function (req, res) {
 
 router.get('/hottest-posts/:categoryId', async (req, res) => {
   try {
-    const posts = await db.Posts.find({category: "Thiết bị điện tử", status: "active"}).sort({createdAt: -1}).limit(4)
-    const posts2 = await db.Posts.find({category: "Đồ nội thất và gia dụng", status: "active"}).sort({createdAt: -1}).limit(4)
+    const posts = await db.Posts.find({category: "Thiết bị điện tử", status: "active"}).sort({createdAt: -1}).limit(4).lean()
+    const posts2 = await db.Posts.find({category: "Đồ nội thất và gia dụng", status: "active"}).sort({createdAt: -1}).limit(4).lean()
     const postArr = await addIsLiked(req.user.zaloId, posts)
     const postArr2 = await addIsLiked(req.user.zaloId, posts2)
     res.send({
@@ -147,7 +144,7 @@ router.get('/by-category/:categoryId', async (req, res) => {
       })
     }
     const category = (param === 0 ? "Thiết bị điện tử" : "Đồ nội thất và gia dụng")
-    const posts = await db.Posts.find({category: category, status: "active"})
+    const posts = await db.Posts.find({category: category, status: "active"}).lean()
     const postArr = await addIsLiked(req.user.zaloId, posts)
     res.send({
       error: 0,
