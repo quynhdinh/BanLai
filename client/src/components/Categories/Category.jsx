@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-import {
-  Card,
-  Icon,
-  Text,
-  Box,
-  Title,
-  zmp
-} from "zmp-framework/react";
+import {Card, Text, Box, Title, zmp} from "zmp-framework/react";
 import { moneyFormat } from "../../util/number";
 import HeartIcon from "../heart-icon";
 import store from "../../store";
+import CustomImage from "../custom-image";
 
 const Category = ({ product, border }) => {
   const [preTime, setPreTime] = useState(0);
@@ -81,7 +75,7 @@ const Category = ({ product, border }) => {
                 borderRadius: 4,
               }}
             />
-            <ImageCount product={product} />
+            <CustomImage product={product} />
           </Box>
           <Box style={{ flex: 1 }} my={0}>
             <Box p={0} m={0} style={{ height: 48 }}>
@@ -130,30 +124,4 @@ const Category = ({ product, border }) => {
   );
 };
 
-const ImageCount = ({ product }) => (
-  <Box
-    px={1}
-    m={0}
-    flex
-    alignItems="center"
-    style={{
-      position: "absolute",
-      background: "rgba(0, 0, 0, 0.5)",
-      width: "fit-content",
-      height: 20,
-      top: 4,
-      left: 4,
-      borderRadius: 2,
-    }}
-  >
-    <Icon zmp=" zi-photo " className="text-color-white demo-icon" size={16} />
-    <Text
-      size="xxxsmall"
-      className="text-color-white"
-      style={{ marginBottom: 0, marginLeft: 2 }}
-    >
-      {product.images.length}
-    </Text>
-  </Box>
-);
 export default Category;

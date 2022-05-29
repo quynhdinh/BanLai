@@ -5,7 +5,7 @@ import '../css/post-filter.css'
 const onClickTag = () => {
     console.log("closed filters clicked")
 }
-const PostFilter = ({children}) => (
+export default ({children}) => (
         <a alt="" href="" className="block-icon">
             <Text
                 className="r-round bg-color-nd300 text-color-black"
@@ -28,5 +28,3 @@ const PostFilter = ({children}) => (
             />
         </a>
 );
-
-export default PostFilter;

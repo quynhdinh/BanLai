@@ -1,24 +1,14 @@
 import React, { useEffect } from "react";
-import {
-  Page,
-  Searchbar,
-  Box,
-  Tabbar,
-  Link,
-  Tabs,
-  Tab,
-  useStore,
-} from "zmp-framework/react";
-import NavigationBar from "../components/NavigationBar";
+import {Page, Searchbar, Box, Tabbar, Link, Tabs, Tab, useStore} from "zmp-framework/react";
 import store from "../store";
-import Loading from "../components/Loading";
-import PostItem from "../components/PostItem";
+import NavigationBar from "../components/NavigationBar";
+import PostItem from "../components/post-item";
+import {LoadingVertical} from "../components/loading";
 
 // Trang quản lý bài đăng
 export default ({ zmproute }) => {
   const userPosts = useStore("userPosts");
   const loading = useStore("loadingFlag");
-  const spacing = "20px";
 
   useEffect(() => {
     store.dispatch("fetchUserPosts");
@@ -46,13 +36,12 @@ export default ({ zmproute }) => {
       <Tabs>
         <Tab id="tab-1" className="page-content" tabActive>
           {loading ? (
-            <Loading />
+            <LoadingVertical />
           ) : (
             <Box style={{ marginBottom: "150px" }}>
               {userPosts
                 .filter(function (obj) {
-                  const o = JSON.parse(JSON.stringify(obj));
-                  return o.status === "active";
+                  return obj.status === "active";
                 })
                 .map((item, index) => (
                   <PostItem
@@ -63,7 +52,6 @@ export default ({ zmproute }) => {
                       price: item.price,
                       title: item.title,
                     }}
-                    marginTop={index === 0 ? "0px" : spacing}
                   />
                 ))}
             </Box>
@@ -71,13 +59,12 @@ export default ({ zmproute }) => {
         </Tab>
         <Tab id="tab-2" className="page-content">
           {loading ? (
-            <Loading />
+            <LoadingVertical />
           ) : (
             <Box style={{ marginBottom: "150px" }}>
               {userPosts
                 .filter(function (obj) {
-                  const o = JSON.parse(JSON.stringify(obj));
-                  return o.status !== "active"; // sold, closed
+                  return obj.status !== "active"; // sold, closed
                 })
                 .map((item, index) => (
                   <PostItem
@@ -88,7 +75,6 @@ export default ({ zmproute }) => {
                       price: item.price,
                       title: item.title,
                     }}
-                    marginTop={index === 0 ? "0px" : spacing}
                     sold
                   />
                 ))}

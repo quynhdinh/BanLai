@@ -1,9 +1,10 @@
 import React, { useRef } from "react";
-import { Box, Button, Icon, Text, Title, Card, zmp } from "zmp-framework/react";
+import { Box, Button, Title, Card, zmp } from "zmp-framework/react";
 import { moneyFormat } from "../util/number";
 import store from "../store";
+import CustomImage from "./custom-image";
 
-const PostItem = ({ product, sold }) => {
+export default ({ product, sold }) => {
   const toast = useRef(null);
 
   function onClickButton() {
@@ -47,7 +48,7 @@ const PostItem = ({ product, sold }) => {
                 borderRadius: 4,
               }}
             />
-            <ImageCount product={product} />
+            <CustomImage product={product} />
           </Box>
           <Box style={{ flex: 1 }} my={0}>
             <Title
@@ -82,34 +83,3 @@ const PostItem = ({ product, sold }) => {
     </div>
   );
 };
-
-const ImageCount = ({ product }) => (
-  <Box
-    px={1}
-    m={0}
-    flex
-    alignItems="center"
-    style={{
-      position: "absolute",
-      background: "rgba(0, 0, 0, 0.5)",
-      width: "fit-content",
-      height: 20,
-      top: 4,
-      left: 4,
-      borderRadius: 2,
-    }}
-  >
-    <Icon zmp="zi-photo" className="text-color-white demo-icon" size={16} />
-    <Text
-      size="xxxsmall"
-      className="text-color-white"
-      style={{ marginBottom: 0, marginLeft: 2 }}
-    >
-      {product.images.length}
-    </Text>
-  </Box>
-);
-
-PostItem.displayName = "zmp-post-card";
-
-export default PostItem;

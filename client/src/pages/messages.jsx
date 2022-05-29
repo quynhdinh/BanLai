@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import {Page, useStore, Tabbar, Link, Tabs, Tab, Box} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import store from "../store";
-import Loading from "../components/Loading";
-import MessageItem from "../components/MessageItem";
+import MessageItem from "../components/message-item";
+import {LoadingVertical} from "../components/loading";
 
 //Trang quản lý tin nhắn (Tôi mua/Tôi bán)
 export default ({ zmproute }) => {
@@ -26,13 +26,12 @@ export default ({ zmproute }) => {
       <Tabs>
         <Tab id="tab-1" className="page-content" tabActive>
           {loading ? (
-            <Loading />
+            <LoadingVertical />
           ) : (
             <Box style={{ marginBottom: "50px" }}>
               {messages
                 .filter(function (obj) {
-                  const o = JSON.parse(JSON.stringify(obj));
-                  return o.type === "0";
+                  return obj.type === "0";
                 })
                 .map((item, index) => (
                   <MessageItem key={index} product={item} />
@@ -42,13 +41,12 @@ export default ({ zmproute }) => {
         </Tab>
         <Tab id="tab-2" className="page-content">
           {loading ? (
-            <Loading />
+            <LoadingVertical />
           ) : (
-            <Box>
+            <Box style={{ marginBottom: "50px" }}>
               {messages
                 .filter(function (obj) {
-                  const o = JSON.parse(JSON.stringify(obj));
-                  return o.type === "1";
+                  return obj.type === "1";
                 })
                 .map((item, index) => (
                   <MessageItem key={index} product={item} />

@@ -7,12 +7,11 @@ const isLiked = async (zaloId, postId) => {
 };
 
 const addIsLiked = async (zaloId, posts) => {
-  const postsArr = JSON.parse(JSON.stringify(posts))
-  for (let post of postsArr) {
-    const countLikedPost = await db.CarePostMapping.find({"zaloId": zaloId, "postId": post._id}).countDocuments()
+  for (let post of posts) {
+    const countLikedPost = await db.CarePostMapping.countDocuments({"zaloId": zaloId, "postId": post._id})
     post.isLiked = (countLikedPost > 0 ? 1 : 0)
   }
-  return postsArr
+  return posts
 };
 
 const validateCreatePost = () => {

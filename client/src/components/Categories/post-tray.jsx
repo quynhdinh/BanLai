@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Title, zmp, Button, Row, Col } from "zmp-framework/react";
 import Category from "./Category";
 
-const HotItem = ({ category, products, index}) => {
+export default ({ category, products, index}) => {
   const zmproute = zmp.views.main.router;
 
   function viewAll() {
@@ -18,10 +18,10 @@ const HotItem = ({ category, products, index}) => {
 
   return (
     <Box m={0}>
-      <Box m={0} style={{ height: 12 }} className="bg-color-lg600"></Box>
+      <Box m={0} style={{height: 12}} className="bg-color-lg600"/>
       <Box flex ml={4} flexDirection="column">
         <Box m={0} style={{ flex: 1 }}>
-          <Title bold>{category}</Title>
+          {category === "" ? <></> : <Title bold>{category}</Title>}
         </Box>
         <Box className="product-row" p={1}>
           <Row
@@ -50,11 +50,9 @@ const HotItem = ({ category, products, index}) => {
             borderBottom: "1px solid",
           }}
         >
-          <Button size="xsmall">Xem tất cả</Button>
+          {index === 0 || index === 1 ? <Button size="xsmall">Xem tất cả</Button> : <></>}
         </Box>
       </div>
     </Box>
   );
 };
-
-export default HotItem;

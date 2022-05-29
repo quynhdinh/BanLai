@@ -7,16 +7,13 @@ router.use(AuthService.verify);
 
 router.get('/', async (req, res) => {
   try {
-    const _messages = await db.Messages.find({owner: req.user.zaloId})
-    const messages = JSON.parse(JSON.stringify(_messages))
+    const messages = await db.Messages.find({owner: req.user.zaloId}).lean()
     for (let message of messages) {
-      const user = await db.Users.find({zaloId: message.partner})
-      const post = await db.Posts.find({_id: ObjectId(message.postId)})
-      const u = JSON.parse(JSON.stringify(user))[0]
-      const p = JSON.parse(JSON.stringify(post))[0]
-      message.picture = u.picture
-      message.name = u.name
-      message.title = p.title
+      const user = await db.Users.findOne({zaloId: message.partner}).lean()
+      const post = await db.Posts.findOne({_id: ObjectId(message.postId)}).lean()
+      message.picture = user.picture
+      message.name = user.name
+      message.title = post.title
     }
     res.send({
       error: 0,

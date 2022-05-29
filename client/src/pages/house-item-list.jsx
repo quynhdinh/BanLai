@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {Box, Searchbar, Page, Tab, useStore,} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
-import PostFilter from "../components/PostFilter";
 import Category from "../components/Categories/Category";
 import store from "../store";
-import Loading from "../components/Loading";
+import PostFilter from "../components/post-filter";
+import {LoadingVertical} from "../components/loading";
 
 export default () => {
   const [keyword, setKeyword] = useState('')
@@ -29,7 +29,7 @@ export default () => {
       </Box>
       <Tab className="page-content">
         {
-          loading ? <Loading/> :
+          loading ? <LoadingVertical/> :
             <Box>
               <div style={{
                 marginBottom: "150px",

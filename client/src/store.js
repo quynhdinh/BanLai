@@ -12,9 +12,11 @@ import {
   getPostsByCategory,
   getSellerInfo,
   getUserPosts,
-  repostPost,
+  getViewedPosts,
+  repostPost
 } from "./services/post";
 import { getCareList, likePost, unlikePost } from "./services/care-list";
+import {updateViewCount} from "./services/viewed-post";
 
 const store = createStore({
   state: {
@@ -33,6 +35,7 @@ const store = createStore({
     houseItems: [],
     hottestElectronicItems: [],
     hottestHouseItems: [],
+    viewedItems: [],
     careList: [],
     postDetails: {
       images: [],
@@ -69,6 +72,9 @@ const store = createStore({
     },
     hottestHouseItems({ state }) {
       return state.hottestHouseItems;
+    },
+    viewedItems({ state }) {
+      return state.viewedItems;
     },
     u({ state }) {
       return state.u;
@@ -119,12 +125,6 @@ const store = createStore({
     setViewingZaloId({ state }, _zaloId) {
       state.viewingZaloId = _zaloId;
     },
-    addCareItem({ state }, careItem) {
-      state.careList = [...state.careList, careItem];
-    },
-    async fetchPosts({ state }, { category }) {
-      state.posts = await getPostsByCategory(category);
-    },
     async fetchElectronicItems({ state }) {
       state.loadingFlag = true;
       state.electronicItems = await getPostsByCategory(0);
@@ -140,8 +140,17 @@ const store = createStore({
       while (!state.jwt) {
         await new Promise((resolve) => setTimeout(resolve, 100));
       }
-      state.hottestElectronicItems = await getHottestPosts(0);
-      state.hottestHouseItems = await getHottestPosts(1);
+      const response = await getHottestPosts();
+      state.hottestElectronicItems = response.data
+      state.hottestHouseItems = response.data2
+      state.loadingFlag = false;
+    },
+    async fetchViewedItems({ state }) {
+      state.loadingFlag = true;
+      while (!state.jwt) {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      }
+      state.viewedItems = await getViewedPosts();
       state.loadingFlag = false;
     },
     async fetchFilteredPosts({ state }, { condition }) {
@@ -153,6 +162,9 @@ const store = createStore({
       state.loadingFlag = true;
       state.postDetails = await getPostDetails(id);
       state.loadingFlag = false;
+    },
+    async updateViewCount({state}, {postId}) {
+      await updateViewCount(postId);
     },
     async createPost({ state }, { data }) {
       state.loadingFlag = true;
@@ -216,26 +228,17 @@ const store = createStore({
         }
         return item;
       };
-      state.hottestElectronicItems = state.hottestElectronicItems.map((item) =>
-        processItem(item)
-      );
-      state.hottestHouseItems = state.hottestHouseItems.map((item) =>
-        processItem(item)
-      );
-      state.electronicItems = state.electronicItems.map((item) =>
-        processItem(item)
-      );
+      state.hottestElectronicItems = state.hottestElectronicItems.map((item) => processItem(item));
+      state.hottestHouseItems = state.hottestHouseItems.map((item) => processItem(item));
+      state.electronicItems = state.electronicItems.map((item) => processItem(item));
       state.houseItems = state.houseItems.map((item) => processItem(item));
+      state.viewedItems = state.viewedItems.map((item) => processItem(item));
       const newPostDetails = state.postDetails;
       newPostDetails.isLiked = data.isLiked === 1 ? 0 : 1;
       state.postDetails = newPostDetails;
-      const newCareList = state.careList.filter((item) => {
-        if (item.postDetail[0]._id === data.postId) {
-          return false;
-        }
-        return true;
+      state.careList = state.careList.filter((item) => {
+        return item.postDetail[0]._id !== data.postId
       });
-      state.careList = newCareList;
     },
     async fetchSellerInfo({ state }, zaloId) {
       state.loadingFlag = true;

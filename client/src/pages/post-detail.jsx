@@ -1,19 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  Page,
-  Navbar,
-  Swiper,
-  SwiperSlide,
-  Text,
-  Title,
-  useStore,
-  Box,
-  GridItem,
-  Row,
-  Col,
-  zmp,
-  Grid,
-} from "zmp-framework/react";
+import React, {useEffect, useState} from "react";
+import {Page, Navbar, Swiper, SwiperSlide, Text, Title, useStore, Box, GridItem, Grid, zmp} from "zmp-framework/react";
 import "../css/swiper.css";
 import store from "../store";
 import MessageBox from "../components/message-box";
@@ -25,8 +11,9 @@ import { getReadableTimeGap, moneyFormat } from "../util/number";
 import { getProductDetailTitle } from "../util/productDetail";
 import UserCard from "../components/user-card";
 import HeartIcon from "../components/heart-icon";
-import Loading from "../components/Loading";
-import Category from "../components/Categories/Category";
+import {PostTray} from "../components/Categories";
+import {LoadingHorizontal} from "../components/loading";
+import {updateViewCount} from "../services/viewed-post";
 
 const linkItems = [zalo, facebook, messenger, link];
 
@@ -36,6 +23,7 @@ export default () => {
   const viewingPostId = useStore("viewingPostId");
   useEffect(() => {
     store.dispatch("fetchPostDetail", { id: viewingPostId });
+    store.dispatch("updateViewCount", { postId: viewingPostId });
   }, []);
 
   const handleViewSellerProfile = ({ zaloId }) => {
@@ -50,19 +38,11 @@ export default () => {
     if (nowTime - preTime < 250) {
       return;
     }
-    if (details.isLiked === 0) {
-      store.dispatch("fakeLikeUnlikePostList", {
-        postId: details._id,
-        isLiked: details.isLiked,
-      });
-      store.dispatch("likePost", { postId: details._id });
-    } else {
-      store.dispatch("fakeLikeUnlikePostList", {
-        postId: details._id,
-        isLiked: details.isLiked,
-      });
-      store.dispatch("unlikePost", { postId: details._id });
-    }
+    store.dispatch("fakeLikeUnlikePostList", {
+      postId: details._id,
+      isLiked: details.isLiked,
+    });
+    store.dispatch(details.isLiked === 0 ? "likePost" : "unlikePost", {postId: details._id});
   };
 
   return (
@@ -120,35 +100,21 @@ export default () => {
           handleViewSellerProfile({ zaloId: postDetails.zaloId });
         }}
       />
-      <Box ml={5} style={{ paddingBottom: 200 }}>
+      <Box ml={5} style={{paddingBottom: 200}}>
         <Title bold>Sản phẩm tương tự</Title>
         {postDetails.relatedPosts ? (
-          <RelatedPosts relatedPosts={postDetails.relatedPosts} />
+          <PostTray
+            category=""
+            products={postDetails.relatedPosts}
+            index={-1}
+          />
         ) : (
-          <Loading />
+          <LoadingHorizontal/>
         )}
       </Box>
     </Page>
   );
 };
-
-const RelatedPosts = ({ relatedPosts }) => (
-  <Box className="product-row" p={1}>
-    <Row
-      style={{
-        width: `calc(${relatedPosts.length * 80}vw - ${
-          relatedPosts.length * 20
-        }px + ${(relatedPosts.length - 1) * 8}px)`,
-      }}
-    >
-      {relatedPosts.map((post) => (
-        <Col key={post._id} className="product-column">
-          <Category product={post} />
-        </Col>
-      ))}
-    </Row>
-  </Box>
-);
 
 const Description = ({ title, description }) => (
   <>

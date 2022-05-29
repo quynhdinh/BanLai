@@ -23,9 +23,8 @@ app.use(cors())
 app.use('/', require('./routes/index'));
 app.use('/apis', require('./routes/index'));
 app.use("/admin", require('./routes/admin'));
-app.use('/users', require('./routes/users'));
+app.use('/users', require('./routes/user'));
 app.use('/api/posts', require('./routes/post'));
-app.use('/api/posts', require('./routes/manage-post'));
 app.use('/api/carelist', require('./routes/care-list'));
 app.use('/api/messages', require('./routes/message'));
 app.use('/api/viewedposts', require('./routes/viewed-post'));
@@ -45,5 +44,16 @@ app.use(function (err, req, res) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+const allowedOrigins = ['https://h5.zdn.vn/', 'zbrowser://h5.zdn.vn/'];
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  return next();
+});
+
 
 module.exports = app;

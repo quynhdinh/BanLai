@@ -3,7 +3,7 @@ import { Page, useStore } from "zmp-framework/react";
 import NavbarBack from "../components/navbar-back";
 import { Category } from "../components/Categories";
 import store from "../store";
-import Loading from "../components/Loading";
+import {LoadingVertical} from "../components/loading";
 
 export default () => {
   const careList = useStore("careList");
@@ -17,7 +17,7 @@ export default () => {
     <Page className="page-box page-with-navbar">
       <NavbarBack title="Danh sách tin đã lưu" linkLeft={"/account/"} />
       {loading ? (
-        <Loading />
+        <LoadingVertical />
       ) : (
         careList.map((item, index) => (
           <Category
