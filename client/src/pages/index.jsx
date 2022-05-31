@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Page, Box, zmp, Title } from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import Categories from "../components/Categories";
 import pc from "../static/icons/PC.svg";
 import bed from "../static/icons/Bed.svg";
+import store from "../store";
 
 const HomePage = () => {
   const zmproute = zmp.views.main.router;
@@ -11,6 +12,20 @@ const HomePage = () => {
     {title: "Thiết bị điện tử", icon: pc, navigateLink: "/electronic-list"},
     {title: "Đồ gia dụng và nội thất", icon: bed, navigateLink: "/house-item-list"}
   ];
+
+  const handleViewCategory = (title) => {
+    if (title === "Thiết bị điện tử") {
+      useEffect(async () => {
+        await store.dispatch("fetchElectronicItems");
+      })
+    }
+    if (title === "Đồ gia dụng và nội thất") {
+      useEffect(async () => {
+        await store.dispatch("fetchHouseItems");
+      })
+    }
+      zmproute.navigate("/posts-list")
+    }
 
   return (
     <Page name="home" navbarLarge>
@@ -21,9 +36,7 @@ const HomePage = () => {
             key={index}
             title={item.title}
             icon={item.icon}
-            onClick={() => {
-              zmproute.navigate(item.navigateLink);
-            }}
+            onClick={handleViewCategory(item.title)}
           />
         ))}
       </Box>

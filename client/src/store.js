@@ -37,6 +37,7 @@ const store = createStore({
     hottestHouseItems: [],
     viewedItems: [],
     careList: [],
+    viewingPostsList: [],
     postDetails: {
       images: [],
       title: "",
@@ -75,6 +76,9 @@ const store = createStore({
     },
     viewedItems({ state }) {
       return state.viewedItems;
+    },
+    viewingPostsList({ state }) {
+      return state.viewingPostsList;
     },
     u({ state }) {
       return state.u;
@@ -121,6 +125,10 @@ const store = createStore({
     },
     setViewingPostId({ state }, postId) {
       state.viewingPostId = postId;
+    },
+    setViewingPostsList({ state }, postsList) {
+      console.log("set:"+ postsList)
+      state.viewingPostsList = postsList;
     },
     setViewingZaloId({ state }, _zaloId) {
       state.viewingZaloId = _zaloId;
