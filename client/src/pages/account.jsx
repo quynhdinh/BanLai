@@ -1,8 +1,17 @@
 import React from "react";
 import NavigationBar from "../components/NavigationBar";
-import {Page, useStore, List, ListItem, Box, Title, Icon} from "zmp-framework/react";
+import {
+  Page,
+  useStore,
+  List,
+  ListItem,
+  Box,
+  Title,
+  Icon,
+} from "zmp-framework/react";
 import UserCard from "../components/user-card";
-
+import ZMPLogo from "../static/icons/ZMPLogo.svg";
+import BanLaiLogo from "../static/icons/BanLai.svg";
 // Trang tài khoản
 const account = ({ zmproute }) => {
   const fakeUser = useStore("fakeUser");
@@ -30,16 +39,24 @@ const account = ({ zmproute }) => {
           />
         </ListItem>
       </List>
+      <Box m={10}>
+        <img src={BanLaiLogo} style={{ height: 32, marginBottom: 4 }} />
+        <img src={ZMPLogo} style={{ height: 28 }} />
+      </Box>
 
       <Box mt={20} ml={10}>
-        <Title size="normal">Liên hệ Bán Lại</Title>
+        <Title bold>Liên hệ Bán Lại</Title>
         <Box key="normal" mb="4">
-          <Title size="xsmall">Email: banlai@gmail.com</Title>
+          <Title size="xsmall">
+            Email: <span className="text-color-bl300">banlai@gmail.com</span>
+          </Title>
           <Title size="xsmall">Hotline: 1987654321</Title>
         </Box>
       </Box>
-      <Box ml={10} mt={10}>
-        <Title size="normal">Hướng dẫn đăng tin</Title>
+
+      <Box ml={10} mt={5}>
+        <Title bold>Hướng dẫn đăng tin</Title>
+
         <Box key="normal" mb="4">
           <Title size="xsmall">Quy định đăng tin</Title>
           <Title size="xsmall">Hướng dẫn đăng tin</Title>

@@ -18,7 +18,7 @@ export default ({ category, products, index}) => {
 
   return (
     <Box m={0}>
-      <Box m={0} style={{height: 12}} className="bg-color-lg600"/>
+      <Box m={0} style={{height: 4}} className="bg-color-lg700"/>
       <Box flex ml={4} flexDirection="column">
         <Box m={0} style={{ flex: 1 }}>
           {category === "" ? <></> : <Title bold>{category}</Title>}
@@ -44,7 +44,7 @@ export default ({ category, products, index}) => {
           m={0}
           flex
           justifyContent="center"
-          className="border-color-nl700"
+          className="border-color-lg700"
           style={{
             borderTop: "1px solid",
             borderBottom: "1px solid",
