@@ -121,7 +121,7 @@ export default () => {
                     }
                   )}
                   label={getProductDetailTitle(item)}
-                  compulsory={item === "manufacturer" ? true : false}
+                  compulsory={item === "manufacturer"}
                   option={subCategoriesDetails[item]}
                   errorMessage={
                     item === "manufacturer" &&

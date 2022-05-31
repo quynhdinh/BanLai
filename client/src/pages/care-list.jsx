@@ -23,12 +23,12 @@ export default () => {
           <Category
             key={index}
             product={{
-              _id: item.postDetail[0]._id,
-              images: item.postDetail[0].images,
-              price: item.postDetail[0].price,
-              title: item.postDetail[0].title,
-              district: item.postDetail[0].district,
-              city: item.postDetail[0].city,
+              _id: item.postDetail._id,
+              images: item.postDetail.images,
+              price: item.postDetail.price,
+              title: item.postDetail.title,
+              district: item.postDetail.district,
+              city: item.postDetail.city,
               isLiked: 1,
             }}
             border

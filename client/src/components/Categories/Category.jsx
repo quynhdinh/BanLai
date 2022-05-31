@@ -67,7 +67,7 @@ const Category = ({ product, border }) => {
             style={{ position: "relative" }}
           >
             <img
-              src={product.images[0]?.url}
+              src={product.images[0].url}
               style={{
                 objectFit: "cover",
                 width: 102,

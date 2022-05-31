@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
   try {
     const careList = await db.CarePostMapping.find({zaloId: req.user.zaloId}).lean()
     for (let care of careList) {
-      care.postDetail = await db.Posts.find({_id: ObjectId(care.postId)}).lean()
+      care.postDetail = await db.Posts.findOne({_id: ObjectId(care.postId)}).lean()
     }
     res.send({
       error: 0,
