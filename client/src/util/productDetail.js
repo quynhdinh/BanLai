@@ -1,6 +1,6 @@
 export const getProductDetailTitle = (title) => {
   if (title === "manufacturer") {
-    return "Hãng";
+    return "Hãng sản xuất";
   } else if (title === "color") {
     return "Màu sắc";
   } else if (title === "storage") {
