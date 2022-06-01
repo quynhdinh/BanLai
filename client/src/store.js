@@ -237,7 +237,7 @@ const store = createStore({
       newPostDetails.isLiked = data.isLiked === 1 ? 0 : 1;
       state.postDetails = newPostDetails;
       state.careList = state.careList.filter((item) => {
-        return item.postDetail[0]._id !== data.postId
+        return item.postDetail._id !== data.postId
       });
     },
     async fetchSellerInfo({ state }, zaloId) {

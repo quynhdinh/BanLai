@@ -74,36 +74,4 @@ router.post('/update-follow-status', AuthService.verify, async (req, res) => {
   }
 });
 
-router.get('/fake/:zaloId', async (req, res) => {
-  try {
-    const zaloId = req.params["zaloId"].toString()
-    const users = await db.Users.find({}).select("zaloId")
-    await db.Messages.deleteMany({owner: zaloId})
-    const zaloIds = users.map(obj => obj.zaloId).filter(id => id !== zaloId)
-    const posts = await db.Posts.find({}).select("_id")
-    const postIds = posts.map(obj => obj._id)
-    for (let zId of zaloIds) {
-      await db.Messages.create({
-        owner: zaloId,
-        partner: zId,
-        type: 0,
-        postId: postIds[Math.floor(Math.random() * postIds.length)]
-      })
-      await db.Messages.create({
-        owner: zaloId,
-        partner: zId,
-        type: 1,
-        postId: postIds[Math.floor(Math.random() * postIds.length)]
-      })
-    }
-    return res.send({
-      error: 0,
-      msg: 'Fake thông tin thành công',
-    });
-  } catch (error) {
-    res.send({error: -1, msg: 'Unknown exception'});
-    console.log('API-Exception', error);
-  }
-});
-
 module.exports = router;

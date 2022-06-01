@@ -28,6 +28,7 @@ app.use('/api/posts', require('./routes/post'));
 app.use('/api/carelist', require('./routes/care-list'));
 app.use('/api/messages', require('./routes/message'));
 app.use('/api/viewedposts', require('./routes/viewed-post'));
+app.use('/api/cheat', require('./routes/cheat'));
 
 // catch 404 and forward to error handler
 app.use(function (_req, _res, next) {
