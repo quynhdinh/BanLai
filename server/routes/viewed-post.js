@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
     }, {$inc: {count: 1}}, {upsert: true})
     res.send({
       error: 0,
-      msg: 'Cập nhật lượt xem thành công',
+      msg: 'Cập nhật lượt xem thành công'
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
@@ -28,11 +28,31 @@ router.get("/count/:postId", async (req, res) => {
     const postId = req.params["postId"].toString()
     const response =
       await db.ViewedPostMapping
-      .findOne({zaloId: req.user.zaloId, postId: postId}, {count: 1, _id: 0})
-      .select("count")
+        .findOne({zaloId: req.user.zaloId, postId: postId}, {count: 1, _id: 0})
+        .select("count")
     res.send({
       error: 0, msg: 'Lấy số lượt xem bài đăng thành công',
       data: response.count
+    });
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
+});
+
+// Lấy tổng số lượt xem theo user
+router.get("/by-user/:zaloId", async (req, res) => {
+  try {
+    const zaloId = req.params["zaloId"].toString()
+    const response =
+      (await db.ViewedPostMapping
+        .find({zaloId: zaloId}, {count: 1, _id: 0}))
+        .map(m => m.count)
+        .reduce((sum, a) => sum + a, 0);
+    res.send({
+      error: 0,
+      msg: 'Lấy số lượt xem bài đăng theo user thành công',
+      data: response
     });
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
@@ -44,15 +64,16 @@ router.get('/', async (req, res) => {
   try {
     const zaloId = req.user.zaloId
     const filter =
-      (await db.ViewedPostMapping.find({zaloId: zaloId}, {postId: 1, _id: 0}).sort({count: -1}))
-      .map(p => p.postId)
-      .map(p => Types.ObjectId(p))
+      (await db.ViewedPostMapping
+        .find({zaloId: zaloId}, {postId: 1, _id: 0}).sort({count: -1}))
+        .map(p => p.postId)
+        .map(p => Types.ObjectId(p))
     const posts = await db.Posts.find({'_id': {$in: filter}}).lean()
     const response = await addIsLiked(zaloId, posts)
     res.send({
       error: 0,
       msg: 'Lấy danh sách đã xem thành công',
-      data: response,
+      data: response
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});

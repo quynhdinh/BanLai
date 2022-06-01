@@ -2,12 +2,12 @@ const db = require("../models");
 const {check} = require("express-validator");
 
 const isLiked = async (zaloId, postId) => {
-  const entry = await db.CarePostMapping.find({"zaloId": zaloId, "postId": postId})
+  const entry = await db.CarePostMapping.findOne({"zaloId": zaloId, "postId": postId})
   return entry ? 1 : 0
 };
 
 const addIsLiked = async (zaloId, posts) => {
-  for (let post of posts) {
+  for (const post of posts) {
     const countLikedPost = await db.CarePostMapping.countDocuments({"zaloId": zaloId, "postId": post._id})
     post.isLiked = (countLikedPost > 0 ? 1 : 0)
   }
