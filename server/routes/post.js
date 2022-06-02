@@ -170,7 +170,7 @@ router.get('/search', async (req, res) => {
     const allPosts = await db.Posts.find();
     const filteredPosts = allPosts.filter(post => {
       let isValid = true;
-      for (let key in filters)
+      for (const key in filters)
         if (key === "price") {
           isValid &= parseInt(post['price']) <= parseInt(filters[key])
         } else if (key === "keyWord") {

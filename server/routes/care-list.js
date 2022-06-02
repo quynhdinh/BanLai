@@ -77,4 +77,24 @@ router.delete('/:postId', async (req, res) => {
   }
 });
 
+router.get('/by-user/:zaloId', async (req, res) => {
+  try {
+    const zaloId = req.params["zaloId"].toString()
+    const postIds =
+      (await db.Posts
+        .find({zaloId: zaloId})
+        .select("_id"))
+        .map(obj => obj._id)
+    const sum = await db.CarePostMapping.countDocuments({'postId': {$in: postIds}});
+    res.send({
+      error: 0,
+      msg: 'Lấy thông tin quan tâm thành công',
+      data: sum,
+    })
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
+});
+
 module.exports = router;
