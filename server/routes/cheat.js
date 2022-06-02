@@ -8,7 +8,7 @@ router.get('/posts/:zaloId', async (req, res) => {
 
     await db.Posts.create({
       zaloId: zaloId,
-      category: "Thiết bị điện tử",
+      category: "Thiết bị điện tử",
       subCategory: "Điện thoại",
       city: "Hồ Chí Minh",
       district: "Quận 6",
