@@ -1,30 +1,39 @@
 import React, {useEffect, useState} from "react";
-import {Box, Searchbar, Page, Tab, useStore,} from "zmp-framework/react";
+import {Box, Page, Searchbar, Tab, useStore, zmp} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
-import Category from "../components/Categories/Category";
 import store from "../store";
-import PostFilter from "../components/post-filter";
+import Category from "../components/Categories/Category";
 import {LoadingVertical} from "../components/loading";
 
 export default () => {
-  const [keyword, setKeyword] = useState('')
-  const houseItems = useStore('houseItems')
-  const loading = useStore("loadingFlag");
+  const zmproute = zmp.views.main.router.currentRoute;
 
+  function postFilter() {
+    zmproute.navigate("/posts-filter");
+  }
+
+  const [keyword, setKeyword] = useState('')
+  const loading = useStore("loadingFlag");
+  const posts = useStore('viewingPostsList')
   useEffect(() => {
-    store.dispatch('fetchHouseItems')
+    const zmproute = zmp.views.main.router.currentRoute;
+    if (zmproute.query.index == 0) {
+      store.dispatch("fetchElectronicItems")
+    }
+    if (zmproute.query.index == 1) {
+      store.dispatch("fetchHouseItems")
+    }
   }, [])
   return (
     <Page pageContent={false}
-          name="house-item-list"
+          name="posts-list"
     >
       <NavigationBar/>
       <Box className="inquiry" mt={1}>
-        <div className="flex-1 ">
+        <div className="flex-1" onClick={postFilter}>
           <Searchbar className="discount-searchbar" value={keyword}
                      onChange={e => setKeyword(e.target.value)} type="text" placeholder="Tìm sản phẩm"
                      clearButton onSearchbarClear={() => setKeyword('')}/>
-          <PostFilter>{"Đồ gia dụng"}</PostFilter>
         </div>
       </Box>
       <Tab className="page-content">
@@ -34,7 +43,7 @@ export default () => {
               <div style={{
                 marginBottom: "150px",
               }}>
-                {houseItems.map((item, index) => (
+                {posts.map((item, index) => (
                   <Category key={index} product={item} border/>
                 ))}
               </div>

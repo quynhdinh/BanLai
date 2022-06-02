@@ -1,26 +1,22 @@
 import React from "react";
-import { Box, Title, zmp, Button, Row, Col } from "zmp-framework/react";
+import {Box, Title, zmp, Button, Row, Col} from "zmp-framework/react";
 import Category from "./Category";
 
-export default ({ category, products, index}) => {
+export default ({category, products, index}) => {
   const zmproute = zmp.views.main.router;
 
   function viewAll() {
-    switch (index) {
-      case 0:
-        zmproute.navigate("/electronic-list");
-        break;
-      case 1:
-        zmproute.navigate("/house-item-list");
-        break;
-    }
+    zmproute.navigate({
+      path: "/posts-list",
+      query: {index: index}
+    })
   }
 
   return (
     <Box m={0}>
       <Box m={0} style={{height: 4}} className="bg-color-lg700"/>
       <Box flex ml={4} flexDirection="column">
-        <Box m={0} style={{ flex: 1 }}>
+        <Box m={0} style={{flex: 1}}>
           {category === "" ? <></> : <Title bold>{category}</Title>}
         </Box>
         <Box className="product-row" p={1}>
@@ -33,7 +29,7 @@ export default ({ category, products, index}) => {
           >
             {products.map((product) => (
               <Col key={product._id} className="product-column">
-                <Category product={product} />
+                <Category product={product}/>
               </Col>
             ))}
           </Row>

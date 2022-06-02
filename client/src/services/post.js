@@ -1,4 +1,4 @@
-import { request } from "./auth";
+import {request} from "./auth";
 import store from "../store";
 
 export const getPostsByCategory = async (category) => {
@@ -35,11 +35,14 @@ export const getViewedPosts = async () => {
 
 export const getFilteredPosts = async (condition) => {
   try {
+    condition = JSON.parse(condition);
     let query = "";
-    Object.entries(condition).forEach(([key, value]) => {
+    Object.keys(condition).forEach(function (key) {
+      var value = condition[key];
       console.log(key, value);
       query += "?" + key + "=" + value;
     });
+    console.log("query ne`:" + query);
     const url = "api/posts/search" + query;
     const response = await (await request("GET", url)).json();
     return response.data;

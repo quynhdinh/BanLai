@@ -26,6 +26,7 @@
     "/seller-info",
     "/care-list",
     "/post-detail",
-    "/posts-filter"
+    "/posts-filter",
+    "/posts-list"
   ]
 }
