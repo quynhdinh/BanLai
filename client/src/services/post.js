@@ -1,11 +1,10 @@
-import { request } from "./auth";
+import {request} from "./auth";
 import store from "../store";
 
 export const getPostsByCategory = async (category) => {
   try {
     const url = "api/posts/by-category/" + category;
     const response = await (await request("GET", url)).json();
-    await store.dispatch("setViewingPostsList", response.data);
     return response.data;
   } catch (error) {
     console.log("Error fetching posts by category:", error);
@@ -38,12 +37,12 @@ export const getFilteredPosts = async (condition) => {
   try {
     condition = JSON.parse(condition);
     let query = "";
-    Object.keys(condition).forEach(function(key) {
+    Object.keys(condition).forEach(function (key) {
       var value = condition[key];
       console.log(key, value);
       query += "?" + key + "=" + value;
     });
-    console.log("query ne`:"+ query);
+    console.log("query ne`:" + query);
     const url = "api/posts/search" + query;
     const response = await (await request("GET", url)).json();
     return response.data;

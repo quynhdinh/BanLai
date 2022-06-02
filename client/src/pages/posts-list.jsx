@@ -6,18 +6,24 @@ import Category from "../components/Categories/Category";
 import {LoadingVertical} from "../components/loading";
 
 export default () => {
-  const zmproute = zmp.views.main.router;
+  const zmproute = zmp.views.main.router.currentRoute;
 
   function postFilter() {
-    console.log("on click filter")
     zmproute.navigate("/posts-filter");
   }
 
   const [keyword, setKeyword] = useState('')
   const loading = useStore("loadingFlag");
-  const posts1 = useStore('viewingPostsList')
-  const posts = Object.entries(posts1)
-  console.log("posts:"+ posts)
+  const posts = useStore('viewingPostsList')
+  useEffect(() => {
+    const zmproute = zmp.views.main.router.currentRoute;
+    if (zmproute.query.index == 0) {
+      store.dispatch("fetchElectronicItems")
+    }
+    if (zmproute.query.index == 1) {
+      store.dispatch("fetchHouseItems")
+    }
+  }, [])
   return (
     <Page pageContent={false}
           name="posts-list"
