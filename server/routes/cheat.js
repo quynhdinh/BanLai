@@ -88,4 +88,36 @@ router.get('/messages/:zaloId', async (req, res) => {
   }
 });
 
+router.get('/carelist', async (req, res) => {
+  try {
+    await db.CarePostMapping.deleteMany()
+
+    const zaloIds =
+      (await db.Users.find().select("zaloId"))
+        .map(obj => obj.zaloId)
+
+    const postIds =
+      (await db.Posts.find()
+        .limit(5)
+        .select("_id"))
+        .map(obj => obj._id)
+
+    for (const zId of zaloIds) {
+      for (const pId of postIds) {
+        await db.CarePostMapping.create({
+          zaloId: zId,
+          postId: pId
+        })
+      }
+    }
+    return res.send({
+      error: 0,
+      msg: 'Cheat care list thành công'
+    });
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
+});
+
 module.exports = router;

@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-    owner: {type: String, required: true},
-    partner: {type: String, required: true},
-    type: {type: String, required: true},
-    postId: {type: String, required: true},
-}, {timestamps: true});
+  owner: {type: String, required: true},
+  partner: {type: String, required: true},
+  type: {type: String, required: true},
+  postId: {type: String, required: true},
+}, {timestamps: true, versionKey: false});
 
 
 module.exports = mongoose.model('Message', schema);
