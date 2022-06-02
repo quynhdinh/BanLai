@@ -21,6 +21,34 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Tìm kiếm bài đăng
+router.get('/search', async (req, res) => {
+  try {
+    const filters = req.query;
+    const allPosts = await db.Posts.find();
+    const filteredPosts = allPosts.filter(post => {
+      let isValid = true;
+      for (const key in filters)
+        if (key === "price") {
+          isValid &= parseInt(post['price']) <= parseInt(filters[key])
+        } else if (key === "keyWord") {
+          isValid &= post['title'].includes(filters[key]);
+        } else {
+          isValid &= post[key] === filters[key];
+        }
+      return isValid;
+    });
+    res.send({
+      error: 0,
+      msg: 'Lấy danh sách bài đăng tìm kiếm thành công',
+      data: filteredPosts
+    })
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
+})
+
 // Active lại 1 bài đăng
 router.put('/repost/:postId', async (req, res) => {
   try {
@@ -162,34 +190,6 @@ router.get('/by-category/:categoryId', async (req, res) => {
     console.log('API-Exception', error);
   }
 });
-
-// Tìm kiếm bài đăng
-router.get('/search', async (req, res) => {
-  try {
-    const filters = req.query;
-    const allPosts = await db.Posts.find();
-    const filteredPosts = allPosts.filter(post => {
-      let isValid = true;
-      for (const key in filters)
-        if (key === "price") {
-          isValid &= parseInt(post['price']) <= parseInt(filters[key])
-        } else if (key === "keyWord") {
-          isValid &= post['title'].includes(filters[key]);
-        } else {
-          isValid &= post[key] === filters[key];
-        }
-      return isValid;
-    });
-    res.send({
-      error: 0,
-      msg: 'Lấy danh sách bài đăng tìm kiếm thành công',
-      data: filteredPosts
-    })
-  } catch (error) {
-    res.send({error: -1, msg: 'Unknown exception'});
-    console.log('API-Exception', error);
-  }
-})
 
 // Tạo bài đăng
 router.post('/', validateCreatePost(), async (req, res) => {
