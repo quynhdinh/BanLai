@@ -8,8 +8,8 @@ router.get('/posts/:zaloId', async (req, res) => {
 
     await db.Posts.create({
       zaloId: zaloId,
-      category: "Điện thoại",
-      subCategory: "Apple",
+      category: "Thiết bị điện tử",
+      subCategory: "Điện thoại",
       city: "Hồ Chí Minh",
       district: "Quận 6",
       images: [{"url": "https://res.cloudinary.com/banlai/image/upload/v1653810477/feqvx0lgt7zeqy9iqbkr.jpg"}],

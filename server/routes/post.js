@@ -124,7 +124,7 @@ router.get('/by-user/:zaloId', async (req, res) => {
 router.get('/hottest-posts/:categoryId', async (req, res) => {
   try {
     const posts = await db.Posts.find({category: "Thiết bị điện tử", status: "active"}).sort({createdAt: -1}).limit(4).lean()
-    const posts2 = await db.Posts.find({category: "Đồ nội thất và gia dụng", status: "active"}).sort({createdAt: -1}).limit(4).lean()
+    const posts2 = await db.Posts.find({category: "Đồ gia dụng, nội thất", status: "active"}).sort({createdAt: -1}).limit(4).lean()
     const postArr = await addIsLiked(req.user.zaloId, posts)
     const postArr2 = await addIsLiked(req.user.zaloId, posts2)
     res.send({
@@ -149,7 +149,7 @@ router.get('/by-category/:categoryId', async (req, res) => {
         msg: 'Param không hợp lệ'
       })
     }
-    const category = (param === 0 ? "Thiết bị điện tử" : "Đồ nội thất và gia dụng")
+    const category = (param === 0 ? "Thiết bị điện tử" : "Đồ gia dụng, nội thất")
     const posts = await db.Posts.find({category: category, status: "active"}).lean()
     const postArr = await addIsLiked(req.user.zaloId, posts)
     res.send({
