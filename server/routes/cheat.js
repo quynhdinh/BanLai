@@ -24,7 +24,7 @@ router.get('/posts/:zaloId', async (req, res) => {
       productDetails: {"manufacturer": "Apple", "color": "Vàng hồng", "storage": "64GB"}
     }, {
       zaloId: zaloId,
-      category: "Đồ gia dụng, nội thất",
+      category: "Đồ gia dụng, nội thất",
       subCategory: "Giường, chăn, ga, gối nệm",
       city: "Hồ Chí Minh",
       district: "Quận 3",

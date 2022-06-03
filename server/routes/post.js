@@ -6,6 +6,10 @@ const {validateCreatePost, isLiked, addIsLiked} = require("./helper");
 const router = express.Router();
 router.use(AuthService.verify);
 
+const normalize = (x) => {
+  return x.toString().normalize("NFC")
+};
+
 // Lấy danh sách bài đăng
 router.get('/', async (req, res) => {
   try {
@@ -32,7 +36,7 @@ router.get('/search', async (req, res) => {
         if (key === "price") {
           isValid &= parseInt(post['price']) <= parseInt(filters[key])
         } else if (key === "keyWord") {
-          isValid &= post['title'].includes(filters[key]);
+          isValid &= normalize(post['title']).includes(filters[key]);
         } else {
           isValid &= post[key] === filters[key];
         }
@@ -48,6 +52,25 @@ router.get('/search', async (req, res) => {
     console.log('API-Exception', error);
   }
 })
+
+// Tìm những bài đăng mới nhất
+router.get('/hottest-posts', async (req, res) => {
+  try {
+    const posts = await db.Posts.find({category: normalize("Thiết bị điện tử"), status: "active"}).sort({createdAt: -1}).limit(4).lean()
+    const posts2 = await db.Posts.find({category: normalize("Đồ gia dụng, nội thất"), status: "active"}).sort({createdAt: -1}).limit(4).lean()
+    const postArr = await addIsLiked(req.user.zaloId, posts)
+    const postArr2 = await addIsLiked(req.user.zaloId, posts2)
+    res.send({
+      error: 0,
+      msg: 'Lấy danh sách bài đăng hot thành công',
+      data: postArr,
+      data2: postArr2,
+    })
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
+});
 
 // Active lại 1 bài đăng
 router.put('/repost/:postId', async (req, res) => {
@@ -151,8 +174,8 @@ router.get('/by-user/:zaloId', async (req, res) => {
 // Tìm những bài đăng mới nhất
 router.get('/hottest-posts/:categoryId', async (req, res) => {
   try {
-    const posts = await db.Posts.find({category: "Thiết bị điện tử", status: "active"}).sort({createdAt: -1}).limit(4).lean()
-    const posts2 = await db.Posts.find({category: "Đồ gia dụng, nội thất", status: "active"}).sort({createdAt: -1}).limit(4).lean()
+    const posts = await db.Posts.find({category: normalize("Thiết bị điện tử"), status: "active"}).sort({createdAt: -1}).limit(4).lean()
+    const posts2 = await db.Posts.find({category: normalize("Đồ gia dụng, nội thất"), status: "active"}).sort({createdAt: -1}).limit(4).lean()
     const postArr = await addIsLiked(req.user.zaloId, posts)
     const postArr2 = await addIsLiked(req.user.zaloId, posts2)
     res.send({
@@ -177,8 +200,8 @@ router.get('/by-category/:categoryId', async (req, res) => {
         msg: 'Param không hợp lệ'
       })
     }
-    const category = (param === 0 ? "Thiết bị điện tử" : "Đồ gia dụng, nội thất")
-    const posts = await db.Posts.find({category: category, status: "active"}).lean()
+    const category = (param === 0 ? "Thiết bị điện tử" : "Đồ gia dụng, nội thất")
+    const posts = await db.Posts.find({category: normalize(category), status: "active"}).lean()
     const postArr = await addIsLiked(req.user.zaloId, posts)
     res.send({
       error: 0,
@@ -208,15 +231,15 @@ router.post('/', validateCreatePost(), async (req, res) => {
     }
     const post = await db.Posts.create({
       zaloId: req.user.zaloId,
-      category: category.toString(),
-      subCategory: subCategory.toString(),
-      city: city.toString(),
-      district: district.toString(),
+      category: normalize(category),
+      subCategory: normalize(subCategory),
+      city: normalize(city),
+      district: normalize(district),
       images: images,
-      condition: condition.toString(),
-      title: title.toString(),
+      condition: normalize(condition),
+      title: normalize(title),
       price: parseInt(price),
-      description: description.toString(),
+      description: normalize(description),
       productDetails: productDetails
     });
     res.send({
@@ -240,15 +263,15 @@ router.put('/:postId', async (req, res) => {
     } = req.body
     const p = await db.Posts.findByIdAndUpdate({_id: param}, {
         zaloId: req.user.zaloId,
-        category: category,
-        subCategory: subCategory,
-        city: city,
-        district: district,
-        status: status,
-        condition: condition,
-        title: title,
+        category: normalize(category),
+        subCategory: normalize(subCategory),
+        city: normalize(city),
+        district: normalize(district),
+        status: normalize(status),
+        condition: normalize(condition),
+        title: normalize(title),
         price: price,
-        description: description,
+        description: normalize(description),
         productDetails: productDetails
       }, {new: true}
     )
