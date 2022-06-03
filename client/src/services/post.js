@@ -36,11 +36,11 @@ export const getViewedPosts = async () => {
 export const getFilteredPosts = async (condition) => {
   try {
     condition = JSON.parse(condition);
-    let query = "";
+    let query = "?";
     Object.keys(condition).forEach(function (key) {
       var value = condition[key];
       console.log(key, value);
-      query += "?" + key + "=" + value;
+      query += key + "=" + value + "&";
     });
     console.log("query ne`:" + query);
     const url = "api/posts/search" + query;

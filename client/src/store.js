@@ -160,6 +160,7 @@ const store = createStore({
     async fetchFilteredPosts({state}, {condition}) {
       state.loadingFlag = true;
       state.filteredPosts = await getFilteredPosts(condition);
+      state.viewingPostsList = state.filteredPosts;
       state.loadingFlag = false;
     },
     async fetchPostDetail({state}, {id}) {

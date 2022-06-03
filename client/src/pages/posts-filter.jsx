@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Page, Title, Box, Range, Searchbar, Button} from 'zmp-framework/react';
+import {Page, Title, Box, Range, Searchbar, Button, zmp} from 'zmp-framework/react';
 import NavbarBack from '../components/navbar-back';
 import {Select} from "../components/Input";
 import {getCities, getDistricts} from "../services/data";
@@ -22,6 +22,7 @@ export default () => {
     console.log("before search data:"+ JSON.stringify(data));
     const condition = JSON.stringify(data)
     await store.dispatch("fetchFilteredPosts", {condition});
+    zmp.views.current.router.navigate("/posts-list");
   }
   return (
     <Page name="posts-filter">
@@ -56,7 +57,7 @@ export default () => {
         />
       </Box>
       <Select
-
+        {...register("condition")}
         label="Tình trạng sản phẩm"
         compulsory
         option={["Đã qua sử dụng", "Còn mới", "Còn bảo hành"]}
