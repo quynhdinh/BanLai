@@ -38,7 +38,7 @@ router.get('/search', async (req, res) => {
         } else if (key === "keyWord") {
           isValid &= normalize(post['title']).includes(filters[key]);
         } else {
-          isValid &= post[key] === filters[key];
+          isValid &= normalize(post[key]) === normalize(filters[key]);
         }
       return isValid;
     });
