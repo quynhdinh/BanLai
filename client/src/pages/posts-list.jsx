@@ -6,10 +6,9 @@ import Category from "../components/Categories/Category";
 import {LoadingVertical} from "../components/loading";
 
 export default () => {
-  const zmproute = zmp.views.main.router.currentRoute;
 
   function postFilter() {
-    zmproute.navigate("/posts-filter");
+    zmp.views.current.router.navigate("/posts-filter");
   }
 
   const [keyword, setKeyword] = useState('')
@@ -17,10 +16,10 @@ export default () => {
   const posts = useStore('viewingPostsList')
   useEffect(() => {
     const zmproute = zmp.views.main.router.currentRoute;
-    if (zmproute.query.index == 0) {
+    if (zmproute.query.index === "0") {
       store.dispatch("fetchElectronicItems")
     }
-    if (zmproute.query.index == 1) {
+    if (zmproute.query.index === "1") {
       store.dispatch("fetchHouseItems")
     }
   }, [])

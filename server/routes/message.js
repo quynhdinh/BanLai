@@ -8,7 +8,7 @@ router.use(AuthService.verify);
 router.get('/', async (req, res) => {
   try {
     const messages = await db.Messages.find({owner: req.user.zaloId}).lean()
-    for (let message of messages) {
+    for (const message of messages) {
       const user = await db.Users.findOne({zaloId: message.partner}).lean()
       const post = await db.Posts.findOne({_id: ObjectId(message.postId)}).lean()
       message.picture = user.picture
