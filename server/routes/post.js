@@ -152,7 +152,8 @@ router.get('/:postId', async (req, res) => {
 router.get('/by-user/:zaloId', async (req, res) => {
   try {
     const zaloId = req.params["zaloId"].toString()
-    const result = await db.Posts.find({zaloId: zaloId})
+    const result = await db.Posts.find({zaloId: zaloId}).lean()
+    await addIsLiked(zaloId, result)
     const user = await db.Users.findOne({zaloId: zaloId})
     const postCount = await db.Posts.countDocuments({zaloId: zaloId})
     res.send({
