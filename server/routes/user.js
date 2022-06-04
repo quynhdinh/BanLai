@@ -22,6 +22,34 @@ router.get('/', async (_req, res) => {
   }
 });
 
+router.get('/stats/:zaloId', async (req, res) => {
+  try {
+    const zaloId = req.params["zaloId"].toString()
+    const postIds =
+      (await db.Posts
+        .find({zaloId: zaloId})
+        .select("_id"))
+        .map(obj => obj._id)
+    const likeCount = await db.CarePostMapping.countDocuments({'postId': {$in: postIds}});
+    const viewCount =
+      (await db.ViewedPostMapping
+        .find({zaloId: zaloId}, {count: 1, _id: 0}))
+        .map(m => m.count)
+        .reduce((sum, a) => sum + a, 0);
+    res.send({
+      error: 0,
+      msg: 'Lấy thống kê người dùng thành công',
+      data: {
+        likeCount: likeCount,
+        viewCount: viewCount,
+      }
+    })
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
+});
+
 router.post('/login', async (req, res) => {
   try {
     const accessToken = req.body.accessToken;

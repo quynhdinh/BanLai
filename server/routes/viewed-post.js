@@ -40,26 +40,6 @@ router.get("/count/:postId", async (req, res) => {
   }
 });
 
-// Lấy tổng số lượt xem theo user
-router.get("/by-user/:zaloId", async (req, res) => {
-  try {
-    const zaloId = req.params["zaloId"].toString()
-    const response =
-      (await db.ViewedPostMapping
-        .find({zaloId: zaloId}, {count: 1, _id: 0}))
-        .map(m => m.count)
-        .reduce((sum, a) => sum + a, 0);
-    res.send({
-      error: 0,
-      msg: 'Lấy số lượt xem bài đăng theo user thành công',
-      data: response
-    });
-  } catch (error) {
-    res.send({error: -1, msg: 'Unknown exception'});
-    console.log('API-Exception', error);
-  }
-});
-
 router.get('/', async (req, res) => {
   try {
     const zaloId = req.user.zaloId
