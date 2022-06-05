@@ -17,6 +17,7 @@ import {
 } from "./services/post";
 import {getCareList, likePost, unlikePost} from "./services/care-list";
 import {updateViewCount} from "./services/viewed-post";
+import {getUserStats} from "./services/user";
 
 const store = createStore({
   state: {
@@ -52,6 +53,7 @@ const store = createStore({
     },
     viewingPostId: null,
     sellerInfo: [],
+    userStats: null,
     viewingZaloId: null,
   },
 
@@ -106,6 +108,9 @@ const store = createStore({
     },
     sellerInfo({state}) {
       return state.sellerInfo;
+    },
+    userStats({state}) {
+      return state.userStats;
     },
     viewingZaloId({state}) {
       return state.viewingZaloId;
@@ -248,6 +253,11 @@ const store = createStore({
     async fetchSellerInfo({state}, zaloId) {
       state.loadingFlag = true;
       state.sellerInfo = await getSellerInfo(zaloId);
+      state.loadingFlag = false;
+    },
+    async fetchUserStats({state}, zaloId) {
+      state.loadingFlag = true;
+      state.userStats = await getUserStats(zaloId);
       state.loadingFlag = false;
     },
   },

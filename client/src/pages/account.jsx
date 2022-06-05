@@ -1,25 +1,28 @@
-import React from "react";
+import React, {useEffect} from "react";
 import NavigationBar from "../components/NavigationBar";
-import {
-  Page,
-  useStore,
-  List,
-  ListItem,
-  Box,
-  Title,
-  Icon,
-} from "zmp-framework/react";
+import {Page, useStore, List, ListItem, Box, Title, Icon, Text} from "zmp-framework/react";
 import UserCard from "../components/user-card";
 import ZMPLogo from "../static/icons/ZMPLogo.svg";
 import BanLaiLogo from "../static/icons/BanLai.svg";
+import store from "../store";
+
 // Trang tài khoản
 const account = ({ zmproute }) => {
+  const loading = useStore("loadingFlag");
   const fakeUser = useStore("fakeUser");
+  const stats = useStore("userStats");
   const _u = useStore("u");
   const u = _u ? _u : fakeUser;
 
+  useEffect(() => {
+    store.dispatch("fetchUserStats", u.zaloId);
+  }, []);
+
   return (
     <Page className="page-box page-with-navbar">
+      <Text>
+        {loading ? "none" : stats?.likeCount + ", " +stats?.viewCount}
+      </Text>
       <NavigationBar active={zmproute.path} />
       <List style={{ marginTop: 0 }}>
         <ListItem>
