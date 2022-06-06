@@ -135,7 +135,7 @@ router.get('/:postId', async (req, res) => {
     response.name = user.name
     response.picture = user.picture
     response.postCount = postCount
-    response.isLiked = await isLiked(sellerId, postId)
+    response.isLiked = await isLiked(req.user.zaloId, postId)
     response.relatedPosts = await db.Posts.find({subCategory: response.subCategory}).sort({createdAt: -1}).limit(5);
     res.send({
       error: 0,
