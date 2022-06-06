@@ -120,4 +120,36 @@ router.get('/carelist', async (req, res) => {
   }
 });
 
+router.get('/viewedposts', async (req, res) => {
+  try {
+    await db.ViewedPostMapping.deleteMany()
+
+    const zaloIds =
+      (await db.Users.find().select("zaloId"))
+        .map(obj => obj.zaloId)
+
+    const postIds =
+      (await db.Posts.find()
+        .select("_id"))
+        .map(obj => obj._id)
+
+    for (const zId of zaloIds) {
+      for (const pId of postIds) {
+        await db.ViewedPostMapping.create({
+          zaloId: zId,
+          postId: pId,
+          count: Math.floor(Math.random() * 50 + 50)
+        })
+      }
+    }
+    return res.send({
+      error: 0,
+      msg: 'Cheat viewed posts thành công'
+    });
+  } catch (error) {
+    res.send({error: -1, msg: 'Unknown exception'});
+    console.log('API-Exception', error);
+  }
+});
+
 module.exports = router;
