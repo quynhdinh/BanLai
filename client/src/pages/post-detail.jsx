@@ -43,6 +43,7 @@ export default () => {
       isLiked: details.isLiked,
     });
     store.dispatch(details.isLiked === 0 ? "likePost" : "unlikePost", {postId: details._id});
+    store.dispatch(details.isLiked === 0 ? "unlikePost" : "likePost", {postId: details._id});
   };
 
   return (
