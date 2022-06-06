@@ -30,10 +30,7 @@ const store = createStore({
       avatar: "https://i.imgur.com/aWdfgHg.jpeg",
       online: true,
     },
-    posts: [],
     userPosts: [],
-    electronicItems: [],
-    houseItems: [],
     hottestElectronicItems: [],
     hottestHouseItems: [],
     viewedItems: [],
@@ -58,17 +55,8 @@ const store = createStore({
   },
 
   getters: {
-    categories({state}) {
-      return state.categories;
-    },
-    posts({state}) {
-      return state.posts;
-    },
     postDetails({state}) {
       return state.postDetails;
-    },
-    electronicItems({state}) {
-      return state.electronicItems;
     },
     hottestElectronicItems({state}) {
       return state.hottestElectronicItems;
@@ -90,9 +78,6 @@ const store = createStore({
     },
     messages({state}) {
       return state.messages;
-    },
-    houseItems({state}) {
-      return state.houseItems;
     },
     fakeUser({state}) {
       return state.fakeUser;
@@ -134,14 +119,9 @@ const store = createStore({
     setViewingZaloId({state}, _zaloId) {
       state.viewingZaloId = _zaloId;
     },
-    async fetchElectronicItems({state}) {
+    async fetchAllItems({state}, category) {
       state.loadingFlag = true;
-      state.viewingPostsList = await getPostsByCategory(0);
-      state.loadingFlag = false;
-    },
-    async fetchHouseItems({state}) {
-      state.loadingFlag = true;
-      state.viewingPostsList = await getPostsByCategory(1);
+      state.viewingPostsList = await getPostsByCategory(parseInt(category));
       state.loadingFlag = false;
     },
     async fetchHottestItems({state}) {
@@ -240,8 +220,7 @@ const store = createStore({
       };
       state.hottestElectronicItems = state.hottestElectronicItems.map((item) => processItem(item));
       state.hottestHouseItems = state.hottestHouseItems.map((item) => processItem(item));
-      state.electronicItems = state.electronicItems.map((item) => processItem(item));
-      state.houseItems = state.houseItems.map((item) => processItem(item));
+      state.viewingPostsList = state.viewingPostsList.map((item) => processItem(item));
       state.viewedItems = state.viewedItems.map((item) => processItem(item));
       const newPostDetails = state.postDetails;
       newPostDetails.isLiked = data.isLiked === 1 ? 0 : 1;
