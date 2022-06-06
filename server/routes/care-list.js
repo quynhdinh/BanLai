@@ -8,13 +8,12 @@ router.use(AuthService.verify)
 router.get('/', async (req, res) => {
   try {
     const careList = await db.CarePostMapping.find({zaloId: req.user.zaloId}).lean()
-    for (let care of careList) {
+    for (const care of careList)
       care.postDetail = await db.Posts.findOne({_id: ObjectId(care.postId)}).lean()
-    }
     res.send({
       error: 0,
       msg: 'Lấy thông tin quan tâm thành công',
-      data: careList,
+      data: careList
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
@@ -24,7 +23,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const id = req.body.postId.toString()
+    const id = req.body.postId.toString();
     const mapping = await db.CarePostMapping.create({
       zaloId: req.user.zaloId,
       postId: id
@@ -32,7 +31,7 @@ router.post('/', async (req, res) => {
     res.send({
       error: 0,
       msg: 'Thêm bài đăng vào danh sách quan tâm thành công!',
-      data: mapping,
+      data: mapping
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
@@ -44,17 +43,16 @@ router.delete('/:postId', async (req, res) => {
   try {
     const postId = req.params["postId"].toString()
     const post = await db.CarePostMapping.deleteOne({postId: postId, zaloId: req.user.zaloId})
-    if (post.deletedCount) {
+    if (post.deletedCount)
       res.send({
         error: 0,
         msg: 'Xóa bài khỏi danh sách quan tâm thành công!'
       })
-    } else {
+    else
       res.send({
         error: 1,
         msg: 'Không tìm thấy bài đăng này'
       })
-    }
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
     console.log('API-Exception', error);

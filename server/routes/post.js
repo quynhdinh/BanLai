@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
     res.send({
       error: 0,
       msg: 'Lấy danh sách bài đăng thành công',
-      data: posts,
+      data: posts
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
@@ -64,7 +64,7 @@ router.get('/hottest-posts', async (req, res) => {
       error: 0,
       msg: 'Lấy danh sách bài đăng hot thành công',
       data: postArr,
-      data2: postArr2,
+      data2: postArr2
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
@@ -80,18 +80,17 @@ router.put('/repost/:postId', async (req, res) => {
       _id: param,
       zaloId: req.user.zaloId
     }, {'status': 'active'})
-    if (p) {
+    if (p)
       res.send({
         error: 0,
         msg: 'Active bài đăng thành công',
         data: p
       })
-    } else {
+    else
       res.send({
         error: -1,
         msg: 'Không tìm thấy bài đăng',
       })
-    }
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
     console.log('API-Exception', error);
@@ -106,18 +105,17 @@ router.put('/close-post/:postId', async (req, res) => {
       _id: postId,
       zaloId: req.user.zaloId
     }, {'status': 'closed'})
-    if (p) {
+    if (p)
       res.send({
         error: 0,
         msg: 'Ẩn bài đăng thành công',
         data: p
       })
-    } else {
+    else
       res.send({
         error: -1,
-        msg: 'Không tìm thấy bài đăng',
+        msg: 'Không tìm thấy bài đăng'
       })
-    }
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
     console.log('API-Exception', error);
@@ -147,7 +145,7 @@ router.get('/:postId', async (req, res) => {
     res.send({
       error: 0,
       msg: 'Lấy thông tin bài đăng thành công',
-      data: response,
+      data: response
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
@@ -170,7 +168,7 @@ router.get('/by-user/:zaloId', async (req, res) => {
       extra: {
         name: user.name,
         picture: user.picture,
-        postCount: postCount,
+        postCount: postCount
       }
     })
   } catch (error) {
@@ -190,7 +188,7 @@ router.get('/hottest-posts/:categoryId', async (req, res) => {
       error: 0,
       msg: 'Lấy danh sách bài đăng hot thành công',
       data: postArr,
-      data2: postArr2,
+      data2: postArr2
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
@@ -202,19 +200,18 @@ router.get('/hottest-posts/:categoryId', async (req, res) => {
 router.get('/by-category/:categoryId', async (req, res) => {
   try {
     const param = parseInt(req.params["categoryId"])
-    if (param !== 0 && param !== 1) {
+    if (param !== 0 && param !== 1)
       return res.send({
         error: -1,
         msg: 'Param không hợp lệ'
       })
-    }
     const category = (param === 0 ? "Thiết bị điện tử" : "Đồ gia dụng, nội thất")
     const posts = await db.Posts.find({category: normalize(category), status: "active"}).lean()
     const postArr = await addIsLiked(req.user.zaloId, posts)
     res.send({
       error: 0,
       msg: 'Lấy danh sách bài đăng thành công',
-      data: postArr,
+      data: postArr
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
@@ -230,13 +227,12 @@ router.post('/', validateCreatePost(), async (req, res) => {
     } = req.body
 
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
+    if (!errors.isEmpty())
       return res.send({
         error: 1,
         massage: 'Thông tin không hợp lệ',
         data: errors.array()
       })
-    }
     const post = await db.Posts.create({
       zaloId: req.user.zaloId,
       category: normalize(category),
@@ -253,9 +249,8 @@ router.post('/', validateCreatePost(), async (req, res) => {
     res.send({
       error: 0,
       msg: 'Tạo bài thành công!',
-      data: post,
+      data: post
     })
-
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
     console.log('API-Exception', error);

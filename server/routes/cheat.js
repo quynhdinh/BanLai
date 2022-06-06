@@ -88,7 +88,7 @@ router.get('/messages/:zaloId', async (req, res) => {
   }
 });
 
-router.get('/carelist', async (req, res) => {
+router.get('/carelist', async (_req, res) => {
   try {
     await db.CarePostMapping.deleteMany()
 
@@ -120,7 +120,7 @@ router.get('/carelist', async (req, res) => {
   }
 });
 
-router.get('/viewedposts', async (req, res) => {
+router.get('/viewedposts', async (_req, res) => {
   try {
     await db.ViewedPostMapping.deleteMany()
 

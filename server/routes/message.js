@@ -18,8 +18,8 @@ router.get('/', async (req, res) => {
     res.send({
       error: 0,
       msg: 'Lấy danh sách tin nhắn thành công',
-      data: messages,
-    });
+      data: messages
+    })
   } catch (error) {
     res.send({error: -1, message: 'Unknown exception'});
     console.log('API-Exception', error);
@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
     res.send({
       error: 0,
       msg: 'Tạo tin nhắn thành công',
-      data: msg,
+      data: msg
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});

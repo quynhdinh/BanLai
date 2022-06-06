@@ -24,15 +24,15 @@ auth.genJSONWebToken = (uid, exp) => {
 
 auth.verify = async (req, res, next) => {
   try {
-    let header = req.headers['authorization'];
+    const header = req.headers['authorization'];
     if (!header || !header.startsWith('Bearer ')) {
       return res.send({error: ERROR_CODE.INVALID_SESSION, message: 'User session invalid.'});
     }
 
-    let authToken = header.substring(7);
-    var data = jwt.verify(authToken, process.env.TOKEN_SECRET);
+    const authToken = header.substring(7);
+    const data = jwt.verify(authToken, process.env.TOKEN_SECRET);
 
-    let user = await db.Users.findOne({
+    const user = await db.Users.findOne({
       zaloId: data.id
     });
 
