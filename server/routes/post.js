@@ -177,25 +177,6 @@ router.get('/by-user/:zaloId', async (req, res) => {
   }
 })
 
-// Tìm những bài đăng mới nhất
-router.get('/hottest-posts/:categoryId', async (req, res) => {
-  try {
-    const posts = await db.Posts.find({category: normalize("Thiết bị điện tử"), status: "active"}).sort({createdAt: -1}).limit(4).lean()
-    const posts2 = await db.Posts.find({category: normalize("Đồ gia dụng, nội thất"), status: "active"}).sort({createdAt: -1}).limit(4).lean()
-    const postArr = await addIsLiked(req.user.zaloId, posts)
-    const postArr2 = await addIsLiked(req.user.zaloId, posts2)
-    res.send({
-      error: 0,
-      msg: 'Lấy danh sách bài đăng hot thành công',
-      data: postArr,
-      data2: postArr2
-    })
-  } catch (error) {
-    res.send({error: -1, msg: 'Unknown exception'});
-    console.log('API-Exception', error);
-  }
-});
-
 // Tìm kiếm bài đăng theo danh mục
 router.get('/by-category/:categoryId', async (req, res) => {
   try {
