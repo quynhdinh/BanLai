@@ -22,22 +22,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-//Lấy số lượng người quan tâm :postId
-router.get('/:postId', async (req, res) => {
-  try {
-    const postId = req.params["postId"].toString()
-    const count = await db.CarePostMapping.countDocuments({postId: postId})
-    res.send({
-      error: 0,
-      msg: 'Lấy thông tin quan tâm thành công',
-      data: count,
-    })
-  } catch (error) {
-    res.send({error: -1, msg: 'Unknown exception'});
-    console.log('API-Exception', error);
-  }
-});
-
 router.post('/', async (req, res) => {
   try {
     const id = req.body.postId.toString()

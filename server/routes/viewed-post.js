@@ -23,23 +23,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get("/count/:postId", async (req, res) => {
-  try {
-    const postId = req.params["postId"].toString()
-    const response =
-      await db.ViewedPostMapping
-        .findOne({zaloId: req.user.zaloId, postId: postId}, {count: 1, _id: 0})
-        .select("count")
-    res.send({
-      error: 0, msg: 'Lấy số lượt xem bài đăng thành công',
-      data: response.count
-    });
-  } catch (error) {
-    res.send({error: -1, msg: 'Unknown exception'});
-    console.log('API-Exception', error);
-  }
-});
-
 router.get('/', async (req, res) => {
   try {
     const zaloId = req.user.zaloId
