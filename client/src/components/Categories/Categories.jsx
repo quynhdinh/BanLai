@@ -6,8 +6,7 @@ import {LoadingHorizontal} from "../loading";
 
 const Categories = () => {
   const loading = useStore("loadingFlag");
-  const electronicItems = useStore("hottestElectronicItems");
-  const houseItems = useStore("hottestHouseItems");
+  const hottestItems = useStore("hottestItems");
   const viewedItems = useStore("viewedItems");
   useEffect(() => {
     store.dispatch("fetchHottestItems");
@@ -20,7 +19,7 @@ const Categories = () => {
       ) : (
         <PostTray
           category="Thiết bị điện tử"
-          products={electronicItems}
+          products={hottestItems.electric}
           index={0}
         />
       )}
@@ -29,7 +28,7 @@ const Categories = () => {
       ) : (
         <PostTray
           category="Đồ gia dụng và nội thất"
-          products={houseItems}
+          products={hottestItems.house}
           index={1}
         />
       )}

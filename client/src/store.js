@@ -31,8 +31,10 @@ const store = createStore({
       online: true,
     },
     userPosts: [],
-    hottestElectronicItems: [],
-    hottestHouseItems: [],
+    hottestItems: {
+      electric: [],
+      house: []
+    },
     viewedItems: [],
     careList: [],
     viewingPostsList: [],
@@ -58,11 +60,8 @@ const store = createStore({
     postDetails({state}) {
       return state.postDetails;
     },
-    hottestElectronicItems({state}) {
-      return state.hottestElectronicItems;
-    },
-    hottestHouseItems({state}) {
-      return state.hottestHouseItems;
+    hottestItems({state}) {
+      return state.hottestItems;
     },
     viewedItems({state}) {
       return state.viewedItems;
@@ -130,8 +129,8 @@ const store = createStore({
         await new Promise((resolve) => setTimeout(resolve, 100));
       }
       const response = await getHottestPosts();
-      state.hottestElectronicItems = response.data
-      state.hottestHouseItems = response.data2
+      state.hottestItems.electric = response.data
+      state.hottestItems.house = response.data2
       state.loadingFlag = false;
     },
     async fetchViewedItems({state}) {
@@ -218,8 +217,8 @@ const store = createStore({
         }
         return item;
       };
-      state.hottestElectronicItems = state.hottestElectronicItems.map((item) => processItem(item));
-      state.hottestHouseItems = state.hottestHouseItems.map((item) => processItem(item));
+      state.hottestItems.electric = state.hottestItems.data.map((item) => processItem(item));
+      state.hottestItems.house = state.hottestItems.data2.map((item) => processItem(item));
       state.viewingPostsList = state.viewingPostsList.map((item) => processItem(item));
       state.viewedItems = state.viewedItems.map((item) => processItem(item));
       const newPostDetails = state.postDetails;
