@@ -12,7 +12,6 @@ import {
   getPostsByCategory,
   getSellerInfo,
   getUserPosts,
-  getViewedPosts,
   repostPost
 } from "./services/post";
 import {getCareList, likePost, unlikePost} from "./services/care-list";
@@ -33,7 +32,8 @@ const store = createStore({
     userPosts: [],
     hottestItems: {
       electric: [],
-      house: []
+      house: [],
+      viewed: []
     },
     viewedItems: [],
     careList: [],
@@ -131,14 +131,7 @@ const store = createStore({
       const response = await getHottestPosts();
       state.hottestItems.electric = response.data
       state.hottestItems.house = response.data2
-      state.loadingFlag = false;
-    },
-    async fetchViewedItems({state}) {
-      state.loadingFlag = true;
-      while (!state.jwt) {
-        await new Promise((resolve) => setTimeout(resolve, 100));
-      }
-      state.viewedItems = await getViewedPosts();
+      state.hottestItems.viewed = response.data3
       state.loadingFlag = false;
     },
     async fetchFilteredPosts({state}, {condition}) {
@@ -217,10 +210,11 @@ const store = createStore({
         }
         return item;
       };
-      state.hottestItems.electric = state.hottestItems.data.map((item) => processItem(item));
-      state.hottestItems.house = state.hottestItems.data2.map((item) => processItem(item));
-      state.viewingPostsList = state.viewingPostsList.map((item) => processItem(item));
+      state.hottestItems.electric = state.hottestItems.electric.map((item) => processItem(item));
+      state.hottestItems.house = state.hottestItems.house.map((item) => processItem(item));
+      state.hottestItems.viewed = state.hottestItems.viewed.map((item) => processItem(item));
       state.viewedItems = state.viewedItems.map((item) => processItem(item));
+      state.viewingPostsList = state.viewingPostsList.map((item) => processItem(item));
       const newPostDetails = state.postDetails;
       newPostDetails.isLiked = data.isLiked === 1 ? 0 : 1;
       state.postDetails = newPostDetails;

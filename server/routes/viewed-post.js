@@ -23,25 +23,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
-  try {
-    const zaloId = req.user.zaloId
-    const filter =
-      (await db.ViewedPostMapping
-        .find({zaloId: zaloId}, {postId: 1, _id: 0}).sort({count: -1}))
-        .map(p => p.postId)
-        .map(p => Types.ObjectId(p))
-    const posts = await db.Posts.find({'_id': {$in: filter}}).lean()
-    const response = await addIsLiked(zaloId, posts)
-    res.send({
-      error: 0,
-      msg: 'Lấy danh sách đã xem thành công',
-      data: response
-    })
-  } catch (error) {
-    res.send({error: -1, msg: 'Unknown exception'});
-    console.log('API-Exception', error);
-  }
-});
-
 module.exports = router;

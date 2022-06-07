@@ -10,7 +10,6 @@ const Categories = () => {
   const viewedItems = useStore("viewedItems");
   useEffect(() => {
     store.dispatch("fetchHottestItems");
-    store.dispatch("fetchViewedItems");
   }, []);
   return (
     <Box ml={0} mr={0} style={{ marginBottom: "50px" }}>
@@ -37,7 +36,7 @@ const Categories = () => {
       ) : (
         <PostTray
           category="Sản phẩm đã xem"
-          products={viewedItems}
+          products={hottestItems.viewed}
           index={-1}
         />
       )}

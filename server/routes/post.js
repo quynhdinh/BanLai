@@ -3,6 +3,7 @@ const db = require('../models');
 const AuthService = require("../services/auth-service");
 const {validationResult} = require('express-validator');
 const {validateCreatePost, isLiked, addIsLiked} = require("./helper");
+const {Types} = require("mongoose");
 const router = express.Router();
 router.use(AuthService.verify);
 
@@ -60,11 +61,21 @@ router.get('/hottest-posts', async (req, res) => {
     const posts2 = await db.Posts.find({category: normalize("Đồ gia dụng, nội thất"), status: "active"}).sort({createdAt: -1}).limit(4).lean()
     const postArr = await addIsLiked(req.user.zaloId, posts)
     const postArr2 = await addIsLiked(req.user.zaloId, posts2)
+
+    const zaloId = req.user.zaloId
+    const filter =
+      (await db.ViewedPostMapping
+        .find({zaloId: zaloId}, {postId: 1, _id: 0}).sort({count: -1}))
+        .map(p => p.postId)
+        .map(p => Types.ObjectId(p))
+    const posts3 = await db.Posts.find({'_id': {$in: filter}}).lean()
+    const postArr3 = await addIsLiked(zaloId, posts3)
     res.send({
       error: 0,
       msg: 'Lấy danh sách bài đăng hot thành công',
       data: postArr,
-      data2: postArr2
+      data2: postArr2,
+      data3: postArr3
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
@@ -176,25 +187,6 @@ router.get('/by-user/:zaloId', async (req, res) => {
     console.log('API-Exception', error);
   }
 })
-
-// Tìm những bài đăng mới nhất
-router.get('/hottest-posts/:categoryId', async (req, res) => {
-  try {
-    const posts = await db.Posts.find({category: normalize("Thiết bị điện tử"), status: "active"}).sort({createdAt: -1}).limit(4).lean()
-    const posts2 = await db.Posts.find({category: normalize("Đồ gia dụng, nội thất"), status: "active"}).sort({createdAt: -1}).limit(4).lean()
-    const postArr = await addIsLiked(req.user.zaloId, posts)
-    const postArr2 = await addIsLiked(req.user.zaloId, posts2)
-    res.send({
-      error: 0,
-      msg: 'Lấy danh sách bài đăng hot thành công',
-      data: postArr,
-      data2: postArr2
-    })
-  } catch (error) {
-    res.send({error: -1, msg: 'Unknown exception'});
-    console.log('API-Exception', error);
-  }
-});
 
 // Tìm kiếm bài đăng theo danh mục
 router.get('/by-category/:categoryId', async (req, res) => {
