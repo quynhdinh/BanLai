@@ -1,6 +1,6 @@
 import {createStore} from "zmp-core/lite";
 import {getAccessToken} from "./services/zalo";
-import {loadUserFromCache} from "./services/storage";
+import {loadElectronicPostsFromCache, loadUserFromCache, saveUserToCache, test} from "./services/storage";
 import {getCurrentUser, login} from "./services/auth";
 import {getMessages} from "./services/message";
 import {
@@ -108,6 +108,7 @@ const store = createStore({
         avatar: u.picture,
         online: true,
       };
+      saveUserToCache(u);
     },
     setJwt({state}, jwt) {
       state.jwt = jwt;
@@ -120,7 +121,22 @@ const store = createStore({
     },
     async fetchAllItems({state}, category) {
       state.loadingFlag = true;
-      state.viewingPostsList = await getPostsByCategory(parseInt(category));
+      var cachedPosts = null;
+      if (parseInt(category) === 0) {
+        cachedPosts = await loadElectronicPostsFromCache();
+      }
+      // cachedPosts = JSON.parse(JSON.stringify(cachedPosts)[0]
+      console.log("cachedPosts: "+ typeof cachedPosts+ "length"+ cachedPosts)
+      if (cachedPosts.length != 0) {
+        console.log("get cached posts")
+        console.log("cachedPosts: "+ typeof cachedPosts)
+        console.log("in store "+ cachedPosts)
+        state.viewingPostsList = cachedPosts;
+      } else {
+        const response = await getPostsByCategory(parseInt(category));
+        console.log("type response "+ typeof response + "length " + response.length)
+        state.viewingPostsList = response
+      }
       state.loadingFlag = false;
     },
     async fetchHottestItems({state}) {

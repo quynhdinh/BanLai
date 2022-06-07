@@ -1,10 +1,16 @@
 import {request} from "./auth";
 import store from "../store";
+import {saveElectronicPostsToCache} from "./storage";
 
 export const getPostsByCategory = async (category) => {
   try {
     const url = "api/posts/by-category/" + category;
     const response = await (await request("GET", url)).json();
+    if (parseInt(category) === 0) {
+      console.log("in save to cache")
+      console.log("type save to cache: "+ typeof response.data)
+      await saveElectronicPostsToCache(response.data);
+    }
     return response.data;
   } catch (error) {
     console.log("Error fetching posts by category:", error);
