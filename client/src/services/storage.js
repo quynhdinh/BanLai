@@ -1,7 +1,7 @@
 import api from "zmp-sdk";
 
 export const test = async () => {
-  const { currentSize, limitSize } = await api.getStorageInfo({
+  const {currentSize, limitSize} = await api.getStorageInfo({
     fail: (error) => {
       // xử lý khi gọi api thất bại
       console.log(error);
@@ -27,11 +27,10 @@ export const test = async () => {
 export const loadElectronicPostsFromCache = () => new Promise(resolve => {
   api.getStorage({
     keys: ['electronicPosts'],
-    success: (electronicPosts) => {
+    success: ({electronicPosts}) => {
       if (electronicPosts) {
         console.log("have product in cache")
-        console.log("in storage: "+"type "+ electronicPosts)
-        resolve(electronicPosts)
+        resolve({electronicPosts})
       }
       resolve([])
     },
@@ -42,7 +41,24 @@ export const loadElectronicPostsFromCache = () => new Promise(resolve => {
   })
 })
 
-export const saveElectronicPostsToCache = async (electronicPosts) => {
+export const loadhouseItemPostsFromCache = () => new Promise(resolve => {
+  api.getStorage({
+    keys: ['houseItemPosts'],
+    success: ({houseItemPosts}) => {
+      if (houseItemPosts) {
+        console.log("have product in cache")
+        resolve({houseItemPosts})
+      }
+      resolve([])
+    },
+    fail: (error) => {
+      console.log('Failed to load products from cache. Details: ', error)
+      resolve([])
+    }
+  })
+})
+
+export const saveElectronicPostsToCache = async electronicPosts => {
   await api.setStorage({
     data: {electronicPosts},
     fail: (error) =>
@@ -50,6 +66,17 @@ export const saveElectronicPostsToCache = async (electronicPosts) => {
   });
   return electronicPosts;
 };
+
+export const saveHouseItemPostsToCache = async houseItemPosts => {
+  await api.setStorage({
+    data: {houseItemPosts},
+    fail: (error) =>
+      console.log("Failed to save products to cache. Details: ", error),
+  });
+  return houseItemPosts;
+};
+
+saveHouseItemPostsToCache
 
 export const loadUserFromCache = () =>
   new Promise((resolve) => {
