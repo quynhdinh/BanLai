@@ -1,38 +1,43 @@
 import api from "zmp-sdk";
 
-export const loadElectronicPostsFromCache = () => new Promise(resolve => {
-  api.getStorage({
-    keys: ['electronicPosts'],
-    success: ({electronicPosts}) => {
-      if (electronicPosts) {
-        console.log("electronicPosts cache hit!")
-        resolve({electronicPosts})
-      } else {
-        console.log("electronicPosts cache miss!")
-      }
+
+export const clearCache = async () => new Promise(resolve => {
+  api.clearStorage({
+    success: () => {
+      console.log("clear cache successfully !")
       resolve([])
     },
     fail: (error) => {
-      console.log('Failed to load electronics from cache. Details: ', error)
+      // xử lý khi gọi api thất bại
+      console.log(error);
       resolve([])
     }
-  })
+  });
 })
 
-export const loadhouseItemPostsFromCache = () => new Promise(resolve => {
+export const loadPostsFromCache = (category) => new Promise(resolve => {
   api.getStorage({
-    keys: ['houseItemPosts'],
-    success: ({houseItemPosts}) => {
-      if (houseItemPosts) {
-        console.log("houseItemPosts cache hit!")
-        resolve({houseItemPosts})
+    keys: ['electronicPosts', 'houseItemPosts'],
+    success: ({electronicPosts, houseItemPosts}) => {
+      if (parseInt(category) === 0) {
+        if (electronicPosts) {
+          console.log("electronicPosts cache hit!")
+          resolve(electronicPosts)
+        } else {
+          console.log("electronicPosts cache miss!")
+        }
       } else {
-        console.log("houseItemPosts cache miss!")
+        if (houseItemPosts) {
+          console.log("houseItemPosts cache hit!")
+          resolve(houseItemPosts)
+        } else {
+          console.log("houseItemPosts cache miss!")
+        }
       }
       resolve([])
     },
     fail: (error) => {
-      console.log('Failed to load house items from cache. Details: ', error)
+      console.log('Failed to load posts from cache. Details: ', error)
       resolve([])
     }
   })

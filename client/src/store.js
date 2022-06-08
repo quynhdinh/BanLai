@@ -1,8 +1,8 @@
 import {createStore} from "zmp-core/lite";
 import {getAccessToken} from "./services/zalo";
 import {
-  loadElectronicPostsFromCache,
-  loadhouseItemPostsFromCache, loadMessagesFromCache,
+  loadMessagesFromCache,
+  loadPostsFromCache,
   loadUserFromCache,
   saveElectronicPostsToCache,
   saveHouseItemPostsToCache, saveMessagesToCache,
@@ -24,12 +24,14 @@ import {
 import {getCareList, likePost, unlikePost} from "./services/care-list";
 import {updateViewCount} from "./services/viewed-post";
 import {getUserStats} from "./services/user";
+import {isValidCache} from "./util/time";
 
 const store = createStore({
   state: {
     jwt: null,
     messages: [],
     loadingFlag: true,
+    lastFetchPosts: 0, // unix time
     u: null,
     fakeUser: {
       displayName: "Thành viên bán lại",
@@ -66,6 +68,9 @@ const store = createStore({
   getters: {
     postDetails({state}) {
       return state.postDetails;
+    },
+    lastFetchPosts({state}) {
+      return state.lastFetchPosts;
     },
     hottestItems({state}) {
       return state.hottestItems;
@@ -117,6 +122,9 @@ const store = createStore({
       };
       await saveUserToCache(u);
     },
+    setLastFetchPosts({state}, time) {
+      state.lastFetchPosts = time;
+    },
     setJwt({state}, jwt) {
       state.jwt = jwt;
     },
@@ -128,21 +136,25 @@ const store = createStore({
     },
     async fetchAllItems({state}, category) {
       state.loadingFlag = true;
+      let cachedPosts = null;
+      if (isValidCache(state.lastFetchPosts)) {
+        cachedPosts = await loadPostsFromCache(category);
+      }
       if (parseInt(category) === 0) {
-        const cachedPosts = await loadElectronicPostsFromCache();
-        if (cachedPosts['electronicPosts']) {
-          state.viewingPostsList = JSON.parse(cachedPosts['electronicPosts']);
+        if (cachedPosts) {
+          if (cachedPosts['electronicPosts']) state.viewingPostsList = cachedPosts['electronicPosts'];
         } else {
-          const response = await getPostsByCategory(parseInt(category));
+          console.log("fetch electronics")
+          const response = await getPostsByCategory(0);
           await saveElectronicPostsToCache(response);
           state.viewingPostsList = response;
         }
       } else {
-        const cachedPosts = await loadhouseItemPostsFromCache();
-        if (cachedPosts['houseItemPosts']) {
-          state.viewingPostsList = JSON.parse(cachedPosts['houseItemPosts']);
+        if (cachedPosts) {
+          if (cachedPosts['houseItemPosts']) state.viewingPostsList = cachedPosts['houseItemPosts'];
         } else {
-          const response = await getPostsByCategory(parseInt(category));
+          console.log("fetch houses")
+          const response = await getPostsByCategory(1);
           await saveHouseItemPostsToCache(response);
           state.viewingPostsList = response;
         }
