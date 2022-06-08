@@ -1,6 +1,13 @@
 import {createStore} from "zmp-core/lite";
 import {getAccessToken} from "./services/zalo";
-import {loadUserFromCache} from "./services/storage";
+import {
+  loadElectronicPostsFromCache,
+  loadhouseItemPostsFromCache,
+  loadUserFromCache,
+  saveElectronicPostsToCache,
+  saveHouseItemPostsToCache,
+  saveUserToCache
+} from "./services/storage";
 import {getCurrentUser, login} from "./services/auth";
 import {getMessages} from "./services/message";
 import {
@@ -101,13 +108,14 @@ const store = createStore({
     },
   },
   actions: {
-    setU({state}, u) {
+    async setU({state}, u) {
       state.u = {
         zaloId: u.zaloId,
         displayName: u.name,
         avatar: u.picture,
         online: true,
       };
+      await saveUserToCache(u);
     },
     setJwt({state}, jwt) {
       state.jwt = jwt;
@@ -120,7 +128,25 @@ const store = createStore({
     },
     async fetchAllItems({state}, category) {
       state.loadingFlag = true;
-      state.viewingPostsList = await getPostsByCategory(parseInt(category));
+      if (parseInt(category) === 0) {
+        const cachedPosts = await loadElectronicPostsFromCache();
+        if (cachedPosts['electronicPosts']) {
+          state.viewingPostsList = JSON.parse(cachedPosts['electronicPosts']);
+        } else {
+          const response = await getPostsByCategory(parseInt(category));
+          await saveElectronicPostsToCache(response);
+          state.viewingPostsList = response;
+        }
+      } else {
+        const cachedPosts = await loadhouseItemPostsFromCache();
+        if (cachedPosts['houseItemPosts']) {
+          state.viewingPostsList = JSON.parse(cachedPosts['houseItemPosts']);
+        } else {
+          const response = await getPostsByCategory(parseInt(category));
+          await saveHouseItemPostsToCache(response);
+          state.viewingPostsList = response;
+        }
+      }
       state.loadingFlag = false;
     },
     async fetchHottestItems({state}) {

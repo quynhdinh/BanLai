@@ -1,66 +1,66 @@
 import api from "zmp-sdk";
 
-export const loadAddresses = () =>
-  new Promise((resolve) => {
-    api.getStorage({
-      keys: ["addresses"],
-      success: ({ addresses }) => {
-        if (addresses) {
-          if (addresses.filter) {
-            resolve(addresses.filter((a) => !!a && !!a.address));
-          }
-        }
-        resolve([]);
-      },
-      fail: (error) => {
-        console.log("Failed to get addresses from storage. Details: ", error);
-        resolve([]);
-      },
-    });
-  });
+export const loadElectronicPostsFromCache = () => new Promise(resolve => {
+  api.getStorage({
+    keys: ['electronicPosts'],
+    success: ({electronicPosts}) => {
+      if (electronicPosts) {
+        console.log("electronicPosts cache hit!")
+        resolve({electronicPosts})
+      } else {
+        console.log("electronicPosts cache miss!")
+      }
+      resolve([])
+    },
+    fail: (error) => {
+      console.log('Failed to load electronics from cache. Details: ', error)
+      resolve([])
+    }
+  })
+})
 
-export const saveAddress = async (address) => {
-  const addresses = await loadAddresses();
-  addresses.push(address);
-  api.setStorage({
-    data: { addresses },
+export const loadhouseItemPostsFromCache = () => new Promise(resolve => {
+  api.getStorage({
+    keys: ['houseItemPosts'],
+    success: ({houseItemPosts}) => {
+      if (houseItemPosts) {
+        console.log("houseItemPosts cache hit!")
+        resolve({houseItemPosts})
+      } else {
+        console.log("houseItemPosts cache miss!")
+      }
+      resolve([])
+    },
+    fail: (error) => {
+      console.log('Failed to load house items from cache. Details: ', error)
+      resolve([])
+    }
+  })
+})
+
+export const saveElectronicPostsToCache = async electronicPosts => {
+  await api.setStorage({
+    data: {electronicPosts},
     fail: (error) =>
-      console.log("Failed to save new address to storage. Details: ", error),
+      console.log("Failed to save electrics to cache. Details: ", error),
   });
-  return addresses;
+  return electronicPosts;
 };
 
-export const loadProductsFromCache = () =>
-  new Promise((resolve) => {
-    api.getStorage({
-      keys: ["products"],
-      success: ({ products }) => {
-        if (products) {
-          resolve(products);
-        }
-        resolve([]);
-      },
-      fail: (error) => {
-        console.log("Failed to load products from cache. Details: ", error);
-        resolve([]);
-      },
-    });
-  });
-
-export const saveProductsToCache = async (products) => {
+export const saveHouseItemPostsToCache = async houseItemPosts => {
   await api.setStorage({
-    data: { products },
+    data: {houseItemPosts},
     fail: (error) =>
-      console.log("Failed to save products to cache. Details: ", error),
+      console.log("Failed to save house items to cache. Details: ", error),
   });
-  return products;
+  return houseItemPosts;
 };
 
 export const loadUserFromCache = () =>
   new Promise((resolve) => {
     api.getStorage({
       keys: ["user"],
-      success: ({ user }) => {
+      success: ({user}) => {
         if (user) {
           resolve(user);
         }
@@ -75,7 +75,7 @@ export const loadUserFromCache = () =>
 
 export const saveUserToCache = async (user) => {
   await api.setStorage({
-    data: { user },
+    data: {user},
     fail: (error) =>
       console.log("Failed to save user to cache. Details: ", error),
   });
