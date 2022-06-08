@@ -1,11 +1,12 @@
 import {createStore} from "zmp-core/lite";
 import {getAccessToken} from "./services/zalo";
 import {
+  loadCareListFromCache,
   loadElectronicPostsFromCache,
-  loadhouseItemPostsFromCache,
-  loadUserFromCache,
+  loadhouseItemPostsFromCache, loadMessagesFromCache, loadMyPostsFromCache,
+  loadUserFromCache, saveCareListToCache,
   saveElectronicPostsToCache,
-  saveHouseItemPostsToCache,
+  saveHouseItemPostsToCache, saveMessagesToCache, saveMyPostsToCache,
   saveUserToCache
 } from "./services/storage";
 import {getCurrentUser, login} from "./services/auth";
@@ -195,16 +196,39 @@ const store = createStore({
     },
     async fetchMessages({state}) {
       state.loadingFlag = true;
-      state.messages = await getMessages();
+      const m = await loadMessagesFromCache();
+      if (m.messages && m.messages.length > 0) {
+        state.messages = m.messages;
+      } else {
+        const response = await getMessages();
+        await saveMessagesToCache(response);
+        state.messages = response;
+      }
       state.loadingFlag = false;
     },
     async fetchCareList({state}) {
       state.loadingFlag = true;
+      const list = await loadCareListFromCache();
+      if (list.carelist && list.carelist.length > 0) {
+        state.careList = list.carelist;
+      } else {
+        const response = await getCareList();
+        await saveCareListToCache(response);
+        state.careList = response;
+      }
       state.careList = await getCareList();
       state.loadingFlag = false;
     },
     async fetchUserPosts({state}) {
       state.loadingFlag = true;
+      const u = await loadMyPostsFromCache();
+      if (u.userPosts && u.userPosts.length > 0) {
+        state.userPosts = u.userPosts;
+      } else {
+        const response = await getUserPosts();
+        await saveMyPostsToCache(response);
+        state.messages = response;
+      }
       state.userPosts = await getUserPosts();
       state.loadingFlag = false;
     },

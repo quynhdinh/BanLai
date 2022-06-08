@@ -81,3 +81,85 @@ export const saveUserToCache = async (user) => {
   });
   return user;
 };
+
+export const loadMessagesFromCache = () => new Promise(resolve => {
+  api.getStorage({
+    keys: ['messages'],
+    success: (m) => {
+      if (m.messages) {
+        console.log("[messages] cache hit!")
+        resolve(m)
+      }
+      resolve([])
+    },
+    fail: (error) => {
+      console.log('Failed to load messages from cache. Details: ', error)
+      resolve([])
+    }
+  })
+})
+
+export const saveMessagesToCache = async m => {
+  await api.setStorage({
+    data: {messages: m},
+    fail: (error) =>
+      console.log("Failed to save messages to cache. Details: ", error),
+  });
+  return m;
+};
+
+export const loadMyPostsFromCache = () => new Promise(resolve => {
+  api.getStorage({
+    keys: ['myPosts'],
+    success: (m) => {
+      if (m.myPosts) {
+        console.log("[myPosts] cache hit!")
+        resolve(m)
+      } else {
+        console.log("[myPosts] cache miss!")
+      }
+      resolve([])
+    },
+    fail: (error) => {
+      console.log('Failed to load messages from cache. Details: ', error)
+      resolve([])
+    }
+  })
+})
+
+export const saveMyPostsToCache = async p => {
+  await api.setStorage({
+    data: {myPosts: p},
+    fail: (error) =>
+      console.log("Failed to save my posts to cache. Details: ", error),
+  });
+  return p;
+};
+
+export const loadCareListFromCache = () => new Promise(resolve => {
+  api.getStorage({
+    keys: ['carelist'],
+    success: (m) => {
+      if (m.carelist) {
+        console.log("[carelist] cache hit!")
+        resolve(m)
+      } else {
+        console.log("[carelist] cache miss!")
+      }
+      resolve([])
+    },
+    fail: (error) => {
+      console.log('Failed to load carelist from cache. Details: ', error)
+      resolve([])
+    }
+  })
+})
+
+export const saveCareListToCache = async p => {
+  await api.setStorage({
+    data: {carelist: p},
+    fail: (error) =>
+      console.log("Failed to save care list to cache. Details: ", error),
+  });
+  return p;
+};
