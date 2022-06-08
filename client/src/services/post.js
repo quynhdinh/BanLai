@@ -1,12 +1,12 @@
 import {request} from "./auth";
 import store from "../store";
-import {currentDateTime} from "../util/datetime";
+import {now} from "../util/time";
 
 export const getPostsByCategory = async (category) => {
   try {
     const url = "api/posts/by-category/" + category;
     const response = await (await request("GET", url)).json();
-    await store.dispatch("setLastFetchPosts", new Date(currentDateTime()));
+    await store.dispatch("setLastFetchPosts", now());
     return response.data;
   } catch (error) {
     console.log("Error fetching posts by category:", error);
