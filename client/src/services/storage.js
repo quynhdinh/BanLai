@@ -81,3 +81,45 @@ export const saveUserToCache = async (user) => {
   });
   return user;
 };
+
+export const saveMessagesToCache = async m => {
+  await api.setStorage({
+    data: {messages: m},
+    fail: (error) =>
+      console.log("Failed to save messages to cache. Details: ", error),
+  });
+  return m;
+};
+
+export const loadMessagesFromCache = () => new Promise(resolve => {
+  console.log("loadMessagesFromCache")
+  api.getStorage({
+    keys: ['messages'],
+    success: (m) => {
+      if (m.messages) {
+        console.log("[messages] cache hit!")
+        resolve(m)
+      } else {
+        console.log("[messages] cache miss!")
+      }
+      resolve([])
+    },
+    fail: (error) => {
+      console.log('Failed to load messages from cache. Details: ', error)
+      resolve([])
+    }
+  })
+})
+
+export const removeFromCache = async (key) => {
+  await api.removeStorage({
+    keys: [key],
+    success: (data) => {
+      const {errorKeys} = data;
+      console.log("remove " + key + " in cache successfully: "  + errorKeys)
+    },
+    fail: (error) => {
+      console.log(error);
+    }
+  });
+};

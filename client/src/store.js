@@ -2,10 +2,10 @@ import {createStore} from "zmp-core/lite";
 import {getAccessToken} from "./services/zalo";
 import {
   loadElectronicPostsFromCache,
-  loadhouseItemPostsFromCache,
+  loadhouseItemPostsFromCache, loadMessagesFromCache,
   loadUserFromCache,
   saveElectronicPostsToCache,
-  saveHouseItemPostsToCache,
+  saveHouseItemPostsToCache, saveMessagesToCache,
   saveUserToCache
 } from "./services/storage";
 import {getCurrentUser, login} from "./services/auth";
@@ -195,7 +195,14 @@ const store = createStore({
     },
     async fetchMessages({state}) {
       state.loadingFlag = true;
-      state.messages = await getMessages();
+      const m = await loadMessagesFromCache();
+      if (m.messages && m.messages.length > 0) {
+        state.messages = m.messages;
+      } else {
+        const response = await getMessages();
+        await saveMessagesToCache(response);
+        state.messages = response;
+      }
       state.loadingFlag = false;
     },
     async fetchCareList({state}) {
