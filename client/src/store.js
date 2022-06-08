@@ -1,11 +1,12 @@
 import {createStore} from "zmp-core/lite";
 import {getAccessToken} from "./services/zalo";
 import {
-  loadElectronicPostsFromCache, loadhouseItemPostsFromCache,
+  loadElectronicPostsFromCache,
+  loadhouseItemPostsFromCache,
   loadUserFromCache,
-  saveElectronicPostsToCache, saveHouseItemPostsToCache,
-  saveUserToCache,
-  test
+  saveElectronicPostsToCache,
+  saveHouseItemPostsToCache,
+  saveUserToCache
 } from "./services/storage";
 import {getCurrentUser, login} from "./services/auth";
 import {getMessages} from "./services/message";
@@ -107,14 +108,14 @@ const store = createStore({
     },
   },
   actions: {
-    setU({state}, u) {
+    async setU({state}, u) {
       state.u = {
         zaloId: u.zaloId,
         displayName: u.name,
         avatar: u.picture,
         online: true,
       };
-      saveUserToCache(u);
+      await saveUserToCache(u);
     },
     setJwt({state}, jwt) {
       state.jwt = jwt;
@@ -146,7 +147,6 @@ const store = createStore({
           state.viewingPostsList = response;
         }
       }
-
       state.loadingFlag = false;
     },
     async fetchHottestItems({state}) {

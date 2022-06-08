@@ -1,6 +1,5 @@
 import {request} from "./auth";
 import store from "../store";
-import {saveElectronicPostsToCache} from "./storage";
 
 export const getPostsByCategory = async (category) => {
   try {

@@ -1,41 +1,19 @@
 import api from "zmp-sdk";
 
-export const test = async () => {
-  const {currentSize, limitSize} = await api.getStorageInfo({
-    fail: (error) => {
-      // xử lý khi gọi api thất bại
-      console.log(error);
-    }
-  });
-};
-
-// export const loadElectronicPostsFromCache = () =>
-//   api.getStorage({
-//     keys: ["electronicPos"],
-//     success: (data) => {
-//       console.log("success cache: ")
-//       console.log("type cache " + typeof data)
-//       const {electronicPosts} = data
-//       return electronicPosts
-//     },
-//     fail: (error) => {
-//       // xử lý khi gọi api thất bại
-//       console.log(error);
-//     }
-//   });
-
 export const loadElectronicPostsFromCache = () => new Promise(resolve => {
   api.getStorage({
     keys: ['electronicPosts'],
     success: ({electronicPosts}) => {
       if (electronicPosts) {
-        console.log("have product in cache")
+        console.log("electronicPosts cache hit!")
         resolve({electronicPosts})
+      } else {
+        console.log("electronicPosts cache miss!")
       }
       resolve([])
     },
     fail: (error) => {
-      console.log('Failed to load products from cache. Details: ', error)
+      console.log('Failed to load electronics from cache. Details: ', error)
       resolve([])
     }
   })
@@ -46,13 +24,15 @@ export const loadhouseItemPostsFromCache = () => new Promise(resolve => {
     keys: ['houseItemPosts'],
     success: ({houseItemPosts}) => {
       if (houseItemPosts) {
-        console.log("have product in cache")
+        console.log("houseItemPosts cache hit!")
         resolve({houseItemPosts})
+      } else {
+        console.log("houseItemPosts cache miss!")
       }
       resolve([])
     },
     fail: (error) => {
-      console.log('Failed to load products from cache. Details: ', error)
+      console.log('Failed to load house items from cache. Details: ', error)
       resolve([])
     }
   })
@@ -62,7 +42,7 @@ export const saveElectronicPostsToCache = async electronicPosts => {
   await api.setStorage({
     data: {electronicPosts},
     fail: (error) =>
-      console.log("Failed to save products to cache. Details: ", error),
+      console.log("Failed to save electrics to cache. Details: ", error),
   });
   return electronicPosts;
 };
@@ -71,12 +51,10 @@ export const saveHouseItemPostsToCache = async houseItemPosts => {
   await api.setStorage({
     data: {houseItemPosts},
     fail: (error) =>
-      console.log("Failed to save products to cache. Details: ", error),
+      console.log("Failed to save house items to cache. Details: ", error),
   });
   return houseItemPosts;
 };
-
-saveHouseItemPostsToCache
 
 export const loadUserFromCache = () =>
   new Promise((resolve) => {
