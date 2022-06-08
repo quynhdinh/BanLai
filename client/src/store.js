@@ -142,19 +142,19 @@ const store = createStore({
       }
       if (parseInt(category) === 0) {
         if (cachedPosts) {
-          if (cachedPosts['electronicPosts']) state.viewingPostsList = JSON.parse(cachedPosts['electronicPosts']);
+          if (cachedPosts['electronicPosts']) state.viewingPostsList = cachedPosts['electronicPosts'];
         } else {
           console.log("fetch electronics")
-          const response = await getPostsByCategory(parseInt(category));
+          const response = await getPostsByCategory(0);
           await saveElectronicPostsToCache(response);
           state.viewingPostsList = response;
         }
       } else {
         if (cachedPosts) {
-          if (cachedPosts['houseItemPosts']) state.viewingPostsList = JSON.parse(cachedPosts['houseItemPosts']);
+          if (cachedPosts['houseItemPosts']) state.viewingPostsList = cachedPosts['houseItemPosts'];
         } else {
           console.log("fetch houses")
-          const response = await getPostsByCategory(parseInt(category));
+          const response = await getPostsByCategory(1);
           await saveHouseItemPostsToCache(response);
           state.viewingPostsList = response;
         }
