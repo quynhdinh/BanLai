@@ -37,7 +37,7 @@ const account = ({ zmproute }) => {
             className="list-icon"
             slot="media"
             zmp="zi-heart-solid"
-            color={"#ff3b30"}
+            className="color-rl300"
             size={16}
           />
         </ListItem>

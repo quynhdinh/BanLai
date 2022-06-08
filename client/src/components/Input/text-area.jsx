@@ -7,11 +7,9 @@ const TextArea = React.forwardRef((props, ref) => {
   return (
     <Box className="custom-input">
       {label && (
-        <Text style={{ marginBottom: "2px", color: "#667685" }}>
+        <Text className="text-color-nl500" style={{ marginBottom: "2px" }}>
           {label}
-          {compulsory && (
-            <span style={{ color: "rgba(239, 78, 73, 1)" }}> *</span>
-          )}
+          {compulsory && <span className="text-color-rl300"> *</span>}
         </Text>
       )}
       <textarea ref={ref} {...rest} />
