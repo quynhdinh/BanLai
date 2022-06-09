@@ -1,3 +1,5 @@
+# Dependency directories
+node_modules/
 
-server/.adminjs/.entry.js
-server/.idea/vcs.xml
+# dotenv environment variables file
+.idea
