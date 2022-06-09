@@ -1,10 +1,11 @@
 import {createStore} from "zmp-core/lite";
 import {getAccessToken} from "./services/zalo";
 import {
+  loadHottestPostsFromCache,
   loadMessagesFromCache,
   loadPostsFromCache,
   loadUserFromCache,
-  saveElectronicPostsToCache,
+  saveElectronicPostsToCache, saveHottestPostsToCache,
   saveHouseItemPostsToCache, saveMessagesToCache,
   saveUserToCache
 } from "./services/storage";
@@ -149,18 +150,17 @@ const store = createStore({
         cachedPosts = await loadPostsFromCache(category);
       }
       if (parseInt(category) === 0) {
-        if (cachedPosts) {
-          state.viewingPostsList = JSON.parse(cachedPosts);
-        } else {
+        console.log("cached posts: " +cachedPosts)
+        if (cachedPosts['electronicPosts']) state.viewingPostsList = JSON.parse(cachedPosts['electronicPosts']);
+        else {
           console.log("fetch electronics")
           const response = await getPostsByCategory(0);
           await saveElectronicPostsToCache(response);
           state.viewingPostsList = response;
         }
       } else {
-        if (cachedPosts) {
-          state.viewingPostsList = JSON.parse(cachedPosts);
-        } else {
+        if (cachedPosts['houseItemPosts']) state.viewingPostsList = JSON.parse(cachedPosts['houseItemPosts']);
+        else {
           console.log("fetch houses")
           const response = await getPostsByCategory(1);
           await saveHouseItemPostsToCache(response);
@@ -174,10 +174,25 @@ const store = createStore({
       while (!state.jwt) {
         await new Promise((resolve) => setTimeout(resolve, 100));
       }
-      const response = await getHottestPosts();
-      state.hottestItems.electric = response.data
-      state.hottestItems.house = response.data2
-      state.hottestItems.viewed = response.data3
+
+      let cachedHottestPosts = null;
+      if (isValidCache(state.lastFetchPosts)) {
+        cachedHottestPosts = await loadHottestPostsFromCache();
+        cachedHottestPosts = cachedHottestPosts['posts']
+        console.log("cache posts "+ cachedHottestPosts)
+      }
+      if (cachedHottestPosts) {
+        console.log("posts " + typeof cachedHottestPosts['hottestElectronic'])
+        state.hottestItems.electric = cachedHottestPosts['hottestElectronic']
+        state.hottestItems.house = cachedHottestPosts['hottestHouseItems']
+        state.hottestItems.viewed = cachedHottestPosts['viewedItems']
+      } else {
+        const response = await getHottestPosts();
+        state.hottestItems.electric = response.data
+        state.hottestItems.house = response.data2
+        state.hottestItems.viewed = response.data3
+        await saveHottestPostsToCache(response.data, response.data2, response.data3)
+      }
       state.isHomeLoading = false;
     },
     async fetchFilteredPosts({state}, {condition}) {
