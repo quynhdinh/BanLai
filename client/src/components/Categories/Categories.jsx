@@ -5,7 +5,7 @@ import store from "../../store";
 import {LoadingHorizontal} from "../loading";
 
 const Categories = () => {
-  const loading = useStore("loadingFlag");
+  const loading = useStore("isHomeLoading");
   const hottestItems = useStore("hottestItems");
   const viewedItems = useStore("viewedItems");
   useEffect(() => {

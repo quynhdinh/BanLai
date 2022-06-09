@@ -8,7 +8,7 @@ import {LoadingVertical} from "../components/loading";
 //Trang quản lý tin nhắn (Tôi mua/Tôi bán)
 export default ({ zmproute }) => {
   const messages = useStore("messages");
-  const loading = useStore("loadingFlag");
+  const loading = useStore("isMessageLoading");
 
   useEffect(() => {
     store.dispatch("fetchMessages");

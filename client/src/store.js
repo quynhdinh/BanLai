@@ -31,6 +31,8 @@ const store = createStore({
     jwt: null,
     messages: [],
     loadingFlag: true,
+    isHomeLoading: true,
+    isMessageLoading: true,
     lastFetchPosts: 0, // unix time
     u: null,
     fakeUser: {
@@ -86,6 +88,12 @@ const store = createStore({
     },
     loadingFlag({state}) {
       return state.loadingFlag;
+    },
+    isHomeLoading({state}) {
+      return state.isHomeLoading;
+    },
+    isMessageLoading({state}) {
+      return state.isMessageLoading;
     },
     messages({state}) {
       return state.messages;
@@ -162,7 +170,7 @@ const store = createStore({
       state.loadingFlag = false;
     },
     async fetchHottestItems({state}) {
-      state.loadingFlag = true;
+      state.isHomeLoading = true;
       while (!state.jwt) {
         await new Promise((resolve) => setTimeout(resolve, 100));
       }
@@ -170,7 +178,7 @@ const store = createStore({
       state.hottestItems.electric = response.data
       state.hottestItems.house = response.data2
       state.hottestItems.viewed = response.data3
-      state.loadingFlag = false;
+      state.isHomeLoading = false;
     },
     async fetchFilteredPosts({state}, {condition}) {
       state.loadingFlag = true;
@@ -206,7 +214,7 @@ const store = createStore({
       }
     },
     async fetchMessages({state}) {
-      state.loadingFlag = true;
+      state.isMessageLoading = true;
       const m = await loadMessagesFromCache();
       if (m.messages && m.messages.length > 0) {
         state.messages = m.messages;
@@ -215,7 +223,7 @@ const store = createStore({
         await saveMessagesToCache(response);
         state.messages = response;
       }
-      state.loadingFlag = false;
+      state.isMessageLoading = false;
     },
     async fetchCareList({state}) {
       state.loadingFlag = true;
