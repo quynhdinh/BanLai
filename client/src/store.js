@@ -150,7 +150,7 @@ const store = createStore({
       }
       if (parseInt(category) === 0) {
         if (cachedPosts) {
-          if (cachedPosts['electronicPosts']) state.viewingPostsList = cachedPosts['electronicPosts'];
+          state.viewingPostsList = JSON.parse(cachedPosts);
         } else {
           console.log("fetch electronics")
           const response = await getPostsByCategory(0);
@@ -159,7 +159,7 @@ const store = createStore({
         }
       } else {
         if (cachedPosts) {
-          if (cachedPosts['houseItemPosts']) state.viewingPostsList = cachedPosts['houseItemPosts'];
+          state.viewingPostsList = JSON.parse(cachedPosts);
         } else {
           console.log("fetch houses")
           const response = await getPostsByCategory(1);
