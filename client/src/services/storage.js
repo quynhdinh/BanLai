@@ -150,15 +150,11 @@ export const loadHottestPostsFromCache = () => new Promise(resolve => {
 
 export const saveHottestPostsToCache = async (hottestElectronic, hottestHouseItems, viewedItems) => {
   await api.setStorage({
-    data: {posts: { hottestElectronic: {hottestElectronic},
-        hottestHouseItems: {hottestHouseItems},
-        viewedItems: {viewedItems}
-      }},
+    data: {posts: {hottestElectronic: hottestElectronic},
+          ...{hottestHouseItems: hottestHouseItems},
+          ...{viewedItems: viewedItems}},
     fail: (error) =>
       console.log("Failed to save hottest posts to cache. Details: ", error),
   });
-  return { hottestElectronic: {hottestElectronic},
-    hottestHouseItems: {hottestHouseItems},
-    viewedItems: {viewedItems}
-  };
+  return (hottestElectronic, hottestHouseItems, viewedItems);
 }

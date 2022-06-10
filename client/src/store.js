@@ -179,13 +179,13 @@ const store = createStore({
       if (isValidCache(state.lastFetchPosts)) {
         cachedHottestPosts = await loadHottestPostsFromCache();
         cachedHottestPosts = cachedHottestPosts['posts']
-        console.log("cache posts "+ cachedHottestPosts)
+        console.log("cache posts "+ JSON.stringify(cachedHottestPosts))
       }
       if (cachedHottestPosts) {
-        console.log("posts " + typeof cachedHottestPosts['hottestElectronic'])
-        state.hottestItems.electric = cachedHottestPosts['hottestElectronic']
-        state.hottestItems.house = cachedHottestPosts['hottestHouseItems']
-        state.hottestItems.viewed = cachedHottestPosts['viewedItems']
+        console.log("posts " + JSON.stringify(cachedHottestPosts['hottestElectronic']))
+        state.hottestItems.electric = cachedHottestPosts[0]
+        state.hottestItems.house = cachedHottestPosts[1]
+        state.hottestItems.viewed = cachedHottestPosts[2]
       } else {
         const response = await getHottestPosts();
         state.hottestItems.electric = response.data
