@@ -46,7 +46,6 @@ export const loadPostsFromCache = (category) => new Promise(resolve => {
           console.log("houseItemPosts cache miss!")
         }
       }
-      console.log("here resolve[]")
       resolve([])
     },
     fail: (error) => {
