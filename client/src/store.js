@@ -35,6 +35,7 @@ const store = createStore({
     isHomeLoading: true,
     isMessageLoading: true,
     lastFetchPosts: 0, // unix time
+    lastFetchHottestPosts: 0,
     u: null,
     fakeUser: {
       displayName: "Thành viên bán lại",
@@ -74,6 +75,9 @@ const store = createStore({
     },
     lastFetchPosts({state}) {
       return state.lastFetchPosts;
+    },
+    lastFetchHottestPosts({state}) {
+      return state.lastFetchHottestPosts;
     },
     hottestItems({state}) {
       return state.hottestItems;
@@ -134,6 +138,9 @@ const store = createStore({
     setLastFetchPosts({state}, time) {
       state.lastFetchPosts = time;
     },
+    setLastFetchHottestPosts({state}, time) {
+      state.lastFetchHottestPosts = time;
+    },
     setJwt({state}, jwt) {
       state.jwt = jwt;
     },
@@ -150,17 +157,19 @@ const store = createStore({
         cachedPosts = await loadPostsFromCache(category);
       }
       if (parseInt(category) === 0) {
-        console.log("cached posts: " +cachedPosts)
-        if (cachedPosts['electronicPosts']) state.viewingPostsList = JSON.parse(cachedPosts['electronicPosts']);
-        else {
+
+        if (cachedPosts != null && cachedPosts['electronicPosts']) {
+          state.viewingPostsList = JSON.parse(cachedPosts['electronicPosts']);
+        } else {
           console.log("fetch electronics")
           const response = await getPostsByCategory(0);
           await saveElectronicPostsToCache(response);
           state.viewingPostsList = response;
         }
       } else {
-        if (cachedPosts['houseItemPosts']) state.viewingPostsList = JSON.parse(cachedPosts['houseItemPosts']);
-        else {
+        if (cachedPosts != null && cachedPosts['houseItemPosts']) {
+          state.viewingPostsList = JSON.parse(cachedPosts['houseItemPosts']);
+        } else {
           console.log("fetch houses")
           const response = await getPostsByCategory(1);
           await saveHouseItemPostsToCache(response);
@@ -176,16 +185,15 @@ const store = createStore({
       }
 
       let cachedHottestPosts = null;
-      if (isValidCache(state.lastFetchPosts)) {
+      if (isValidCache(state.lastFetchHottestPosts)) {
         cachedHottestPosts = await loadHottestPostsFromCache();
-        cachedHottestPosts = cachedHottestPosts['posts']
-        console.log("cache posts "+ JSON.stringify(cachedHottestPosts))
+        cachedHottestPosts = JSON.parse(cachedHottestPosts['posts'])
       }
       if (cachedHottestPosts) {
-        console.log("posts " + JSON.stringify(cachedHottestPosts['hottestElectronic']))
-        state.hottestItems.electric = cachedHottestPosts[0]
-        state.hottestItems.house = cachedHottestPosts[1]
-        state.hottestItems.viewed = cachedHottestPosts[2]
+        // console.log("posts " + JSON.stringify(cachedHottestPosts['hottestElectronic']))
+        state.hottestItems.electric = cachedHottestPosts['hottestElectronic']
+        state.hottestItems.house = cachedHottestPosts['hottestHouseItems']
+        state.hottestItems.viewed = cachedHottestPosts['viewedItems']
       } else {
         const response = await getHottestPosts();
         state.hottestItems.electric = response.data

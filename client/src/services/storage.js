@@ -5,7 +5,7 @@ export const removeFromCache = async (key) => {
     keys: [key],
     success: (data) => {
       const {errorKeys} = data;
-      console.log("remove " + key + " in cache successfully: "  + errorKeys)
+      console.log("remove " + key + " in cache successfully: " + errorKeys)
     },
     fail: (error) => {
       console.log(error);
@@ -133,12 +133,12 @@ export const loadHottestPostsFromCache = () => new Promise(resolve => {
   api.getStorage({
     keys: ['posts'],
     success: (posts) => {
-        if (posts) {
-          console.log("hottestPosts cache hit!")
-          resolve(posts)
-        } else {
-          console.log("electronicPosts cache miss!")
-        }
+      if (posts) {
+        console.log("hottestPosts cache hit!")
+        resolve(posts)
+      } else {
+        console.log("electronicPosts cache miss!")
+      }
       resolve([])
     },
     fail: (error) => {
@@ -150,9 +150,13 @@ export const loadHottestPostsFromCache = () => new Promise(resolve => {
 
 export const saveHottestPostsToCache = async (hottestElectronic, hottestHouseItems, viewedItems) => {
   await api.setStorage({
-    data: {posts: {hottestElectronic: hottestElectronic},
-          ...{hottestHouseItems: hottestHouseItems},
-          ...{viewedItems: viewedItems}},
+    data: {
+      posts: {
+        ...{hottestElectronic: hottestElectronic},
+        ...{hottestHouseItems: hottestHouseItems},
+        ...{viewedItems: viewedItems}
+      }
+    },
     fail: (error) =>
       console.log("Failed to save hottest posts to cache. Details: ", error),
   });
