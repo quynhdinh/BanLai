@@ -4,6 +4,7 @@ import { moneyFormat } from "../../util/number";
 import HeartIcon from "../heart-icon";
 import store from "../../store";
 import CustomImage from "../custom-image";
+import {clearCache} from "../../services/storage";
 
 const Category = ({ product, border }) => {
   const [preTime, setPreTime] = useState(0);
@@ -18,12 +19,13 @@ const Category = ({ product, border }) => {
       { transition: "zmp-push" }
     );
   };
-  const handleLikeUnlike = (post) => {
+  const handleLikeUnlike = async (post) => {
     const nowTime = Date.now();
     setPreTime(nowTime);
     if (nowTime - preTime < 250) {
       return;
     }
+    await clearCache()
     if (post.isLiked === 0) {
       store.dispatch("fakeLikeUnlikePostList", {
         postId: post._id,

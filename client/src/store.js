@@ -1,10 +1,11 @@
 import {createStore} from "zmp-core/lite";
 import {getAccessToken} from "./services/zalo";
 import {
+  loadHottestPostsFromCache,
   loadMessagesFromCache,
   loadPostsFromCache,
   loadUserFromCache,
-  saveElectronicPostsToCache,
+  saveElectronicPostsToCache, saveHottestPostsToCache,
   saveHouseItemPostsToCache, saveMessagesToCache,
   saveUserToCache
 } from "./services/storage";
@@ -34,6 +35,7 @@ const store = createStore({
     isHomeLoading: true,
     isMessageLoading: true,
     lastFetchPosts: 0, // unix time
+    lastFetchHottestPosts: 0,
     u: null,
     fakeUser: {
       displayName: "Thành viên bán lại",
@@ -73,6 +75,9 @@ const store = createStore({
     },
     lastFetchPosts({state}) {
       return state.lastFetchPosts;
+    },
+    lastFetchHottestPosts({state}) {
+      return state.lastFetchHottestPosts;
     },
     hottestItems({state}) {
       return state.hottestItems;
@@ -133,6 +138,9 @@ const store = createStore({
     setLastFetchPosts({state}, time) {
       state.lastFetchPosts = time;
     },
+    setLastFetchHottestPosts({state}, time) {
+      state.lastFetchHottestPosts = time;
+    },
     setJwt({state}, jwt) {
       state.jwt = jwt;
     },
@@ -174,10 +182,24 @@ const store = createStore({
       while (!state.jwt) {
         await new Promise((resolve) => setTimeout(resolve, 100));
       }
-      const response = await getHottestPosts();
-      state.hottestItems.electric = response.data
-      state.hottestItems.house = response.data2
-      state.hottestItems.viewed = response.data3
+
+      let cachedHottestPosts = null;
+      if (isValidCache(state.lastFetchHottestPosts)) {
+        cachedHottestPosts = await loadHottestPostsFromCache();
+        cachedHottestPosts = JSON.parse(cachedHottestPosts['posts'])
+      }
+      if (cachedHottestPosts) {
+        // console.log("posts " + JSON.stringify(cachedHottestPosts['hottestElectronic']))
+        state.hottestItems.electric = cachedHottestPosts['hottestElectronic']
+        state.hottestItems.house = cachedHottestPosts['hottestHouseItems']
+        state.hottestItems.viewed = cachedHottestPosts['viewedItems']
+      } else {
+        const response = await getHottestPosts();
+        state.hottestItems.electric = response.data
+        state.hottestItems.house = response.data2
+        state.hottestItems.viewed = response.data3
+        await saveHottestPostsToCache(response.data, response.data2, response.data3)
+      }
       state.isHomeLoading = false;
     },
     async fetchFilteredPosts({state}, {condition}) {

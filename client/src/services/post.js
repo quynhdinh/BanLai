@@ -17,6 +17,7 @@ export const getPostsByCategory = async (category) => {
 export const getHottestPosts = async () => {
   try {
     const url = "api/posts/hottest-posts";
+    await store.dispatch("setLastFetchHottestPosts", now());
     return await (await request("GET", url)).json();
   } catch (error) {
     console.log("Error fetching hottest posts:", error);

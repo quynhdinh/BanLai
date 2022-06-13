@@ -3,12 +3,14 @@ import { Box, Button, Title, Card, zmp } from "zmp-framework/react";
 import { moneyFormat } from "../util/number";
 import store from "../store";
 import CustomImage from "./custom-image";
+import {clearCache} from "../services/storage";
 
 export default ({ product, sold }) => {
   const toast = useRef(null);
 
-  function onClickButton() {
+  const onClickButton = async () => {
     store.dispatch(sold ? "repostPost" : "closePost", product.id);
+    await clearCache()
     if (!toast.current) {
       toast.current = zmp.toast.create({
         text: sold ? "Đăng lại bài viết thành công" : "Ẩn bài viết thành công",

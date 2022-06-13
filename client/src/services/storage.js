@@ -1,5 +1,17 @@
 import api from "zmp-sdk";
 
+export const removeFromCache = async (key) => {
+  await api.removeStorage({
+    keys: [key],
+    success: (data) => {
+      const {errorKeys} = data;
+      console.log("remove " + key + " in cache successfully: " + errorKeys)
+    },
+    fail: (error) => {
+      console.log(error);
+    }
+  });
+};
 
 export const clearCache = async () => new Promise(resolve => {
   api.clearStorage({
@@ -34,7 +46,7 @@ export const loadPostsFromCache = (category) => new Promise(resolve => {
           console.log("houseItemPosts cache miss!")
         }
       }
-      resolve([])
+      resolve(null)
     },
     fail: (error) => {
       console.log('Failed to load posts from cache. Details: ', error)
@@ -116,15 +128,36 @@ export const loadMessagesFromCache = () => new Promise(resolve => {
   })
 })
 
-export const removeFromCache = async (key) => {
-  await api.removeStorage({
-    keys: [key],
-    success: (data) => {
-      const {errorKeys} = data;
-      console.log("remove " + key + " in cache successfully: "  + errorKeys)
+export const loadHottestPostsFromCache = () => new Promise(resolve => {
+  api.getStorage({
+    keys: ['posts'],
+    success: (posts) => {
+      if (posts) {
+        console.log("hottestPosts cache hit!")
+        resolve(posts)
+      } else {
+        console.log("electronicPosts cache miss!")
+      }
+      resolve([])
     },
     fail: (error) => {
-      console.log(error);
+      console.log('Failed to load posts from cache. Details: ', error)
+      resolve([])
     }
+  })
+})
+
+export const saveHottestPostsToCache = async (hottestElectronic, hottestHouseItems, viewedItems) => {
+  await api.setStorage({
+    data: {
+      posts: {
+        ...{hottestElectronic: hottestElectronic},
+        ...{hottestHouseItems: hottestHouseItems},
+        ...{viewedItems: viewedItems}
+      }
+    },
+    fail: (error) =>
+      console.log("Failed to save hottest posts to cache. Details: ", error),
   });
-};
+  return (hottestElectronic, hottestHouseItems, viewedItems);
+}
