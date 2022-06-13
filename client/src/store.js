@@ -157,8 +157,8 @@ const store = createStore({
         cachedPosts = await loadPostsFromCache(category);
       }
       if (parseInt(category) === 0) {
-        if (cachedPosts && cachedPosts['electronicPosts']) {
-          state.viewingPostsList = JSON.parse(cachedPosts['electronicPosts']);
+        if (cachedPosts) {
+          state.viewingPostsList = JSON.parse(cachedPosts);
         } else {
           console.log("fetch electronics")
           const response = await getPostsByCategory(0);
@@ -166,8 +166,8 @@ const store = createStore({
           state.viewingPostsList = response;
         }
       } else {
-        if (cachedPosts && cachedPosts['houseItemPosts']) {
-          state.viewingPostsList = JSON.parse(cachedPosts['houseItemPosts']);
+        if (cachedPosts) {
+          state.viewingPostsList = JSON.parse(cachedPosts);
         } else {
           console.log("fetch houses")
           const response = await getPostsByCategory(1);

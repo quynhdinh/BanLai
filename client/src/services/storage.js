@@ -34,19 +34,19 @@ export const loadPostsFromCache = (category) => new Promise(resolve => {
       if (parseInt(category) === 0) {
         if (electronicPosts) {
           console.log("electronicPosts cache hit!")
-          resolve({electronicPosts})
+          resolve(electronicPosts)
         } else {
           console.log("electronicPosts cache miss!")
         }
       } else {
         if (houseItemPosts) {
           console.log("houseItemPosts cache hit!")
-          resolve({houseItemPosts})
+          resolve(houseItemPosts)
         } else {
           console.log("houseItemPosts cache miss!")
         }
       }
-      resolve([])
+      resolve(null)
     },
     fail: (error) => {
       console.log('Failed to load posts from cache. Details: ', error)
