@@ -104,11 +104,11 @@ export default () => {
         <Box m={0} mb={2} flex style={{ alignItems: "center" }}>
           <MdOutlineRemoveRedEye size={24} className="text-color-bl300" />
           <Text style={{ margin: "0px 24px 0px 4px" }} size="xsmall">
-            10
+            {postDetails.viewCount}
           </Text>
           <BiHeart size={24} className="text-color-rl300" />
           <Text style={{ margin: "0px 8px 0px 4px" }} size="xsmall">
-            10
+            {postDetails.likeCount}
           </Text>
         </Box>
         <Description

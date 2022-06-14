@@ -1,17 +1,6 @@
 import React, { useEffect } from "react";
 import NavigationBar from "../components/NavigationBar";
-import {
-  Page,
-  useStore,
-  List,
-  ListItem,
-  Box,
-  Title,
-  Icon,
-  Text,
-  Grid,
-  GridItem,
-} from "zmp-framework/react";
+import {Page, useStore, List, ListItem, Box, Title, Icon, Text} from "zmp-framework/react";
 import UserCard from "../components/user-card";
 import ZMPLogo from "../static/icons/ZMPLogo.svg";
 import BanLaiLogo from "../static/icons/BanLai.svg";
@@ -21,7 +10,6 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 // Trang tài khoản
 const account = ({ zmproute }) => {
-  const loading = useStore("loadingFlag");
   const fakeUser = useStore("fakeUser");
   const stats = useStore("userStats");
   const _u = useStore("u");
@@ -33,9 +21,6 @@ const account = ({ zmproute }) => {
 
   return (
     <Page className="page-box page-with-navbar">
-      <Text>
-        {loading ? "none" : stats?.likeCount + ", " + stats?.viewCount}
-      </Text>
       <NavigationBar active={zmproute.path} />
       <List style={{ marginTop: 0 }}>
         <ListItem>
@@ -47,7 +32,6 @@ const account = ({ zmproute }) => {
         </ListItem>
         <ListItem link="/care-list/" title="Tin đăng đã lưu">
           <Icon
-            className="list-icon"
             slot="media"
             zmp="zi-heart-solid"
             className="text-color-rl300"
@@ -58,11 +42,11 @@ const account = ({ zmproute }) => {
       <Box flex>
         <Box m={0} flex style={{ flex: 1, alignItems: "center", justifyContent:"center" }}>
           <MdOutlineRemoveRedEye size={24} className="text-color-bl300"/>
-          <Text style={{ marginBottom: 0 }} size="xsmall">10 lượt xem bài đăng</Text>
+          <Text style={{ marginBottom: 0 }} size="xsmall">{stats?.viewCount} lượt xem bài đăng</Text>
         </Box>
         <Box m={0} flex style={{ flex: 1, alignItems: "center", justifyContent:"center" }}>
           <BiHeart size={24} className="text-color-rl300"/>
-          <Text style={{ marginBottom: 0 }} size="xsmall">10 lượt xem bài đăng</Text>
+          <Text style={{ marginBottom: 0 }} size="xsmall">{stats?.likeCount} lượt thích bài đăng</Text>
         </Box>
       </Box>
 
