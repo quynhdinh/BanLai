@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -10,7 +10,7 @@ import {
 } from "zmp-framework/react";
 import NavbarBack from "../components/navbar-back";
 import { useForm } from "react-hook-form";
-import CustomInput, { Select } from "../components/Input";
+import CustomInput, { ImageUploader, Select } from "../components/Input";
 import TextArea from "../components/Input/text-area";
 import store from "../store";
 import CategoryBox from "../components/category-box";
@@ -26,21 +26,26 @@ import { getProductDetailTitle } from "../util/productDetail";
 export default () => {
   const loading = useStore("loadingFlag");
   const zmproute = zmp.views.main.router.currentRoute;
-  const subCategoriesDetails = getSubCategoriesDetails(zmproute.query?.subcategory);
+  const postDetails = useStore("postDetails");
+  const [displayImages, setDisplayImages] = useState([]);
+  const [files, setUploadFile] = useState([]);
 
-  const [districtOptions, setDistrictOptions] = useState(
-    getDistricts("Hồ Chí Minh")
+  const subCategoriesDetails = getSubCategoriesDetails(
+    zmproute.query?.subcategory
   );
+  const [districtOptions, setDistrictOptions] = useState(
+    getDistricts("Hồ Chí Minh")
+  );
+
   const {
     register,
-    getValues,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
     const zmprouter = zmp.views.main.router;
-    const files = getValues("images");
     const images = [];
     for (const file of files) {
       const url = await uploadImage(file);
@@ -61,6 +66,38 @@ export default () => {
     );
   };
 
+  // useEffect(() => {
+  //   store.dispatch("fetchPostDetail", { id: "629b2d75b24e60001621c5c8" });
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log(postDetails.images);
+  //   setDistrictOptions(getDistricts(postDetails.city));
+  //   reset({
+  //     images: postDetails.images,
+  //     title: postDetails.title,
+  //     price: postDetails.price,
+  //     condition: postDetails.condition,
+  //     description: postDetails.description,
+  //     productDetails: postDetails.productDetails,
+  //     city: postDetails.city,
+  //     district: postDetails.district,
+  //   });
+  //   setDisplayImages(postDetails.images);
+  // }, [postDetails]);
+  const imagesRegister = register("images", {
+    required: "Vui lòng chọn ảnh",
+  });
+  const onSelectFile = (event) => {
+    const selectedFiles = event.target.files;
+    const selectedFilesArray = Array.from(selectedFiles);
+    const displayArray = selectedFilesArray.map((file) => {
+      return { url: URL.createObjectURL(file) };
+    });
+    setUploadFile((previousFiles) => previousFiles.concat(selectedFilesArray));
+    setDisplayImages((previousImages) => previousImages.concat(displayArray));
+  };
+
   return (
     <Page name="create-post">
       <NavbarBack title="Tạo tin đăng" linkLeft={"/choose-subcategory/"} />
@@ -70,13 +107,21 @@ export default () => {
           category={zmproute.query?.category}
           subcategory={zmproute.query?.subcategory}
         />
-
         <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
           <Title bold>Hình ảnh và mô tả</Title>
-          <input {...register("images")} type="file" multiple />
-          <Title size="small" style={{}}>
-            Thêm ảnh rao bán (tối đa 10 ảnh) *
-          </Title>
+          <ImageUploader
+            {...imagesRegister}
+            displayImages={displayImages}
+            setDisplayImages={setDisplayImages}
+            setUploadFile={setUploadFile}
+            label="Thêm ảnh rao bán (tối đa 10 ảnh)"
+            compulsory
+            errorMessage={errors?.images && errors?.images.message}
+            onChange={(e) => {
+              imagesRegister.onChange(e);
+              onSelectFile(e);
+            }}
+          />
 
           <CustomInput
             {...register("title", {
@@ -108,6 +153,7 @@ export default () => {
             placeholder="Mô tả"
             label="Mô tả sản phẩm"
           />
+
           {subCategoriesDetails && (
             <>
               <Title bold>Thông tin chi tiết</Title>
