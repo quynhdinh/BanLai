@@ -13,7 +13,7 @@ const CustomInput = React.forwardRef((props, ref) => {
   return (
     <Box className="custom-input">
       {label && (
-        <Text style={{ marginBottom: "2px", color: "#667685" }}>
+        <Text className="text-color-nl500" style={{ marginBottom: "2px" }}>
           {label}
           {compulsory && <span className="text-color-rl300"> *</span>}
         </Text>
