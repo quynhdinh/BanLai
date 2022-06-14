@@ -89,6 +89,7 @@ const Category = ({ product, border }) => {
                   display: "-webkit-box",
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: "vertical",
+                  wordBreak: "break-word"
                 }}
               >
                 {product.title}
