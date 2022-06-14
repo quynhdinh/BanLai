@@ -1,10 +1,23 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import NavigationBar from "../components/NavigationBar";
-import {Page, useStore, List, ListItem, Box, Title, Icon, Text} from "zmp-framework/react";
+import {
+  Page,
+  useStore,
+  List,
+  ListItem,
+  Box,
+  Title,
+  Icon,
+  Text,
+  Grid,
+  GridItem,
+} from "zmp-framework/react";
 import UserCard from "../components/user-card";
 import ZMPLogo from "../static/icons/ZMPLogo.svg";
 import BanLaiLogo from "../static/icons/BanLai.svg";
 import store from "../store";
+import { BiHeart } from "react-icons/bi";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 // Trang tài khoản
 const account = ({ zmproute }) => {
@@ -21,7 +34,7 @@ const account = ({ zmproute }) => {
   return (
     <Page className="page-box page-with-navbar">
       <Text>
-        {loading ? "none" : stats?.likeCount + ", " +stats?.viewCount}
+        {loading ? "none" : stats?.likeCount + ", " + stats?.viewCount}
       </Text>
       <NavigationBar active={zmproute.path} />
       <List style={{ marginTop: 0 }}>
@@ -42,6 +55,17 @@ const account = ({ zmproute }) => {
           />
         </ListItem>
       </List>
+      <Box flex>
+        <Box m={0} flex style={{ flex: 1, alignItems: "center", justifyContent:"center" }}>
+          <MdOutlineRemoveRedEye size={24} className="text-color-bl300"/>
+          <Text style={{ marginBottom: 0 }} size="xsmall">10 lượt xem bài đăng</Text>
+        </Box>
+        <Box m={0} flex style={{ flex: 1, alignItems: "center", justifyContent:"center" }}>
+          <BiHeart size={24} className="text-color-rl300"/>
+          <Text style={{ marginBottom: 0 }} size="xsmall">10 lượt xem bài đăng</Text>
+        </Box>
+      </Box>
+
       <Box m={10}>
         <img src={BanLaiLogo} style={{ height: 32, marginBottom: 4 }} />
         <img src={ZMPLogo} style={{ height: 28 }} />

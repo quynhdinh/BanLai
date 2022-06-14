@@ -1,5 +1,17 @@
-import React, {useEffect, useState} from "react";
-import {Page, Navbar, Swiper, SwiperSlide, Text, Title, useStore, Box, GridItem, Grid, zmp} from "zmp-framework/react";
+import React, { useEffect, useState } from "react";
+import {
+  Page,
+  Navbar,
+  Swiper,
+  SwiperSlide,
+  Text,
+  Title,
+  useStore,
+  Box,
+  GridItem,
+  Grid,
+  zmp,
+} from "zmp-framework/react";
 import "../css/swiper.css";
 import store from "../store";
 import MessageBox from "../components/message-box";
@@ -11,9 +23,11 @@ import { getReadableTimeGap, moneyFormat } from "../util/number";
 import { getProductDetailTitle } from "../util/productDetail";
 import UserCard from "../components/user-card";
 import HeartIcon from "../components/heart-icon";
-import {PostTray} from "../components/Categories";
-import {LoadingHorizontal} from "../components/loading";
-import {updateViewCount} from "../services/viewed-post";
+import { PostTray } from "../components/Categories";
+import { LoadingHorizontal } from "../components/loading";
+import { updateViewCount } from "../services/viewed-post";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { BiHeart } from "react-icons/bi";
 
 const linkItems = [zalo, facebook, messenger, link];
 
@@ -42,8 +56,12 @@ export default () => {
       postId: details._id,
       isLiked: details.isLiked,
     });
-    store.dispatch(details.isLiked === 0 ? "likePost" : "unlikePost", {postId: details._id});
-    store.dispatch(details.isLiked === 0 ? "unlikePost" : "likePost", {postId: details._id});
+    store.dispatch(details.isLiked === 0 ? "likePost" : "unlikePost", {
+      postId: details._id,
+    });
+    store.dispatch(details.isLiked === 0 ? "unlikePost" : "likePost", {
+      postId: details._id,
+    });
   };
 
   return (
@@ -82,6 +100,17 @@ export default () => {
             Tin đăng {getReadableTimeGap(postDetails.createdAt)}
           </PostTag>
         </Box>
+
+        <Box m={0} mb={2} flex style={{ alignItems: "center" }}>
+          <MdOutlineRemoveRedEye size={24} className="text-color-bl300" />
+          <Text style={{ margin: "0px 24px 0px 4px" }} size="xsmall">
+            10
+          </Text>
+          <BiHeart size={24} className="text-color-rl300" />
+          <Text style={{ margin: "0px 8px 0px 4px" }} size="xsmall">
+            10
+          </Text>
+        </Box>
         <Description
           title="Tình trạng sản phẩm"
           description={postDetails.condition}
@@ -101,7 +130,7 @@ export default () => {
           handleViewSellerProfile({ zaloId: postDetails.zaloId });
         }}
       />
-      <Box ml={5} style={{paddingBottom: 200}}>
+      <Box ml={5} style={{ paddingBottom: 200 }}>
         <Title bold>Sản phẩm tương tự</Title>
         {postDetails.relatedPosts ? (
           <PostTray
@@ -110,7 +139,7 @@ export default () => {
             index={-1}
           />
         ) : (
-          <LoadingHorizontal/>
+          <LoadingHorizontal />
         )}
       </Box>
     </Page>
