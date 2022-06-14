@@ -172,6 +172,17 @@ router.get('/by-user/:zaloId', async (req, res) => {
     await addIsLiked(zaloId, result)
     const user = await db.Users.findOne({zaloId: zaloId})
     const postCount = await db.Posts.countDocuments({zaloId: zaloId})
+    const postIds =
+      (await db.Posts
+        .find({zaloId: zaloId})
+        .select("_id"))
+        .map(obj => obj._id)
+    const likeCount = await db.CarePostMapping.countDocuments({'postId': {$in: postIds}});
+    const viewCount =
+      (await db.ViewedPostMapping
+        .find({zaloId: zaloId}, {count: 1, _id: 0}))
+        .map(m => m.count)
+        .reduce((sum, a) => sum + a, 0);
     res.send({
       error: 0,
       msg: 'Lấy thông tin bài đăng tv thành công',
@@ -179,7 +190,9 @@ router.get('/by-user/:zaloId', async (req, res) => {
       extra: {
         name: user.name,
         picture: user.picture,
-        postCount: postCount
+        postCount: postCount,
+        likeCount: likeCount,
+        viewCount: viewCount
       }
     })
   } catch (error) {

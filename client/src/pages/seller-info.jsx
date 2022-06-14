@@ -33,11 +33,11 @@ export default () => {
       <Box flex>
         <Box m={0} flex style={{ flex: 1, alignItems: "center", justifyContent:"center" }}>
           <MdOutlineRemoveRedEye size={24} className="text-color-bl300"/>
-          <Text style={{ marginBottom: 0 }} size="xsmall">10 lượt xem bài đăng</Text>
+          <Text style={{ marginBottom: 0 }} size="xsmall">{sellerInfo?.extra?.viewCount} lượt xem bài đăng</Text>
         </Box>
         <Box m={0} flex style={{ flex: 1, alignItems: "center", justifyContent:"center" }}>
           <BiHeart size={24} className="text-color-rl300"/>
-          <Text style={{ marginBottom: 0 }} size="xsmall">10 lượt xem bài đăng</Text>
+          <Text style={{ marginBottom: 0 }} size="xsmall">{sellerInfo?.extra?.likeCount} lượt thích bài đăng</Text>
         </Box>
       </Box>
       <Box>
