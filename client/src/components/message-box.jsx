@@ -29,25 +29,12 @@ const MessageBox = ({ isTexted }) => {
     >
       {isTexted === false ? (
         <>
-          <Box m={0} flex>
-            <CustomInput
-              placeholder="Nhắn tin với người bán qua Zalo"
-              id="message"
-            />
-            <MessageButton/>
+          <Box flex alignItems="center">
+            <Text style={{ flex: 1, marginBottom: 0 }}>
+              ️Liên hệ với người bán
+            </Text>
+            <Button typeName="primary">Gửi tin nhắn</Button>
           </Box>
-          <Tab className="page-content" m={0} style={{ padding: 0 }}>
-            <Box m={0} mt={2} flex style={{ width: "max-content" }}>
-              {hintMessages.map((item, index) => (
-                <HintMessage
-                  key={index}
-                  onClick={setMessage({ message: item })}
-                >
-                  {item}
-                </HintMessage>
-              ))}
-            </Box>
-          </Tab>
         </>
       ) : (
         <>
@@ -55,45 +42,13 @@ const MessageBox = ({ isTexted }) => {
             <Text style={{ flex: 1, marginBottom: 0 }}>
               ️✅ Đã liên hệ người bán
             </Text>
-            <Button typeName="primary">Xem tin nhắn</Button>
+            <Button typeName="secondary">Xem tin nhắn</Button>
           </Box>
         </>
       )}
     </Box>
   );
 };
-const HintMessage = ({ children, onClick }) => (
-  <div onClick={onClick}>
-    <Text
-      className="r-round border-color-nl600 text-color-black"
-      style={{
-        padding: "8px",
-        marginRight: "4px",
-        display: "inline-block",
-        borderRadius: "8px",
-        border: "0.5px solid",
-      }}
-    >
-      {children}
-    </Text>
-  </div>
-);
-
-const MessageButton = ({ onClick }) => (
-  <div onClick={onClick}>
-  <Box
-    m={0}
-    ml={4}
-    flex
-    className="bg-color-bl300"
-    justifyContent="center"
-    alignItems="center"
-    style={{ borderRadius: "50%", width: 48, height: 48 }}
-  >
-    <Icon className="color-white demo-icon" zmp="zi-send-solid" />
-  </Box>
-  </div>
-);
 
 MessageBox.displayName = "zmp-message-box";
 
