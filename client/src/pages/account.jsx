@@ -9,14 +9,12 @@ import { BiHeart } from "react-icons/bi";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 // Trang tài khoản
-const account = ({ zmproute }) => {
-  const fakeUser = useStore("fakeUser");
+export default ({ zmproute }) => {
+  const u = useStore("u");
   const stats = useStore("userStats");
-  const _u = useStore("u");
-  const u = _u ? _u : fakeUser;
 
   useEffect(() => {
-    store.dispatch("fetchUserStats", u.zaloId);
+    store.dispatch("fetchUserStats", u?.zaloId);
   }, []);
 
   return (
@@ -25,8 +23,8 @@ const account = ({ zmproute }) => {
       <List style={{ marginTop: 0 }}>
         <ListItem>
           <UserCard
-            avatar={u.avatar}
-            displayName={u.displayName}
+            avatar={u?.avatar}
+            displayName={u?.displayName}
             title="Thành viên Bán Lại"
           />
         </ListItem>
@@ -42,11 +40,11 @@ const account = ({ zmproute }) => {
       <Box flex>
         <Box m={0} flex style={{ flex: 1, alignItems: "center", justifyContent:"center" }}>
           <MdOutlineRemoveRedEye size={24} className="text-color-bl300"/>
-          <Text style={{ marginBottom: 0 }} size="xsmall">{stats?.viewCount} lượt xem bài đăng</Text>
+          <Text style={{ marginBottom: 0 }} size="xsmall">{stats?.viewCount} lượt xem</Text>
         </Box>
         <Box m={0} flex style={{ flex: 1, alignItems: "center", justifyContent:"center" }}>
           <BiHeart size={24} className="text-color-rl300"/>
-          <Text style={{ marginBottom: 0 }} size="xsmall">{stats?.likeCount} lượt thích bài đăng</Text>
+          <Text style={{ marginBottom: 0 }} size="xsmall">{stats?.likeCount} lượt thích</Text>
         </Box>
       </Box>
 
@@ -59,7 +57,7 @@ const account = ({ zmproute }) => {
         <Title bold>Liên hệ Bán Lại</Title>
         <Box key="normal" mb="4">
           <Title size="xsmall">
-            Email: <span className="text-color-bl300">banlai@gmail.com</span>
+            Email: <span className="text-color-bl300">contact@banlai.com</span>
           </Title>
           <Title size="xsmall">Hotline: 1987654321</Title>
         </Box>
@@ -67,7 +65,6 @@ const account = ({ zmproute }) => {
 
       <Box ml={10} mt={5}>
         <Title bold>Hướng dẫn đăng tin</Title>
-
         <Box key="normal" mb="4">
           <Title size="xsmall">Quy định đăng tin</Title>
           <Title size="xsmall">Hướng dẫn đăng tin</Title>
@@ -75,5 +72,5 @@ const account = ({ zmproute }) => {
       </Box>
     </Page>
   );
+
 };
-export default account;

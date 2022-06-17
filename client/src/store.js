@@ -37,11 +37,6 @@ const store = createStore({
     lastFetchPosts: 0, // unix time
     lastFetchHottestPosts: 0,
     u: null,
-    fakeUser: {
-      displayName: "Thành viên bán lại",
-      avatar: "https://i.imgur.com/aWdfgHg.jpeg",
-      online: true,
-    },
     userPosts: [],
     hottestItems: {
       electric: [],
@@ -102,9 +97,6 @@ const store = createStore({
     },
     messages({state}) {
       return state.messages;
-    },
-    fakeUser({state}) {
-      return state.fakeUser;
     },
     careList({state}) {
       return state.careList;
