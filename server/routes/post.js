@@ -139,19 +139,22 @@ router.get('/:postId', async (req, res) => {
     const postId = req.params["postId"].toString()
     const response = await db.Posts.findOne({_id: postId}).lean()
     const sellerId = response.zaloId
+    const zaloId = req.user.zaloId
     const user = await db.Users.findOne({zaloId: sellerId})
     const postCount = await db.Posts.countDocuments({zaloId: sellerId})
     const likeCount = await db.CarePostMapping.countDocuments({postId: postId})
     const viewCount =
       (await db.ViewedPostMapping
-        .findOne({zaloId: req.user.zaloId, postId: postId}, {count: 1, _id: 0})
+        .findOne({zaloId: zaloId, postId: postId}, {count: 1, _id: 0})
         .select("count")).count
+    const isContacted = (await db.Messages.countDocuments({owner: zaloId, partner: sellerId, postId: postId}) > 0)
     response.name = user.name
     response.picture = user.picture
     response.postCount = postCount
-    response.isLiked = await isLiked(req.user.zaloId, postId)
+    response.isLiked = await isLiked(zaloId, postId)
     response.likeCount = likeCount
     response.viewCount = viewCount
+    response.isContacted = isContacted
     response.relatedPosts = await db.Posts.find({subCategory: response.subCategory}).sort({createdAt: -1}).limit(5);
     res.send({
       error: 0,
