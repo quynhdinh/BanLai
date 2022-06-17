@@ -1,16 +1,8 @@
 import React from "react";
-import { Icon, Box, Text, Button, Tab } from "zmp-framework/react";
-import CustomInput from "./Input";
+import {Box, Text, Button} from "zmp-framework/react";
+import api from "zmp-sdk";
 
-const MessageBox = ({ isTexted }) => {
-  const hintMessages = [
-    "Sản phẩm này còn không?",
-    "Mình quan tâm, cho thêm thông tin nhé",
-    "Sản phẩm còn bảo hành không?",
-  ];
-  const setMessage = (message) => () => {
-    document.getElementById("message").value = Object.values(message);
-  };
+const MessageBox = ({isTexted, partner}) => {
   return (
     <Box
       m={0}
@@ -27,25 +19,25 @@ const MessageBox = ({ isTexted }) => {
         boxShadow: "0px -2px 2px rgba(0, 0, 0, 0.25)",
       }}
     >
-      {isTexted === false ? (
+      {isTexted === -1 ? <></> : (
         <>
           <Box flex alignItems="center">
-            <Text style={{ flex: 1, marginBottom: 0 }}>
-              ️Liên hệ với người bán
+            <Text style={{flex: 1, marginBottom: 0}}>
+              ️{isTexted ? "✅ Đã liên hệ người bán" : "Liên hệ với người bán"}
             </Text>
-            <Button typeName="primary">Gửi tin nhắn</Button>
+            <Button typeName={isTexted ? "secondary" : "primary"}
+                    onClick={() => {
+                      api.openChat({
+                        type: 'user',
+                        id: partner
+                      });
+                    }}>
+              {isTexted ? "Xem tin nhắn" : "Gửi tin nhắn"}
+            </Button>
           </Box>
         </>
-      ) : (
-        <>
-          <Box flex alignItems="center">
-            <Text style={{ flex: 1, marginBottom: 0 }}>
-              ️✅ Đã liên hệ người bán
-            </Text>
-            <Button typeName="secondary">Xem tin nhắn</Button>
-          </Box>
-        </>
-      )}
+      )
+      }
     </Box>
   );
 };

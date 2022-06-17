@@ -1,17 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Page,
-  Navbar,
-  Swiper,
-  SwiperSlide,
-  Text,
-  Title,
-  useStore,
-  Box,
-  GridItem,
-  Grid,
-  zmp,
-} from "zmp-framework/react";
+import {Page, Navbar, Swiper, SwiperSlide, Text, Title, useStore, Box, GridItem, Grid, zmp,} from "zmp-framework/react";
 import "../css/swiper.css";
 import store from "../store";
 import MessageBox from "../components/message-box";
@@ -35,6 +23,8 @@ export default () => {
   const [preTime, setPreTime] = useState(0);
   const postDetails = useStore("postDetails");
   const viewingPostId = useStore("viewingPostId");
+  const u = useStore("u");
+
   useEffect(() => {
     store.dispatch("fetchPostDetail", { id: viewingPostId });
     store.dispatch("updateViewCount", { postId: viewingPostId });
@@ -68,7 +58,7 @@ export default () => {
     <Page name="post-detail">
       <Navbar backLink="Back" />
       <Box m={0} style={{ position: "relative" }} />
-      <MessageBox isTexted={true} />
+      <MessageBox isTexted={u.zaloId !== postDetails.zaloId ? postDetails.isContacted : -1} partner={postDetails.zaloId}/>
       <Swiper pagination navigation loop>
         {postDetails.images.map((item, index) => (
           <SwiperSlide key={index}>
