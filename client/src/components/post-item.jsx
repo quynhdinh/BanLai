@@ -3,14 +3,14 @@ import { Box, Button, Title, Card, zmp } from "zmp-framework/react";
 import { moneyFormat } from "../util/number";
 import store from "../store";
 import CustomImage from "./custom-image";
-import {clearCache} from "../services/storage";
+import { clearCache } from "../services/storage";
 
 export default ({ product, sold }) => {
   const toast = useRef(null);
 
   const onClickButton = async () => {
     store.dispatch(sold ? "repostPost" : "closePost", product.id);
-    await clearCache()
+    await clearCache();
     if (!toast.current) {
       toast.current = zmp.toast.create({
         text: sold ? "Đăng lại bài viết thành công" : "Ẩn bài viết thành công",
@@ -19,10 +19,22 @@ export default ({ product, sold }) => {
       });
     }
     toast.current.open();
-  }
+  };
+
+  const handleViewDetail = () => () => {
+    const zmprouter = zmp.views.main.router;
+    store.dispatch("setViewingPostId", product.id);
+    zmprouter.navigate(
+      {
+        path: "/post-detail",
+        query: { mode: 1 },
+      },
+      { transition: "zmp-push" }
+    );
+  };
 
   return (
-    <div>
+    <div onClick={handleViewDetail()}>
       <Card style={{ padding: 0 }}>
         <Box
           flex
@@ -73,7 +85,10 @@ export default ({ product, sold }) => {
                 typeName={sold ? "secondary" : "primary"}
                 responsive
                 small
-                onClick={() => onClickButton()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  return onClickButton();
+                }}
                 style={{ maxWidth: 512 }}
               >
                 {sold ? "Đăng lại" : "Đã bán / Ẩn bài"}
