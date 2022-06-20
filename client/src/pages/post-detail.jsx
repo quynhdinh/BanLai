@@ -83,6 +83,9 @@ export default () => {
     });
   };
 
+  //zmproute.query.mode === 0 : xem bài viết bình thường
+  //mode === 1 : xem bài viết chế độ chỉnh sửa
+  //mode === 2 : xem bài viết sau khi tạo bài đăng
   return (
     <Page name="post-detail">
       <Navbar backLink="Back" />
