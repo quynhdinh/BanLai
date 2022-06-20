@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import {Card, Text, Box, Title, zmp} from "zmp-framework/react";
+import { Card, Text, Box, Title, zmp } from "zmp-framework/react";
 import { moneyFormat } from "../../util/number";
 import HeartIcon from "../heart-icon";
 import store from "../../store";
 import CustomImage from "../custom-image";
-import {clearCache} from "../../services/storage";
+import { clearCache } from "../../services/storage";
 
 const Category = ({ product, border }) => {
   const [preTime, setPreTime] = useState(0);
-
   const handleViewDetail = () => () => {
     const zmprouter = zmp.views.main.router;
     store.dispatch("setViewingPostId", product._id);
     zmprouter.navigate(
       {
         path: "/post-detail",
+        query: { mode: 0 },
       },
       { transition: "zmp-push" }
     );
@@ -25,7 +25,7 @@ const Category = ({ product, border }) => {
     if (nowTime - preTime < 250) {
       return;
     }
-    await clearCache()
+    await clearCache();
     if (post.isLiked === 0) {
       store.dispatch("fakeLikeUnlikePostList", {
         postId: post._id,
@@ -89,7 +89,7 @@ const Category = ({ product, border }) => {
                   display: "-webkit-box",
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: "vertical",
-                  wordBreak: "break-word"
+                  wordBreak: "break-word",
                 }}
               >
                 {product.title}

@@ -1,5 +1,18 @@
 import React, { useEffect, useState } from "react";
-import {Page, Navbar, Swiper, SwiperSlide, Text, Title, useStore, Box, GridItem, Grid, zmp,} from "zmp-framework/react";
+import {
+  Page,
+  Navbar,
+  Swiper,
+  SwiperSlide,
+  Text,
+  Title,
+  useStore,
+  Box,
+  GridItem,
+  Grid,
+  zmp,
+  Button,
+} from "zmp-framework/react";
 import "../css/swiper.css";
 import store from "../store";
 import MessageBox from "../components/message-box";
@@ -13,16 +26,17 @@ import UserCard from "../components/user-card";
 import HeartIcon from "../components/heart-icon";
 import { PostTray } from "../components/Categories";
 import { LoadingHorizontal } from "../components/loading";
-import { updateViewCount } from "../services/viewed-post";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { BiHeart } from "react-icons/bi";
 
 const linkItems = [zalo, facebook, messenger, link];
 
 export default () => {
+  const zmproute = zmp.views.main.router.currentRoute;
   const [preTime, setPreTime] = useState(0);
   const postDetails = useStore("postDetails");
   const viewingPostId = useStore("viewingPostId");
+  console.log(viewingPostId);
   const u = useStore("u");
 
   useEffect(() => {
@@ -34,6 +48,21 @@ export default () => {
     const zmprouter = zmp.views.main.router;
     store.dispatch("setViewingZaloId", zaloId);
     zmprouter.navigate({ path: "/seller-info" }, { transition: "zmp-push" });
+  };
+
+  const handleEditPost = () => () => {
+    const zmprouter = zmp.views.main.router;
+    zmprouter.navigate(
+      {
+        path: "/create-post",
+        query: {
+          category: postDetails.category,
+          subcategory: postDetails.subCategory,
+          mode: 1,
+        },
+      },
+      { transition: "zmp-push" }
+    );
   };
 
   const handleLikeUnlike = (details) => {
@@ -58,7 +87,14 @@ export default () => {
     <Page name="post-detail">
       <Navbar backLink="Back" />
       <Box m={0} style={{ position: "relative" }} />
-      <MessageBox isTexted={u.zaloId !== postDetails.zaloId ? postDetails.isContacted : -1} partner={postDetails.zaloId}/>
+      {zmproute.query?.mode === "0" && (
+        <MessageBox
+          isTexted={
+            u.zaloId !== postDetails.zaloId ? postDetails.isContacted : -1
+          }
+          partner={postDetails.zaloId}
+        />
+      )}
       <Swiper pagination navigation loop>
         {postDetails.images.map((item, index) => (
           <SwiperSlide key={index}>
@@ -66,7 +102,7 @@ export default () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <Box ml={5}>
+      <Box ml={5} style={{ paddingBottom: 200 }}>
         <Title className="item-name" size={"normal"} bold>
           {postDetails.title}
         </Title>
@@ -112,25 +148,49 @@ export default () => {
           title="Mô tả sản phẩm"
           description={postDetails.description}
         />
-        <SharePost />
+        {zmproute.query?.mode === "0" && <SharePost />}
       </Box>
-      <SellerInfo
-        postDetails={postDetails}
-        onClick={() => {
-          handleViewSellerProfile({ zaloId: postDetails.zaloId });
-        }}
-      />
-      <Box ml={5} style={{ paddingBottom: 200 }}>
-        <Title bold>Sản phẩm tương tự</Title>
-        {postDetails.relatedPosts ? (
-          <PostTray
-            category=""
-            products={postDetails.relatedPosts}
-            index={-1}
+
+      {zmproute.query?.mode === "0" && (
+        <>
+          <SellerInfo
+            postDetails={postDetails}
+            onClick={() => {
+              handleViewSellerProfile({ zaloId: postDetails.zaloId });
+            }}
           />
-        ) : (
-          <LoadingHorizontal />
-        )}
+          <Box ml={5}>
+            <Title bold>Sản phẩm tương tự</Title>
+            {postDetails.relatedPosts ? (
+              <PostTray
+                category=""
+                products={postDetails.relatedPosts}
+                index={-1}
+              />
+            ) : (
+              <LoadingHorizontal />
+            )}
+          </Box>
+        </>
+      )}
+      <Box
+        style={{
+          position: "fixed",
+          width: "-webkit-fill-available",
+          bottom: 0,
+        }}
+        flex
+      >
+        <Button
+          typeName="primary"
+          style={{ flex: 1, margin: 8 }}
+          onClick={handleEditPost()}
+        >
+          Sửa tin
+        </Button>
+        <Button typeName="secondary" style={{ flex: 1, margin: 8 }}>
+          {postDetails.status === "active" ? "Đã bán/ẩn bài" : "Đăng lại"}
+        </Button>
       </Box>
     </Page>
   );

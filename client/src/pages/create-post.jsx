@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
+  Navbar,
   Page,
   Title,
   ToastPreloader,
   useStore,
   zmp,
 } from "zmp-framework/react";
-import NavbarBack from "../components/navbar-back";
 import { useForm } from "react-hook-form";
 import CustomInput, { ImageUploader, Select } from "../components/Input";
 import TextArea from "../components/Input/text-area";
@@ -46,47 +46,63 @@ export default () => {
 
   const onSubmit = async (data) => {
     const zmprouter = zmp.views.main.router;
-    const images = [];
-    for (const file of files) {
-      const url = await uploadImage(file);
-      images.push(url);
+    if (zmproute.query?.mode === "1") {
+      data = {
+        ...data,
+        category: postDetails.category,
+        subCategory: postDetails.subCategory,
+        status: postDetails.status,
+      };
+      data = {
+        data: data,
+        _id: postDetails._id,
+      };
+      await store.dispatch("editPost", { data });
+      zmprouter.navigate(
+        {
+          path: "/manage-post",
+        },
+        { transition: "zmp-push" }
+      );
+    } else {
+      const images = [];
+      for (const file of files) {
+        const url = await uploadImage(file);
+        images.push(url);
+      }
+      data = {
+        ...data,
+        images: images,
+        category: zmproute.query?.category,
+        subCategory: zmproute.query?.subcategory,
+      };
+      await store.dispatch("createPost", { data });
+      zmprouter.navigate(
+        {
+          path: "/post-detail",
+        },
+        { transition: "zmp-push" }
+      );
     }
-    data = {
-      ...data,
-      images: images,
-      category: zmproute.query?.category,
-      subCategory: zmproute.query?.subcategory,
-    };
-    await store.dispatch("createPost", { data });
-    zmprouter.navigate(
-      {
-        path: "/post-detail",
-      },
-      { transition: "zmp-push" }
-    );
   };
-
-  // useEffect(() => {
-  //   store.dispatch("fetchPostDetail", { id: "629b2d75b24e60001621c5c8" });
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(postDetails.images);
-  //   setDistrictOptions(getDistricts(postDetails.city));
-  //   reset({
-  //     images: postDetails.images,
-  //     title: postDetails.title,
-  //     price: postDetails.price,
-  //     condition: postDetails.condition,
-  //     description: postDetails.description,
-  //     productDetails: postDetails.productDetails,
-  //     city: postDetails.city,
-  //     district: postDetails.district,
-  //   });
-  //   setDisplayImages(postDetails.images);
-  // }, [postDetails]);
+  useEffect(() => {
+    if (zmproute.query?.mode === "1") {
+      setDistrictOptions(getDistricts(postDetails.city));
+      setDisplayImages(postDetails.images);
+      reset({
+        images: postDetails.images,
+        title: postDetails.title,
+        price: postDetails.price,
+        condition: postDetails.condition,
+        description: postDetails.description,
+        productDetails: postDetails.productDetails,
+        city: postDetails.city,
+        district: postDetails.district,
+      });
+    }
+  }, [postDetails]);
   const imagesRegister = register("images", {
-    required: "Vui lòng chọn ảnh",
+    // required: "Vui lòng chọn ảnh",
   });
   const onSelectFile = (event) => {
     const selectedFiles = event.target.files;
@@ -98,9 +114,10 @@ export default () => {
     setDisplayImages((previousImages) => previousImages.concat(displayArray));
   };
 
+  //zmproute.query.mode === 1 : chế độ chỉnh sửa bài viết
   return (
     <Page name="create-post">
-      <NavbarBack title="Tạo tin đăng" linkLeft={"/choose-subcategory/"} />
+      <Navbar title="Tạo tin đăng" backLink="Back" />
       <ToastPreloader visible={loading} text="Đăng bài viết" />
       <Box px={4}>
         <CategoryBox
@@ -196,7 +213,9 @@ export default () => {
             option={districtOptions}
           />
           <Button type="submit" typeName="primary" large responsive>
-            Đăng tin rao bán
+            {zmproute.query?.mode === "1"
+              ? "Cập nhật tin đăng"
+              : "Đăng tin rao bán"}
           </Button>
         </form>
       </Box>

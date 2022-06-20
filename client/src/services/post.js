@@ -1,6 +1,6 @@
-import {request} from "./auth";
+import { request } from "./auth";
 import store from "../store";
-import {now} from "../util/time";
+import { now } from "../util/time";
 
 export const getPostsByCategory = async (category) => {
   try {
@@ -106,5 +106,16 @@ export const getSellerInfo = async (zaloId) => {
   } catch (error) {
     console.log("Error fetching seller info:", error);
     return [];
+  }
+};
+
+export const editPost = async (data) => {
+  try {
+    const url = "api/posts/" + data._id;
+    const response = await (await request("PUT", url, data.data)).json();
+    return response.data;
+  } catch (error) {
+    console.log("Error editing post. Details: ", error);
+    return false;
   }
 };

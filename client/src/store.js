@@ -1,31 +1,34 @@
-import {createStore} from "zmp-core/lite";
-import {getAccessToken} from "./services/zalo";
+import { createStore } from "zmp-core/lite";
+import { getAccessToken } from "./services/zalo";
 import {
   loadHottestPostsFromCache,
   loadMessagesFromCache,
   loadPostsFromCache,
   loadUserFromCache,
-  saveElectronicPostsToCache, saveHottestPostsToCache,
-  saveHouseItemPostsToCache, saveMessagesToCache,
-  saveUserToCache
+  saveElectronicPostsToCache,
+  saveHottestPostsToCache,
+  saveHouseItemPostsToCache,
+  saveMessagesToCache,
+  saveUserToCache,
 } from "./services/storage";
-import {getCurrentUser, login} from "./services/auth";
-import {getMessages} from "./services/message";
+import { getCurrentUser, login } from "./services/auth";
+import { getMessages } from "./services/message";
 import {
   closePost,
   createPost,
+  editPost,
   getFilteredPosts,
   getHottestPosts,
   getPostDetails,
   getPostsByCategory,
   getSellerInfo,
   getUserPosts,
-  repostPost
+  repostPost,
 } from "./services/post";
-import {getCareList, likePost, unlikePost} from "./services/care-list";
-import {updateViewCount} from "./services/viewed-post";
-import {getUserStats} from "./services/user";
-import {isValidCache} from "./util/time";
+import { getCareList, likePost, unlikePost } from "./services/care-list";
+import { updateViewCount } from "./services/viewed-post";
+import { getUserStats } from "./services/user";
+import { isValidCache } from "./util/time";
 
 const store = createStore({
   state: {
@@ -41,7 +44,7 @@ const store = createStore({
     hottestItems: {
       electric: [],
       house: [],
-      viewed: []
+      viewed: [],
     },
     viewedItems: [],
     careList: [],
@@ -65,60 +68,60 @@ const store = createStore({
   },
 
   getters: {
-    postDetails({state}) {
+    postDetails({ state }) {
       return state.postDetails;
     },
-    lastFetchPosts({state}) {
+    lastFetchPosts({ state }) {
       return state.lastFetchPosts;
     },
-    lastFetchHottestPosts({state}) {
+    lastFetchHottestPosts({ state }) {
       return state.lastFetchHottestPosts;
     },
-    hottestItems({state}) {
+    hottestItems({ state }) {
       return state.hottestItems;
     },
-    viewedItems({state}) {
+    viewedItems({ state }) {
       return state.viewedItems;
     },
-    viewingPostsList({state}) {
+    viewingPostsList({ state }) {
       return state.viewingPostsList;
     },
-    u({state}) {
+    u({ state }) {
       return state.u;
     },
-    loadingFlag({state}) {
+    loadingFlag({ state }) {
       return state.loadingFlag;
     },
-    isHomeLoading({state}) {
+    isHomeLoading({ state }) {
       return state.isHomeLoading;
     },
-    isMessageLoading({state}) {
+    isMessageLoading({ state }) {
       return state.isMessageLoading;
     },
-    messages({state}) {
+    messages({ state }) {
       return state.messages;
     },
-    careList({state}) {
+    careList({ state }) {
       return state.careList;
     },
-    userPosts({state}) {
+    userPosts({ state }) {
       return state.userPosts;
     },
-    viewingPostId({state}) {
+    viewingPostId({ state }) {
       return state.viewingPostId;
     },
-    sellerInfo({state}) {
+    sellerInfo({ state }) {
       return state.sellerInfo;
     },
-    userStats({state}) {
+    userStats({ state }) {
       return state.userStats;
     },
-    viewingZaloId({state}) {
+    viewingZaloId({ state }) {
       return state.viewingZaloId;
     },
   },
   actions: {
-    async setU({state}, u) {
+    async setU({ state }, u) {
       state.u = {
         zaloId: u.zaloId,
         displayName: u.name,
@@ -127,22 +130,22 @@ const store = createStore({
       };
       await saveUserToCache(u);
     },
-    setLastFetchPosts({state}, time) {
+    setLastFetchPosts({ state }, time) {
       state.lastFetchPosts = time;
     },
-    setLastFetchHottestPosts({state}, time) {
+    setLastFetchHottestPosts({ state }, time) {
       state.lastFetchHottestPosts = time;
     },
-    setJwt({state}, jwt) {
+    setJwt({ state }, jwt) {
       state.jwt = jwt;
     },
-    setViewingPostId({state}, postId) {
+    setViewingPostId({ state }, postId) {
       state.viewingPostId = postId;
     },
-    setViewingZaloId({state}, _zaloId) {
+    setViewingZaloId({ state }, _zaloId) {
       state.viewingZaloId = _zaloId;
     },
-    async fetchAllItems({state}, category) {
+    async fetchAllItems({ state }, category) {
       state.loadingFlag = true;
       let cachedPosts = null;
       if (isValidCache(state.lastFetchPosts)) {
@@ -152,7 +155,7 @@ const store = createStore({
         if (cachedPosts) {
           state.viewingPostsList = JSON.parse(cachedPosts);
         } else {
-          console.log("fetch electronics")
+          console.log("fetch electronics");
           const response = await getPostsByCategory(0);
           await saveElectronicPostsToCache(response);
           state.viewingPostsList = response;
@@ -161,7 +164,7 @@ const store = createStore({
         if (cachedPosts) {
           state.viewingPostsList = JSON.parse(cachedPosts);
         } else {
-          console.log("fetch houses")
+          console.log("fetch houses");
           const response = await getPostsByCategory(1);
           await saveHouseItemPostsToCache(response);
           state.viewingPostsList = response;
@@ -169,7 +172,7 @@ const store = createStore({
       }
       state.loadingFlag = false;
     },
-    async fetchHottestItems({state}) {
+    async fetchHottestItems({ state }) {
       state.isHomeLoading = true;
       while (!state.jwt) {
         await new Promise((resolve) => setTimeout(resolve, 100));
@@ -178,42 +181,51 @@ const store = createStore({
       let cachedHottestPosts = null;
       if (isValidCache(state.lastFetchHottestPosts)) {
         cachedHottestPosts = await loadHottestPostsFromCache();
-        cachedHottestPosts = JSON.parse(cachedHottestPosts['posts'])
+        cachedHottestPosts = JSON.parse(cachedHottestPosts["posts"]);
       }
       if (cachedHottestPosts) {
         // console.log("posts " + JSON.stringify(cachedHottestPosts['hottestElectronic']))
-        state.hottestItems.electric = cachedHottestPosts['hottestElectronic']
-        state.hottestItems.house = cachedHottestPosts['hottestHouseItems']
-        state.hottestItems.viewed = cachedHottestPosts['viewedItems']
+        state.hottestItems.electric = cachedHottestPosts["hottestElectronic"];
+        state.hottestItems.house = cachedHottestPosts["hottestHouseItems"];
+        state.hottestItems.viewed = cachedHottestPosts["viewedItems"];
       } else {
         const response = await getHottestPosts();
-        state.hottestItems.electric = response.data
-        state.hottestItems.house = response.data2
-        state.hottestItems.viewed = response.data3
-        await saveHottestPostsToCache(response.data, response.data2, response.data3)
+        state.hottestItems.electric = response.data;
+        state.hottestItems.house = response.data2;
+        state.hottestItems.viewed = response.data3;
+        await saveHottestPostsToCache(
+          response.data,
+          response.data2,
+          response.data3
+        );
       }
       state.isHomeLoading = false;
     },
-    async fetchFilteredPosts({state}, {condition}) {
+    async fetchFilteredPosts({ state }, { condition }) {
       state.loadingFlag = true;
       state.filteredPosts = await getFilteredPosts(condition);
       state.viewingPostsList = state.filteredPosts;
       state.loadingFlag = false;
     },
-    async fetchPostDetail({state}, {id}) {
+    async fetchPostDetail({ state }, { id }) {
       state.loadingFlag = true;
       state.postDetails = await getPostDetails(id);
       state.loadingFlag = false;
     },
-    async updateViewCount({state}, {postId}) {
+    async updateViewCount({ state }, { postId }) {
       await updateViewCount(postId);
     },
-    async createPost({state}, {data}) {
+    async createPost({ state }, { data }) {
       state.loadingFlag = true;
       await createPost(data);
       state.loadingFlag = false;
     },
-    async login({dispatch}) {
+    async editPost({ state }, { data }) {
+      state.loadingFlag = true;
+      await editPost(data);
+      state.loadingFlag = false;
+    },
+    async login({ dispatch }) {
       const cachedUser = await loadUserFromCache();
       if (cachedUser) {
         dispatch("setU", cachedUser);
@@ -227,7 +239,7 @@ const store = createStore({
         }
       }
     },
-    async fetchMessages({state}) {
+    async fetchMessages({ state }) {
       state.isMessageLoading = true;
       const m = await loadMessagesFromCache();
       if (m.messages && m.messages.length > 0) {
@@ -239,35 +251,35 @@ const store = createStore({
       }
       state.isMessageLoading = false;
     },
-    async fetchCareList({state}) {
+    async fetchCareList({ state }) {
       state.loadingFlag = true;
       state.careList = await getCareList();
       state.loadingFlag = false;
     },
-    async fetchUserPosts({state}) {
+    async fetchUserPosts({ state }) {
       state.loadingFlag = true;
       state.userPosts = await getUserPosts();
       state.loadingFlag = false;
     },
-    async closePost({_state}, postId) {
+    async closePost({ _state }, postId) {
       const errorCode = await closePost(postId);
       if (errorCode === 0) {
         store.dispatch("fetchUserPosts");
       }
     },
-    async repostPost({_state}, postId) {
+    async repostPost({ _state }, postId) {
       const errorCode = await repostPost(postId);
       if (errorCode === 0) {
         store.dispatch("fetchUserPosts");
       }
     },
-    async likePost({_state}, data) {
+    async likePost({ _state }, data) {
       await likePost(data);
     },
-    async unlikePost({_state}, data) {
+    async unlikePost({ _state }, data) {
       await unlikePost(data);
     },
-    async fakeLikeUnlikePostList({state}, data) {
+    async fakeLikeUnlikePostList({ state }, data) {
       const processItem = (item) => {
         if (item._id === data.postId) {
           return {
@@ -277,24 +289,32 @@ const store = createStore({
         }
         return item;
       };
-      state.hottestItems.electric = state.hottestItems.electric.map((item) => processItem(item));
-      state.hottestItems.house = state.hottestItems.house.map((item) => processItem(item));
-      state.hottestItems.viewed = state.hottestItems.viewed.map((item) => processItem(item));
+      state.hottestItems.electric = state.hottestItems.electric.map((item) =>
+        processItem(item)
+      );
+      state.hottestItems.house = state.hottestItems.house.map((item) =>
+        processItem(item)
+      );
+      state.hottestItems.viewed = state.hottestItems.viewed.map((item) =>
+        processItem(item)
+      );
       state.viewedItems = state.viewedItems.map((item) => processItem(item));
-      state.viewingPostsList = state.viewingPostsList.map((item) => processItem(item));
+      state.viewingPostsList = state.viewingPostsList.map((item) =>
+        processItem(item)
+      );
       const newPostDetails = state.postDetails;
       newPostDetails.isLiked = data.isLiked === 1 ? 0 : 1;
       state.postDetails = newPostDetails;
       state.careList = state.careList.filter((item) => {
-        return item.postDetail._id !== data.postId
+        return item.postDetail._id !== data.postId;
       });
     },
-    async fetchSellerInfo({state}, zaloId) {
+    async fetchSellerInfo({ state }, zaloId) {
       state.loadingFlag = true;
       state.sellerInfo = await getSellerInfo(zaloId);
       state.loadingFlag = false;
     },
-    async fetchUserStats({state}, zaloId) {
+    async fetchUserStats({ state }, zaloId) {
       state.loadingFlag = true;
       state.userStats = await getUserStats(zaloId);
       state.loadingFlag = false;
