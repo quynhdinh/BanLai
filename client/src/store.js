@@ -162,7 +162,7 @@ const store = createStore({
         }
       } else {
         if (cachedPosts) {
-          state.viewingPostsList = JSON.parse(cachedPosts);
+          state.viewingPostsList = cachedPosts;
         } else {
           console.log("fetch houses");
           const response = await getPostsByCategory(1);
