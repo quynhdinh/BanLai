@@ -16,7 +16,9 @@ export default () => {
   const posts = useStore('viewingPostsList')
   useEffect(() => {
     const zmproute = zmp.views.main.router.currentRoute;
-    store.dispatch("fetchAllItems", zmproute.query.index)
+    if (parseInt(zmproute.query.search) !== 1) {
+      store.dispatch("fetchAllItems", zmproute.query.index)
+    }
   }, [])
   return (
     <Page pageContent={false}

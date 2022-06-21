@@ -7,7 +7,7 @@ import {useForm} from "react-hook-form";
 import store from "../store";
 
 export default () => {
-  const [districtOptions, setDistrictOptions] = useState(getDistricts("Hồ Chí Minh"));
+  const [districtOptions, setDistrictOptions] = useState(getDistricts("Hồ Chí Minh"));
   const handleChangeDistrictList = (e) => {
     setDistrictOptions(getDistricts(e.target.value));
   };
@@ -22,7 +22,10 @@ export default () => {
     console.log("before search data:"+ JSON.stringify(data));
     const condition = JSON.stringify(data)
     await store.dispatch("fetchFilteredPosts", {condition});
-    zmp.views.current.router.navigate("/posts-list");
+    zmp.views.current.router.navigate({
+      path: "/posts-list",
+      query: { search: 1}
+    });
   }
   return (
     <Page name="posts-filter">
