@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
-import {Page, Title, Box, Range, Searchbar, Button, zmp} from 'zmp-framework/react';
+import React, {useEffect, useState} from 'react';
+import {Page, Title, Box, Range, Searchbar, Button, zmp, Navbar} from 'zmp-framework/react';
 import NavbarBack from '../components/navbar-back';
 import {Select} from "../components/Input";
-import {getCities, getDistricts} from "../services/data";
+import {getCities, getDistricts, getSubCategories} from "../services/data";
 import {useForm} from "react-hook-form";
 import store from "../store";
 
 export default () => {
   const [districtOptions, setDistrictOptions] = useState(getDistricts("Hồ Chí Minh"));
+  const [subCategoriesList, setSubCategoriesList] = useState([]);
   const handleChangeDistrictList = (e) => {
     setDistrictOptions(getDistricts(e.target.value));
   };
@@ -16,6 +17,14 @@ export default () => {
     handleSubmit,
     formState: { errors }
   } = useForm();
+  const zmproute = zmp.views.main.router.currentRoute
+  useEffect(() => {
+    console.log("index "+ zmproute.query?.subCategory)
+    if (parseInt(zmproute.query?.subCategory) === 0) {
+      console.log("get electric")
+      setSubCategoriesList(getSubCategories("Thiết bị điện tử"));
+    } else setSubCategoriesList(getSubCategories("Đồ gia dụng, nội thất"));
+  });
 
   const onSubmit = async (data) => {
     console.log("on click search");
@@ -29,7 +38,7 @@ export default () => {
   }
   return (
     <Page name="posts-filter">
-      <NavbarBack title="Tìm kiếm" linkLeft={"/electronic-list"}/>
+      <Navbar title="Tìm kiếm" backLink="Back" />
       <form onSubmit={handleSubmit(onSubmit)} >
       <Searchbar
         disableButtonText="Cancel"
@@ -37,28 +46,29 @@ export default () => {
         clearButton={true}
       />
       <Select
+        {...register("subCategory")}
         label="Danh mục sản phẩm"
         compulsory
-        option={["Tất cả"]}
+        option={subCategoriesList}
       />
       <Title>
         Khoảng Giá
       </Title>
-      <Box my='4'>
-        <Range
-          min={0}
-          max={100}
-          label={true}
-          step={5}
-          value={25}
-          scale={true}
-          scaleSteps={5}
-          scaleSubSteps={4}
-          onRangeChange={(value) => {
-            console.log(value);
-          }}
-        />
-      </Box>
+      {/*<Box my='4'>*/}
+      {/*  <Range*/}
+      {/*    min={0}*/}
+      {/*    max={100}*/}
+      {/*    label={true}*/}
+      {/*    step={5}*/}
+      {/*    value={25}*/}
+      {/*    scale={true}*/}
+      {/*    scaleSteps={5}*/}
+      {/*    scaleSubSteps={4}*/}
+      {/*    onRangeChange={(value) => {*/}
+      {/*      console.log(value);*/}
+      {/*    }}*/}
+      {/*  />*/}
+      {/*</Box>*/}
       <Select
         {...register("condition")}
         label="Tình trạng sản phẩm"

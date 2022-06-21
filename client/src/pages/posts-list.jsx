@@ -8,12 +8,16 @@ import {LoadingVertical} from "../components/loading";
 export default () => {
 
   function postFilter() {
-    zmp.views.current.router.navigate("/posts-filter");
+    zmp.views.current.router.navigate({
+      path: "/posts-filter",
+      query: {subCategory: categoryIndex}
+    });
   }
 
   const [keyword, setKeyword] = useState('')
   const loading = useStore("loadingFlag");
   const posts = useStore('viewingPostsList')
+  const categoryIndex = zmp.views.main.router.currentRoute.query.index;
   useEffect(() => {
     const zmproute = zmp.views.main.router.currentRoute;
     if (parseInt(zmproute.query.search) !== 1) {
