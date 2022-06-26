@@ -46,7 +46,6 @@ export default ({categoryIndex, sheet}) => {
       <Select
         {...register("subCategory")}
         label="Danh mục sản phẩm"
-        compulsory
         option={subCategoriesList}
       />
       <Title>
@@ -70,20 +69,17 @@ export default ({categoryIndex, sheet}) => {
       <Select
         {...register("condition")}
         label="Tình trạng sản phẩm"
-        compulsory
         option={["Đã qua sử dụng", "Còn mới", "Còn bảo hành"]}
       />
       <Select
         {...register("city")}
         label="Tỉnh/Thành phố"
-        compulsory
         onChange={handleChangeDistrictList}
         option={getCities()}
       />
       <Select
         {...register("district")}
         label="Quận/Huyện"
-        compulsory
         option={districtOptions}
       />
       <Button type="submit" typeName="primary" large responsive>
