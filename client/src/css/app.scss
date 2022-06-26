@@ -171,3 +171,24 @@ body * {
   }
 }
 
+.sheet-modal {
+  &.has-fixed-action {
+    height: calc(100% - 16px);
+    .sheet-modal-inner {
+      height: calc(100% - 60px);
+      overflow: auto;
+    }
+  }
+  .zmp-sheet-default-toolbar {
+    border-bottom: 1px solid var(--zmp-list-item-border-color);
+  }
+  .section-label {
+    background: #eef1f6;
+    margin: 0;
+    padding: 8px;
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+

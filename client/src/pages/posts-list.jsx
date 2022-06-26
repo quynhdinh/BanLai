@@ -1,27 +1,26 @@
-import React, {useEffect, useState} from "react";
-import {Box, Page, Searchbar, Tab, useStore, zmp} from "zmp-framework/react";
+import React, {useEffect, useRef, useState} from "react";
+import {Box, Button, Card, Page, Searchbar, Sheet, Tab, Text, Title, useStore, zmp} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import store from "../store";
 import Category from "../components/Categories/Category";
 import {LoadingVertical} from "../components/loading";
+import SearchBox from "../components/search-box";
 
 export default () => {
-
-  function postFilter() {
-    zmp.views.current.router.navigate({
-      path: "/posts-filter",
-      query: {subCategory: categoryIndex}
-    });
-  }
+  const [customSheetOpened, setCustomSheetOpened] = useState(false);
+  const sheet = useRef(null);
+  const swipeRef = useRef(null);
 
   const [keyword, setKeyword] = useState('')
   const loading = useStore("loadingFlag");
   const posts = useStore('viewingPostsList')
-  const categoryIndex = zmp.views.main.router.currentRoute.query.index;
+  let categoryIndex = zmp.views.main.router.currentRoute.query.index;
+
   useEffect(() => {
     const zmproute = zmp.views.main.router.currentRoute;
+    categoryIndex = zmproute.query.index;
     if (parseInt(zmproute.query.search) !== 1) {
-      store.dispatch("fetchAllItems", zmproute.query.index)
+      store.dispatch("fetchAllItems", zmproute.query.index);
     }
   }, [])
   return (
@@ -30,11 +29,26 @@ export default () => {
     >
       <NavigationBar/>
       <Box className="inquiry" mt={1}>
-        <div className="flex-1" onClick={postFilter}>
+
+        <div className="flex-1" onClick={() => setCustomSheetOpened(true)}>
           <Searchbar className="discount-searchbar" value={keyword}
                      onChange={e => setKeyword(e.target.value)} type="text" placeholder="Tìm sản phẩm"
                      clearButton onSearchbarClear={() => setKeyword('')}/>
         </div>
+
+        <Sheet
+          className="has-fixed-action product-order"
+          ref={sheet}
+          swipeToClose
+          opened={customSheetOpened}
+          backdrop
+          onSheetClosed={() => setCustomSheetOpened(false)}
+          closeButton
+          title= "Tìm kiếm"
+          // subtitle=
+        >
+          <SearchBox categoryIndex={categoryIndex} sheet={sheet}/>
+        </Sheet>
       </Box>
       <Tab className="page-content">
         {
