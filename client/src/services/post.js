@@ -90,7 +90,7 @@ export const createPost = async (data) => {
   try {
     const url = "api/posts/";
     const response = await (await request("POST", url, data)).json();
-    await store.dispatch("setViewingPostId", response.data._id);
+    // await store.dispatch("setViewingPostId", response.data._id);
     return response.data;
   } catch (error) {
     console.log("Error creating post. Details: ", error);

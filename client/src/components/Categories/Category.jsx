@@ -10,11 +10,10 @@ const Category = ({ product, border }) => {
   const [preTime, setPreTime] = useState(0);
   const handleViewDetail = () => {
     const zmprouter = zmp.views.main.router;
-    store.dispatch("setViewingPostId", product._id);
     zmprouter.navigate(
       {
         path: "/post-detail",
-        query: { mode: 0 },
+        query: { mode: 0, id: product._id },
       },
       { transition: "zmp-push" }
     );

@@ -302,6 +302,12 @@ const store = createStore({
       state.viewingPostsList = state.viewingPostsList.map((item) =>
         processItem(item)
       );
+      state.sellerInfo.data = state.sellerInfo.data.map((item) =>
+        processItem(item)
+      );
+      state.postDetail.relatedPosts = state.postDetails.relatedPosts.map(
+        (item) => processItem(item)
+      );
       const newPostDetails = state.postDetails;
       newPostDetails.isLiked = data.isLiked === 1 ? 0 : 1;
       state.postDetails = newPostDetails;
