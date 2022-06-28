@@ -16,7 +16,6 @@ import {
 import "../css/swiper.css";
 import store from "../store";
 import MessageBox from "../components/message-box";
-import api from 'zmp-sdk';
 import { getReadableTimeGap, moneyFormat } from "../util/number";
 import { getProductDetailTitle } from "../util/productDetail";
 import UserCard from "../components/user-card";
@@ -90,16 +89,6 @@ export default ({ zmproute }) => {
   return (
     <Page name="post-detail">
       <Navbar backLink="Back" />
-      <FacebookShareButton
-        url={shareUrl}
-        quote={title}
-        picture={
-          "https://pixabay.com/photos/football-sport-play-competition-4455306/"
-        }
-        className="Demo__some-network__share-button"
-      >
-        <FacebookIcon size={32} round />
-      </FacebookShareButton>
       <Box m={0} style={{ position: "relative" }} />
       {zmproute.query?.mode === "1" && (
         <Box flex>
