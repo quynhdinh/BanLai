@@ -28,7 +28,7 @@ import {
 import { getCareList, likePost, unlikePost } from "./services/care-list";
 import { updateViewCount } from "./services/viewed-post";
 import { getUserStats } from "./services/user";
-import { isValidCache } from "./util/time";
+import {isValidCache} from "./util/number";
 
 const store = createStore({
   state: {

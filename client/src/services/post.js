@@ -1,6 +1,6 @@
 import { request } from "./auth";
 import store from "../store";
-import { now } from "../util/time";
+import {now} from "../util/number";
 
 export const getPostsByCategory = async (category) => {
   try {
