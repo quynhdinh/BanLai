@@ -21,7 +21,7 @@ export default ({ product, sold }) => {
     toast.current.open();
   };
 
-  const handleViewDetail = () => () => {
+  const handleViewDetail = () => {
     const zmprouter = zmp.views.main.router;
     store.dispatch("setViewingPostId", product.id);
     zmprouter.navigate(
@@ -34,7 +34,7 @@ export default ({ product, sold }) => {
   };
 
   return (
-    <div onClick={handleViewDetail()}>
+    <div onClick={handleViewDetail}>
       <Card style={{ padding: 0 }}>
         <Box
           flex

@@ -29,12 +29,11 @@ export const getFilteredPosts = async (condition) => {
   try {
     condition = JSON.parse(condition);
     let query = "?";
-    Object.keys(condition).forEach(function (key) {
-      var value = condition[key];
-      console.log(key, value);
+    Object.keys(condition).forEach(key => {
+      const value = condition[key];
       query += key + "=" + value + "&";
     });
-    console.log("query ne`:" + query);
+    console.log("Query:" + query);
     const url = "api/posts/search" + query;
     const response = await (await request("GET", url)).json();
     return response.data;

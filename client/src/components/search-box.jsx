@@ -27,7 +27,6 @@ export default ({ categoryIndex, sheet }) => {
   });
 
   const onSubmit = async (data) => {
-    console.log("on click search");
     console.log("before search data:" + JSON.stringify(data));
     const condition = JSON.stringify(data);
     await store.dispatch("fetchFilteredPosts", { condition });
@@ -53,28 +52,12 @@ export default ({ categoryIndex, sheet }) => {
           />
         )}
       />
-
       <Select
         {...register("subCategory")}
         label="Danh mục sản phẩm"
         option={subCategoriesList}
       />
       <Title>Khoảng Giá</Title>
-      {/*<Box my='4'>*/}
-      {/*  <Range*/}
-      {/*    min={0}*/}
-      {/*    max={100}*/}
-      {/*    label={true}*/}
-      {/*    step={5}*/}
-      {/*    value={25}*/}
-      {/*    scale={true}*/}
-      {/*    scaleSteps={5}*/}
-      {/*    scaleSubSteps={4}*/}
-      {/*    onRangeChange={(value) => {*/}
-      {/*      console.log(value);*/}
-      {/*    }}*/}
-      {/*  />*/}
-      {/*</Box>*/}
       <Select
         {...register("condition")}
         label="Tình trạng sản phẩm"

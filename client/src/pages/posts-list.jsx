@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import {Box, Button, Card, Page, Searchbar, Sheet, Tab, Text, Title, useStore, zmp} from "zmp-framework/react";
+import {Box, Page, Searchbar, Sheet, Tab, useStore, zmp} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import store from "../store";
 import Category from "../components/Categories/Category";
@@ -9,7 +9,6 @@ import SearchBox from "../components/search-box";
 export default () => {
   const [customSheetOpened, setCustomSheetOpened] = useState(false);
   const sheet = useRef(null);
-  const swipeRef = useRef(null);
 
   const [keyword, setKeyword] = useState('')
   const loading = useStore("loadingFlag");
@@ -23,6 +22,7 @@ export default () => {
       store.dispatch("fetchAllItems", zmproute.query.index);
     }
   }, [])
+
   return (
     <Page pageContent={false}
           name="posts-list"
@@ -45,7 +45,6 @@ export default () => {
           onSheetClosed={() => setCustomSheetOpened(false)}
           closeButton
           title= "Tìm kiếm"
-          // subtitle=
         >
           <SearchBox categoryIndex={categoryIndex} sheet={sheet}/>
         </Sheet>

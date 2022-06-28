@@ -212,7 +212,7 @@ const store = createStore({
       state.postDetails = await getPostDetails(id);
       state.loadingFlag = false;
     },
-    async updateViewCount({ state }, { postId }) {
+    async updateViewCount({ _state }, { postId }) {
       await updateViewCount(postId);
     },
     async createPost({ state }, { data }) {

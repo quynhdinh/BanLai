@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {Page, Searchbar, Box, Tabbar, Link, Tabs, Tab, useStore} from "zmp-framework/react";
+import {Page, Box, Tabbar, Link, Tabs, Tab, useStore} from "zmp-framework/react";
 import store from "../store";
 import NavigationBar from "../components/NavigationBar";
 import PostItem from "../components/post-item";
@@ -17,14 +17,6 @@ export default ({ zmproute }) => {
   return (
     <Page pageContent={false}>
       <NavigationBar active={zmproute.path} />
-      <Box mt="1">
-        <Searchbar
-          placeholder="Tìm sản phẩm"
-          searchContainer=".virtual-list"
-          searchItem="li"
-          searchIn=".item-title"
-        />
-      </Box>
       <div>
         <Tabbar top>
           <Link tabLink="#tab-1" tabLinkActive>
@@ -38,7 +30,7 @@ export default ({ zmproute }) => {
           {loading ? (
             <LoadingVertical />
           ) : (
-            <Box style={{ marginBottom: "150px" }}>
+            <Box style={{ marginBottom: "100px" }}>
               {userPosts
                 .filter(function (obj) {
                   return obj.status === "active";
@@ -61,7 +53,7 @@ export default ({ zmproute }) => {
           {loading ? (
             <LoadingVertical />
           ) : (
-            <Box style={{ marginBottom: "150px" }}>
+            <Box style={{ marginBottom: "100px" }}>
               {userPosts
                 .filter(function (obj) {
                   return obj.status !== "active"; // sold, closed

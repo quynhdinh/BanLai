@@ -76,7 +76,7 @@ const ImageUploader = React.forwardRef((props, ref) => {
                         displayImages.filter((e) => e !== image)
                       );
                       setUploadFile((previousFiles) =>
-                        previousFiles.filter((value, i) => i !== index)
+                        previousFiles.filter((_, i) => i !== index)
                       );
                     }}
                     style={{ position: "absolute", top: -8, right: -8 }}

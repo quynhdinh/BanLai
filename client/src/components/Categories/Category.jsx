@@ -8,7 +8,7 @@ import { clearCache } from "../../services/storage";
 
 const Category = ({ product, border }) => {
   const [preTime, setPreTime] = useState(0);
-  const handleViewDetail = () => () => {
+  const handleViewDetail = () => {
     const zmprouter = zmp.views.main.router;
     store.dispatch("setViewingPostId", product._id);
     zmprouter.navigate(
@@ -42,7 +42,7 @@ const Category = ({ product, border }) => {
   };
 
   return (
-    <div onClick={handleViewDetail()}>
+    <div onClick={handleViewDetail}>
       <Card style={{ padding: 0 }}>
         <Box
           flex

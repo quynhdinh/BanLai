@@ -36,7 +36,6 @@ export default () => {
   const [preTime, setPreTime] = useState(0);
   const postDetails = useStore("postDetails");
   const viewingPostId = useStore("viewingPostId");
-  console.log(viewingPostId);
   const u = useStore("u");
 
   useEffect(() => {
@@ -50,7 +49,7 @@ export default () => {
     zmprouter.navigate({ path: "/seller-info" }, { transition: "zmp-push" });
   };
 
-  const handleEditPost = () => () => {
+  const handleEditPost = () => {
     const zmprouter = zmp.views.main.router;
     zmprouter.navigate(
       {
@@ -187,7 +186,7 @@ export default () => {
         <Button
           typeName="primary"
           style={{ flex: 1, margin: 8 }}
-          onClick={handleEditPost()}
+          onClick={handleEditPost}
         >
           Sửa tin
         </Button>

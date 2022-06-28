@@ -1,10 +1,9 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {Page, Box, zmp, Title} from "zmp-framework/react";
 import NavigationBar from "../components/NavigationBar";
 import Categories from "../components/Categories";
 import pc from "../static/icons/PC.svg";
 import bed from "../static/icons/Bed.svg";
-import store from "../store";
 
 const HomePage = () => {
   const zmproute = zmp.views.main.router;
