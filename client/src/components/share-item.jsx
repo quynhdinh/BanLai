@@ -4,12 +4,7 @@ import facebook from "../static/icons/Facebook.svg";
 import messenger from "../static/icons/Messenger.svg";
 import link from "../static/icons/Link.svg";
 import { Box, Title } from "zmp-framework/react";
-import {
-  FacebookIcon,
-  FacebookShareButton,
-  TwitterIcon,
-  TwitterShareButton,
-} from "react-share";
+import { FacebookShareButton } from "react-share";
 import api from "zmp-sdk";
 
 const ShareItem = ({ url }) => {
@@ -27,10 +22,13 @@ const ShareItem = ({ url }) => {
     //   success: (res) => {},
     //   fail: (err) => {},
     // });
-    api.openShareSheet({
-      type: "image",
+    api.openPostFeed({
+      type: "link",
       data: {
-        imageUrl: "http://dev.org.zads.zdn.vn/2a16c7fefbbb12e54baa",
+        link: "http://news.zing.vn/Trung-uong-quyet-dinh-phuong-an-nhan-su-cap-cao-post632739.html",
+        title: "Trung ương quyết định phương án nhân sự cấp cao",
+        thumb: "link-to-thumb",
+        description: "description",
       },
       success: (data) => {},
       fail: (err) => {},
