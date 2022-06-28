@@ -23,11 +23,10 @@ export default ({ product, sold }) => {
 
   const handleViewDetail = () => () => {
     const zmprouter = zmp.views.main.router;
-    store.dispatch("setViewingPostId", product.id);
     zmprouter.navigate(
       {
         path: "/post-detail",
-        query: { mode: 1 },
+        query: { mode: 1, id: product.id },
       },
       { transition: "zmp-push" }
     );

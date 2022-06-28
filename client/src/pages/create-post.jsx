@@ -139,7 +139,7 @@ export default () => {
               onSelectFile(e);
             }}
           />
-
+          
           <CustomInput
             {...register("title", {
               required: "Vui lòng điền tiêu đề rao bán",

@@ -16,10 +16,7 @@ import {
 import "../css/swiper.css";
 import store from "../store";
 import MessageBox from "../components/message-box";
-import zalo from "../static/icons/Zalo.svg";
-import facebook from "../static/icons/Facebook.svg";
-import messenger from "../static/icons/Messenger.svg";
-import link from "../static/icons/Link.svg";
+import api from 'zmp-sdk';
 import { getReadableTimeGap, moneyFormat } from "../util/number";
 import { getProductDetailTitle } from "../util/productDetail";
 import UserCard from "../components/user-card";
@@ -28,26 +25,28 @@ import { PostTray } from "../components/Categories";
 import { LoadingHorizontal } from "../components/loading";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { BiHeart } from "react-icons/bi";
+import ShareItem from "../components/share-item";
+import { FacebookIcon, FacebookShareButton } from "react-share";
 
-const linkItems = [zalo, facebook, messenger, link];
 
-export default () => {
-  const zmproute = zmp.views.main.router.currentRoute;
+export default ({ zmproute }) => {
   const [preTime, setPreTime] = useState(0);
   const postDetails = useStore("postDetails");
-  const viewingPostId = useStore("viewingPostId");
-  console.log(viewingPostId);
   const u = useStore("u");
 
   useEffect(() => {
-    store.dispatch("fetchPostDetail", { id: viewingPostId });
-    store.dispatch("updateViewCount", { postId: viewingPostId });
+    if (zmproute.query.id) {
+      store.dispatch("fetchPostDetail", { id: zmproute.query.id });
+      store.dispatch("updateViewCount", { postId: zmproute.query.id });
+    }
   }, []);
 
-  const handleViewSellerProfile = ({ zaloId }) => {
+  const handleViewSellerProfile = () => () => {
     const zmprouter = zmp.views.main.router;
-    store.dispatch("setViewingZaloId", zaloId);
-    zmprouter.navigate({ path: "/seller-info" }, { transition: "zmp-push" });
+    zmprouter.navigate(
+      { path: "/seller-info", query: { zaloId: postDetails.zaloId } },
+      { transition: "zmp-push" }
+    );
   };
 
   const handleEditPost = () => () => {
@@ -83,13 +82,40 @@ export default () => {
     });
   };
 
+  const shareUrl = "http://github.com";
+  const title = "GitHub";
   //zmproute.query.mode === 0 : xem bài viết bình thường
   //mode === 1 : xem bài viết chế độ chỉnh sửa
   //mode === 2 : xem bài viết sau khi tạo bài đăng
   return (
     <Page name="post-detail">
       <Navbar backLink="Back" />
+      <FacebookShareButton
+        url={shareUrl}
+        quote={title}
+        picture={
+          "https://pixabay.com/photos/football-sport-play-competition-4455306/"
+        }
+        className="Demo__some-network__share-button"
+      >
+        <FacebookIcon size={32} round />
+      </FacebookShareButton>
       <Box m={0} style={{ position: "relative" }} />
+      {zmproute.query?.mode === "1" && (
+        <Box flex>
+          <Button
+            typeName="primary"
+            style={{ flex: 1, margin: 8 }}
+            onClick={handleEditPost()}
+          >
+            Sửa tin
+          </Button>
+          <Button typeName="secondary" style={{ flex: 1, margin: 8 }}>
+            {postDetails.status === "active" ? "Đã bán/ẩn bài" : "Đăng lại"}
+          </Button>
+        </Box>
+      )}
+
       {zmproute.query?.mode === "0" && (
         <MessageBox
           isTexted={
@@ -105,7 +131,7 @@ export default () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <Box ml={5} style={{ paddingBottom: 200 }}>
+      <Box ml={5}>
         <Title className="item-name" size={"normal"} bold>
           {postDetails.title}
         </Title>
@@ -151,16 +177,14 @@ export default () => {
           title="Mô tả sản phẩm"
           description={postDetails.description}
         />
-        {zmproute.query?.mode === "0" && <SharePost />}
+        {zmproute.query?.mode === "0" && <ShareItem url="https://www.facebook.com/" />}
       </Box>
 
       {zmproute.query?.mode === "0" && (
         <>
           <SellerInfo
             postDetails={postDetails}
-            onClick={() => {
-              handleViewSellerProfile({ zaloId: postDetails.zaloId });
-            }}
+            onClick={handleViewSellerProfile()}
           />
           <Box ml={5}>
             <Title bold>Sản phẩm tương tự</Title>
@@ -176,25 +200,6 @@ export default () => {
           </Box>
         </>
       )}
-      <Box
-        style={{
-          position: "fixed",
-          width: "-webkit-fill-available",
-          bottom: 0,
-        }}
-        flex
-      >
-        <Button
-          typeName="primary"
-          style={{ flex: 1, margin: 8 }}
-          onClick={handleEditPost()}
-        >
-          Sửa tin
-        </Button>
-        <Button typeName="secondary" style={{ flex: 1, margin: 8 }}>
-          {postDetails.status === "active" ? "Đã bán/ẩn bài" : "Đăng lại"}
-        </Button>
-      </Box>
     </Page>
   );
 };
@@ -265,18 +270,5 @@ const SellerInfo = ({ postDetails, onClick }) => (
         title="tin đang rao"
       />
     </div>
-  </div>
-);
-
-const SharePost = () => (
-  <div>
-    <Title size="small" bold>
-      Chia sẻ bài đăng
-    </Title>
-    <Box ml={0} flexDirection="row" alignItems="left" inline>
-      {linkItems.map((item, index) => (
-        <img key={index} src={item} style={{ marginRight: 12 }} />
-      ))}
-    </Box>
   </div>
 );

@@ -6,11 +6,10 @@ import Category from "../components/Categories/Category";
 import UserCard from "../components/user-card";
 import store from "../store";
 
-export default () => {
+export default ({zmproute}) => {
   const sellerInfo = useStore("sellerInfo");
-  const zaloId = useStore("viewingZaloId");
   useEffect(() => {
-    store.dispatch("fetchSellerInfo", zaloId);
+    store.dispatch("fetchSellerInfo", zmproute.query.zaloId);
   }, []);
   return (
     <Page name="seller-info">
