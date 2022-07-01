@@ -147,7 +147,7 @@ router.get('/:postId', async (req, res) => {
       (await db.ViewedPostMapping
         .findOne({zaloId: zaloId, postId: postId}, {count: 1, _id: 0})
         .select("count")).count
-    const isContacted = (await db.Messages.countDocuments({owner: zaloId, partner: sellerId, postId: postId}) > 0)
+    const isContacted = (await db.Messages.countDocuments({sender: zaloId, receiver: sellerId, postId: postId}) > 0)
     response.name = user.name
     response.picture = user.picture
     response.postCount = postCount

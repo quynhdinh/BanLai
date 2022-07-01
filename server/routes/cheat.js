@@ -54,7 +54,7 @@ router.get('/posts/:zaloId', async (req, res) => {
 router.get('/messages/:zaloId', async (req, res) => {
   try {
     const zaloId = req.params["zaloId"].toString()
-    await db.Messages.deleteMany({owner: zaloId})
+    await db.Messages.deleteMany({sender: zaloId})
 
     const friendZaloIds =
       (await db.Users.find().select("zaloId"))
@@ -67,14 +67,12 @@ router.get('/messages/:zaloId', async (req, res) => {
 
     for (const zId of friendZaloIds) {
       await db.Messages.create({
-        owner: zaloId,
-        partner: zId,
-        type: 0,
+        sender: zaloId,
+        receiver: zId,
         postId: postIds[Math.floor(Math.random() * postIds.length)]
       }, {
-        owner: zaloId,
-        partner: zId,
-        type: 1,
+        sender: zId,
+        receiver: zaloId,
         postId: postIds[Math.floor(Math.random() * postIds.length)]
       })
     }

@@ -7,9 +7,19 @@ router.use(AuthService.verify);
 
 router.get('/', async (req, res) => {
   try {
-    const messages = await db.Messages.find({owner: req.user.zaloId}).lean()
-    for (const message of messages) {
-      const user = await db.Users.findOne({zaloId: message.partner}).lean()
+    const me = req.user.zaloId
+    const iBuyMessages = await db.Messages.find({sender: me}).lean()
+    const iSellMessages = await db.Messages.find({receiver: req.user.zaloId}).lean()
+    for (const message of iBuyMessages) {
+      const user = await db.Users.findOne({zaloId: message.receiver}).lean()
+      const post = await db.Posts.findOne({_id: ObjectId(message.postId)}).lean()
+      console.log(post)
+      message.picture = user.picture
+      message.name = user.name
+      message.title = post.title
+    }
+    for (const message of iSellMessages) {
+      const user = await db.Users.findOne({zaloId: message.sender}).lean()
       const post = await db.Posts.findOne({_id: ObjectId(message.postId)}).lean()
       message.picture = user.picture
       message.name = user.name
@@ -18,7 +28,8 @@ router.get('/', async (req, res) => {
     res.send({
       error: 0,
       msg: 'Lấy danh sách tin nhắn thành công',
-      data: messages
+      iBuy: iBuyMessages,
+      iSell: iSellMessages
     })
   } catch (error) {
     res.send({error: -1, message: 'Unknown exception'});
@@ -28,11 +39,11 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const {partner, type, postId} = req.body
+    const sender = req.user.zaloId
+    const {receiver, postId} = req.body
     const msg = await db.Messages.create({
-      owner: req.user.zaloId,
-      partner: partner.toString(),
-      type: type.toString(),
+      sender: sender.toString(),
+      receiver: receiver.toString(),
       postId: postId.toString()
     })
     res.send({
