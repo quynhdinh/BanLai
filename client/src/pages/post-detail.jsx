@@ -105,7 +105,7 @@ export default ({ zmproute }) => {
       )}
 
       {zmproute.query?.mode === "0" && (
-        <MessageBox isTexted={false} partnerId={postDetails.zaloId}/>
+        <MessageBox isTexted={postDetails.isContacted} partnerId={postDetails.zaloId} postId={postDetails._id}/>
       )}
       <Swiper pagination navigation loop>
         {postDetails.images.map((item, index) => (

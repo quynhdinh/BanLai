@@ -29,12 +29,8 @@ export default ({ zmproute }) => {
             <LoadingVertical />
           ) : (
             <Box style={{ marginBottom: "50px" }}>
-              {messages
-                .filter(function (obj) {
-                  return obj.type === "0";
-                })
-                .map((item, index) => (
-                  <MessageItem key={index} product={item} />
+              {messages.iBuy?.map((item, index) => (
+                  <MessageItem key={index} product={item}/>
                 ))}
             </Box>
           )}
@@ -44,12 +40,8 @@ export default ({ zmproute }) => {
             <LoadingVertical />
           ) : (
             <Box style={{ marginBottom: "50px" }}>
-              {messages
-                .filter(function (obj) {
-                  return obj.type === "1";
-                })
-                .map((item, index) => (
-                  <MessageItem key={index} product={item} />
+              {messages.iSell?.map((item, index) => (
+                  <MessageItem key={index} product={item}/>
                 ))}
             </Box>
           )}

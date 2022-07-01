@@ -1,16 +1,16 @@
 import React from "react";
-import {Icon, Box, Text, Button, Tab, zmp} from "zmp-framework/react";
+import {Icon, Box, Text, Button, Tab} from "zmp-framework/react";
 import CustomInput from "./Input";
 import api from "zmp-sdk";
 import store from "../store";
 
-export default ({isTexted, partnerId}) => {
+export default ({isTexted, partnerId, postId}) => {
   const hintMessages = [
     "Sản phẩm này còn không?",
     "Mình quan tâm, cho thêm thông tin nhé",
-    "Sản phẩm còn bảo hành không?",
+    "Sản phẩm còn bảo hành không?"
   ];
-  const setMessage = (message) => () => {
+  const setMessage = (message) => {
     document.getElementById("message").value = Object.values(message);
   };
   return (
@@ -37,9 +37,7 @@ export default ({isTexted, partnerId}) => {
               id="message"
             />
             <MessageButton onClick={() => {
-              console.log("sendTo: " + partnerId)
               const msgToSend = document.getElementById("message").value.toString()
-              console.log("msgToSend: " + msgToSend)
               if (msgToSend?.length > 0) {
                 api.openChat({
                   type: 'user',
@@ -47,6 +45,7 @@ export default ({isTexted, partnerId}) => {
                   message: msgToSend
                 });
               }
+              store.dispatch("createMessageTracking", {receiver: partnerId, postId: postId})
             }}/>
           </Box>
           <Tab className="page-content" m={0} style={{ padding: 0 }}>
@@ -54,7 +53,7 @@ export default ({isTexted, partnerId}) => {
               {hintMessages.map((item, index) => (
                 <HintMessage
                   key={index}
-                  onClick={setMessage({ message: item })}
+                  onClick={() => setMessage({message: item})}
                 >
                   {item}
                 </HintMessage>
@@ -68,7 +67,16 @@ export default ({isTexted, partnerId}) => {
             <Text style={{ flex: 1, marginBottom: 0 }}>
               ️✅ Đã liên hệ người bán
             </Text>
-            <Button typeName="primary">Xem tin nhắn</Button>
+            <Button typeName="primary"
+                    onClick={() => {
+                      api.openChat({
+                        type: 'user',
+                        id: partnerId
+                      })
+                    }
+                    }>
+              Xem tin nhắn
+            </Button>
           </Box>
         </>
       )}

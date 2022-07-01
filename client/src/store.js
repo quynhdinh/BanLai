@@ -1,18 +1,16 @@
-import { createStore } from "zmp-core/lite";
-import { getAccessToken } from "./services/zalo";
+import {createStore} from "zmp-core/lite";
+import {getAccessToken} from "./services/zalo";
 import {
   loadHottestPostsFromCache,
-  loadMessagesFromCache,
   loadPostsFromCache,
   loadUserFromCache,
   saveElectronicPostsToCache,
   saveHottestPostsToCache,
   saveHouseItemPostsToCache,
-  saveMessagesToCache,
   saveUserToCache,
 } from "./services/storage";
-import { getCurrentUser, login } from "./services/auth";
-import { getMessages } from "./services/message";
+import {getCurrentUser, login} from "./services/auth";
+import {createMessage, getMessages} from "./services/message";
 import {
   closePost,
   createPost,
@@ -25,9 +23,9 @@ import {
   getUserPosts,
   repostPost,
 } from "./services/post";
-import { getCareList, likePost, unlikePost } from "./services/care-list";
-import { updateViewCount } from "./services/viewed-post";
-import { getUserStats } from "./services/user";
+import {getCareList, likePost, unlikePost} from "./services/care-list";
+import {updateViewCount} from "./services/viewed-post";
+import {getUserStats} from "./services/user";
 import {isValidCache} from "./util/number";
 
 const store = createStore({
@@ -241,15 +239,11 @@ const store = createStore({
     },
     async fetchMessages({ state }) {
       state.isMessageLoading = true;
-      const m = await loadMessagesFromCache();
-      if (m.messages && m.messages.length > 0) {
-        state.messages = m.messages;
-      } else {
-        const response = await getMessages();
-        await saveMessagesToCache(response);
-        state.messages = response;
-      }
+      state.messages = await getMessages();
       state.isMessageLoading = false;
+    },
+    async createMessageTracking({ state }, data) {
+      state.messages = await createMessage(data);
     },
     async fetchCareList({ state }) {
       state.loadingFlag = true;
