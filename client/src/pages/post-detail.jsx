@@ -15,7 +15,6 @@ import {
 } from "zmp-framework/react";
 import "../css/swiper.css";
 import store from "../store";
-import MessageBox from "../components/message-box";
 import { getReadableTimeGap, moneyFormat } from "../util/number";
 import { getProductDetailTitle } from "../util/productDetail";
 import UserCard from "../components/user-card";
@@ -25,7 +24,7 @@ import { LoadingHorizontal } from "../components/loading";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { BiHeart } from "react-icons/bi";
 import ShareItem from "../components/share-item";
-import { FacebookIcon, FacebookShareButton } from "react-share";
+import MessageBox from "../components/message-box";
 
 
 export default ({ zmproute }) => {
@@ -95,7 +94,7 @@ export default ({ zmproute }) => {
           <Button
             typeName="primary"
             style={{ flex: 1, margin: 8 }}
-            onClick={handleEditPost()}
+            onClick={handleEditPost}
           >
             Sửa tin
           </Button>
@@ -106,12 +105,7 @@ export default ({ zmproute }) => {
       )}
 
       {zmproute.query?.mode === "0" && (
-        <MessageBox
-          isTexted={
-            u.zaloId !== postDetails.zaloId ? postDetails.isContacted : -1
-          }
-          partner={postDetails.zaloId}
-        />
+        <MessageBox isTexted={false} partnerId={postDetails.zaloId}/>
       )}
       <Swiper pagination navigation loop>
         {postDetails.images.map((item, index) => (

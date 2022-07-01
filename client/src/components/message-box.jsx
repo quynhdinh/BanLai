@@ -1,8 +1,18 @@
 import React from "react";
-import {Box, Text, Button} from "zmp-framework/react";
+import {Icon, Box, Text, Button, Tab, zmp} from "zmp-framework/react";
+import CustomInput from "./Input";
 import api from "zmp-sdk";
+import store from "../store";
 
-const MessageBox = ({isTexted, partner}) => {
+export default ({isTexted, partnerId}) => {
+  const hintMessages = [
+    "Sản phẩm này còn không?",
+    "Mình quan tâm, cho thêm thông tin nhé",
+    "Sản phẩm còn bảo hành không?",
+  ];
+  const setMessage = (message) => () => {
+    document.getElementById("message").value = Object.values(message);
+  };
   return (
     <Box
       m={0}
@@ -19,29 +29,82 @@ const MessageBox = ({isTexted, partner}) => {
         boxShadow: "0px -2px 2px rgba(0, 0, 0, 0.25)",
       }}
     >
-      {isTexted === -1 ? <></> : (
+      {isTexted === false ? (
+        <>
+          <Box m={0} flex>
+            <CustomInput
+              placeholder="Nhắn tin với người bán qua Zalo"
+              id="message"
+            />
+            <MessageButton onClick={() => {
+              console.log("sendTo: " + partnerId)
+              const msgToSend = document.getElementById("message").value.toString()
+              console.log("msgToSend: " + msgToSend)
+              if (msgToSend?.length > 0) {
+                api.openChat({
+                  type: 'user',
+                  id: partnerId,
+                  message: msgToSend
+                });
+              }
+            }}/>
+          </Box>
+          <Tab className="page-content" m={0} style={{ padding: 0 }}>
+            <Box m={0} mt={2} flex style={{ width: "max-content" }}>
+              {hintMessages.map((item, index) => (
+                <HintMessage
+                  key={index}
+                  onClick={setMessage({ message: item })}
+                >
+                  {item}
+                </HintMessage>
+              ))}
+            </Box>
+          </Tab>
+        </>
+      ) : (
         <>
           <Box flex alignItems="center">
-            <Text style={{flex: 1, marginBottom: 0}}>
-              ️{isTexted ? "✅ Đã liên hệ người bán" : "Liên hệ với người bán"}
+            <Text style={{ flex: 1, marginBottom: 0 }}>
+              ️✅ Đã liên hệ người bán
             </Text>
-            <Button typeName={isTexted ? "secondary" : "primary"}
-                    onClick={() => {
-                      api.openChat({
-                        type: 'user',
-                        id: partner
-                      });
-                    }}>
-              {isTexted ? "Xem tin nhắn" : "Gửi tin nhắn"}
-            </Button>
+            <Button typeName="primary">Xem tin nhắn</Button>
           </Box>
         </>
-      )
-      }
+      )}
     </Box>
   );
 };
 
-MessageBox.displayName = "zmp-message-box";
+const HintMessage = ({ children, onClick }) => (
+  <div onClick={onClick}>
+    <Text
+      className="r-round border-color-nl600 text-color-black"
+      style={{
+        padding: "8px",
+        marginRight: "4px",
+        display: "inline-block",
+        borderRadius: "8px",
+        border: "0.5px solid",
+      }}
+    >
+      {children}
+    </Text>
+  </div>
+);
 
-export default MessageBox;
+const MessageButton = ({ onClick }) => (
+  <div onClick={onClick}>
+    <Box
+      m={0}
+      ml={4}
+      flex
+      className="bg-color-bl300"
+      justifyContent="center"
+      alignItems="center"
+      style={{ borderRadius: "50%", width: 48, height: 48 }}
+    >
+      <Icon className="color-white demo-icon" zmp="zi-send-solid" />
+    </Box>
+  </div>
+);
