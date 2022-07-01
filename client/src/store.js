@@ -1,11 +1,9 @@
 import {createStore} from "zmp-core/lite";
 import {getAccessToken} from "./services/zalo";
 import {
-  loadHottestPostsFromCache,
   loadPostsFromCache,
   loadUserFromCache,
   saveElectronicPostsToCache,
-  saveHottestPostsToCache,
   saveHouseItemPostsToCache,
   saveUserToCache,
 } from "./services/storage";
@@ -170,33 +168,15 @@ const store = createStore({
       }
       state.loadingFlag = false;
     },
-    async fetchHottestItems({ state }) {
+    async fetchHottestItems({state}) {
       state.isHomeLoading = true;
       while (!state.jwt) {
         await new Promise((resolve) => setTimeout(resolve, 100));
       }
-
-      let cachedHottestPosts = null;
-      if (isValidCache(state.lastFetchHottestPosts)) {
-        cachedHottestPosts = await loadHottestPostsFromCache();
-        cachedHottestPosts = JSON.parse(cachedHottestPosts["posts"]);
-      }
-      if (cachedHottestPosts) {
-        // console.log("posts " + JSON.stringify(cachedHottestPosts['hottestElectronic']))
-        state.hottestItems.electric = cachedHottestPosts["hottestElectronic"];
-        state.hottestItems.house = cachedHottestPosts["hottestHouseItems"];
-        state.hottestItems.viewed = cachedHottestPosts["viewedItems"];
-      } else {
-        const response = await getHottestPosts();
-        state.hottestItems.electric = response.data;
-        state.hottestItems.house = response.data2;
-        state.hottestItems.viewed = response.data3;
-        await saveHottestPostsToCache(
-          response.data,
-          response.data2,
-          response.data3
-        );
-      }
+      const response = await getHottestPosts();
+      state.hottestItems.electric = response.data;
+      state.hottestItems.house = response.data2;
+      state.hottestItems.viewed = response.data3;
       state.isHomeLoading = false;
     },
     async fetchFilteredPosts({ state }, { condition }) {
