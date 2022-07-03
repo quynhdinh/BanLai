@@ -25,19 +25,13 @@ const Category = ({ product, border, isShowHeart }) => {
       return;
     }
     await clearCache();
-    if (post.isLiked === 0) {
-      store.dispatch("fakeLikeUnlikePostList", {
-        postId: post._id,
-        isLiked: post.isLiked,
-      });
-      store.dispatch("likePost", { postId: post._id });
-    } else {
-      store.dispatch("fakeLikeUnlikePostList", {
-        postId: post._id,
-        isLiked: post.isLiked,
-      });
-      store.dispatch("unlikePost", { postId: post._id });
-    }
+    store.dispatch(post.isLiked === 0 ? "likePost" : "unlikePost", {
+      postId: post._id,
+    });
+    store.dispatch("fakeLikeUnlikePostList", {
+      postId: post._id,
+      isLiked: post.isLiked,
+    });
   };
 
   return (
