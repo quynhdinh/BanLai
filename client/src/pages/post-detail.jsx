@@ -86,7 +86,7 @@ export default ({zmproute}) => {
     <Page name="post-detail">
       <Navbar backLink="Back"/>
       <Box m={0} style={{position: "relative"}}/>
-      {zmproute.query?.mode === "1" && (
+      { (zmproute.query?.mode === "1" || zmproute.query?.mode === "2") && (
         <Box flex>
           <Button
             typeName="primary"
@@ -95,9 +95,19 @@ export default ({zmproute}) => {
           >
             Sửa tin
           </Button>
-          <Button typeName="secondary" style={{flex: 1, margin: 8}}>
-            {postDetails.status === "active" ? "Đã bán/ẩn bài" : "Đăng lại"}
-          </Button>
+          {zmproute.query?.mode === "1" && (
+            <Button typeName="secondary" style={{flex: 1, margin: 8}}>
+              {postDetails.status === "active" ? "Đã bán/ẩn bài" : "Đăng lại"}
+            </Button>
+          )}
+          {zmproute.query?.mode === "2" &&
+            (<Button typeName="secondary" style={{flex: 1, margin: 8}}
+                     onClick={() => {
+                       zmp.views.main.router.navigate({path: "/manage-post"})
+                     }}>
+                Quản lý tin
+              </Button>
+            )}
         </Box>
       )}
 

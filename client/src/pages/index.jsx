@@ -5,7 +5,7 @@ import Categories from "../components/Categories";
 import pc from "../static/icons/PC.svg";
 import bed from "../static/icons/Bed.svg";
 
-const HomePage = () => {
+export default () => {
   const zmproute = zmp.views.main.router;
   const categoryList = [
     {index: 0, title: "Thiết bị điện tử", icon: pc, navigateLink: "/electronic-list"},
@@ -67,5 +67,3 @@ const CategoryIcon = ({title, icon, onClick}) => (
     </Box>
   </div>
 );
-
-export default HomePage;

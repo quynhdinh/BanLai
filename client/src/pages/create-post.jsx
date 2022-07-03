@@ -76,10 +76,12 @@ export default () => {
         category: zmproute.query?.category,
         subCategory: zmproute.query?.subcategory,
       };
-      await store.dispatch("createPost", { data });
+      const res = await store.dispatch("createPost", { data });
+      console.log("id ", res._id)
       zmprouter.navigate(
         {
           path: "/post-detail",
+          query: { mode: 2, id: res._id },
         },
         { transition: "zmp-push" }
       );

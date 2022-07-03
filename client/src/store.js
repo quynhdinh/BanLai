@@ -195,8 +195,9 @@ const store = createStore({
     },
     async createPost({ state }, { data }) {
       state.loadingFlag = true;
-      await createPost(data);
+      const res = await createPost(data);
       state.loadingFlag = false;
+      return res;
     },
     async editPost({ state }, { data }) {
       state.loadingFlag = true;
