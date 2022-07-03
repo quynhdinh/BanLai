@@ -12,7 +12,6 @@
   "listAsyncJS": [],
   "pages": [
     "/saved-posts",
-    "/404",
     "/home",
     "/manage-post",
     "/create",
@@ -24,7 +23,6 @@
     "/seller-info",
     "/care-list",
     "/post-detail",
-    "/posts-filter",
     "/posts-list"
   ]
 }
