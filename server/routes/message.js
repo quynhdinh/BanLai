@@ -13,7 +13,6 @@ router.get('/', async (req, res) => {
     for (const message of iBuyMessages) {
       const user = await db.Users.findOne({zaloId: message.receiver}).lean()
       const post = await db.Posts.findOne({_id: ObjectId(message.postId)}).lean()
-      console.log(post)
       message.picture = user.picture
       message.name = user.name
       message.title = post.title
