@@ -176,6 +176,7 @@ export default ({ zmproute }) => {
                 category=""
                 products={postDetails.relatedPosts}
                 index={-1}
+                isShowHeart={0}
               />
             ) : (
               <LoadingHorizontal />

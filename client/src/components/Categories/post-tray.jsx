@@ -2,7 +2,7 @@ import React from "react";
 import {Box, Title, zmp, Button, Row, Col} from "zmp-framework/react";
 import Category from "./Category";
 
-export default ({category, products, index}) => {
+export default ({category, products, index, isShowHeart}) => {
   const zmproute = zmp.views.main.router;
 
   function viewAll() {
@@ -29,7 +29,7 @@ export default ({category, products, index}) => {
           >
             {products.map((product) => (
               <Col key={product._id} className="product-column">
-                <Category product={product}/>
+                <Category product={product} isShowHeart={isShowHeart}/>
               </Col>
             ))}
           </Row>

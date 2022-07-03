@@ -6,7 +6,7 @@ import store from "../../store";
 import CustomImage from "../custom-image";
 import { clearCache } from "../../services/storage";
 
-const Category = ({ product, border }) => {
+const Category = ({ product, border, isShowHeart }) => {
   const [preTime, setPreTime] = useState(0);
   const handleViewDetail = () => {
     const zmprouter = zmp.views.main.router;
@@ -111,6 +111,7 @@ const Category = ({ product, border }) => {
               </Text>
             </Box>
           </Box>
+          { isShowHeart !== 0 && (
           <Box m={0} style={{ position: "absolute", right: 8, top: 8 }}>
             <HeartIcon
               isLiked={product.isLiked}
@@ -120,6 +121,7 @@ const Category = ({ product, border }) => {
               }}
             />
           </Box>
+            )}
         </Box>
       </Card>
     </div>
