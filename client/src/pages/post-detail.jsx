@@ -119,13 +119,15 @@ export default ({zmproute}) => {
           <Title className="item-price" bold style={{flex: 1}}>
             {moneyFormat(postDetails.price)}
           </Title>
-          <HeartIcon
-            isLiked={postDetails.isLiked}
-            handleLikeUnlike={(e) => {
-              e.stopPropagation();
-              return handleLikeUnlike(postDetails);
-            }}
-          />
+          {zmproute.query?.mode === "0" && (
+            <HeartIcon
+              isLiked={postDetails.isLiked}
+              handleLikeUnlike={(e) => {
+                e.stopPropagation();
+                return handleLikeUnlike(postDetails);
+              }}
+            />
+          )}
         </Box>
         <Box flexDirection="row" m={0}>
           <PostTag>
