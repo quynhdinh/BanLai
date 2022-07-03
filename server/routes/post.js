@@ -14,7 +14,7 @@ const normalize = (x) => {
 // Lấy danh sách bài đăng
 router.get('/', async (req, res) => {
   try {
-    const posts = await db.Posts.find({zaloId: req.user.zaloId})
+    const posts = await db.Posts.find({zaloId: req.user.zaloId}).sort({createdAt: -1})
     res.send({
       error: 0,
       msg: 'Lấy danh sách bài đăng thành công',
@@ -171,7 +171,7 @@ router.get('/:postId', async (req, res) => {
 router.get('/by-user/:zaloId', async (req, res) => {
   try {
     const zaloId = req.params["zaloId"].toString()
-    const result = await db.Posts.find({zaloId: zaloId}).lean()
+    const result = await db.Posts.find({zaloId: zaloId}).sort({createdAt: -1}).lean()
     await addIsLiked(zaloId, result)
     const user = await db.Users.findOne({zaloId: zaloId})
     const postCount = await db.Posts.countDocuments({zaloId: zaloId})
@@ -214,7 +214,7 @@ router.get('/by-category/:categoryId', async (req, res) => {
         msg: 'Param không hợp lệ'
       })
     const category = (param === 0 ? "Thiết bị điện tử" : "Đồ gia dụng, nội thất")
-    const posts = await db.Posts.find({category: normalize(category), status: "active"}).lean()
+    const posts = await db.Posts.find({category: normalize(category), status: "active"}).sort({createdAt: -1}).lean()
     const postArr = await addIsLiked(req.user.zaloId, posts)
     res.send({
       error: 0,

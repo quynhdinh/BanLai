@@ -7,7 +7,7 @@ router.use(AuthService.verify)
 
 router.get('/', async (req, res) => {
   try {
-    const careList = await db.CarePostMapping.find({zaloId: req.user.zaloId}).lean()
+    const careList = await db.CarePostMapping.find({zaloId: req.user.zaloId}).sort({createdAt: -1}).lean()
     for (const care of careList)
       care.postDetail = await db.Posts.findOne({_id: ObjectId(care.postId)}).lean()
     res.send({
