@@ -8,8 +8,8 @@ router.use(AuthService.verify);
 router.get('/', async (req, res) => {
   try {
     const me = req.user.zaloId
-    const iBuyMessages = await db.Messages.find({sender: me}).lean()
-    const iSellMessages = await db.Messages.find({receiver: req.user.zaloId}).lean()
+    const iBuyMessages = await db.Messages.find({sender: me}).sort({createdAt: -1}).lean()
+    const iSellMessages = await db.Messages.find({receiver: req.user.zaloId}).sort({createdAt: -1}).lean()
     for (const message of iBuyMessages) {
       const user = await db.Users.findOne({zaloId: message.receiver}).lean()
       const post = await db.Posts.findOne({_id: ObjectId(message.postId)}).lean()
