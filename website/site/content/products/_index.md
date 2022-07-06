@@ -1,5 +1,5 @@
 ---
-title: Our Coffee
+title: Tổng quan về Bán Lại
 type: products
 image: /img/banner.gif
 heading: What we offer
@@ -37,12 +37,9 @@ intro:
         space where you can hang out with fellow coffee lovers and learn about
         coffee making techniques. All of the artwork on display there is for
         sale. The full price you pay goes to the artist.
-  heading: What we offer
+  heading: Bài viết này nói về gì?
   description: >
-    Kaldi is the ultimate spot for coffee lovers who want to learn about their
-    java’s origin and support the farmers that grew it. We take coffee
-    production, roasting and brewing seriously and we’re glad to pass that
-    knowledge to anyone. This is an edit via identity...
+    Bài viết dưới đây sẽ hướng dẫn bạn cài đặt những công cụ để phát triển app, cách chạy ứng dụng trên thiết bị của bạn và đi qua chi tiết kĩ thuật để bạn có thể áp dụng ngay và ứng dụng mini app của bạn.
 main:
   heading: Great coffee with no compromises
   description: >
