@@ -1,6 +1,6 @@
 ---
 title: "Showcase features"
-image: /img/about-jumbotron.jpg
+image: /img/banner.gif
 values:
   - heading: "Trang chủ"
     text: >

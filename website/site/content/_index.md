@@ -1,7 +1,7 @@
 ---
 title: "Chợ đồ cũ Bán Lại"
 subtitle: Một mini app chợ đồ cũ phát triển trên Zalo Mini Program Framework.
-image: /img/home-jumbotron.jpg
+image: /img/banner.gif
 intro:
     heading: "Bán Lại là gì ?"
     text: "Kaldi is the ultimate spot for coffee lovers who want to learn about their java’s origin and support the farmers that grew it. We take coffee production, roasting and brewing seriously and we’re glad to pass that knowledge to anyone."
