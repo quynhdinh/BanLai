@@ -6,7 +6,8 @@ import api from "zmp-sdk";
 const handleOpenChat = (p) => () => {
   api.openChat({
     type: 'user',
-    id: p.partner,
+    id: p.receiver,
+    message: ""
   });
 };
 
