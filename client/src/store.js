@@ -33,6 +33,7 @@ const store = createStore({
     loadingFlag: true,
     isHomeLoading: true,
     isMessageLoading: true,
+    isUploadingPost: false,
     lastFetchPosts: 0, // unix time
     lastFetchHottestPosts: 0,
     u: null,
@@ -93,6 +94,9 @@ const store = createStore({
     },
     isMessageLoading({ state }) {
       return state.isMessageLoading;
+    },
+    isUploadingPost({ state }) {
+      return state.isUploadingPost;
     },
     messages({ state }) {
       return state.messages;
@@ -194,9 +198,9 @@ const store = createStore({
       await updateViewCount(postId);
     },
     async createPost({ state }, { data }) {
-      state.loadingFlag = true;
+      state.isUploadingPost = true;
       const res = await createPost(data);
-      state.loadingFlag = false;
+      state.isUploadingPost = false;
       return res;
     },
     async editPost({ state }, { data }) {

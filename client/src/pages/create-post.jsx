@@ -24,7 +24,7 @@ import {
 import { getProductDetailTitle } from "../util/productDetail";
 
 export default () => {
-  const loading = useStore("loadingFlag");
+  const loading = useStore("isUploadingPost");
   const zmproute = zmp.views.main.router.currentRoute;
   const postDetails = useStore("postDetails");
   const [displayImages, setDisplayImages] = useState([]);
