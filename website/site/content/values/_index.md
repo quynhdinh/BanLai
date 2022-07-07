@@ -1,45 +1,31 @@
 ---
-title: "Showcase features"
+title: "Các tính năng chính"
 image: /img/banner.gif
 values:
   - heading: "Trang chủ"
     text: >
-      Coffee is a small tree or shrub that grows in the forest
-      understory in its wild form, and traditionally was grown
-      commercially under other trees that provided shade. The
-      forest-like structure of shade coffee farms provides habitat for
-      a great number of migratory and resident species.
-    imageUrl: "/img/home.jpg"
+      Hiển thị các bài viết mới nhất theo danh mục. Lọc các bài viết theo danh mục. 
+      Người dùng cũng có thể thêm một bài viết vào danh sách chăm sóc của mình ngay 
+      từ trang chủ bằng cách chạm vào biểu tượng trái tim. Người dùng cũng có thể xem
+      chi tiết của một bài đăng và xem thêm thông tin như số lượt xem, số lượt thích 
+      và gửi tin nhắn trực tiếp cho người bán
+    imageUrl: "/img/home.gif"
   - heading: "Quản lý bài đăng"
     text: >
-      Single-origin coffee is coffee grown within a single known
-      geographic origin. Sometimes, this is a single farm or a
-      specific collection of beans from a single country. The name of
-      the coffee is then usually the place it was grown to whatever
-      degree available.
-    imageUrl: "/img/manage-post.jpg"
+      Quản lý các bài đã đăng, đăng lại hoặc đóng bài hoặc chỉnh sửa bài đăng.
+    imageUrl: "/img/manage-post.gif"
   - heading: "Tạo bài đăng"
     text: >
-      Sustainable agriculture is farming in sustainable ways based on
-      an understanding of ecosystem services, the study of
-      relationships between organisms and their environment. What
-      grows where and how it is grown are a matter of choice and
-      careful consideration for nature and communities.
-    imageUrl: "/img/create.jpg"
+      Cho phép tạo bài đăng và trang chuyên nghiệp hơn với các tùy chọn tùy thuộc vào 
+      từng danh mục đã chọn.
+    imageUrl: "/img/create.gif"
   - heading: "Quản lý tin nhắn"
     text: >
-      We want to truly empower the communities that bring amazing
-      coffee to you. That’s why we reinvest 20% of our profits into
-      farms, local businesses and schools everywhere our coffee is
-      grown. You can see the communities grow and learn more about
-      coffee farming on our blog.
-    imageUrl: "/img/messages.jpg"
+      Trang tin nhắn cho phép bạn xem những người bạn đã liên hệ thông qua ứng dụng nhắn tin Zalo, 
+      chỉ cần một nút bấm là bạn có thể tiếp tục trò chuyện với họ
+    imageUrl: "/img/messages.gif"
   - heading: "Trang cá nhân"
     text: >
-      We want to truly empower the communities that bring amazing
-      coffee to you. That’s why we reinvest 20% of our profits into
-      farms, local businesses and schools everywhere our coffee is
-      grown. You can see the communities grow and learn more about
-      coffee farming on our blog.
-    imageUrl: "/img/account.jpg"
+      Trang tài khoản cho phép bạn xem số lượng bài viết được thích và được xem cũng như lưu lại, quản lý những bài viết mà bạn đã quan tâm.
+    imageUrl: "/img/account.gif"
 ---
