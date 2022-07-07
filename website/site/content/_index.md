@@ -4,12 +4,12 @@ subtitle: Một mini app chợ đồ cũ phát triển trên Zalo Mini Program F
 image: /img/banner.gif
 intro:
     heading: "Bán Lại là gì ?"
-    text: "Kaldi is the ultimate spot for coffee lovers who want to learn about their java’s origin and support the farmers that grew it. We take coffee production, roasting and brewing seriously and we’re glad to pass that knowledge to anyone."
+    text: "Bán lại là một mini app chợ đồ cũ kết nối người mua và người bán có thể trao đổi sản phẩm đã qua sử dụng."
 products:
-    - image: img/illustrations-coffee.svg
-      text: "We sell green and roasted coffee beans that are sourced directly from independent farmers and farm cooperatives. We’re proud to offer a variety of coffee beans grown with great care for the environment and local communities. Check our post or contact us directly for current availability."
-    - image: /img/illustrations-coffee-gear.svg
-      text: "We offer a small, but carefully curated selection of brewing gear and tools for every taste and experience level. No matter if you roast your own beans or just bought your first french press, you’ll find a gadget to fall in love with in our shop."
+    - image: img/backend-techstack.svg
+      text: "Framework dùng cho Back-end là NodeJS cơ sở dữ liệu MongoDB Atlas và dịch vụ lưu trữ hình ảnh trên Cloudinary host server bằng Heroku"
+    - image: /img/frontend-techstack.svg
+      text: "Front-end Bckend là React JS dùng với Zalo Mini framework"
 values:
     heading: Showcase tính năng
     text: Đi qua nhanh những màn hình chính của mini app nhằm giúp bạn nắm qua sơ bộ những tính năng chính của app
