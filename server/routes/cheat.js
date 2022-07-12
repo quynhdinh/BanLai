@@ -55,6 +55,7 @@ router.get('/messages/:zaloId', async (req, res) => {
   try {
     const zaloId = req.params["zaloId"].toString()
     await db.Messages.deleteMany({sender: zaloId})
+    await db.Messages.deleteMany({receiver: zaloId})
 
     const friendZaloIds =
       (await db.Users.find().select("zaloId"))
