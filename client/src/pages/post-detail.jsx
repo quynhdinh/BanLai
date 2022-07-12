@@ -77,8 +77,6 @@ export default ({zmproute}) => {
     });
   };
 
-  const shareUrl = "http://github.com";
-  const title = "GitHub";
   //zmproute.query.mode === 0 : xem bài viết bình thường
   //mode === 1 : xem bài viết chế độ chỉnh sửa
   //mode === 2 : xem bài viết sau khi tạo bài đăng
