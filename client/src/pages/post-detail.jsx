@@ -1,18 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {
-  Page,
-  Navbar,
-  Swiper,
-  SwiperSlide,
-  Text,
-  Title,
-  useStore,
-  Box,
-  GridItem,
-  Grid,
-  zmp,
-  Button,
-} from "zmp-framework/react";
+import {Page, Navbar, Swiper, SwiperSlide, Text, Title, useStore, Box, GridItem, Grid, zmp, Button} from "zmp-framework/react";
 import "../css/swiper.css";
 import store from "../store";
 import {getReadableTimeGap, moneyFormat} from "../util/number";
@@ -110,7 +97,10 @@ export default ({zmproute}) => {
       )}
 
       {zmproute.query?.mode === "0" && (
-        <MessageBox isTexted={postDetails.isContacted} partnerId={postDetails.zaloId} postId={postDetails._id}/>
+        <MessageBox isTexted={postDetails.isContacted}
+                    partnerId={postDetails.zaloId}
+                    postId={postDetails._id}
+                    isVisible={u.zaloId !== postDetails.zaloId}/>
       )}
       <Swiper pagination navigation loop>
         {postDetails.images.map((item, index) => (

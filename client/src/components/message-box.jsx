@@ -4,7 +4,7 @@ import CustomInput from "./Input";
 import api from "zmp-sdk";
 import store from "../store";
 
-export default ({isTexted, partnerId, postId}) => {
+export default ({isTexted, partnerId, postId, isVisible}) => {
   const hintMessages = [
     "Sản phẩm này còn không?",
     "Mình quan tâm, cho thêm thông tin nhé",
@@ -29,7 +29,7 @@ export default ({isTexted, partnerId, postId}) => {
         boxShadow: "0px -2px 2px rgba(0, 0, 0, 0.25)",
       }}
     >
-      {isTexted === false ? (
+      {!isVisible ? <></> : !isTexted ? (
         <>
           <Box m={0} flex>
             <CustomInput
