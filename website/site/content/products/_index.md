@@ -9,10 +9,10 @@ intro:
   blurbs:
     - image: /img/backend-techstack.svg
       text: >
-        "Backend được xây dựng trên NodeJS, MongoDB và Cloudinary"
+        Backend được xây dựng trên NodeJS, MongoDB và Cloudinary
     - image: /img/frontend-techstack.svg
       text: >
-        "Front end được xây dựng trên Zalo mini framework, ReactJS, React Icon"
+        Frontend được xây dựng trên Zalo mini framework, ReactJS, React Icon
   heading: Bài viết này nói về gì?
   description: >
     Bài viết dưới đây sẽ hướng dẫn bạn cài đặt những công cụ để phát triển app, cách chạy ứng dụng trên thiết bị của bạn và đi qua chi tiết kĩ thuật để bạn có thể áp dụng ngay vào ứng dụng mini app của bạn.

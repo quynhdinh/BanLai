@@ -1,8 +1,8 @@
 ---
 title: 'Hướng dẫn cài đặt Heroku Server, Mongo Atlas và Cloudinary'
-date: 2017-01-04T15:04:10.000Z
+date: 2022-07-05T15:04:10.000Z
 description: >-
-    Trong hướng dẫn này, chúng tôi sẽ chỉ cho bạn cách sao chép dự án của chúng tôi, thiết lập các dịch vụ liên quan để chạy ứng dụng nhỏ trên máy của bạn
+    Trong hướng dẫn này, chúng tôi sẽ chỉ cho bạn cách clone repo này, thiết lập các dịch vụ liên quan để chạy mini app trên máy của bạn
 ---
 
 Repo này gồm 3 folder:
@@ -10,7 +10,7 @@ Repo này gồm 3 folder:
 - `server`: Bán Lại back-end, sử dụng Node, Express, MongoDB. Không có giới hạn cho lựa chọn cho ngôn ngữ lập trình hay công nghệ cho Backend Node, Express and MongoDB.
 - `website`: Code cho trang web này, bạn không cần quan tâm.
 
-## Pre-requisites
+## Yêu cầu
 
 1. [Install Node JS](https://nodejs.org/en/download/)
 2. [Install Mini App DevTools CLI](https://mini.zalo.me/docs/dev-tools)
@@ -42,7 +42,7 @@ Repo này gồm 3 folder:
    ```bash
    npm install
    ```
-1. Create a new file `.env` and put these configurations:
+1. Tạo 1 file `.env` chưa những configs sau:
    ```bash
    PORT=5000
    MONGODB_URL=mongodb+srv://YOUR_MONGODB_CONNECTION_STRING
@@ -51,11 +51,11 @@ Repo này gồm 3 folder:
 
   - You can change the PORT to anything you want, however remember to sync the `VITE_BASE_URL` in `client/.env.development` to match the PORT that you choose.
 
-  - MONGODB_URL is required to connect to your MongoDB server.
+  - `MONGODB_URL`: link Mongo cluster để kết nối đến csdl của bạn.
 
-  - OA_TOKEN is required to send message to your customer after they settled an order. How to get an OA_TOKEN here: (https://developers.zalo.me/docs/api/official-account-api/phu-luc/official-account-access-token-post-4307)
+  - `OA_TOKEN` sẽ cần nếu bạn muốn để gửi tin nhắn đến người dùng . Cách để lấy `OA_TOKEN` ở [đây](https://developers.zalo.me/docs/api/official-account-api/phu-luc/official-account-access-token-post-4307)
 
-1. Start server using npm script
+1. Start server bằng lệnh
    ```bash
    npm start
    ```
@@ -76,7 +76,7 @@ Remember to update VITE_BASE_URL in `client/.env.production` to point to your se
 
 ### Server API
 
-The source code in this example can be hosted anywhere. Here is an instruction on how to deploy it to [Heroku](https://www.heroku.com/)
+Bạn có thể host source code này bằng các dịch vụ khác nhau. Bài viết này sẽ  deploy với [Heroku](https://www.heroku.com/)
 
 > Note: In order to test your application on Zalo by scanning QR code, you will need to host your backend in an external server.
 
@@ -84,7 +84,7 @@ The source code in this example can be hosted anywhere. Here is an instruction o
    ```bash
    cd server
    ```
-1. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) và login
+1. Cài [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) và login
    ```bash
    heroku login
    ```
@@ -110,19 +110,17 @@ Client code nằm trong folder **`client/`**:
 * **`src`**: Bao gồm toàn bộ những source code của mini app của bạn. Trong đó:
 
   * **`components`**: những component sẽ được tái sử dụng viết bằng React JS
-  * **`css`**: Stylesheets, pre-processors also supported
+  * **`css`**: Stylesheets, pre-processors
   * **`pages`**: a Page is also a component but will act as an entire view and must be registered inside `app-config.json` (https://mini.zalo.me/docs/framework/getting-started/app-config#pages)
   * **`services`**: reuseable logic for complex tasks that should be separated from your component, such as fetching API, get access token from Zalo or caching stuff,...
-  * **`static`**: contain binary assets of your Mini App, such as icon, background, etc,...
+  * **`static`**: bao gồi assets cho mini app của bạn, (icon, background, etc,...)
 * **`.env.*`**: Các biến môi trường, zmp is using Vite build tools, read more about Vite env here (https://vitejs.dev/guide/env-and-mode.html#env-variables)
-  * **`.env.development`**: Loaded when running project locally with `zmp start`.
+  * **`.env.development`**: Load local khi  `zmp start`.
 
     > If you're using `getAccessToken` API from zmp (https://mini.zalo.me/docs/api/getAccessToken) when running on browser, zmp will always return "DEFAULT ACCESS TOKEN" because there is no logged in Zalo user. Specify a `VITE_DEFAULT_ACCESS_TOKEN` to mock a real Zalo user for development purpose.
 
   * **`.env.production`**: Loaded when deploy project to Zalo with `zmp deploy`
   * **`app-config.json`**: Global configuration for your Mini App (https://mini.zalo.me/docs/framework/getting-started/app-config)
-  
-  Most of the time you won't need to touch these other files. `src` will be the busiest section of your development process.
 
 ### Backend code
 
