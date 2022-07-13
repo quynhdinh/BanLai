@@ -1,19 +1,16 @@
 ---
-title: "Contact"
+title: "Liên hệ"
 logo: "/img/logo.svg"
 contact_entries:
-  - heading: Location
-    text: "3153 Lynn Avenue, South San Francisco, California 94080"
-  - heading: Working hours
-    text: "Monday – Saturday: 9AM – 7PM We’re closed on Sundays"
+  - heading: Địa chỉ
+    text: "Khu Chế Xuất Tân Thuận, Quận 7, Hành tinh Sao Hỏa"
+  - heading: Giờ làm việc
+    text: "Mọi ngày trong tuần"
 ---
 
-We’d love to get in touch with you and hear your ideas and
-questions. We strive to grow and improve constantly and your feedback
-is valuable for us.
+Hãy liên lạc cho chúng tôi nếu có thắc mắc.
 
-<h3 class="f4 b lh-title mb2">How can I get…?</h3>
+<h3 class="f4 b lh-title mb2">Làm sao để liên lạc với chúng tôi?</h3>
 
-You can also use the form below for any inquiries about coffee
-availability, monthly subscriptions and scheduling a 1-on-1 session
-with our baristas. Don’t be shy, drop us a line!
+Bạn cũng có thể sử dụng form bên dưới để được giải đáp mọi thắc mắc về
+app. Đừng ngại, hãy liên hệ với chúng tôi!

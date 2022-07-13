@@ -2,7 +2,7 @@
 title: 'Trang quản lý bài đăng'
 date: 2022-07-15T15:04:10.000Z
 description: >-
-  Đang cập nhật
+  Đang cập nhật...
 ---
 
 We expect the shipment of a limited quantity of green beans next Monday. We’ll be offering the roasted beans from Tuesday, but quantities are limited, so be quick.

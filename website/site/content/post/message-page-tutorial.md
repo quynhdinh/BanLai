@@ -2,10 +2,10 @@
 title: 'Trang quản lý tin nhắn'
 date: 2022-07-05T15:04:10.000Z
 description: >-
-  Đang cập nhật
+  Trong hướng dẫn này chúng tôi sẽ hướng dẫn cho các bạn làm trang tin nhắn
 ---
 
-We expect the shipment of a limited quantity of green beans next Monday. We’ll be offering the roasted beans from Tuesday, but quantities are limited, so be quick.
+Bạn có thể tham khảo file `messages.jsx`.
 
 ## A little history
 
