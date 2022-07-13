@@ -1,28 +1,39 @@
 ---
-title: 'Trang tạo bài, flow tạo bài'
-date: 2017-01-04T15:04:10.000Z
+title: 'Tạo bài đăng và sửa chi tiết bài đăng'
+date: 2022-07-12T15:04:10.000Z
 description: >-
-  We’re proud to announce that we’ll be offering a small batch of Jamaica Blue
-  Mountain coffee beans in our store next week.
+  Trong bài viết này chúng tôi sẽ hướng dẫn cho bạn tạo bài đăng và sửa chi tiết bài đăng
 ---
 
-We expect the shipment of a limited quantity of green beans next Monday. We’ll be offering the roasted beans from Tuesday, but quantities are limited, so be quick.
+## Tạo bài đăng
 
-Blue Mountain Peak is the highest mountain in Jamaica and one of the highest peaks in the Caribbean at 7,402 ft. It is the home of Blue Mountain coffee and their famous tours. It is located on the border of the Portland and Saint Thomas parishes of Jamaica.
+- Chọn danh mục và danh mục phụ
+- Điền thông tin chi tiết
+  - Hình ảnh và mô tả (hình ảnh sản phẩm, tiêu đề và mô tả)
+  - Thông tin chi tiết (hãng sản xuất, màu sắc, công suất,…)
+  - Địa chỉ (tỉnh/thành phố và quận huyện)
+- Đăng bài
 
-## A little history
+Trong phần điền thông tin chi tiết, Bán Lại có sử dụng những component riêng với những tính năng đặc biệt như đưa ra gợi ý giúp người dùng có thể điền thông tin đúng hơn, từ đó giúp việc validate form dễ dàng hơn. Đây là một vài ví dụ:
 
-The Blue Mountains are considered by many to be a hiker's and camper's paradise. The traditional Blue Mountain trek is a 7-mile hike to the peak and consists of a 3,000-foot increase in elevation. Jamaicans prefer to reach the peak at sunrise, thus the 3–4 hour hike is usually undertaken in darkness. Since the sky is usually very clear in the mornings, Cuba can be seen in the distance.
+- [Input](https://harmless-impatiens-74a.notion.site/Input-7f24603283804d4084ea20349cc02207)
+- [Text area](https://harmless-impatiens-74a.notion.site/Textarea-2cef345cbd284066ace5dcb83769a353)
+- [ImageUploder](https://harmless-impatiens-74a.notion.site/Image-Uploader-8042663e285148a3ba282ed76d02f2b4)
+- [Select](https://harmless-impatiens-74a.notion.site/Select-ca7da06cbad2482a9d82abc83b57e085)
 
->Some of the plants found on the Blue Mountain cannot be found anywhere else in the world and they are often of a dwarfed sort.
 
-This is mainly due to the cold climate which inhibits growth. The small coffee farming communities of Claverty Cottage and Hagley Gap are located near the peak.
+Chúng ta đều nhận thấy được sự phức tạp và khó khăn mà chúng ta có thể gặp phải khi làm việc với form. Chúng ta phải xử lý các form dài dòng, validate, quản lý state của form và các component bên trong nó. Trong mini program Bán Lại, `React-hook-form` được sử dụng để xác thực form. React-hook-form là một thư viện giúp bạn xác thực các form trong React, là một thư viện tối thiểu không có bất kỳ phụ thuộc nào khác. Nó rất tiện và dễ sử dụng, yêu cầu các developer code ít hơn các thư viện khác. Một tính năng tuyệt vời khác được cung cấp bởi React Hook Form là tích hợp dễ dàng với các thư viện UI, vì hầu hết các thư viện đều hỗ trợ `ref`.
 
-## What you need to know before trying
+Bạn có thể truy cập vào link [này](https://react-hook-form.com/get-started/) để tham khảo document về cách xác thực một form sử dụng React Form Hook.
 
-Jamaican Blue Mountain Coffee or Jamaica Blue Mountain Coffee is a classification of coffee grown in the Blue Mountains of Jamaica. The best lots of Blue Mountain coffee are noted for their mild flavor and lack of bitterness. Over the past few decades, this coffee has developed a reputation that has made it one of the most expensive and sought-after coffees in the world. Over 80% of all Jamaican Blue Mountain Coffee is exported to Japan. In addition to its use for brewed coffee, the beans are the flavor base of Tia Maria coffee liqueur.
+# Sửa chi tiết bài đăng
 
-Jamaican Blue Mountain Coffee is a globally protected certification mark, meaning only coffee certified by the Coffee Industry Board of Jamaica can be labeled as such. It comes from a recognized growing region in the Blue Mountain region of Jamaica, and its cultivation is monitored by the Coffee Industry Board of Jamaica.
+Khi người đăng bài, họ có thể sẽ muốn thay đổi một vài chi tiết trong bài đăng đó. Để tiết kiệm thời gian lập trình, ta có thể tận dụng trang tạo bài đăng làm trang chỉnh sửa chi tiết bài đăng. Hai trang này có thể được phân biệt với nhau bằng một thuộc tính trong query của url trang.
 
-The Blue Mountains are generally located between Kingston to the south and Port Antonio to the north. Rising 7,402 ft, they are some of the highest mountains in the Caribbean. The climate of the region is cool and misty with high rainfall. The soil is rich, with excellent drainage. This combination of climate and soil is considered ideal for coffee.
+Ở phần tạo bài đăng, Bán Lại đã sử dụng `React Hook Form` để xác thực form vì những sự tiện lợi của nó mang lại. Một tính năng tuyệt vời khác của React Hook Form là [reset](https://react-hook-form.com/api/useform/reset/), giúp fill data vào những component nhập thông tin.
 
+
+
+Trong Bán Lại, đầu tiên khi người bán muốn sửa chi tiết một bài đăng nào đó, API lấy chi tiết bài đăng sẽ được gọi và lưu chi tiết đó vào một state trong `store`. form sẽ lấy data từ state này và fill vào các component dùng để nhập thông tin.
+
+[Tham khảo](https://harmless-impatiens-74a.notion.site/T-o-b-i-ng-v-s-a-chi-ti-t-b-i-ng-ccea11e79dba4ff0811326f7113e3896)
