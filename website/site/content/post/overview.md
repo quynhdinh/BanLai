@@ -40,3 +40,8 @@ Sau đây là những bài viết hướng dẫn liên quan đến app. Bạn c�
 ![Alt Text](https://scintillating-haupia-01fe5d.netlify.app/img/account.gif)
 
 [Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/account-page-tutorial/)
+
+### Trang quản lý bài viết
+![Alt Text](https://scintillating-haupia-01fe5d.netlify.app/img/manage-post.gif)
+
+[Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/manage-posts-page-tutorial/)

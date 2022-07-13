@@ -5,7 +5,7 @@ description: >-
   Trong hướng dẫn này chúng tôi sẽ hướng dẫn cho các bạn làm trang tin nhắn
 ---
 
-Bạn có thể tham khảo file `messages.jsx`.
+Bạn có thể tham khảo file **messages.jsx**.
 
 ## A little history
 
