@@ -7,11 +7,32 @@ description: >-
 
 Bạn có thể tham khảo file **messages.jsx**.
 
-## A little history
+## Server
+Model của post:
+- **sender**: String(**zaloId** của người gửi)
+- **receiver**: String(**zaloId** của người nhận)
+- **postId**: String(post id của post mà họ đang bàn tới)
+- **createdAt**: IsoDate(thời gian mà tin nhắn này được tạo lần đầu)
 
-The Blue Mountains are considered by many to be a hiker's and camper's paradise. The traditional Blue Mountain trek is a 7-mile hike to the peak and consists of a 3,000-foot increase in elevation. Jamaicans prefer to reach the peak at sunrise, thus the 3–4 hour hike is usually undertaken in darkness. Since the sky is usually very clear in the mornings, Cuba can be seen in the distance.
+Những api liên quan bao gồm:
+- Lấy danh sách tin nhắn của 1 user. Bạn sẽ phản lập trình cẩn thận 1 chút để mà lấy được cả tin nhắn cho cả phần Tôi mua và Tôi bán. Code server [ở đây](https://github.com/quynhdinh/BanLai/blob/440894a9332f6ae27bd239803b7aa3286bf1fac3/server/routes/message.js#L8)
+- Tạo 1 message để tracking mỗi khi người mua liên hệ với người bán. Code server [ở đây](https://github.com/quynhdinh/BanLai/blob/440894a9332f6ae27bd239803b7aa3286bf1fac3/server/routes/message.js#L39)
+## Client code
+Để phân chia ra làm 2 tab, Đang rao và đã bán, bạn có thể sử dụng [Tabbar](https://mini.zalo.me/docs/framework/components/layout-components/tabs/) hỗ trợ bởi ZMP.
+Mỗi component Message được cài đặt trong component **MessageItem** (tham khảo [message-item.jsx](https://github.com/quynhdinh/BanLai/blob/master/client/src/pages/messages.jsx))
+![Alt Text](https://scintillating-haupia-01fe5d.netlify.app/img/messages.jpg)
 
-## What you need to know before trying
+### Sự kiện người dùng bấm vào mỗi **MessageItem**
+Zmp có hỗ trợ [openChat](https://mini.zalo.me/static/zmp-docs/v1.12.0/api/openChat/) cho phép ứng dụng mở cửa số chat với User hoặc Official Account. Để sử dụng api này, bạn cần xin cấp quyền tại trang Quản lý ứng dụng.
+```javascript
+const handleOpenChat = (p) => () => {
+  api.openChat({
+    type: 'user',
+    id: p.receiver,
+    message: ""
+  });
+};
+```
 
-The Blue Mountains are generally located between Kingston to the south and Port Antonio to the north. Rising 7,402 ft, they are some of the highest mountains in the Caribbean. The climate of the region is cool and misty with high rainfall. The soil is rich, with excellent drainage. This combination of climate and soil is considered ideal for coffee.
 
+Các bạn lưu ý cho dù không muốn điền sẵn nội dung vào khung chat nhưng thuộc tính _message_ là bắt buộc các bạn có thể truyền chuỗi rỗng.

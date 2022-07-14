@@ -7,10 +7,10 @@ description: >-
   Bán lại là một ứng dụng nơi người bán và người mua có thể kết nối để trao đổi sản phẩm cũ.
 intro:
   blurbs:
-    - image: /img/backend-techstack.svg
+    - image: /img/post-detail.jpg
       text: >
         Backend được xây dựng trên NodeJS, MongoDB và Cloudinary
-    - image: /img/frontend-techstack.svg
+    - image: /img/create.jpg
       text: >
         Frontend được xây dựng trên Zalo mini framework, ReactJS, React Icon
   heading: Bài viết này nói về gì?
@@ -25,13 +25,13 @@ main:
     optimal for the plants, farmers and the local environment.
   image1:
     alt: A close-up of a paper filter filled with ground coffee
-    image: /img/products-grid3.jpg
+    image: /img/messages.jpg
   image2:
     alt: A green cup of a coffee on a wooden table
-    image: /img/products-grid2.jpg
+    image: /img/home.jpg
   image3:
     alt: Coffee beans
-    image: /img/products-grid1.jpg
+    image: /img/account.jpg
 testimonials:
   - author: Elisabeth Kaurismäki
     quote: >-

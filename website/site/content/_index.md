@@ -9,7 +9,7 @@ intro:
         hóa các ý tưởng kinh doanh của họ nhanh chóng hơn."
 products:
     - image: img/backend-techstack.svg
-      text: "Framework dùng cho back-end là NodeJS cơ sở dữ liệu MongoDB Atlas và dịch vụ lưu trữ hình ảnh trên Cloudinary host server bằng Heroku"
+      text: "Các công nghệ chính dùng cho back-end là Node.JS cơ sở dữ liệu MongoDB Atlas và lưu trữ hình ảnh trên Cloudinary host server bằng Heroku"
     - image: /img/frontend-techstack.svg
       text: "Các công nghệ front-end bao gồm là React JS cùng với Zalo Mini framework"
 values:

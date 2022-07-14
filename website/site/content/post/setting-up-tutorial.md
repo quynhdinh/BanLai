@@ -2,13 +2,13 @@
 title: 'Hướng dẫn clone project, chạy project và cài đặt Heroku Server, Mongo Atlas và Cloudinary'
 date: 2022-07-05T15:04:10.000Z
 description: >-
-    Trong hướng dẫn này, chúng tôi sẽ chỉ cho bạn cách clone repo này, thiết lập các dịch vụ liên quan để chạy mini app trên máy của bạn
+    Trong hướng dẫn này, chúng tôi sẽ chỉ cho bạn cách clone repo này, thiết lập các dịch vụ liên quan để chạy Bán Lại mini app trên máy của bạn
 ---
 
 Repo này gồm 3 folder:
-- **client**: Bán Lại front-end, created by using the **zmp-cli**. Tuy mini app có thể lập trình bằng framework nào cũng được, chúng tôi đề nghị sử dụng React.JS để tận dụng đượch hết bộ ZAUI. Hướng dẫn để tạo 1 zmp client mới ở đây: (https://mini.zalo.me/docs/docs/getting-started/#tạo-mới-dự-án-sử-dụng-zmp-framework)
+- **client**: Bán Lại front-end, được tạo bởi **zmp-cli**. Tuy mini app có thể lập trình bằng framework nào cũng được, chúng tôi đề nghị sử dụng React.JS để tận dụng đượch hết bộ ZAUI. Hướng dẫn để tạo 1 zmp client mới ở đây: (https://mini.zalo.me/docs/docs/getting-started/#tạo-mới-dự-án-sử-dụng-zmp-framework)
 - **server**: Bán Lại back-end, sử dụng Node, Express, MongoDB. Không có giới hạn cho lựa chọn cho ngôn ngữ lập trình hay công nghệ cho Backend Node, Express and MongoDB.
-- **website**: Code cho trang web này, bạn không cần quan tâm.
+- **website**: Source code cho trang web này, bạn không cần quan tâm.
 
 ## Yêu cầu
 
@@ -107,29 +107,29 @@ Mở trình duyệt lên và đi đến server vừa host lên Heroku của bạ
 ### Client code
 
 Client code nằm trong folder **client/**:
-* **`src`**: Bao gồm toàn bộ những source code của mini app của bạn. Trong đó:
+* **src**: Bao gồm toàn bộ những source code của mini app của bạn. Trong đó:
 
-  * **components**: những component sẽ được tái sử dụng viết bằng React JS
+  * **components**: những component sẽ được tái sử dụng viết bằng **React.js**
   * **css**: Stylesheets, pre-processors
-  * **pages**: a Page is also a component but will act as an entire view and must be registered inside `app-config.json` (https://mini.zalo.me/docs/framework/getting-started/app-config#pages)
-  * **services**: reuseable logic for complex tasks that should be separated from your component, such as fetching API, get access token from Zalo or caching stuff,...
+  * **pages**: chứa những **Page** cũng có thể coi là một component những sẽ là toàn bộ view và phải được register trong [app-config.json](https://mini.zalo.me/docs/framework/getting-started/app-config#pages)
+  * **services**: những logic có thể dùng lại có thể tách ra khỏi component của bạn, như là fetching API, get access token từ Zalo hoặc caching,...
   * **static**: bao gồi assets cho mini app của bạn, (icon, background, etc,...)
-* **.env.**: Các biến môi trường, zmp is using Vite build tools, read more about Vite env [here](https://vitejs.dev/guide/env-and-mode.html#env-variables)
-  * **`.env.development`**: Load local khi **zmp start**.
+* **.env.**: Các biến môi trường, zmp dùng Vite build tools, đọc thêm về Vite env [ở đây](https://vitejs.dev/guide/env-and-mode.html#env-variables)
+  * **.env.development**: Load các biến local khi local khi bạn **zmp start**.
     
-Nếu bạn đang dùng `getAccessToken` API  từ [zmp](https://mini.zalo.me/docs/api/getAccessToken) when running on browser, zmp will always return "DEFAULT ACCESS TOKEN" because there is no logged in Zalo user. Specify a `VITE_DEFAULT_ACCESS_TOKEN` to mock a real Zalo user for development purpose.
+Nếu bạn đang dùng **getAccessToken** API  từ [zmp](https://mini.zalo.me/docs/api/getAccessToken) khi chạy trên trình duyệt, zmp luôn trả về **DEFAULT ACCESS TOKEN** bởi vì không có người dùng Zalo nào thật login cả. Hãy khai báo một biến tên **VITE_DEFAULT_ACCESS_TOKEN** để mock 1 người dùng Zalo thật để có thể dev trên máy local của bạn.
 
-  * **`.env.production`**: Được tải lên khi bạn `zmp deploy`
-  * **`app-config.json`**: Cấu hình global mini app của bạn (https://mini.zalo.me/docs/framework/getting-started/app-config)
+  * **.env.production**: Được tải lên khi bạn `zmp deploy`
+  * **app-config.json**: Cấu hình global mini app của bạn (https://mini.zalo.me/docs/framework/getting-started/app-config)
 
 ### Backend code
 
-* **`models`**: Mongoose Model, giúp bạn lưu dữ liệu và đọc dữ liệu lên bằng MongoDB
-* **`lines`**: các trình xử lý tuyến đường có thể gắn kết, bạn có thể gọi nó là Controller nếu bạn biết về MVC
-* **`services`**: một Trang cũng là một thành phần nhưng sẽ hoạt động như một chế độ xem toàn bộ và phải được đăng ký bên trong` app-config.json` (https://mini.zalo.me/docs/framework/getting -started / app-config # trang)
-* **`services`**: logic có thể sử dụng lại cho các tác vụ phức tạp cần được tách biệt khỏi các tuyến của bạn, chẳng hạn như xử lý mã thông báo và tìm nạp API Zalo OA, ..
-* **`app.js`**: điểm vào server của bạn, nơi kết nối tất cả các phần phụ trợ của bạn với nhau. Đây là nơi bạn đăng ký các tuyến đường mới hoặc phần mềm trung gian, xử lý các công cụ CORS, ...
-* **`config.js`**: cấu hình máy chủ của bạn. Hầu hết thời gian bạn sẽ đọc cấu hình từ biến môi trường (chẳng hạn như tạo `.env` trên máy local của bạn hoặc` heroku config: set` trên các dịch vụ lưu trữ của bạn). Dưới đây là các cấu hình bắt buộc:
-  * **`MONGODB_URL`**: Chuỗi kết nối với cơ sở dữ liệu MongoDB của bạn
-  * **`ZALO_APP_ID`**: nếu bạn chưa có ID APP, hãy truy cập Zalo Developers để đăng ký và đặt tại đây
-  * **`ZALO_APP_ID`**: ID của Ứng dụng nhỏ của bạn
+* **models**: Mongoose Model, giúp bạn lưu dữ liệu và đọc dữ liệu lên từ MongoDB
+* **routes**: chứa các routes, bạn có thể gọi nó là Controller nếu bạn biết về MVC
+* **pages**: một Page cũng là một component nhưng sẽ hoạt động như view và phải được register trong [app-config.json](https://mini.zalo.me/docs/framework/getting -started / app-config # trang)
+* **services**: chữa những logic có thể sử dụng lại cho các tác vụcần được tách biệt khỏi routes của bạn, chẳng hạn như token handling và tìm nạp API Zalo OA, ..
+* **app.js**: nơi bắt đầu server của bạn, nơi kết nối tất cả các phần phụ trợ của bạn với nhau. Đây là nơi bạn đăng ký các tuyến đường mới hoặc phần mềm trung gian, xử lý các công cụ CORS, ...
+* **config.js**: cấu hình server của bạn. Hầu hết thời gian bạn sẽ đọc cấu hình từ biến môi trường (chẳng hạn như tạo **.env** trên máy local của bạn hoặc **heroku config: set** trên các dịch vụ lưu trữ của bạn). Dưới đây là các cấu hình bắt buộc:
+  * **MONGODB_URL**: Connection string với cơ sở dữ liệu MongoDB của bạn
+  * **ZALO_APP_ID**: nếu bạn chưa có ID APP, hãy truy cập Zalo Developers để đăng ký và đặt tại đây
+  * **ZALO_APP_ID**: ID của mini app của bạn
