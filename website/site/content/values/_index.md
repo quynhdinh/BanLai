@@ -16,7 +16,7 @@ values:
     imageUrl: "/img/manage-post.gif"
   - heading: "Tạo bài đăng"
     text: >
-      Cho phép tạo bài đăng và trang chuyên nghiệp hơn với các tùy chọn tùy thuộc vào 
+      Cho phép tạo bài đăng chuyên nghiệp hơn với các tùy chọn tùy thuộc vào 
       từng danh mục đã chọn.
     imageUrl: "/img/create.gif"
   - heading: "Quản lý tin nhắn"

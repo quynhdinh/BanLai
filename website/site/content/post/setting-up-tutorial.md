@@ -1,14 +1,14 @@
 ---
-title: 'Hướng dẫn cài đặt Heroku Server, Mongo Atlas và Cloudinary'
+title: 'Hướng dẫn clone project, chạy project và cài đặt Heroku Server, Mongo Atlas và Cloudinary'
 date: 2022-07-05T15:04:10.000Z
 description: >-
     Trong hướng dẫn này, chúng tôi sẽ chỉ cho bạn cách clone repo này, thiết lập các dịch vụ liên quan để chạy mini app trên máy của bạn
 ---
 
 Repo này gồm 3 folder:
-- `client`: Bán Lại front-end, created by using the `zmp-cli`. Miniapp client can be written in any library and frameworks, we recommend using React.JS to get the most out of our ZaUI. Documentation on how to create a new zmp client here: (https://mini.zalo.me/docs/docs/getting-started/#tạo-mới-dự-án-sử-dụng-zmp-framework)
-- `server`: Bán Lại back-end, sử dụng Node, Express, MongoDB. Không có giới hạn cho lựa chọn cho ngôn ngữ lập trình hay công nghệ cho Backend Node, Express and MongoDB.
-- `website`: Code cho trang web này, bạn không cần quan tâm.
+- **client**: Bán Lại front-end, created by using the **zmp-cli**. Tuy mini app có thể lập trình bằng framework nào cũng được, chúng tôi đề nghị sử dụng React.JS để tận dụng đượch hết bộ ZAUI. Hướng dẫn để tạo 1 zmp client mới ở đây: (https://mini.zalo.me/docs/docs/getting-started/#tạo-mới-dự-án-sử-dụng-zmp-framework)
+- **server**: Bán Lại back-end, sử dụng Node, Express, MongoDB. Không có giới hạn cho lựa chọn cho ngôn ngữ lập trình hay công nghệ cho Backend Node, Express and MongoDB.
+- **website**: Code cho trang web này, bạn không cần quan tâm.
 
 ## Yêu cầu
 
@@ -21,17 +21,17 @@ Repo này gồm 3 folder:
    ```bash
    cd client
    ```
-1. Install dependencies
+1. Cài những dependencies
    ```bash
    npm install
    ```
-1. Open `.env.development` and `.env.production` to setup environments (OA ID for the Follow/Message button, API base for fetching products, orders,...)
+1. Open **.env.development** and **.env.production** để cài đặt các biến môi trường
 
 1. Chạy client dùng zmp-cli
    ```bash
    zmp start
 
-1. Mở `localhost:3000` bằng trình duyệt và bắt đầu code thôi🔥
+1. Mở **localhost:3000** bằng trình duyệt và bắt đầu code thôi🔥
 
 ### Server API
 1. Cd đến folder backend của bạn:
@@ -49,11 +49,11 @@ Repo này gồm 3 folder:
    OA_TOKEN=YOUR_OA_TOKEN_STRING
    ```
 
-  - You can change the PORT to anything you want, however remember to sync the `VITE_BASE_URL` in `client/.env.development` to match the PORT that you choose.
+  - Bạn có thể đổi **PORT** bằng cái gì cũng được nhưng nhớ hãy sync theo **VITE_BASE_URL** trong **client/.env.development** để ứng với PORT bạn đã chọn.
 
-  - `MONGODB_URL`: link Mongo cluster để kết nối đến csdl của bạn.
+  - **MONGODB_URL**: link Mongo cluster để kết nối đến csdl của bạn.
 
-  - `OA_TOKEN` sẽ cần nếu bạn muốn để gửi tin nhắn đến người dùng . Cách để lấy `OA_TOKEN` ở [đây](https://developers.zalo.me/docs/api/official-account-api/phu-luc/official-account-access-token-post-4307)
+  - **OA_TOKEN** sẽ cần nếu bạn muốn để gửi tin nhắn đến người dùng . Cách để lấy **OA_TOKEN** ở [đây](https://developers.zalo.me/docs/api/official-account-api/phu-luc/official-account-access-token-post-4307)
 
 1. Start server bằng lệnh
    ```bash
@@ -78,7 +78,7 @@ Remember to update VITE_BASE_URL in `client/.env.production` to point to your se
 
 Bạn có thể host source code này bằng các dịch vụ khác nhau. Bài viết này sẽ  deploy với [Heroku](https://www.heroku.com/)
 
-> Note: In order to test your application on Zalo by scanning QR code, you will need to host your backend in an external server.
+**Lưu ý:** Để test được mini app của bạn trên Zalo(scan QR code), bạn phải host server backend dùng một service khác(ở đây là Heroku).
 
 1. Cd đến folder backend của bạn:
    ```bash
@@ -104,23 +104,23 @@ Mở trình duyệt lên và đi đến server vừa host lên Heroku của bạ
 
 ## Hướng dẫn sử dụng:
 
-### Client
+### Client code
 
-Client code nằm trong folder **`client/`**:
+Client code nằm trong folder **client/**:
 * **`src`**: Bao gồm toàn bộ những source code của mini app của bạn. Trong đó:
 
-  * **`components`**: những component sẽ được tái sử dụng viết bằng React JS
-  * **`css`**: Stylesheets, pre-processors
-  * **`pages`**: a Page is also a component but will act as an entire view and must be registered inside `app-config.json` (https://mini.zalo.me/docs/framework/getting-started/app-config#pages)
-  * **`services`**: reuseable logic for complex tasks that should be separated from your component, such as fetching API, get access token from Zalo or caching stuff,...
-  * **`static`**: bao gồi assets cho mini app của bạn, (icon, background, etc,...)
-* **`.env.*`**: Các biến môi trường, zmp is using Vite build tools, read more about Vite env here (https://vitejs.dev/guide/env-and-mode.html#env-variables)
-  * **`.env.development`**: Load local khi  `zmp start`.
+  * **components**: những component sẽ được tái sử dụng viết bằng React JS
+  * **css**: Stylesheets, pre-processors
+  * **pages**: a Page is also a component but will act as an entire view and must be registered inside `app-config.json` (https://mini.zalo.me/docs/framework/getting-started/app-config#pages)
+  * **services**: reuseable logic for complex tasks that should be separated from your component, such as fetching API, get access token from Zalo or caching stuff,...
+  * **static**: bao gồi assets cho mini app của bạn, (icon, background, etc,...)
+* **.env.**: Các biến môi trường, zmp is using Vite build tools, read more about Vite env [here](https://vitejs.dev/guide/env-and-mode.html#env-variables)
+  * **`.env.development`**: Load local khi **zmp start**.
+    
+Nếu bạn đang dùng `getAccessToken` API  từ [zmp](https://mini.zalo.me/docs/api/getAccessToken) when running on browser, zmp will always return "DEFAULT ACCESS TOKEN" because there is no logged in Zalo user. Specify a `VITE_DEFAULT_ACCESS_TOKEN` to mock a real Zalo user for development purpose.
 
-    > If you're using `getAccessToken` API from zmp (https://mini.zalo.me/docs/api/getAccessToken) when running on browser, zmp will always return "DEFAULT ACCESS TOKEN" because there is no logged in Zalo user. Specify a `VITE_DEFAULT_ACCESS_TOKEN` to mock a real Zalo user for development purpose.
-
-  * **`.env.production`**: Loaded when deploy project to Zalo with `zmp deploy`
-  * **`app-config.json`**: Global configuration for your Mini App (https://mini.zalo.me/docs/framework/getting-started/app-config)
+  * **`.env.production`**: Được tải lên khi bạn `zmp deploy`
+  * **`app-config.json`**: Cấu hình global mini app của bạn (https://mini.zalo.me/docs/framework/getting-started/app-config)
 
 ### Backend code
 

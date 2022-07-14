@@ -4,18 +4,23 @@ date: 2022-07-12T15:04:10.000Z
 description: >-
   Bài viết dưới đây sẽ hướng dẫn bạn cài đặt những công cụ để chạy được app, cách chạy ứng dụng trên thiết bị của bạn và đi qua chi tiết kĩ thuật để bạn có thể áp dụng ngay vào ứng dụng mini app của bạn.
 ---
+## Zalo Mini App là gì ?
+Mini app trên Zalo là giải pháp tích hợp ứng dụng web của doanh nghiệp vào nền tảng mạng xã hội Zalo. Các mini app mang đến trải nghiệm mượt mà tương tự như app riêng biệt mà không cần download về điện thoại hay thoát khỏi ứng dụng Zalo
 ## Bán Lại là gì ?
 Bán lại là một mini app chợ đồ cũ kết nối người mua và người bán có thể trao đổi sản phẩm đã qua sử dụng.
-Mục tiêu của project này đóng vai trò 1 **template app** giúp các nhà phát triển tham khảo và nhanh chóng hiện thực
+Mục tiêu của project này đóng vai trò 1 **template app** giúp các nhà phát triển tham khảo và hiện thực
 hóa các ý tưởng kinh doanh của họ nhanh chóng hơn.
 ## Các công nghệ đằng sau Bán Lại
-Chúng tôi sử dụng MERN stack(MongoDB, Express.js, React.JS, and Node.js) làm những công nghệ back-bone để xây dựng ứng dụng mini appp của mình. MERN rất phổ biến và được ưa chuộng. Tuy bạn có thể dùng bất cứ công nghệ backend nào ở phía backend và Vue.js 
-ở frontent. Chúng tôi khuyến nghị sử dụng Node.js ở backend và dùng React.js làm framework frontend để tận dụng tốt nhất project này.
-* Backend được xây dựng trên [NodeJS](https://nodejs.org/) dùng cơ sở dữ liệu là [MongoDB](https://www.mongodb.com/atlas/database), lưu trữ hình ảnh bằng [Cloudinary](https://cloudinary.com/), server được host trên [Heroku](https://heroku.com/)
-* Frontend được xây dựng trên [Zalo mini framework](https://mini.zalo.me/docs/ui), [ReactJS](https://reactjs.org/), và [React Icon](https://react-icons.github.io/react-icons/)
+Chúng tôi sử dụng **MERN stack** (MongoDB, Express.js, React.JS, và Node.js) làm những công nghệ back-bone để xây dựng ứng dụng mini appp của mình. MERN rất phổ biến và được ưa chuộng. Tuy bạn có thể dùng bất cứ công nghệ backend nào ở phía backend và Vue.js 
+ở frontent. Chúng tôi khuyến nghị sử dụng Node.js ở backend và dùng React.js làm framework frontend để tận dụng tốt nhất bài viết hướng dẫn này.
 
+Cụ thể các công nghệ sử dụng bao gồm:
+* Backend được xây dựng trên [Node.jS](https://nodejs.org/) dùng cơ sở dữ liệu là [MongoDB](https://www.mongodb.com/atlas/database), lưu trữ hình ảnh bằng [Cloudinary](https://cloudinary.com/), server được host trên [Heroku](https://heroku.com/)
+* Frontend được xây dựng trên [Zalo mini framework](https://mini.zalo.me/docs/ui), [React.js](https://reactjs.org/), và [React Icon](https://react-icons.github.io/react-icons/)
+
+## Các bài viết liên quan đến kĩ thuật
 Sau đây là những bài viết hướng dẫn liên quan đến app. Bạn có thể follow các link liên quan để tìm hiểu thêm nhé!
-### Cài đặt Clone project, cài đặt các service Heroku, Mongo Atlas và Cloudinary
+### Clone project, cài đặt các service Heroku, Mongo Atlas và Cloudinary
 [Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/setting-up-tutorial/)
 
 ### Tạo bài đăng và sửa bài đăng

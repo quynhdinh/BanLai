@@ -9,10 +9,10 @@ intro:
         hóa các ý tưởng kinh doanh của họ nhanh chóng hơn."
 products:
     - image: img/backend-techstack.svg
-      text: "Framework dùng cho Back-end là NodeJS cơ sở dữ liệu MongoDB Atlas và dịch vụ lưu trữ hình ảnh trên Cloudinary host server bằng Heroku"
+      text: "Framework dùng cho back-end là NodeJS cơ sở dữ liệu MongoDB Atlas và dịch vụ lưu trữ hình ảnh trên Cloudinary host server bằng Heroku"
     - image: /img/frontend-techstack.svg
-      text: "Front-end Bckend là React JS dùng với Zalo Mini framework"
+      text: "Các công nghệ front-end bao gồm là React JS cùng với Zalo Mini framework"
 values:
     heading: Showcase tính năng
-    text: Đi qua nhanh những màn hình chính của mini app nhằm giúp bạn nắm qua sơ bộ những tính năng chính của app
+    text: Đi qua nhanh những màn hình chính của mini app nhằm giúp bạn nắm qua sơ bộ những tính năng chính của mini app
 ---
