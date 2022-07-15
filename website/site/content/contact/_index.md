@@ -3,9 +3,9 @@ title: "Liên hệ"
 logo: "/img/logo.svg"
 contact_entries:
   - heading: Địa chỉ
-    text: "Khu Chế Xuất Tân Thuận, Quận 7, Hành tinh Sao Hỏa"
+    text: "Khu Chế Xuất Tân Thuận, Quận 7, Sao Hỏa"
   - heading: Giờ làm việc
-    text: "Mọi ngày trong tuần"
+    text: "Tất cả các ngày trong tuần"
 ---
 
 Hãy liên lạc cho chúng tôi nếu có thắc mắc.

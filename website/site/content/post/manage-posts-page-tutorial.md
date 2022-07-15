@@ -5,15 +5,15 @@ description: >-
   Trong hướng dẫn này chúng tôi sẽ hướng dẫn cho các bạn làm trang quản lý bài viết
 ---
 
-Trang quản lý bài đăng được bắt đầu từ file **manage-post.jsx**. Trang này gồm 2 phần, Đã mua và đã bán, lần lượt hiện thị những bài viết người dùng đã mua và đã bán(những bài viết được đóng). Mỗi
+Trang quản lý bài đăng được bắt đầu từ file [manage-post.jsx](https://github.com/quynhdinh/BanLai/blob/master/client/src/pages/manage-post.jsx). Trang này gồm 2 phần, Đã mua và đã bán, lần lượt hiện thị những bài viết người dùng đã mua và đã bán(những bài viết được đóng). Mỗi
 khi người dùng bầm vào nút bấm nút **Đã bán/Ẩn bài** hay **Đăng lại** thì sẽ được đưa sang mục bên kia.
 
 ## Tổng quan
 
-Việc phân chia trang thành 2 tab ta có thể sử dụng [Tabbar](https://mini.zalo.me/docs/framework/components/layout-components/tabs/) trong ZMP. Mỗi component được bài viết được thể hiện bằng component **PostItem** (trong file **post-item.jsx**).
+Việc phân chia trang thành 2 tab ta có thể sử dụng [Tabbar](https://mini.zalo.me/docs/framework/components/layout-components/tabs/) hỡ trợ bởi ZMP. Mỗi component được bài viết được thể hiện bằng component **PostItem** (trong file [post-item.jsx](https://github.com/quynhdinh/BanLai/blob/master/client/src/components/post-item.jsx)).
 
 ## Server
-Model của message:
+Schema của post:
 - **_id**: String(**id** của bài đăng)
 - **category**: String(**zaloId** của người gửi)
 - **subCategory**: String(**zaloId** của người nhận)

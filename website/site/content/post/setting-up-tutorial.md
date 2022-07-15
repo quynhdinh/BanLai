@@ -72,7 +72,7 @@ Repo này gồm 3 folder:
    zmp deploy
    ```
 
-Remember to update VITE_BASE_URL in `client/.env.production` to point to your server API address, since you won't be able to call localhost API.
+Nhớ update file VITE_BASE_URL trong client/.env.production để point đến API server của ban, vì bạn sẽ không thể gọi server localhost từ thiết bị Zalo.
 
 ### Server API
 
