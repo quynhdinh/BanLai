@@ -1,26 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  Navbar,
-  Page,
-  Title,
-  ToastPreloader,
-  useStore,
-  zmp,
-} from "zmp-framework/react";
+import {Box, Button, Navbar, Page, Title, ToastPreloader, useStore, zmp} from "zmp-framework/react";
 import { useForm } from "react-hook-form";
 import CustomInput, { ImageUploader, Select } from "../components/Input";
 import TextArea from "../components/Input/text-area";
 import store from "../store";
 import CategoryBox from "../components/category-box";
-import {
-  getCities,
-  getDistricts,
-  getHints,
-  getSubCategoriesDetails,
-  uploadImage,
-} from "../services/data";
+import {getCities, getDistricts, getHints, getSubCategoriesDetails, uploadImage} from "../services/data";
 import { getProductDetailTitle } from "../util/productDetail";
 
 export default () => {

@@ -10,6 +10,7 @@ export default ({ zmproute }) => {
   const userPosts = useStore("userPosts");
   const loading = useStore("loadingFlag");
 
+  /* fetch user posts everytime the component is mounted. */
   useEffect(() => {
     store.dispatch("fetchUserPosts");
   }, []);

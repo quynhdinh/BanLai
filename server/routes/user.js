@@ -4,10 +4,12 @@ const AuthService = require('../services/auth-service');
 const ZaloService = require('./../services/zalo-service.js');
 const router = express.Router();
 
+/* This is a route that checks if the user is logged in. */
 router.get('/logged-in', AuthService.verify, (req, res) => {
   return res.send({error: 0, msg: 'Success', data: req.user});
 });
 
+/* This is a route that returns all users in the database. */
 router.get('/', async (_req, res) => {
   try {
     const result = await db.Users.find({})
@@ -22,6 +24,7 @@ router.get('/', async (_req, res) => {
   }
 });
 
+/* A route that returns the stats of a user. */
 router.get('/stats/:zaloId', async (req, res) => {
   try {
     const zaloId = req.params["zaloId"].toString()
@@ -50,6 +53,7 @@ router.get('/stats/:zaloId', async (req, res) => {
   }
 });
 
+/* This is a route that allows users to login. */
 router.post('/login', async (req, res) => {
   try {
     const accessToken = req.body.accessToken;
@@ -80,22 +84,6 @@ router.post('/login', async (req, res) => {
         data: {...user, jwt}
       });
     }
-  } catch (ex) {
-    res.send({error: -1, msg: 'Unknown exception'});
-    console.log('API-Exception', ex);
-  }
-});
-
-router.post('/update-follow-status', AuthService.verify, async (req, res) => {
-  try {
-    const zaloId = req.user.zaloId
-    const isFollowing = req.body.status
-    const user = await db.Users.updateOne({zaloId}, {isFollowing})
-    return res.send({
-      error: 0,
-      msg: 'Cập nhật thông tin theo dõi thành công',
-      data: user
-    });
   } catch (ex) {
     res.send({error: -1, msg: 'Unknown exception'});
     console.log('API-Exception', ex);

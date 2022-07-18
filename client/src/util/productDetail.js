@@ -1,3 +1,8 @@
+/**
+ * It takes a english word and return a corresponding word
+ * @param title - The title of the product detail.
+ * @returns A function that returns a string.
+ */
 export const getProductDetailTitle = (title) => {
   if (title === "manufacturer") {
     return "Hãng sản xuất";

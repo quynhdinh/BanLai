@@ -3,6 +3,9 @@ import {Avatar, Text, Title} from "zmp-framework/react";
 import { getReadableTimeGap } from "../util/number";
 import api from "zmp-sdk";
 
+/**
+ * It opens a chat window with the user whose id is passed in as a parameter
+ */
 const handleOpenChat = (p) => () => {
   api.openChat({
     type: 'user',

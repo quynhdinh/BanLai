@@ -5,6 +5,7 @@ const router = express.Router();
 const ObjectId = require('mongodb').ObjectId;
 router.use(AuthService.verify);
 
+/* A function that will be called when the client send a GET request to the server. */
 router.get('/', async (req, res) => {
   try {
     const me = req.user.zaloId
@@ -36,6 +37,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+/* A function that will be called when the client send a POST request to the server. */
 router.post('/', async (req, res) => {
   try {
     const sender = req.user.zaloId

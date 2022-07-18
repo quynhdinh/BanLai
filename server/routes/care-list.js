@@ -5,6 +5,7 @@ const router = express.Router();
 const AuthService = require("../services/auth-service");
 router.use(AuthService.verify)
 
+/* This is a router for get all care post of user. */
 router.get('/', async (req, res) => {
   try {
     const careList = await db.CarePostMapping.find({zaloId: req.user.zaloId}).sort({createdAt: -1}).lean()
@@ -21,6 +22,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+/* This is a router for add a post to care list. */
 router.post('/', async (req, res) => {
   try {
     const id = req.body.postId.toString();
@@ -39,6 +41,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+/* A router for delete a post from care list. */
 router.delete('/:postId', async (req, res) => {
   try {
     const postId = req.params["postId"].toString()

@@ -2,10 +2,9 @@ const express = require('express');
 const db = require('../models');
 const router = express.Router();
 const AuthService = require("../services/auth-service");
-const {addIsLiked} = require("./helper");
-const {Types} = require("mongoose");
 router.use(AuthService.verify)
 
+/* A function that is called when the user visits the `/` route. */
 router.post('/', async (req, res) => {
   try {
     const postId = req.body.postId

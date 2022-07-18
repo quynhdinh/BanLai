@@ -11,7 +11,7 @@ const normalize = (x) => {
   return x.toString().normalize("NFC")
 };
 
-// Lấy danh sách bài đăng
+/* This is a route to get all posts of a user. */
 router.get('/', async (req, res) => {
   try {
     const posts = await db.Posts.find({zaloId: req.user.zaloId}).sort({createdAt: -1})
@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Tìm kiếm bài đăng
+/* A route to search posts. */
 router.get('/search', async (req, res) => {
   try {
     const filters = req.query;
@@ -54,7 +54,7 @@ router.get('/search', async (req, res) => {
   }
 })
 
-// Tìm những bài đăng mới nhất
+/* This is a route to get hottest posts. */
 router.get('/hottest-posts', async (req, res) => {
   try {
     const posts = await db.Posts.find({category: normalize("Thiết bị điện tử"), status: "active"}).sort({createdAt: -1}).limit(4).lean()
@@ -83,7 +83,7 @@ router.get('/hottest-posts', async (req, res) => {
   }
 });
 
-// Active lại 1 bài đăng
+/* This is a route to active a post. */
 router.put('/repost/:postId', async (req, res) => {
   try {
     const param = req.params["postId"].toString()
@@ -108,7 +108,7 @@ router.put('/repost/:postId', async (req, res) => {
   }
 });
 
-// Đóng 1 bài đăng
+/* This is a route to close a post. */
 router.put('/close-post/:postId', async (req, res) => {
   try {
     const postId = req.params["postId"].toString()
@@ -133,7 +133,7 @@ router.put('/close-post/:postId', async (req, res) => {
   }
 });
 
-// Lấy thông tin 1 bài đăng
+/* This is a route to get a post by its postId. */
 router.get('/:postId', async (req, res) => {
   try {
     const postId = req.params["postId"].toString()
