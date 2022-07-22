@@ -50,3 +50,7 @@ Sau đây là những bài viết hướng dẫn liên quan đến app. Bạn c�
 ![Alt Text](https://scintillating-haupia-01fe5d.netlify.app/img/manage-post.gif)
 
 [Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/manage-posts-page-tutorial/)
+
+## Hỗ trợ kỹ thuật
+Cách tốt nhất để được hỗ trợ là tạo 1 [Github Issue](https://github.com/quynhdinh/BanLai/issues/new). 
+Còn không bạn có thể liên lạc qua các kênh liên lạc được cung cấp tại [đây](https://scintillating-haupia-01fe5d.netlify.app/contact/) 
