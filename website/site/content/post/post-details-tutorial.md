@@ -2,7 +2,7 @@
 title: 'Chi tiết bài đăng'
 date: 2022-07-12T15:04:10.000Z
 description: >-
-  Trong bài viết này chúng tôi sẽ hướng dẫn cho bạn chi tiết bài đăng
+  Trong bài viết này chúng tôi sẽ đi qua những phần liên quan đến trang chi tiết bài đăng. Đây là phần khá quan trọng vì ắt hẳn trong một ứng dụng nào cũng có những phần sau.
 ---
 
 ## Tạo bài đăng
@@ -17,9 +17,7 @@ Khi đã tạo bài đăng cho một sản phẩm, để người mua có thể 
 - Các sản phẩm tương tự
 - Liên hệ với người bán
 
-Trong mini program Bán Lại, bạn có thể chia sẻ qua Zalo, Facebook hoặc copy link, để chia sẻ qua Zalo, bạn cần phải có quyền truy cập API `openShareSheet`. Link hướng dẫn chi tiết được đính kèm dưới đây
-
-[openShareSheet | Zalo Mini Program](https://mini.zalo.me/docs/api/openShareSheet/)
+Trong mini program Bán Lại, bạn có thể chia sẻ qua Zalo, Facebook hoặc copy link, để chia sẻ qua Zalo, bạn cần phải có quyền truy cập API **openShareSheet**. Link hướng dẫn chi tiết được đính kèm ở [đây](https://mini.zalo.me/docs/api/openShareSheet/)
 
 Một tính năng quan trọng của một sàn thương mại điện tử là phần trao đổi giữa người mua và người bán. Trong Bán Lại, để trao đổi thông tin giữa 2 bên, bạn có thể tham khảo cách này
 
