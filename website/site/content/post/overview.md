@@ -12,7 +12,7 @@ Mục tiêu của project này đóng vai trò 1 **template app** giúp các nh�
 ## Trang web này nói về gì?
 Trang web này sẽ hướng dẫn bạn phát triển riêng 1 ZMA của bạn. Với đây đủ các bài viết hướng dẫn, hình ảnh trực quan từ code những đoạn code tiêu biểu dễ tái sử dụng.  
 ## Các công nghệ đằng sau Bán Lại
-Chúng mình sử dụng **MERN stack** (MongoDB, Express.js, React.JS, và Node.js) làm những công nghệ back-bone để xây dựng ứng dụng mini appp của mình. MERN rất phổ biến và được ưa chuộng. Tuy bạn có thể dùng bất cứ công nghệ backend nào ở phía backend và có thể dùng Vue.js 
+Chúng mình sử dụng **MERN stack** (MongoDB, Express.js, React.JS, và Node.js) làm những công nghệ back-bone để xây dựng ứng dụng mini appp của mình. MERN rất [phổ biến và được ưa chuộng](https://www.google.com/search?q=why+mern+in+popular&oq=why+mern+in+popular&aqs=chrome..69i57j33i160l3.6235j0j7&sourceid=chrome&ie=UTF-8). Tuy bạn có thể dùng bất cứ công nghệ backend nào ở phía backend và có thể dùng Vue.js 
 ở frontend. Chúng mình đề nghị sử dụng **Node.js** ở backend và dùng **React.js** làm framework frontend để tận dụng tốt nhất những bài viết hướng dẫn này.
 
 Cụ thể các công nghệ sử dụng bao gồm:
@@ -22,6 +22,8 @@ Cụ thể các công nghệ sử dụng bao gồm:
 ## Các bài viết liên quan đến kĩ thuật
 Sau đây là những bài viết hướng dẫn liên quan đến app. Bạn có thể follow các link liên quan để tìm hiểu thêm nhé!
 ### Clone project, cài đặt các service Heroku, Mongo Atlas và Cloudinary
+Hướng dẫn clone repo này, thiết lập các dịch vụ liên quan để chạy Bán Lại mini app trên máy của bạn. Bài viết tiên quyết, các bạn rất nên đọc qua nhé.
+
 [Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/setting-up-tutorial/)
 
 ### Tạo bài đăng và sửa bài đăng
@@ -30,14 +32,20 @@ Sau đây là những bài viết hướng dẫn liên quan đến app. Bạn c�
 [Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/create-post-tutorial/)
 
 ### Chi tiết bài đăng
+Hiển thị chi tiết thông tin 1 bài đăng. Cho phép sửa, thích và nhắn tin với người bán.
+
 [Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/post-details-tutorial/)
 
 ### Trang chủ
+Hiển thị những bài viết mới nhất, những bài viết đã xem, hay sắp xếp, lọc theo nhiều tùy chọn tùy ý. 
+
 ![Alt Text](https://scintillating-haupia-01fe5d.netlify.app/img/home.gif)
 
 [Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/home-page-tutorial/)
 
 ### Trang quản lý tin nhắn
+Trang này sẽ lưu lại những người mà bạn đã từng liên lạc sắp xếp theo thứ tự giảm dần theo thời gian được chia theo 2 phân tôi mua và tôi bán. Với 1 cái chạm bạn có thể tiếp tục trò chuyện với họ từ cửa sổ chat Zalo.
+
 ![Alt Text](https://scintillating-haupia-01fe5d.netlify.app/img/messages.gif)
 
 [Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/message-page-tutorial/)
@@ -50,6 +58,8 @@ Một app nào chắc hẳn đều có trang quản lý tài khoản, chứa nh�
 [Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/account-page-tutorial/)
 
 ### Trang quản lý bài viết
+Giúp xem lại những bài viết mà bạn đã đăng
+
 ![Alt Text](https://scintillating-haupia-01fe5d.netlify.app/img/manage-post.gif)
 
 [Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/manage-posts-page-tutorial/)
