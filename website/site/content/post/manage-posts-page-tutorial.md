@@ -2,7 +2,7 @@
 title: 'Trang quản lý bài viết'
 date: 2022-07-05T15:04:10.000Z
 description: >-
-  Trong hướng dẫn này chúng tôi sẽ hướng dẫn cho các bạn làm trang quản lý bài viết
+  Trong hướng dẫn này chúng mình sẽ hướng dẫn cho các bạn làm trang quản lý bài viết
 ---
 
 Trang quản lý bài đăng được bắt đầu từ file [manage-post.jsx](https://github.com/quynhdinh/BanLai/blob/master/client/src/pages/manage-post.jsx). Trang này gồm 2 phần, Đã mua và đã bán, lần lượt hiện thị những bài viết người dùng đã mua và đã bán(những bài viết được đóng). Mỗi

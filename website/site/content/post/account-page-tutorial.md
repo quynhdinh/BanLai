@@ -2,7 +2,7 @@
 title: 'Trang tài khoản và danh sách quan tâm'
 date: 2022-07-05T15:04:10.000Z
 description: >-
-  Trong bài viết này chúng tôi sẽ hướng dẫn cho các bạn trang Cá nhân
+  Trong bài viết này chúng mình sẽ hướng dẫn cho các bạn trang Cá nhân
 ---
 
 Trang cá nhân là nơi sẽ hiển thị những metric cơ bản về người dùng(Số lượng lượt xem những bài họ đăng, lượt thích những bài họ đăng). Tên, avatar và mục, danh sách quan tâm(những bài họ bấm quan tâm).

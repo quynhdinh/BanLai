@@ -2,7 +2,7 @@
 title: 'Hướng dẫn design'
 date: 2022-07-26T15:04:10.000Z
 description: >-
-  Trong bài viết này chúng tôi sẽ đi qua về design guidelines
+  Trong bài viết này chúng mình sẽ đi qua về design guidelines
 ---
 
 ## Màu sắc

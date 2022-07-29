@@ -2,11 +2,11 @@
 title: 'Hướng dẫn clone project, chạy project và cài đặt Heroku Server, Mongo Atlas và Cloudinary'
 date: 2022-07-05T15:04:10.000Z
 description: >-
-    Trong hướng dẫn này, chúng tôi sẽ chỉ cho bạn cách clone repo này, thiết lập các dịch vụ liên quan để chạy Bán Lại mini app trên máy của bạn
+    Trong hướng dẫn này, chúng mình sẽ chỉ cho bạn cách clone repo này, thiết lập các dịch vụ liên quan để chạy Bán Lại mini app trên máy của bạn
 ---
 
 Repo này gồm 3 folder:
-- **client**: Bán Lại front-end, được tạo bởi **zmp-cli**. Tuy mini app có thể lập trình bằng framework nào cũng được, chúng tôi đề nghị sử dụng React.JS để tận dụng đượch hết bộ ZAUI. Hướng dẫn để tạo 1 zmp client mới ở đây: (https://mini.zalo.me/docs/docs/getting-started/#tạo-mới-dự-án-sử-dụng-zmp-framework)
+- **client**: Bán Lại front-end, được tạo bởi **zmp-cli**. Tuy mini app có thể lập trình bằng framework nào cũng được, chúng mình đề nghị sử dụng React.JS để tận dụng đượch hết bộ ZAUI. Hướng dẫn để tạo 1 zmp client mới ở đây: (https://mini.zalo.me/docs/docs/getting-started/#tạo-mới-dự-án-sử-dụng-zmp-framework)
 - **server**: Bán Lại back-end, sử dụng Node, Express, MongoDB. Không có giới hạn cho lựa chọn cho ngôn ngữ lập trình hay công nghệ cho Backend Node, Express and MongoDB.
 - **website**: Source code cho trang web này, bạn không cần quan tâm.
 

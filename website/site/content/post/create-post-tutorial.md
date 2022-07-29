@@ -2,7 +2,7 @@
 title: 'Tạo bài đăng và sửa chi tiết bài đăng'
 date: 2022-07-12T15:04:10.000Z
 description: >-
-  Trong bài viết này chúng tôi sẽ hướng dẫn cho bạn tạo bài đăng và sửa chi tiết bài đăng
+  Trong bài viết này chúng mình sẽ hướng dẫn cho bạn tạo bài đăng và sửa chi tiết bài đăng
 ---
 
 ## Tạo bài đăng

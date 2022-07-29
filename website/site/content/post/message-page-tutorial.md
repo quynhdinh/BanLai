@@ -2,7 +2,7 @@
 title: 'Trang quản lý tin nhắn'
 date: 2022-07-05T15:04:10.000Z
 description: >-
-  Trong hướng dẫn này chúng tôi sẽ hướng dẫn cho các bạn làm trang tin nhắn
+  Trong hướng dẫn này chúng mình sẽ hướng dẫn cho các bạn làm trang tin nhắn
 ---
 
 Bạn có thể tham khảo file **[messages.jsx](https://github.com/quynhdinh/BanLai/blob/master/client/src/pages/messages.jsx)**.

@@ -2,7 +2,7 @@
 title: 'Chi tiết bài đăng'
 date: 2022-07-12T15:04:10.000Z
 description: >-
-  Trong bài viết này chúng tôi sẽ đi qua những phần liên quan đến trang chi tiết bài đăng. Đây là phần khá quan trọng vì ắt hẳn trong một ứng dụng nào cũng có những phần sau.
+  Trong bài viết này chúng mình sẽ đi qua những phần liên quan đến trang chi tiết bài đăng. Đây là phần khá quan trọng vì ắt hẳn trong một ứng dụng nào cũng có những phần sau.
 ---
 
 ## Tạo bài đăng
