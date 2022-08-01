@@ -1,6 +1,6 @@
 ---
-title: "Chợ đồ cũ Bán Lại"
-subtitle: Một mini app chợ đồ cũ phát triển trên Zalo Mini Program Framework.
+title: "Zalo Mini Template App Bán Lại"
+subtitle: Một sample app dựa trên Zalo Mini Framework giúp việc phát triển app của riêng bạn dễ dàng hơn bao giờ hết ! 
 image: /img/banner.gif
 intro:
     heading: "Giới thiệu về Zalo Mini App và Bán Lại"
