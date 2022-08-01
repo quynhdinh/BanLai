@@ -22,7 +22,7 @@ Hiển thị chi tiết thông tin 1 bài đăng. Cho phép sửa, thích và nh
 [Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/post-details-tutorial/)
 
 ### Trang chủ
-Hiển thị những bài viết mới nhất, những bài viết đã xem, hay sắp xếp, lọc theo nhiều tùy chọn tùy ý. Trong đó có hướng dẫn bạn làm trang điều hướng.
+Hiển thị những bài viết mới nhất, những bài viết đã xem, hay sắp xếp, lọc theo nhiều tùy chọn tùy ý.
 
 ![Alt Text](https://scintillating-haupia-01fe5d.netlify.app/img/home.gif)
 
@@ -49,6 +49,7 @@ Giúp xem lại những bài viết mà bạn đã đăng
 
 [Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/manage-posts-page-tutorial/)
 
+## Hướng dẫn
+Các bạn vui lòng theo đường link [này](https://scintillating-haupia-01fe5d.netlify.app/post/post-summary/) để xem tổng hợp các bài viết nhé.
 ## Hỗ trợ kỹ thuật
-Cách tốt nhất để được hỗ trợ là tạo 1 [Github Issue](https://github.com/quynhdinh/BanLai/issues).
-Còn không bạn có thể liên lạc qua các kênh liên lạc được cung cấp tại [đây](https://scintillating-haupia-01fe5d.netlify.app/contact/) 
+Với bất kỳ thắc mình hãy tạo 1 [Github issue](https://github.com/quynhdinh/BanLai/issues). Hoặc các bạn có thể liên lạc với chúng mình qua các kênh liên lạc được cung cấp tại [đây](https://scintillating-haupia-01fe5d.netlify.app/contact/) 
