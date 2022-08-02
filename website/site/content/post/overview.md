@@ -4,13 +4,13 @@ date: 2022-07-12T15:04:10.000Z
 description: >-
   Bài viết dưới đây sẽ hướng dẫn bạn cài đặt những công cụ để chạy được app, cách chạy ứng dụng trên thiết bị của bạn và đi qua chi tiết kĩ thuật để bạn có thể áp dụng ngay vào ứng dụng mini app của bạn.
 ---
-## Zalo Mini App(ZMA) là gì ?
-ZMA là giải pháp tích hợp ứng dụng web của doanh nghiệp vào nền tảng mạng xã hội Zalo. Các mini app mang đến trải nghiệm mượt mà tương tự như app riêng biệt mà không cần download về điện thoại hay thoát khỏi ứng dụng Zalo. Tìm hiểu thêm về ZMA tại [đây](https://mini.zalo.me/)
+## Zalo Mini App(ZMP) là gì ?
+ZMP là giải pháp tích hợp ứng dụng web của doanh nghiệp vào nền tảng mạng xã hội Zalo. Các mini app mang đến trải nghiệm mượt mà tương tự như app riêng biệt mà không cần download về điện thoại hay thoát khỏi ứng dụng Zalo. Tìm hiểu thêm về ZMP tại [đây](https://mini.zalo.me/)
 ## Bán Lại là gì ?
-Dù phát triển app trên ZMA vốn đã rất dễ dàng. Bán Lại giúp bạn phát triển app của riêng bạn thậm chí còn nhanh chóng hơn. Bán lại là một mini app chợ đồ cũ kết nối người mua và người bán có thể trao đổi sản phẩm đã qua sử dụng.
+Dù phát triển app trên ZMP vốn đã rất dễ dàng. Bán Lại giúp bạn phát triển app của riêng bạn thậm chí còn nhanh chóng hơn. Bán lại là một mini app chợ đồ cũ kết nối người mua và người bán có thể trao đổi sản phẩm đã qua sử dụng.
 Mục tiêu của project này đóng vai trò 1 **template app** giúp các nhà phát triển tham khảo và hiện thực hóa các ý tưởng kinh doanh của họ nhanh chóng hơn. Source code đầy đủ của Bán Lại ở [đây](https://github.com/quynhdinh/BanLai)
 ## Trang web này nói về gì?
-Trang web này sẽ hướng dẫn bạn phát triển riêng 1 ZMA của bạn. Với đây đủ các bài viết hướng dẫn, hình ảnh trực quan từ code những đoạn code tiêu biểu dễ tái sử dụng.  
+Trang web này sẽ hướng dẫn bạn phát triển riêng 1 ZMP của bạn. Với đây đủ các bài viết hướng dẫn, hình ảnh trực quan từ code những đoạn code tiêu biểu dễ tái sử dụng.  
 ## Các công nghệ đằng sau Bán Lại
 Chúng mình sử dụng **MERN stack** (MongoDB, Express.js, React.JS, và Node.js) làm những công nghệ back-bone để xây dựng ứng dụng mini appp của mình. MERN rất [phổ biến và được ưa chuộng](https://www.google.com/search?q=why+mern+in+popular&oq=why+mern+in+popular&aqs=chrome..69i57j33i160l3.6235j0j7&sourceid=chrome&ie=UTF-8). Tuy bạn có thể dùng bất cứ công nghệ backend nào ở phía backend và có thể dùng Vue.js 
 ở frontend. Chúng mình đề nghị sử dụng **Node.js** ở backend và dùng **React.js** làm framework frontend để tận dụng tốt nhất những bài viết hướng dẫn này.
