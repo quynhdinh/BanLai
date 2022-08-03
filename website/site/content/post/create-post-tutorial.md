@@ -2,7 +2,7 @@
 title: 'Tạo bài đăng và sửa chi tiết bài đăng'
 date: 2022-07-12T15:04:10.000Z
 description: >-
-  Trong bài viết này chúng mình sẽ hướng dẫn cho bạn tạo bài đăng và sửa chi tiết bài đăng
+  Tạo bài đăng chắc hẳn là một tính năng then chốt trong bất kì ứng dụng thương mại điện tử nào. App Bán Lại được truyền cảm hứng từng nhiều app như vậy. Trong bài viết này chúng mình sẽ hướng dẫn cho các bạn những thành phần cấu thành nên màn hình tạo bài đăng. 
 ---
 
 ## Tạo bài đăng
@@ -18,7 +18,7 @@ Trong phần điền thông tin chi tiết, Bán Lại có sử dụng những c
 
 - [Input](https://harmless-impatiens-74a.notion.site/Input-7f24603283804d4084ea20349cc02207)
 - [Text area](https://harmless-impatiens-74a.notion.site/Textarea-2cef345cbd284066ace5dcb83769a353)
-- [ImageUploder](https://harmless-impatiens-74a.notion.site/Image-Uploader-8042663e285148a3ba282ed76d02f2b4)
+- [ImageUploader](https://harmless-impatiens-74a.notion.site/Image-Uploader-8042663e285148a3ba282ed76d02f2b4)
 - [Select](https://harmless-impatiens-74a.notion.site/Select-ca7da06cbad2482a9d82abc83b57e085)
 
 
@@ -31,8 +31,6 @@ Bạn có thể truy cập vào link [này](https://react-hook-form.com/get-star
 Khi người đăng bài, họ có thể sẽ muốn thay đổi một vài chi tiết trong bài đăng đó. Để tiết kiệm thời gian lập trình, ta có thể tận dụng trang tạo bài đăng làm trang chỉnh sửa chi tiết bài đăng. Hai trang này có thể được phân biệt với nhau bằng một thuộc tính trong query của url trang.
 
 Ở phần tạo bài đăng, Bán Lại đã sử dụng **React Hook Form** để xác thực form vì những sự tiện lợi của nó mang lại. Một tính năng tuyệt vời khác của React Hook Form là [reset](https://react-hook-form.com/api/useform/reset/), giúp fill data vào những component nhập thông tin.
-
-
 
 Trong Bán Lại, đầu tiên khi người bán muốn sửa chi tiết một bài đăng nào đó, API lấy chi tiết bài đăng sẽ được gọi và lưu chi tiết đó vào một state trong `store`. form sẽ lấy data từ state này và fill vào các component dùng để nhập thông tin.
 
