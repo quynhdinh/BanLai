@@ -10,7 +10,7 @@ khi người dùng bầm vào nút bấm nút **Đã bán/Ẩn bài** hay **Đă
 
 ## Front-end
 
-Việc phân chia trang thành 2 tab ta có thể sử dụng [Tabbar](https://mini.zalo.me/docs/framework/components/layout-components/tabs/) hỡ trợ bởi ZMP. Mỗi component được bài viết được thể hiện bằng component **PostItem** (trong file [post-item.jsx](https://github.com/quynhdinh/BanLai/blob/master/client/src/components/post-item.jsx)).
+Việc phân chia trang thành 2 tab ta có thể sử dụng [Tabbar](https://mini.zalo.me/docs/framework/components/layout-components/tabs/) hỡ trợ bởi ZMA. Mỗi component được bài viết được thể hiện bằng component **PostItem** (trong file [post-item.jsx](https://github.com/quynhdinh/BanLai/blob/master/client/src/components/post-item.jsx)).
 
 Gọi 1 api lấy thông tin bài đăng [fetchUserPosts](https://github.com/quynhdinh/BanLai/blob/5263a8293e975ea7c92e1fb6b476a58758e4e9ed/client/src/pages/manage-post.jsx#L15). Đổ data vào mỗi tab tương ứng.
 ## Server

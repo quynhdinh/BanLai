@@ -1,5 +1,5 @@
 ---
-title: "Các tính năng chính"
+title: "Các màn hình và tính năng chính"
 image: /img/banner.gif
 values:
   - heading: "Trang chủ"
@@ -12,9 +12,9 @@ values:
     imageUrl: "/img/home.gif"
   - heading: "Quản lý bài đăng"
     text: >
-      Quản lý các bài đã đăng, đăng lại, đóng bài hoặc chỉnh sửa bài đăng.
+      Cho phép xem lại các bài đã đăng, mở bán lại bài đăng, đóng bài hoặc chỉnh sửa bài đăng.
     imageUrl: "/img/manage-post.gif"
-  - heading: "Tạo bài đăng"
+  - heading: "Tạo bài đăng và sửa bài đã đăng"
     text: >
       Cho phép tạo bài đăng chuyên nghiệp hơn với các tùy chọn tùy thuộc vào 
       từng danh mục đã chọn.
@@ -26,6 +26,6 @@ values:
     imageUrl: "/img/messages.gif"
   - heading: "Trang cá nhân"
     text: >
-      Trang tài khoản cho phép bạn xem số lượng bài viết được thích và được xem cũng như lưu lại, quản lý những bài viết mà bạn đã quan tâm.
+      Trang tài khoản cho phép bạn xem tổng số lượng bài viết được thích và được xem cũng như lưu lại, quản lý những bài viết mà bạn đã quan tâm.
     imageUrl: "/img/account.gif"
 ---

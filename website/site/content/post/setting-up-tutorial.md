@@ -114,7 +114,7 @@ Client code nằm trong folder **client/**:
   * **pages**: chứa những **Page** cũng có thể coi là một component những sẽ là toàn bộ view và phải được register trong [app-config.json](https://mini.zalo.me/docs/framework/getting-started/app-config#pages)
   * **services**: những logic có thể dùng lại có thể tách ra khỏi component của bạn, như là fetching API, get access token từ Zalo hoặc caching,...
   * **static**: bao gồi assets cho mini app của bạn, (icon, background, etc,...)
-* **.env.**: Các biến môi trường, zmp dùng Vite build tools, đọc thêm về Vite env [ở đây](https://vitejs.dev/guide/env-and-mode.html#env-variables)
+* **.env.**: Các biến môi trường, zma dùng Vite build tools, đọc thêm về Vite env [ở đây](https://vitejs.dev/guide/env-and-mode.html#env-variables)
   * **.env.development**: Load các biến local khi local khi bạn **zmp start**.
     
 Nếu bạn đang dùng **getAccessToken** API  từ [zmp](https://mini.zalo.me/docs/api/getAccessToken) khi chạy trên trình duyệt, zmp luôn trả về **DEFAULT ACCESS TOKEN** bởi vì không có người dùng Zalo nào thật login cả. Hãy khai báo một biến tên **VITE_DEFAULT_ACCESS_TOKEN** để mock 1 người dùng Zalo thật để có thể dev trên máy local của bạn.
