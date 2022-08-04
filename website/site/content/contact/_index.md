@@ -12,4 +12,4 @@ Hãy liên lạc cho chúng mình nếu có thắc mắc.
 
 <h3 class="f4 b lh-title mb2">Làm sao để liên lạc với chúng mình?</h3>
 
-Hãy liên lạc với chúng mình trong một trong những email sau: dvquynh@apcs.fitus.edu.vn, takiet@apcs.fitus.edu.vn, thanhdat020300@gmail.com
+Hãy liên lạc với chúng mình trong một trong những email sau: dvquynh@apcs.fitus.edu.vn, thanhdat020300@gmail.com

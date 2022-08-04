@@ -8,7 +8,7 @@ description: >-
 ZMA là giải pháp tích hợp ứng dụng web của doanh nghiệp vào nền tảng mạng xã hội Zalo. Các mini app mang đến trải nghiệm mượt mà tương tự như app riêng biệt mà không cần download về điện thoại hay thoát khỏi ứng dụng Zalo. Tìm hiểu thêm về ZMA tại [đây](https://mini.zalo.me/)
 ## Bán Lại là gì ?
 Dù phát triển app trên ZMA vốn đã rất dễ dàng. Bán Lại giúp bạn phát triển app của riêng bạn thậm chí còn nhanh chóng hơn. Bán lại là một mini app chợ đồ cũ kết nối người mua và người bán có thể trao đổi sản phẩm đã qua sử dụng.
-Mục tiêu của project này đóng vai trò 1 **template app** giúp các nhà phát triển tham khảo và hiện thực hóa các ý tưởng kinh doanh của họ nhanh chóng hơn. Source code đầy đủ của Bán Lại ở [đây](https://github.com/quynhdinh/BanLai)
+Mục tiêu của project này đóng vai trò 1 **template app** giúp các nhà phát triển tham khảo và hiện thực hóa các ý tưởng kinh doanh của họ nhanh chóng hơn. Source code đầy đủ của Bán Lại ở [đây](https://github.com/quynhdinh/BanLai) và xem video demo ở [đây](https://www.youtube.com/watch?v=1IexwSMcoT0)
 ## Trang web này nói về gì?
 Trang web này sẽ hướng dẫn bạn phát triển riêng 1 ZMA của bạn. Với đây đủ các bài viết hướng dẫn, hình ảnh trực quan từ code những đoạn code tiêu biểu dễ tái sử dụng.  
 ## Các công nghệ đằng sau Bán Lại
@@ -22,4 +22,4 @@ Cụ thể các công nghệ sử dụng bao gồm:
 ## Hướng dẫn
 Các bạn vui lòng theo đường link [này](https://scintillating-haupia-01fe5d.netlify.app/post/post-summary/) để xem tổng hợp các bài viết nhé.
 ## Hỗ trợ kỹ thuật
-Với bất kỳ thắc mình hãy tạo 1 [Github issue](https://github.com/quynhdinh/BanLai/issues). Hoặc các bạn có thể liên lạc với chúng mình qua các kênh liên lạc được cung cấp tại [đây](https://scintillating-haupia-01fe5d.netlify.app/contact/) 
+Cách nhanh nhất để được nhận sự hỗ trợ từ chúng mình là hãy tạo 1 [issue](https://github.com/quynhdinh/BanLai/issues). Hoặc các bạn có thể liên lạc với chúng mình qua các kênh liên lạc được cung cấp tại [đây](https://scintillating-haupia-01fe5d.netlify.app/contact/) 

@@ -14,22 +14,6 @@ Việc phân chia trang thành 2 tab ta có thể sử dụng [Tabbar](https://m
 
 Gọi 1 api lấy thông tin bài đăng [fetchUserPosts](https://github.com/quynhdinh/BanLai/blob/5263a8293e975ea7c92e1fb6b476a58758e4e9ed/client/src/pages/manage-post.jsx#L15). Đổ data vào mỗi tab tương ứng.
 ## Server
-Schema của post:
-- **_id**: String(**id** của bài đăng)
-- **category**: String(**zaloId** của người gửi)
-- **subCategory**: String(**zaloId** của người nhận)
-- **zaloId**: String(zaloId của người bán)
-- **city**: String(thành phố bán(chỉ có 2 lựa chọn Hà Nội và Hồ Chí Minh))
-- **district**: String(quận huyện)
-- **status**: String(trạng thái bài viết(đóng, mở))
-- **condition**: String(tình trạng sản phẩm)
-- **title**: String(tiêu đề bài viết)
-- **price**: String(giá sản phẩm)
-- **description**: String(mô tả sản phẩm)
-- **productDetails**: Object(chi tiết sản phẩm, là kiểu json với key là thuộc tính tùy thuộc vào danh mục sản phẩm)
-- **images**: Object(hình của sản phẩm)
-- **createdAt**: IsoDate(thời gian mà post này được tạo lần đầu)
-  Ngoài ra còn có các cột khác sẽ được tạo như **`__v`**, **updateAt** nhưng chúng ta không cần tới những cột này
 
 Những api liên quan đến trang này bao gồm:
 - Lấy những bài đăng theo từng danh mục

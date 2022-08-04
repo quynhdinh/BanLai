@@ -8,9 +8,9 @@ description: >-
 Sau đây là những bài viết hướng dẫn liên quan đến app. Bạn có thể follow các link liên quan để tìm hiểu thêm nhé!
 
 ### Clone project, cài đặt các service Heroku, Mongo Atlas và Cloudinary
-Hướng dẫn clone repo này, thiết lập các dịch vụ liên quan để chạy Bán Lại mini app trên máy của bạn. Bài viết tiên quyết, các bạn rất nên đọc qua nhé.
+Hướng dẫn clone repo này, thiết lập các dịch vụ liên quan để chạy Bán Lại mini app trên máy của bạn. Đây là bài viết tiên quyết, các bạn hãy đọc qua nhé. [Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/setting-up-tutorial/)
 
-[Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/setting-up-tutorial/)
+[Tổng quan về backend và database](https://scintillating-haupia-01fe5d.netlify.app/post/database-schema)
 ### Tạo bài đăng và sửa bài đăng
 ![Alt Text](https://scintillating-haupia-01fe5d.netlify.app/img/create.gif)
 
@@ -50,4 +50,4 @@ Giúp xem lại những bài viết mà bạn đã đăng, đóng hoặc mở b�
 [Xem thêm](https://scintillating-haupia-01fe5d.netlify.app/post/manage-posts-page-tutorial/)
 
 ## Hỗ trợ kỹ thuật
-Với bất kỳ thắc mình hãy tạo 1 [Github issue](https://github.com/quynhdinh/BanLai/issues). Hoặc các bạn có thể liên lạc với chúng mình qua các kênh liên lạc được cung cấp tại [đây](https://scintillating-haupia-01fe5d.netlify.app/contact/) 
+Cách nhanh nhất để được nhận sự hỗ trợ từ chúng mình là hãy tạo 1 [issue](https://github.com/quynhdinh/BanLai/issues). Hoặc các bạn có thể liên lạc với chúng mình qua các kênh liên lạc được cung cấp tại [đây](https://scintillating-haupia-01fe5d.netlify.app/contact/) 

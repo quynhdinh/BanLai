@@ -11,7 +11,7 @@ description: >-
 Trang chi tiết bài đăng được thể hiện trong file code [post-detail.jsx](https://github.com/quynhdinh/BanLai/blob/master/client/src/pages/post-detail.jsx). 
 
 Khi đã tạo bài đăng cho một sản phẩm, để người mua có thể xem nó thì cần có một trang chi tiết bài đăng. Trong Bán Lại, phần chi tiết bài đăng gồm những phần chính như sau
-
+  
 #### Hình ảnh
 Chúng ta cần một [**Swiper**](https://mini.zalo.me/docs/framework/components/basic-components/swiper/) để user có được hiệu ứng trượt ảnh. [Code](https://github.com/quynhdinh/BanLai/blob/5e2d362e8740aa1440d306bb52dbb1eca5ebf438/client/src/pages/post-detail.jsx#L105) 
 #### Tiêu đề và giá, nút like
