@@ -16,7 +16,8 @@ router.get('/', async (_req, res) => {
     res.send({
       error: 0,
       msg: 'Lấy danh sách người dùng thành công',
-      data: result,
+      count: result.length,
+      data: result
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
