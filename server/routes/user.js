@@ -12,12 +12,27 @@ router.get('/logged-in', AuthService.verify, (req, res) => {
 /* This is a route that returns all users in the database. */
 router.get('/', async (_req, res) => {
   try {
-    const result = await db.Users.find({})
+    const raw = await db.Users.find({}).lean()
+    const dates = raw.map(x => new Date(x.createdAt).toISOString().slice(0, 10))
+    const occurrences = dates.reduce((acc, curr) => {
+      return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
+    }, {});
+    const users = raw.sort(x => x.createdAt)
+      .reverse()
+      .map(x => {
+        return {
+          "name": x.name,
+          "picture": x.picture,
+          "zaloId": x.zaloId,
+          "createdAt": (new Date(x.createdAt)).toLocaleString()
+        }
+      })
     res.send({
       error: 0,
       msg: 'Lấy danh sách người dùng thành công',
-      count: result.length,
-      data: result
+      count: raw.length,
+      stats: occurrences,
+      users: users
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
