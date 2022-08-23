@@ -61,6 +61,7 @@ router.get('/messages/:zaloId', async (req, res) => {
       (await db.Users.find().select("zaloId"))
         .map(obj => obj.zaloId)
         .filter(id => id !== zaloId)
+        .slice(-10)
 
     const postIds =
       (await db.Posts.find().select("_id"))
