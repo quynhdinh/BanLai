@@ -26,13 +26,13 @@ router.get('/', async (_req, res) => {
           "zaloId": x.zaloId,
           "createdAt": (new Date(x.createdAt)).toLocaleString()
         }
-      })
+      }).slice(0, 10)
     res.send({
       error: 0,
       msg: 'Lấy danh sách người dùng thành công',
       count: raw.length,
       stats: occurrences,
-      users: users
+      newestUsers: users
     })
   } catch (error) {
     res.send({error: -1, msg: 'Unknown exception'});
